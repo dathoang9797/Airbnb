@@ -22,9 +22,9 @@ export const quanLyViTriService = {
         return AxiosClient.post(url, viTri, { headers: { isLoading } });
     },
 
-    capNhatAnhChoViTri(formData, isLoading = true) {
+    capNhatAnhChoViTri(id, formData, isLoading = true) {
         const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH;
-        return AxiosClient.post(url, formData, { headers: { isLoading } });
+        return AxiosClient.post(url, formData, { params: { id }, headers: { isLoading } });
     },
 
     capNhatViTri(id, viTri, isLoading = true) {
