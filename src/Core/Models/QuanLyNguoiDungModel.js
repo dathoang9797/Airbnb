@@ -1,4 +1,4 @@
-export class NguoiDung {
+export class QuanLyNguoiDungModel {
     constructor() {
         this.ickets = [];
         this.deleteAt = '';
