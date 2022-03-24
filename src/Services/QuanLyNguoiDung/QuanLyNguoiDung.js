@@ -20,6 +20,7 @@ export const quanLyNguoiDungService = {
         const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG;
         return AxiosClient.delete(url, { params: { id }, headers: { isLoading } });
     },
+
     capNhatNguoiDung(id, nguoiDungCapNhat, isLoading = true) {
         const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG;
         return AxiosClient.put(url, nguoiDungCapNhat, { params: { id }, headers: { isLoading } });
@@ -30,8 +31,8 @@ export const quanLyNguoiDungService = {
         return AxiosClient.post(url, nguoiDung, { headers: { isLoading } });
     },
 
-    capNhatAnhDaiDienNguoiDung(id, isLoading = true) {
+    capNhatAnhDaiDienNguoiDung(formData, isLoading = true) {
         const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG_UPLOAD_AVATAR;
-        return AxiosClient.post(url, { params: { id }, headers: { isLoading } });
+        return AxiosClient.post(url, formData, { headers: { isLoading } });
     }
 };
