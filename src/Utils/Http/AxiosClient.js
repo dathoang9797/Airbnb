@@ -1,9 +1,8 @@
+import { loadingReducerAction } from '@Redux/Reducers/LoadingReducer';
+import { store } from '@Redux/store';
+import { localService } from '@Services/LocalStorageService/LocalStorageService';
 import axios, { AxiosError } from 'axios';
 import queryString from 'query-string';
-import { localService } from '@Services/LocalStorageService/LocalStorageService';
-import { store } from '@Redux/store';
-import { loadingReducerAction } from '@Redux/Reducers/LoadingReducer';
-import { MyHeader } from 'src/@Types/axios';
 
 const { setRequestSpinnerStarted, setRequestSpinnerEnded } = loadingReducerAction;
 
@@ -18,7 +17,7 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(
-  (config: MyHeader) => {
+  (config) => {
     // Do something before request is sent
     if (config.headers) {
       const isLoading = config.headers.isLoading;
@@ -27,7 +26,7 @@ axiosClient.interceptors.request.use(
 
     if (config.headers) {
       const userInfo = localService.getUserInfo();
-      if (userInfo) config.headers.Authorization = `Bearer ${userInfo.accessToken}`;
+      if (userInfo) config.headers.token = `Bearer ${userInfo.accessToken}`;
     }
 
     return config;

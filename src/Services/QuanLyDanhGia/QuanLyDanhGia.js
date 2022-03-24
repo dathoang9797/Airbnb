@@ -1,18 +1,28 @@
-import _ from 'lodash';
+import AxiosClient from '@Utils/Http/AxiosClient';
 
 export const quanLyDanhGiaService = {
-    setUserInfo(value) {
-        const data = JSON.stringify(value);
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, data);
+    layTatCaDanhGia(isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    getUserInfo() {
-        const userInfo = localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO);
-        if (!_.isEmpty(userInfo) && !_.isNull(userInfo))
-            return JSON.parse(userInfo);
+    layDanhGiaTheoID(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    removeUserInfo() {
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, '');
+    taoDanhGia(roomId, danhGia, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA_TAO_DANH_GIA;
+        return AxiosClient.post(url, danhGia, { params: { roomId }, headers: { isLoading } });
+    },
+
+    xoaDanhGia(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
+    },
+
+    capNhatDanhGia(id, DanhGiaCapNhat, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
+        return AxiosClient.put(url, DanhGiaCapNhat, { headers: { isLoading } });
     },
 };

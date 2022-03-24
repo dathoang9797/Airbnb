@@ -1,18 +1,13 @@
-import _ from 'lodash';
+import AxiosClient from '@Utils/Http/AxiosClient';
 
-export const xacThucNguoiDung = {
-    setUserInfo(value) {
-        const data = JSON.stringify(value);
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, data);
+export const xacThucNguoiDungService = {
+    dangNhap(isLoading = true) {
+        const url = process.env.REACT_APP_LINK_XAC_THUC_NGUOI_DUNG_DANG_NHAP;
+        return AxiosClient.post(url, { headers: { isLoading } });
     },
 
-    getUserInfo() {
-        const userInfo = localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO);
-        if (!_.isEmpty(userInfo) && !_.isNull(userInfo))
-            return JSON.parse(userInfo);
+    dangKy(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_XAC_THUC_NGUOI_DUNG_DANG_KY;
+        return AxiosClient.post(url, { headers: { isLoading } });
     },
-
-    removeUserInfo() {
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, '');
-    },
-};
+}

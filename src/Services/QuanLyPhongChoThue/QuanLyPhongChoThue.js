@@ -1,18 +1,39 @@
-import _ from 'lodash';
+import AxiosClient from '@Utils/Http/AxiosClient';
 
-export const quanPhongChoThueService = {
-    setUserInfo(value) {
-        const data = JSON.stringify(value);
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, data);
+export const quanLyPhongChoThueService = {
+    layTatCaPhongChoThue(isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    getUserInfo() {
-        const userInfo = localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO);
-        if (!_.isEmpty(userInfo) && !_.isNull(userInfo))
-            return JSON.parse(userInfo);
+    layPhongChoThueTheoID(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    removeUserInfo() {
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, '');
+    taoPhongChoThue(phongChoThue, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
+        return AxiosClient.post(url, phongChoThue, { headers: { isLoading } });
     },
-};
+
+    datPhongChoThue(datPhongChoThue, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_DAT_PHONG;
+        return AxiosClient.post(url, datPhongChoThue, { headers: { isLoading } });
+    },
+
+    capNhatHinhAnhPhongChoThue(id, formData, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_CAP_NHAT_ANH + `/${id}`;
+        return AxiosClient.put(url, formData, { headers: { isLoading } });
+    },
+
+    capNhatThongTinPhongChoThue(id, phongChoThue, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.put(url, phongChoThue, { headers: { isLoading } });
+    },
+
+    xoaPhongChoThue(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
+    }
+
+}

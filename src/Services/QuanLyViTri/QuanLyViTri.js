@@ -1,18 +1,40 @@
-import _ from 'lodash';
+import AxiosClient from '@Utils/Http/AxiosClient';
 
-export const quanLyViTri = {
-    setUserInfo(value) {
-        const data = JSON.stringify(value);
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, data);
+export const quanLyViTriService = {
+    layTatCaViTri(isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    getUserInfo() {
-        const userInfo = localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO);
-        if (!_.isEmpty(userInfo) && !_.isNull(userInfo))
-            return JSON.parse(userInfo);
+    layViTriTheoID(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
-    removeUserInfo() {
-        localStorage.setItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO, '');
+    layViTriTheoDanhGia(valueate, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_DANH_GIA;
+        return AxiosClient.get(url, { params: { valueate }, headers: { isLoading } });
     },
-};
+
+
+    taoViTri(viTri, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
+        return AxiosClient.post(url, viTri, { headers: { isLoading } });
+    },
+
+    capNhatAnhChoViTri(id, formData, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH + `/${id}`;
+        return AxiosClient.post(url, formData, { headers: { isLoading } });
+    },
+
+    capNhatThongTinViTri(id, viTri, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.put(url, viTri, { headers: { isLoading } });
+    },
+
+    xoaViTri(id, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
+    }
+
+}
