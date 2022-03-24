@@ -7,8 +7,8 @@ export const quanLyNguoiDungService = {
     },
 
     layNguoiDungTheoID(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG;
-        return AxiosClient.get(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
     layNguoiDungPhanTrang(skip = 0, limit = 10, isLoading = true) {
@@ -17,13 +17,13 @@ export const quanLyNguoiDungService = {
     },
 
     xoaNguoiDung(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG;
-        return AxiosClient.delete(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
     },
 
     capNhatNguoiDung(id, nguoiDungCapNhat, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG;
-        return AxiosClient.put(url, nguoiDungCapNhat, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_NGUOI_DUNG + `/${id}`;
+        return AxiosClient.put(url, nguoiDungCapNhat, { headers: { isLoading } });
     },
 
     taoNguoiDung(nguoiDung, isLoading = true) {

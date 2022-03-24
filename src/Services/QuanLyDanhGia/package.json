@@ -1,0 +1,5 @@
+{
+  "name": "QuanLyDanhGia",
+  "main": "./QuanLyDanhGia.js",
+  "private": true
+}

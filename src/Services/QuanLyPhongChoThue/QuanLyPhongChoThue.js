@@ -7,8 +7,8 @@ export const quanLyPhongChoThueService = {
     },
 
     layPhongChoThueTheoID(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
-        return AxiosClient.get(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
     taoPhongChoThue(phongChoThue, isLoading = true) {
@@ -22,18 +22,18 @@ export const quanLyPhongChoThueService = {
     },
 
     capNhatHinhAnhPhongChoThue(id, formData, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_CAP_NHAT_ANH;
-        return AxiosClient.put(url, formData, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_CAP_NHAT_ANH + `/${id}`;
+        return AxiosClient.put(url, formData, { headers: { isLoading } });
     },
 
     capNhatThongTinPhongChoThue(id, phongChoThue, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
-        return AxiosClient.put(url, phongChoThue, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.put(url, phongChoThue, { headers: { isLoading } });
     },
 
     xoaPhongChoThue(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
-        return AxiosClient.delete(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
     }
 
 }

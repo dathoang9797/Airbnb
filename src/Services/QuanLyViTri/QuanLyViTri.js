@@ -7,8 +7,8 @@ export const quanLyViTriService = {
     },
 
     layViTriTheoID(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-        return AxiosClient.get(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.get(url, { headers: { isLoading } });
     },
 
     layViTriTheoDanhGia(valueate, isLoading = true) {
@@ -23,18 +23,18 @@ export const quanLyViTriService = {
     },
 
     capNhatAnhChoViTri(id, formData, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH;
-        return AxiosClient.post(url, formData, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH + `/${id}`;
+        return AxiosClient.post(url, formData, { headers: { isLoading } });
     },
 
-    capNhatViTri(id, viTri, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-        return AxiosClient.put(url, viTri, { params: { id }, headers: { isLoading } });
+    capNhatThongTinViTri(id, viTri, isLoading = true) {
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.put(url, viTri, { headers: { isLoading } });
     },
 
     xoaViTri(id, isLoading = true) {
-        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-        return AxiosClient.delete(url, { params: { id }, headers: { isLoading } });
+        const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+        return AxiosClient.delete(url, { headers: { isLoading } });
     }
 
 }
