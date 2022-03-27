@@ -1,6 +1,6 @@
-import { loadingReducerAction } from '@Redux/Reducers/LoadingReducer';
+import { loadingReducerAction } from '@Redux/Reducers/LoadingSlice';
 import { store } from '@Redux/store';
-import { localService } from '@Services/LocalStorageService/LocalStorageService';
+import { localService } from '@Services/LocalStorageService';
 import axios, { AxiosError } from 'axios';
 import queryString from 'query-string';
 
@@ -19,16 +19,12 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     // Do something before request is sent
+    const userInfo = localService.getUserInfo();
     if (config.headers) {
       const isLoading = config.headers.isLoading;
       isLoading && store.dispatch(setRequestSpinnerStarted());
+      if (userInfo) config.headers.token = `Bearer ${userInfo.token}`;
     }
-
-    if (config.headers) {
-      const userInfo = localService.getUserInfo();
-      if (userInfo) config.headers.token = `Bearer ${userInfo.accessToken}`;
-    }
-
     return config;
   },
   (error) => {
@@ -51,19 +47,24 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
+    const isLoading = error.config.headers?.isLoading;
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
+      isLoading && store.dispatch(setRequestSpinnerEnded());
       return error.response.data;
     }
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
     if (error.request) {
+      isLoading && store.dispatch(setRequestSpinnerEnded());
       console.log('🚀 ~ file: AxiosClient.ts ~ line 34 ~ error.request', error.request);
+      return;
     }
     // // Something happened in setting up the request that triggered an Error
     if (error.message) {
+      isLoading && store.dispatch(setRequestSpinnerEnded());
       console.log('🚀 ~ file: AxiosClient.ts ~ line 39 ~ error.message', error.message);
       return;
     }
