@@ -1,16 +1,12 @@
 import { QuanLyDanhGiaModel } from '@Core/Models/QuanLyDanhGiaModel';
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = new QuanLyDanhGiaModel()
+const quanLyDanhGiaState = new QuanLyDanhGiaModel();
+const initialState = { ...quanLyDanhGiaState };
 
 const quanLyDanhGiaSlice = createSlice({
   name: 'quanLyDanhGiaReducer',
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
 });
-
-
 
 export default quanLyDanhGiaSlice.reducer;
