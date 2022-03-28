@@ -15,6 +15,7 @@ const CustomStyles = createGlobalStyle`
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: rgba(0, 0, 0, 0.5); !important;
 }
+
 `;
 
 const GlobalStyles = () => (

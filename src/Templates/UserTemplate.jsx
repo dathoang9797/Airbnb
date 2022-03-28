@@ -1,4 +1,4 @@
-// import Footer from '@Layouts/Footer';
+import Footer from '@Layouts/Footer';
 // import Header from '@Layouts/Header';
 // import HomeCarousel from '@Pages/HomePage/HomeCarousel';
 import React from 'react';
