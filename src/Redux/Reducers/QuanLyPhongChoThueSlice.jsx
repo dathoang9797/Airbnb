@@ -1,16 +1,12 @@
 import { QuanLyPhongChoThueModel } from '@Core/Models/QuanLyPhongChoThueModel';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = new QuanLyPhongChoThueModel()
-
+const quanLyPhongChoThueState = new QuanLyPhongChoThueModel();
+const initialState = { ...quanLyPhongChoThueState };
 const quanLyPhongChoThueSlice = createSlice({
   name: 'quanLyPhongChoThueReducer',
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
 });
-
-
 
 export default quanLyPhongChoThueSlice.reducer;
