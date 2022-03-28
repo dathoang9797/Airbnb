@@ -82,7 +82,7 @@ const FormInput = styled(Input)`
   &:focus ~ label,
   &:not(:placeholder-shown) ~ label,
   &:-webkit-autofill ~ label {
-    ${tw`absolute top-0 left-[8.8%] block transition-all duration-300 text-indigo-500 pointer-events-none text-xs  -translate-y-1/2`}
+    ${tw`absolute top-0 left-[36px] block transition-all duration-300 text-indigo-500 pointer-events-none text-xs -translate-y-1/2  `}
   }
 `;
 
