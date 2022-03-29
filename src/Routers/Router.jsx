@@ -5,17 +5,20 @@ import { nanoid } from '@reduxjs/toolkit';
 
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
 const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
-const DetailPage = lazy(() => import('@Pages/DetailPage/'));
-const RoomPage = lazy(() => import('@Pages/RoomPage/'));
+const DetailPage = lazy(() => import('@Pages/DetailPage'));
+const RoomPage = lazy(() => import('@Pages/RoomPage'));
+const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
 
 export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_IN, componentPage: SignInPage },
   { path: process.env.REACT_APP_LINK_SIGN_UP, componentPage: SignUpPage },
+  { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
 ];
 
 export const routerHomeTemplate = [
   { path: process.env.REACT_APP_LINK_DETAIL, componentPage: DetailPage },
   { path: process.env.REACT_APP_LINK_ROOM, componentPage: RoomPage },
+  { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
 ];
 
 const renderUserTemplate = (() => {
