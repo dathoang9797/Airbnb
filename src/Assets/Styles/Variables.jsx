@@ -1,5 +1,8 @@
-export const colorPrimary = `#6366f1`;
+export const colorPrimary = `#ff385c`;
+export const colorGreyMedium = `#f7f7f7`;
+export const colorGreyLight = `#ddd`;
+export const colorGreyTextLight = `#717171`;
+export const colorGreyTextDark = `#222`;
 
-export const colorLinearGradient = `
-linear-gradient(114.58deg, #6372f1 0, #6366f1 51%, #8463f1 100%)
-`;
+export const colorLinearGradient = (deg) =>
+  `linear-gradient(${deg}deg, #ff388e 0, #ff385c 51%, #ff4638 100%)`;

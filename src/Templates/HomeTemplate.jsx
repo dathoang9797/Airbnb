@@ -1,16 +1,16 @@
 import Footer from '@Layouts/Footer';
-import Header from '@Layouts/Header';
+// import Header from '@Layouts/Header';
 // import HomeCarousel from '@Pages/HomePage/HomeCarousel';
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-const UserTemplate = ({ Component, ...restRoute }: PropsTemplate) => {
+const HomeTemplate = ({ Component, ...restRoute }: PropsTemplate) => {
   return (
     <Route
       {...restRoute}
       render={(propsRoute) => (
         <>
-          <Header />
+          {/* <Header /> */}
           {/* <HomeCarousel /> */}
           <Component {...propsRoute} />
           <Footer />
@@ -20,4 +20,4 @@ const UserTemplate = ({ Component, ...restRoute }: PropsTemplate) => {
   );
 };
 
-export default UserTemplate;
+export default HomeTemplate;
