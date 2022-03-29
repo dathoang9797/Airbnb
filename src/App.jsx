@@ -1,12 +1,12 @@
 // import { routerTemplates } from '@Routers/Router';
+import GlobalStyles from '@Assets/Styles/Global';
 import Spinner from '@Components/Spinner/Spinner';
-import { useSelector } from 'react-redux';
 import { selectIsLoadingState } from '@Redux/Selector/LoadingSelect';
 import { routerTemplates } from '@Routers/Router';
 import History from '@Utils/Libs/History';
 import React, { Suspense } from 'react';
+import { useSelector } from 'react-redux';
 import { Router, Switch } from 'react-router-dom';
-import GlobalStyles from './GlobalStyles';
 
 function App() {
   const isLoading = useSelector(selectIsLoadingState);

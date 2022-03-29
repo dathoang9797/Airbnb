@@ -1,6 +1,9 @@
 import tw, { styled, css } from 'twin.macro';
 import * as AntIcon from '@ant-design/icons';
 import { Form, Input, DatePicker, Switch } from 'antd';
+import * as Variable from '@Assets/Styles/Variables';
+
+const { colorLinearGradient, colorPrimary } = Variable;
 
 const {
   UserOutlined,
@@ -23,7 +26,8 @@ const FormDatePicker = styled(DatePicker)`
   &.ant-picker-status-error.ant-picker:focus {
     box-shadow: none;
     outline: 0;
-    ${tw`border-indigo-500 border-2 border-solid`};
+    ${tw` border-2 border-solid`};
+    border-color: ${colorPrimary};
   }
 `;
 const FormSwitch = styled(Switch)`
@@ -32,11 +36,11 @@ const FormSwitch = styled(Switch)`
   }
 
   &.ant-switch-checked {
-    ${tw`bg-indigo-500`}
+    background-color: ${colorPrimary};
   }
 
   &.ant-switch-checked:focus {
-    box-shadow: 0 0 0 2px #6366f1;
+    box-shadow: 0 0 0 2px ${colorPrimary};
   }
 `;
 
@@ -120,36 +124,30 @@ const FormInput = styled(Input)`
   &:not(:placeholder-shown) ~ fieldset,
   &:-webkit-autofill ~ fieldset {
     ${tw`border-indigo-500 border-2 border-solid`};
+    border-color: ${colorPrimary};
     ${FormLegend} {
       ${tw`max-w-full`}
-    }
-    ${FormUserOutlined}, ${FormLockOutlined} {
-      ${tw`text-indigo-500`};
     }
   }
 
   &:focus ~ label,
   &:not(:placeholder-shown) ~ label,
   &:-webkit-autofill ~ label {
-    ${tw`absolute top-0 left-[36px] block transition-all duration-300 text-indigo-500 pointer-events-none text-xs -translate-y-1/2  `}
+    ${tw`absolute top-0 left-[36px] block transition-all duration-300  pointer-events-none text-xs -translate-y-1/2  `}
+    color: ${colorPrimary};
   }
 `;
 
 const FormButton = styled.button`
-  ${tw`block w-full max-w-xs mx-auto  text-white rounded-lg px-2 py-2 font-semibold transition-all duration-300 bg-origin-border background-size[200% !important] filter[drop-shadow(22.9008px 11.4504px 68.7023px rgba(83, 125, 236, 0.1))] `}
-  background: linear-gradient(
-    90deg,
-    rgb(61, 84, 160) 0,
-    rgb(61, 84, 250) 51%,
-    rgb(61, 84, 160) 100%
-  );
+  ${tw`block w-full max-w-xs mx-auto  text-white rounded-lg px-2 py-2 font-semibold transition-all duration-300 bg-origin-border background-size[200% !important] filter[drop-shadow(22.9008px 11.4504px 68.7023px rgba(255, 56, 92, 0.1))] `}
+  background: ${colorLinearGradient(90)};
 
   &:focus {
     ${tw`outline-none shadow-none`}
   }
 
   &:hover {
-    ${tw`text-white background-position[right center] box-shadow[0px 10px 15px 0px rgb(123 110 246 / 50%)]`};
+    ${tw`text-white background-position[right center] box-shadow[0px 10px 15px 0px rgb(255 56 92 / 50%)]`};
   }
 `;
 
