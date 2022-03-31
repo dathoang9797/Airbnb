@@ -1,0 +1,51 @@
+.navbar {
+  background: transparent;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+}
+
+.navbar .navbar-brand {
+  filter: brightness(0) invert(1);
+}
+
+.navbar.active {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 9px 35px rgb(0 0 0 / 5%);
+  border-bottom: 0 solid transparent;
+  top: 0;
+  transition: 0.3s;
+
+}
+.navbar .navbar-nav .nav-link {
+  color: #fff;
+}
+.navbar.active .navbar-nav .nav-link {
+  color: #000;
+}
+.navbar.active .navbar-nav .nav-link:hover {
+  color: #6c4af2;
+}
+.navbar .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+.navbar.active .navbar-brand {
+  filter: brightness(1) invert(0);
+}
+.btn-primary {
+  color: #fff;
+  background-color: #6c4af2;
+  border-color: #6c4af2;}
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #5c3fce;
+    border-color: #563bc2;}

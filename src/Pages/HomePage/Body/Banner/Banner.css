@@ -1,0 +1,13 @@
+.banner__content {
+  margin-top: 20rem;
+  margin-bottom: 20rem;
+}
+.custom-select {
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  color: #343a40;
+  font-size: 16px;
+  line-height: 32px;
+}
