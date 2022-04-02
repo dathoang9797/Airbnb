@@ -1,6 +1,7 @@
 .banner__content {
-  margin-top: 20rem;
-  margin-bottom: 20rem;
+  text-align: center;
+  margin-top: 18rem;
+  margin-bottom: 22rem;
 }
 .custom-select {
   border: 0;
@@ -10,4 +11,20 @@
   color: #343a40;
   font-size: 16px;
   line-height: 32px;
+}
+.card__menu {
+  border-radius: 20px;
+}
+.title__text {
+  font-size: 4rem;
+}
+.ant-btn {
+  color: #fff;
+  background: #6c4af2;
+}
+.ant-picker {
+  height: 40px;
+  border-top: none;
+  border-bottom: none;
+  color: #6c757d;
 }

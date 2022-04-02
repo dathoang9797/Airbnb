@@ -24,44 +24,49 @@ export default function NavBar() {
             <nav
               className={
                 state
-                  ? "active navbar navbar-expand-lg navbar-light animate__fadeInDown  animate__animated"
-                  : "navbar navbar-expand-lg navbar-light"
+                  ? "active navbar navbar-expand-lg navbar-light animate__fadeInDown  animate__animated nav__header"
+                  : "navbar navbar-expand-lg navbar-light "
               }
             >
-              <button
-                className="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-              >
-                <span className="navbar-toggler-icon" />
-              </button>
               <a className="navbar-brand " href="#">
                 <img
                   src="https://easetemplate.com/html/rentkit/assets/images/logo.svg"
                   alt=""
                 />
               </a>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+
               <div
                 className="collapse navbar-collapse justify-between"
-                id="navbarTogglerDemo03"
+                id="navbarSupportedContent"
               >
-                <ul className="navbar-nav me-auto ms-lg-3">
+                <ul className="navbar-nav mr-auto ms-lg-3">
                   <li className="nav-item dropdown ">
                     <a
                       className="nav-link dropdown-toggle text-xl"
                       href="#"
-                      id="homeDropdown"
+                      id="navbarDropdown"
                       role="button"
                       data-toggle="dropdown"
+                      aria-haspopup="true"
                       aria-expanded="false"
                     >
                       Home
                     </a>
-                    <ul className="dropdown-menu">
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                    >
                       <li>
                         <a className="dropdown-item" href="">
                           Classic
@@ -83,17 +88,17 @@ export default function NavBar() {
                     <a
                       className="nav-link dropdown-toggle text-xl"
                       href="#"
-                      id="blogDropdown"
+                      id="navbarDropdown"
                       role="button"
                       data-toggle="dropdown"
-                      aria-expanded="true"
+                      aria-haspopup="true"
+                      aria-expanded="false"
                     >
                       Blog
                     </a>
                     <ul
                       className="dropdown-menu"
-                      aria-labelledby="blogDropdown"
-                      data-bs-popper="none"
+                      aria-labelledby="navbarDropdown"
                     >
                       <li>
                         <a href="" className="dropdown-item">

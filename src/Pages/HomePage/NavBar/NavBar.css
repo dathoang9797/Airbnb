@@ -1,9 +1,6 @@
 .navbar {
   background: transparent;
   height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 1.2rem;
   position: fixed;
   top: 0;
@@ -24,7 +21,6 @@
   border-bottom: 0 solid transparent;
   top: 0;
   transition: 0.3s;
-
 }
 .navbar .navbar-nav .nav-link {
   color: #fff;
@@ -44,8 +40,10 @@
 .btn-primary {
   color: #fff;
   background-color: #6c4af2;
-  border-color: #6c4af2;}
-  .btn-primary:hover {
-    color: #fff;
-    background-color: #5c3fce;
-    border-color: #563bc2;}
+  border-color: #6c4af2;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #5c3fce;
+  border-color: #563bc2;
+}
