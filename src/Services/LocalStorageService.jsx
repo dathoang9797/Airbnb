@@ -8,8 +8,7 @@ export const localService = {
 
   getUserInfo() {
     const userInfo = localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_USER_INFO);
-    if (!_.isEmpty(userInfo) && !_.isNull(userInfo))
-      return JSON.parse(userInfo);
+    if (!_.isEmpty(userInfo) && !_.isNull(userInfo)) return JSON.parse(userInfo);
   },
 
   removeUserInfo() {

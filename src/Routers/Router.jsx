@@ -1,24 +1,49 @@
-import UserTemplate from '@Templates/UserTemplate';
-import HomeTemplate from '@Templates/HomeTemplate';
-import React, { lazy } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
+import AdminTemplate from '@Templates/AdminTemplate';
+import HomeTemplate from '@Templates/HomeTemplate';
+import UserTemplate from '@Templates/UserTemplate';
+import React, { lazy } from 'react';
 
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
 const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
 const DetailPage = lazy(() => import('@Pages/DetailPage'));
 const RoomPage = lazy(() => import('@Pages/RoomPage'));
 const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
+const DashBoardPage = lazy(() => import('@Pages/AdminPage/DashBoardPage'));
+const LocationManagerPage = lazy(() => import('@Pages/AdminPage/LocationManagerPage'));
+const RoomManagerPage = lazy(() => import('@Pages/AdminPage/RoomManagerPage'));
+const UserManagerPage = lazy(() => import('@Pages/AdminPage/UserManagerPage'));
+const UserManagerEditPage = lazy(() =>
+  import('@Pages/AdminPage/UserManagerPage/UserManagerEditPage')
+);
+const UserManagerProfilePage = lazy(() =>
+  import('@Pages/AdminPage/UserManagerPage/UserManagerProfilePage')
+);
 
 export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_IN, componentPage: SignInPage },
   { path: process.env.REACT_APP_LINK_SIGN_UP, componentPage: SignUpPage },
-  { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
 ];
 
 export const routerHomeTemplate = [
   { path: process.env.REACT_APP_LINK_DETAIL, componentPage: DetailPage },
   { path: process.env.REACT_APP_LINK_ROOM, componentPage: RoomPage },
   { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
+];
+
+export const routerAdminTemplate = [
+  {
+    path: [process.env.REACT_APP_LINK_ADMIN, process.env.REACT_APP_LINK_ADMIN_DASH_BOARD],
+    componentPage: DashBoardPage,
+  },
+  { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER, componentPage: RoomManagerPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER, componentPage: LocationManagerPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER, componentPage: UserManagerPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT, componentPage: UserManagerEditPage },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE,
+    componentPage: UserManagerProfilePage,
+  },
 ];
 
 const renderUserTemplate = (() => {
@@ -35,4 +60,15 @@ const renderHomeTemplate = (() => {
   ));
 })();
 
-export const routerTemplates = [...renderUserTemplate, ...renderHomeTemplate];
+const renderAdminTemplate = (() => {
+  const idAdminTemplate = nanoid();
+  return routerAdminTemplate.map(({ componentPage, path }) => (
+    <AdminTemplate key={idAdminTemplate} Component={componentPage} path={path} exact />
+  ));
+})();
+
+export const routerTemplates = [
+  ...renderAdminTemplate,
+  ...renderUserTemplate,
+  ...renderHomeTemplate,
+];

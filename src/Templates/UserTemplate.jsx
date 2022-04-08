@@ -1,6 +1,5 @@
-import Footer from '@Layouts/Footer';
-import Header from '@Layouts/Header';
-// import HomeCarousel from '@Pages/HomePage/HomeCarousel';
+import Footer from '@Layouts/User/FooterUser';
+import Header from '@Layouts/User/HeaderUser';
 import React from 'react';
 import { Route } from 'react-router-dom';
 

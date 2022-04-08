@@ -3,7 +3,7 @@ import * as Variable from '@Assets/Styles/Variables';
 
 const { colorGreyTextLight } = Variable;
 
-const RoomListRating = styled.div`
+const Rating = styled.div`
   display: flex;
   margin-top: auto;
   img {
@@ -15,7 +15,7 @@ const RoomListRating = styled.div`
   }
 `;
 
-const RoomListPriceNight = styled.div`
+const PriceNight = styled.div`
   font-size: 18px;
   font-family: 'Circular Bold';
   & span {
@@ -27,26 +27,26 @@ const RoomListPriceNight = styled.div`
     color: ${colorGreyTextLight};
   }
 `;
-const RoomListPriceTotal = styled.div`
+const PriceTotal = styled.div`
   font-size: 14px;
   color: ${colorGreyTextLight};
   text-decoration: underline;
   margin-top: 2px;
 `;
 
-const RoomListPrice = styled.div`
+const Price = styled.div`
   text-align: right;
   display: flex;
   flex-direction: column;
 `;
 
-const RoomListDetail = styled.div`
+const Detail = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: auto;
 `;
 
-const RoomListDesc = styled.div`
+const Desc = styled.div`
   padding-top: 15px;
   span {
     display: block;
@@ -54,7 +54,7 @@ const RoomListDesc = styled.div`
   }
 `;
 
-const RoomListTitle = styled.div`
+const Title = styled.div`
   display: flex;
   justify-content: space-between;
   button {
@@ -91,14 +91,14 @@ const RoomListTitle = styled.div`
   }
 `;
 
-const RoomListContent = styled.div`
+const Content = styled.div`
   width: calc(100% - 300px);
   padding-left: 15px;
   display: flex;
   flex-direction: column;
 `;
 
-const RoomListImage = styled.div`
+const Image = styled.div`
   width: 300px;
   height: 200px;
   border-radius: 10px;
@@ -160,11 +160,11 @@ const RoomListImage = styled.div`
   }
 `;
 
-const RoomListItem = styled.div`
+const Item = styled.div`
   border-top: 1px solid #ebebeb;
   padding: 24px 0;
   display: flex;
-  &:hover ${RoomListImage} button {
+  &:hover ${Image} button {
     opacity: 0.7;
   }
   .greyText {
@@ -180,15 +180,15 @@ const RoomListItem = styled.div`
   }
 `;
 
-export const RoomItemStyle = {
-  RoomListImage,
-  RoomListItem,
-  RoomListContent,
-  RoomListTitle,
-  RoomListDesc,
-  RoomListDetail,
-  RoomListPrice,
-  RoomListPriceTotal,
-  RoomListPriceNight,
-  RoomListRating,
+export const RoomItemCSS = {
+  Image,
+  Item,
+  Content,
+  Title,
+  Desc,
+  Detail,
+  Price,
+  PriceTotal,
+  PriceNight,
+  Rating,
 };
