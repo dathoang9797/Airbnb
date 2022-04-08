@@ -25,6 +25,7 @@ const loadingSlice = createSlice({
 const { setRequestSpinnerEnded, setRequestSpinnerStarted } = loadingSlice.actions;
 
 export const loadingReducerAction = {
-  setRequestSpinnerEnded, setRequestSpinnerStarted
-}
+  setRequestSpinnerEnded,
+  setRequestSpinnerStarted,
+};
 export default loadingSlice.reducer;

@@ -1,0 +1,5 @@
+{
+  "name": "SearchInput",
+  "main": "./SearchInput.jsx",
+  "private": true
+}

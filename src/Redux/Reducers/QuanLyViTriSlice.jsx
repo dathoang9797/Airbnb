@@ -1,8 +1,6 @@
-import { QuanLyViTriModel } from '@Core/Models/QuanLyViTriModel';
 import { createSlice } from '@reduxjs/toolkit';
 
-const quanLyViTriState = new QuanLyViTriModel();
-const initialState = { ...quanLyViTriState };
+const initialState = {};
 
 const quanLyViTriSlice = createSlice({
   name: 'quanLyViTriReducer',

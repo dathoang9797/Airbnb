@@ -1,23 +1,10 @@
 import React from 'react';
-import { RoomItemStyle } from './RoomItem.styles';
-
-const {
-  RoomListImage,
-  RoomListItem,
-  RoomListContent,
-  RoomListTitle,
-  RoomListDesc,
-  RoomListDetail,
-  RoomListPrice,
-  RoomListPriceNight,
-  RoomListPriceTotal,
-  RoomListRating,
-} = RoomItemStyle;
+import { RoomItemCSS } from './RoomItem.styles';
 
 function RoomItem() {
   return (
-    <RoomListItem>
-      <RoomListImage>
+    <RoomItemCSS.Item>
+      <RoomItemCSS.Image>
         <button>
           <img src='./icons/chevronLeft.svg' alt='Chevron Left' />
         </button>
@@ -28,9 +15,9 @@ function RoomItem() {
           src='https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2635&q=80'
           alt=''
         ></img>
-      </RoomListImage>
-      <RoomListContent>
-        <RoomListTitle>
+      </RoomItemCSS.Image>
+      <RoomItemCSS.Content>
+        <RoomItemCSS.Title>
           <div>
             <span className='greyText'>Private room in Birkenhead</span>
             <h2>Small Single in Eastham, Wirral Townhouse</h2>
@@ -40,30 +27,30 @@ function RoomItem() {
               <img src='./icons/heart.svg' alt='Heart' />
             </button>
           </div>
-        </RoomListTitle>
+        </RoomItemCSS.Title>
         <div className='separator' />
-        <RoomListDesc>
+        <RoomItemCSS.Desc>
           <span className='greyText'>2 Guest · 1 bedroom</span>
           <span className='greyText'>Kitchen · Wifi · Heating</span>
-        </RoomListDesc>
-        <RoomListDetail>
-          <RoomListRating>
+        </RoomItemCSS.Desc>
+        <RoomItemCSS.Detail>
+          <RoomItemCSS.Rating>
             <img src='./icons/star.svg' alt='Star' />
             <span>
               5 <span>(14)</span>
             </span>
-          </RoomListRating>
-          <RoomListPrice>
-            <RoomListPriceNight>
+          </RoomItemCSS.Rating>
+          <RoomItemCSS.Price>
+            <RoomItemCSS.PriceNight>
               £29 <span> / night</span>
-            </RoomListPriceNight>
-            <RoomListPriceTotal>
+            </RoomItemCSS.PriceNight>
+            <RoomItemCSS.PriceTotal>
               <span>£57 total</span>
-            </RoomListPriceTotal>
-          </RoomListPrice>
-        </RoomListDetail>
-      </RoomListContent>
-    </RoomListItem>
+            </RoomItemCSS.PriceTotal>
+          </RoomItemCSS.Price>
+        </RoomItemCSS.Detail>
+      </RoomItemCSS.Content>
+    </RoomItemCSS.Item>
   );
 }
 
