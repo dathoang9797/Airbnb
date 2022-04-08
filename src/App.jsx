@@ -1,4 +1,3 @@
-// import { routerTemplates } from '@Routers/Router';
 import GlobalStyles from '@Assets/Styles/Global';
 import Spinner from '@Components/Spinner/Spinner';
 import { selectIsLoadingState } from '@Redux/Selector/LoadingSelect';
@@ -10,6 +9,11 @@ import { Router, Switch } from 'react-router-dom';
 
 function App() {
   const isLoading = useSelector(selectIsLoadingState);
+
+  // useEffect(() => {
+  //   document.querySelector('html').classList.add('dark');
+  // });
+
   return (
     <Suspense fallback={<Spinner />}>
       {isLoading ? <Spinner /> : null}

@@ -21,7 +21,7 @@ const SignUpForm = styled.div`
 `;
 
 const SignUpContainer = styled.div`
-  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-1 py-1`}
+  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-1 pt-24`}
 `;
 
 export const SignUpStyle = {

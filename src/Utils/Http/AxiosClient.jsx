@@ -4,8 +4,6 @@ import { localService } from '@Services/LocalStorageService';
 import axios, { AxiosError } from 'axios';
 import queryString from 'query-string';
 
-const { setRequestSpinnerStarted, setRequestSpinnerEnded } = loadingReducerAction;
-
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_AIRBNB,
   timeout: 8000,
@@ -22,8 +20,9 @@ axiosClient.interceptors.request.use(
     const userInfo = localService.getUserInfo();
     if (config.headers) {
       const isLoading = config.headers.isLoading;
+      const { setRequestSpinnerStarted } = loadingReducerAction;
       isLoading && store.dispatch(setRequestSpinnerStarted());
-      if (userInfo) config.headers.token = `Bearer ${userInfo.token}`;
+      if (userInfo) config.headers.token = `${userInfo.token}`;
     }
     return config;
   },
@@ -38,6 +37,7 @@ axiosClient.interceptors.response.use(
   async (response) => {
     if (response.config.headers) {
       const isLoading = response.config.headers.isLoading;
+      const { setRequestSpinnerEnded } = loadingReducerAction;
       isLoading && store.dispatch(setRequestSpinnerEnded());
     }
 
@@ -48,6 +48,8 @@ axiosClient.interceptors.response.use(
   },
   (error: AxiosError) => {
     const isLoading = error.config.headers?.isLoading;
+    const { setRequestSpinnerEnded } = loadingReducerAction;
+
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx

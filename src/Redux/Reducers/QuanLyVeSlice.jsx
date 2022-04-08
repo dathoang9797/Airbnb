@@ -1,8 +1,6 @@
-import { QuanLyVeModel } from '@Core/Models/QuanLyVeModel';
 import { createSlice } from '@reduxjs/toolkit';
 
-const quanLyVeState = new QuanLyVeModel();
-const initialState = { ...quanLyVeState };
+const initialState = {};
 
 const quanLyVeSlice = createSlice({
   name: 'quanLyVeReducer',

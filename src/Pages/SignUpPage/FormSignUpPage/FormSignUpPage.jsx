@@ -1,23 +1,19 @@
-import { FormStyle } from '@Pages/SignUpPage/FormSignUpPage/FormSignUp.styles';
+import Form from '@Components/Form';
+import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { signUpUserSchema } from '@Shared/Schema/SignUpSchema';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import React, { useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
-
-const { setRegisterUserInfoAsync } = quanLyNguoiDungThunk;
 
 function FormSignUpPage() {
   const dispatch = useDispatch();
-  const [typeInput, setTypeInput] = React.useState('password');
+  const { setRegisterUserInfoAsync } = quanLyNguoiDungThunk;
+  const [typeInput, setTypeInput] = useState('password');
 
-  const handleSubmitRegister = useCallback(
-    (values) => {
-      dispatch(setRegisterUserInfoAsync(values));
-    },
-    [dispatch]
-  );
+  const handleSubmitRegister = (values) => {
+    dispatch(setRegisterUserInfoAsync(values));
+  };
 
   const handleChangeTypeInput = () => {
     if (typeInput === 'password') {
@@ -27,15 +23,15 @@ function FormSignUpPage() {
     }
   };
 
-  const handleChangeDatePicker = useCallback(async (date) => {
+  const handleChangeDatePicker = async (date) => {
     if (!date) return;
     const birthDay = moment(date).format('DD/MM/YYYY');
     await setFieldValue('birthday', birthDay);
-  }, []);
+  };
 
-  const handleChangeSwitch = useCallback(async (checked) => {
+  const handleChangeSwitch = async (checked) => {
     await setFieldValue('gender', checked);
-  }, []);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -51,137 +47,122 @@ function FormSignUpPage() {
     onSubmit: handleSubmitRegister,
   });
 
-  const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
+  const { setFieldValue, handleSubmit, handleChange, errors } = formik;
 
   return (
-    <FormStyle.FormContainer onFinish={handleSubmit}>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+    <Form.FormContainer onFinish={handleSubmit}>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.name : ''}
           >
-            <FormStyle.FormUserOutlined />
-            <FormStyle.FormInput type='text' placeholder=' ' name='name' onChange={handleChange} />
-            <FormStyle.FormLabel>Your Name</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your Name</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+            <Form.FormUserOutlined />
+            <Form.FormInput
+              type='text'
+              placeholder=' '
+              name='name'
+              onChange={handleChange}
+              childrenProps='Your Name'
+            />
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.email : ''}
           >
-            <FormStyle.FormMailOutlined />
-            <FormStyle.FormInput
+            <Form.FormMailOutlined />
+            <Form.FormInput
               type='email'
               placeholder=' '
               name='email'
               onChange={handleChange}
+              childrenProps='Your Email'
             />
-            <FormStyle.FormLabel>Your Email</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your Email</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.password : ''}
           >
-            <FormStyle.FormLockOutlined />
+            <Form.FormLockOutlined />
             {typeInput === 'password' ? (
-              <FormStyle.FormEyeOutlined onClick={handleChangeTypeInput} />
+              <Form.FormEyeOutlined onClick={handleChangeTypeInput} />
             ) : (
-              <FormStyle.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
+              <Form.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
             )}
-            <FormStyle.FormInput
-              type={typeInput}
+            <Form.FormInput
+              type='password'
               placeholder=' '
               name='password'
               onChange={handleChange}
+              childrenProps='Your PassWord'
             />
-            <FormStyle.FormLabel>Your PassWord</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your PassWord</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.phone : ''}
           >
-            <FormStyle.FormPhoneOutlined />
-            <FormStyle.FormInput type='text' placeholder=' ' name='phone' onChange={handleChange} />
-            <FormStyle.FormLabel>Your Phone</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your Phone</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+            <Form.FormPhoneOutlined />
+            <Form.FormInput
+              type='text'
+              placeholder=' '
+              name='phone'
+              onChange={handleChange}
+              childrenProps='Your Phone'
+            />
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.address : ''}
           >
-            <FormStyle.FormHomeOutlined />
-            <FormStyle.FormInput
+            <Form.FormHomeOutlined />
+            <Form.FormInput
               type='text'
               placeholder=' '
               name='address'
               onChange={handleChange}
+              childrenProps='Your Address'
             />
-            <FormStyle.FormLabel>Your Address</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your Address</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.birthday : ''}
             label='Birthday'
           >
-            <FormStyle.FormDatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem label='Gender'>
-            <FormStyle.FormSwitch onChange={handleChangeSwitch} />
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormButton type='submit'>SIGNIN NOW</FormStyle.FormButton>
-      </FormStyle.FormControl>
-    </FormStyle.FormContainer>
+            <Form.FormDatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem label='Gender'>
+            <Form.FormSwitch onChange={handleChangeSwitch} />
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormButton type='submit'>SIGNUP NOW</Form.FormButton>
+      </Form.FormControl>
+    </Form.FormContainer>
   );
 }
 

@@ -1,34 +1,35 @@
 import tw, { styled } from 'twin.macro';
 import * as Variable from '@Assets/Styles/Variables';
 
-const { colorPrimary } = Variable;
-
-const SignInContentRight = styled.div`
+const ContentRight = styled.div`
   ${tw`w-full md:w-1/2 py-20 px-5 md:px-10 relative`}
+  form {
+    ${tw`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-max-w-114`}
+  }
 `;
 
-const SignInContentLeft = styled.div`
+const ContentLeft = styled.div`
   ${tw`hidden md:block w-1/2 bg-indigo-500 py-10 px-10`}
   background:${Variable.colorPrimary}
 `;
 
-const SignInContent = styled.div`
+const Content = styled.div`
   ${tw`md:flex w-full`}
 `;
 
-const SignInForm = styled.div`
+const Form = styled.div`
   max-width: 1000px;
   ${tw`bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden`}
 `;
 
-const SignInContainer = styled.div`
+const Container = styled.div`
   ${tw`min-w-full min-h-screen bg-gray-400 flex items-center justify-center px-5 py-5`}
 `;
 
-export const SignInStyle = {
-  SignInContainer,
-  SignInForm,
-  SignInContent,
-  SignInContentLeft,
-  SignInContentRight,
+export const SignInCSS = {
+  Container,
+  Form,
+  Content,
+  ContentLeft,
+  ContentRight,
 };

@@ -1,14 +1,14 @@
-import React from 'react';
-import FormSignInPage from '@Pages/SignInPage/FormSignInPage';
-import { SignInStyle } from './SignIn.styles';
 import { colorPrimary } from '@Assets/Styles/Variables';
+import FormSignInPage from '@Pages/SignInPage/FormSignInPage';
+import React from 'react';
+import { SignInCSS } from './SignIn.styles';
 
 function SignInPage() {
   return (
-    <SignInStyle.SignInContainer>
-      <SignInStyle.SignInForm>
-        <SignInStyle.SignInContent>
-          <SignInStyle.SignInContentLeft>
+    <SignInCSS.Container>
+      <SignInCSS.Form>
+        <SignInCSS.Content>
+          <SignInCSS.ContentLeft>
             <svg
               id='a87032b8-5b37-4b7e-a4d9-4dbfbe394641'
               data-name='Layer 1'
@@ -207,13 +207,13 @@ function SignInPage() {
                 fill='#2f2e41'
               />
             </svg>
-          </SignInStyle.SignInContentLeft>
-          <SignInStyle.SignInContentRight>
+          </SignInCSS.ContentLeft>
+          <SignInCSS.ContentRight>
             <FormSignInPage />
-          </SignInStyle.SignInContentRight>
-        </SignInStyle.SignInContent>
-      </SignInStyle.SignInForm>
-    </SignInStyle.SignInContainer>
+          </SignInCSS.ContentRight>
+        </SignInCSS.Content>
+      </SignInCSS.Form>
+    </SignInCSS.Container>
   );
 }
 

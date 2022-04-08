@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import ReactLoading from 'react-loading';
-import { SpinnerContainer } from './Spinner.styles';
+import { SpinnerCSS } from './Spinner.styles';
 
 const Spinner = () => {
   return (
     <Fragment>
       <Fragment>
-        <SpinnerContainer className='bg-black bg-opacity-30 fixed  h-screen w-screen flex justify-center items-center z-50'>
+        <SpinnerCSS.Container className=''>
           <ReactLoading type={'bubbles'} color={'#fff'} height={150} width={150} />
-        </SpinnerContainer>
+        </SpinnerCSS.Container>
       </Fragment>
     </Fragment>
   );

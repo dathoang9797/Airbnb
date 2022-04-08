@@ -1,13 +1,13 @@
-import React from 'react';
-import { FormStyle } from '@Pages/SignInPage/FormSignInPage/FormSignIn.styles';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
+import Form from '@Components/Form';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { signInUserSchema } from '@Shared/Schema/SignInSchema';
-const { setUserInfoAsync } = quanLyNguoiDungThunk;
+import { useFormik } from 'formik';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 function FormSignInPage() {
   const dispatch = useDispatch();
+  const { setUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = React.useState('password');
 
   const handleChangeTypeInput = () => {
@@ -33,55 +33,51 @@ function FormSignInPage() {
   const { handleSubmit, handleChange, errors } = formik;
 
   return (
-    <FormStyle.FormContainer onFinish={handleSubmit}>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+    <Form.FormContainer onFinish={handleSubmit}>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.email : ''}
           >
-            <FormStyle.FormUserOutlined />
-            <FormStyle.FormInput type='text' placeholder=' ' name='email' onChange={handleChange} />
-            <FormStyle.FormLabel>Your Email</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your Email</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormGroup>
-          <FormStyle.FormItem
+            <Form.FormUserOutlined />
+            <Form.FormInput
+              type='email'
+              placeholder=' '
+              name='email'
+              onChange={handleChange}
+              childrenProps='Your Email'
+            />
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormGroup>
+          <Form.FormItem
             validateStatus={errors ? 'error' : 'success'}
             help={errors ? errors.password : ''}
           >
-            <FormStyle.FormLockOutlined />
+            <Form.FormLockOutlined />
             {typeInput === 'password' ? (
-              <FormStyle.FormEyeOutlined onClick={handleChangeTypeInput} />
+              <Form.FormEyeOutlined onClick={handleChangeTypeInput} />
             ) : (
-              <FormStyle.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
+              <Form.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
             )}
-            <FormStyle.FormInput
-              type={typeInput}
+
+            <Form.FormInput
+              type='password'
               placeholder=' '
               name='password'
               onChange={handleChange}
+              childrenProps='Your PassWord'
             />
-            <FormStyle.FormLabel>Your PassWord</FormStyle.FormLabel>
-            <FormStyle.FormFieldSet>
-              <FormStyle.FormLegend>
-                <FormStyle.FormSpan>Your PassWord</FormStyle.FormSpan>
-              </FormStyle.FormLegend>
-            </FormStyle.FormFieldSet>
-          </FormStyle.FormItem>
-        </FormStyle.FormGroup>
-      </FormStyle.FormControl>
-      <FormStyle.FormControl>
-        <FormStyle.FormButton type='submit'>SIGNIN NOW</FormStyle.FormButton>
-      </FormStyle.FormControl>
-    </FormStyle.FormContainer>
+          </Form.FormItem>
+        </Form.FormGroup>
+      </Form.FormControl>
+      <Form.FormControl>
+        <Form.FormButton type='submit'>SIGNIN NOW</Form.FormButton>
+      </Form.FormControl>
+    </Form.FormContainer>
   );
 }
 
