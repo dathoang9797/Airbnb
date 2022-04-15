@@ -4,6 +4,7 @@ import Spinner from "@Components/Spinner/Spinner";
 import Footer from "@Layouts/Footer/Footer";
 import Header from "@Layouts/Header/Header";
 import HomePage from "@Pages/HomePage/HomePage";
+import ProfilePage from "@Pages/ProfilePage/ProfilePage";
 import { selectIsLoadingState } from "@Redux/Selector/LoadingSelect";
 import { routerTemplates } from "@Routers/Router";
 import History from "@Utils/Libs/History";
@@ -20,7 +21,8 @@ function App() {
       <Router history={History}>
         <Switch>{routerTemplates}</Switch>
       </Router>
-      <HomePage />
+      {/* <HomePage /> */}
+      <ProfilePage />
     </Suspense>
   );
 }
