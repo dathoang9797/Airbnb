@@ -1,6 +1,6 @@
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { createSlice } from '@reduxjs/toolkit';
-import { showError } from '@Utils/Alert/PopUp';
+import { showError } from '@/Utils/Common';
 
 const {
   setUserInfoAsync,
@@ -9,9 +9,9 @@ const {
   xoaNguoiDungAsync,
   capNhatNguoiDungAsync,
   getChiTietNguoiDungAsync,
-  setDangKyNguoiDungModal,
   capNhatAnhDaiDienAsync,
   taoNguoiDungAsync,
+  xoaNhieuNguoiDungAsync,
 } = quanLyNguoiDungThunk;
 
 const initialState = {
@@ -27,15 +27,15 @@ const quanLyNguoiDungSlice = createSlice({
   initialState,
   reducers: {
     setDanhSachNguoiDungFilter: (state, action) => {
-      const searchValue = action.payload.trim().toLowerCase();
-      if (!searchValue.length) {
+      state.searchValue = action.payload.trim().toLowerCase();
+      if (!state.searchValue.length) {
         state.danhSachNguoiDung = state.danhSachNguoiDungBackUp;
         return;
       }
-      state.searchValue = searchValue;
+
       state.danhSachNguoiDung = state.danhSachNguoiDungBackUp.filter((nguoiDung, index) => {
         if (!nguoiDung.name) return null;
-        return nguoiDung.name.toLowerCase().indexOf(searchValue) > -1;
+        return nguoiDung.name.toLowerCase().indexOf(state.searchValue) > -1;
       });
     },
   },
@@ -57,16 +57,19 @@ const quanLyNguoiDungSlice = createSlice({
         showError(action.error.message);
       }
     });
-    builder.addCase(setDangKyNguoiDungModal.rejected, (state, action) => {
-      if (action.payload) {
-        showError(action.payload);
-      } else {
-        showError(action.error.message);
-      }
-    });
+
     builder.addCase(getDanhSachNguoiDungAsync.fulfilled, (state, action) => {
       state.danhSachNguoiDungBackUp = action.payload;
-      state.danhSachNguoiDung = action.payload;
+      const searchValue = state.searchValue.trim().toLowerCase();
+      if (!searchValue.length) {
+        state.danhSachNguoiDung = state.danhSachNguoiDungBackUp;
+        return;
+      }
+
+      state.danhSachNguoiDung = state.danhSachNguoiDungBackUp.filter((nguoiDung, index) => {
+        if (!nguoiDung.name) return null;
+        return nguoiDung.name.toLowerCase().indexOf(searchValue) > -1;
+      });
     });
     builder.addCase(getDanhSachNguoiDungAsync.rejected, (state, action) => {
       if (action.payload) {
@@ -76,6 +79,13 @@ const quanLyNguoiDungSlice = createSlice({
       }
     });
     builder.addCase(xoaNguoiDungAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(xoaNhieuNguoiDungAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
       } else {

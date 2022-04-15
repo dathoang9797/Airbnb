@@ -1,6 +1,6 @@
 import * as AntIcon from '@ant-design/icons';
-import { colorPrimary } from '@Assets/Styles/Variables';
 import tw, { css, styled } from 'twin.macro';
+import { FaBed, FaClipboard } from 'react-icons/fa';
 
 const {
   UserOutlined,
@@ -14,24 +14,27 @@ const {
 } = AntIcon;
 
 const FormIcon = css`
-  &.anticon {
-    ${tw`text-sm absolute left[4%] top-1/2 -translate-y-1/2`}
-  }
+  ${tw`text-sm absolute left[4%] top-1/2 -translate-y-1/2`}
+`;
+
+const FormBedOutline = styled(FaBed)`
+  ${FormIcon}
+`;
+
+const FormHiOutlineClipboard = styled(FaClipboard)`
+  ${FormIcon}
 `;
 
 const FormCheckOutlined = styled(CheckOutlined)`
   ${FormIcon}
   &.anticon {
-    left: auto;
-    right: 0;
-    right: 10%;
-    width: 0;
-    color: ${colorPrimary};
+    color: var(--color-primary);
+    ${tw`left-auto right-[10%] w-0`}
   }
 `;
 
 const FormHomeOutlined = styled(HomeOutlined)`
-  ${FormIcon};
+  ${FormIcon}
 `;
 
 const FormPhoneOutlined = styled(PhoneOutlined)`
@@ -73,4 +76,6 @@ export const FormIconCSS = {
   FormPhoneOutlined,
   FormMailOutlined,
   FormCheckOutlined,
+  FormBedOutline,
+  FormHiOutlineClipboard,
 };

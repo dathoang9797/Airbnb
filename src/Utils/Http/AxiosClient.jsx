@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_AIRBNB,
-  timeout: 8000,
+  timeout: 3000,
   headers: {
     'Content-Type': 'application/json',
     tokenByClass: process.env.REACT_APP_TOKEN_CYBERSOFT,

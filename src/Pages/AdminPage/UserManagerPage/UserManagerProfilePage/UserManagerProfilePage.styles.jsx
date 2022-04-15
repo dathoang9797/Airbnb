@@ -1,7 +1,4 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
-
-const { colorPrimary } = Variable;
 
 const Container = styled.div`
   ${tw`container mx-auto my-5 p-5`}
@@ -13,7 +10,7 @@ const Content = styled.div`
 
 const Desc = styled.div`
   ${tw`bg-white p-3 border-t-4 border-green-400`}
-  border-color: ${colorPrimary};
+  border-color: var(--color-primary);
 `;
 
 const Img = styled.div`
@@ -32,7 +29,7 @@ const Grid = styled.div`
 `;
 
 const GridContent = styled.div`
-  ${tw`grid grid-cols-2`}
+  ${tw`flex  items-center`}
 `;
 
 const GridKey = styled.div`

@@ -1,7 +1,4 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
-
-const { colorGreyTextLight } = Variable;
 
 const Rating = styled.div`
   display: flex;
@@ -24,12 +21,12 @@ const PriceNight = styled.div`
   }
   & span span {
     font-family: 'Circular Book';
-    color: ${colorGreyTextLight};
+    color: var(--color-text-light);
   }
 `;
 const PriceTotal = styled.div`
   font-size: 14px;
-  color: ${colorGreyTextLight};
+  color: var(--color-text-light);
   text-decoration: underline;
   margin-top: 2px;
 `;
@@ -70,7 +67,7 @@ const Title = styled.div`
     cursor: pointer;
     &:after {
       opacity: 0;
-      background: ${colorGreyTextLight};
+      background: var(--color-text-light);
       position: absolute;
       content: '';
       width: 48px;

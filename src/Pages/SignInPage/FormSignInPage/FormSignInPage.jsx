@@ -2,13 +2,13 @@ import Form from '@Components/Form';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { signInUserSchema } from '@Shared/Schema/SignInSchema';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 function FormSignInPage() {
   const dispatch = useDispatch();
   const { setUserInfoAsync } = quanLyNguoiDungThunk;
-  const [typeInput, setTypeInput] = React.useState('password');
+  const [typeInput, setTypeInput] = useState('password');
 
   const handleChangeTypeInput = () => {
     if (typeInput === 'password') {
@@ -25,7 +25,6 @@ function FormSignInPage() {
     },
     validationSchema: signInUserSchema,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(setUserInfoAsync(values));
     },
   });
@@ -65,7 +64,7 @@ function FormSignInPage() {
             )}
 
             <Form.FormInput
-              type='password'
+              type={typeInput}
               placeholder=' '
               name='password'
               onChange={handleChange}

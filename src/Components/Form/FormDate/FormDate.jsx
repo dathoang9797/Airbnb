@@ -1,8 +1,5 @@
-import * as Variable from '@Assets/Styles/Variables';
 import { DatePicker } from 'antd';
 import tw, { styled } from 'twin.macro';
-
-const { colorPrimary, colorGreyTextDark } = Variable;
 
 const FormDatePicker = styled(DatePicker)`
   ${tw`w-[80%] `}
@@ -16,20 +13,20 @@ const FormDatePicker = styled(DatePicker)`
     box-shadow: none;
     outline: 0;
     ${tw` border-2 border-solid`};
-    border-color: ${colorPrimary};
+    border-color: var(--color-primary);
   }
 
   & .ant-picker-input-placeholder > input {
-    color: ${colorGreyTextDark};
+    color: var(--color-text-dark);
   }
 
   & input::placeholder {
-    color: ${colorGreyTextDark};
+    color: var(--color-text-dark);
   }
 
   & .ant-picker-suffix,
   & .ant-picker-clear {
-    color: ${colorGreyTextDark};
+    color: var(--color-text-dark);
   }
 `;
 

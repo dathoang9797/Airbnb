@@ -4,7 +4,7 @@ const selectDanhSachNguoiDung = (state) => state.QuanLyNguoiDungReducer.danhSach
 
 const selectChiTietNguoiDung = (state) => state.QuanLyNguoiDungReducer.chiTietNguoiDung;
 
-export const selectQuanLyNguoiDung = {
+export const quanLyNguoiDungSelector = {
   selectUserInfo,
   selectDanhSachNguoiDung,
   selectChiTietNguoiDung,

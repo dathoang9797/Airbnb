@@ -1,12 +1,9 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
-
-const { colorLinearGradient } = Variable;
+import { Mixins } from '@Assets/Styles/Abstracts/Mixins';
 
 const FormButton = styled.button`
   ${tw`block w-full max-w-xs mx-auto  text-white rounded-lg px-2 py-2 font-semibold transition-all duration-300 bg-origin-border background-size[200% !important] filter[drop-shadow(22.9008px 11.4504px 68.7023px rgba(255, 56, 92, 0.1))] `}
-  background: ${colorLinearGradient(90)};
-
+  ${Mixins.backgroundLinearGradient(90)};
   &:focus {
     ${tw`outline-none shadow-none`}
   }

@@ -1,6 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { removeSpace } from '@Utils/Text/RemoveSpace';
-import { removeUnicode } from '@Utils/Text/RemoveUniconde';
+import { removeSpace, removeUnicode } from '@Utils/Common';
 
 const selectDanhSachViTri = (state) => state.QuanLyViTriReducer.danhSachViTri;
 

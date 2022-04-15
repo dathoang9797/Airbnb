@@ -4,14 +4,25 @@ import { localService } from '@Services/LocalStorageService';
 import SearchInput from '@Components/SearchInput';
 import { useLocation, useHistory } from 'react-router-dom';
 import { images } from '@Assets/Images';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
+import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
 
 function HeaderAdmin() {
+  const userInfo = localService.getUserInfo();
   const { pathname } = useLocation();
   const history = useHistory();
   const urlProfile = process.env.REACT_APP_LINK_PROFILE;
   const urlSignIn = process.env.REACT_APP_LINK_SIGN_IN;
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
+  const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
+  const urlLocationManager = process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER;
+  const { setDanhSachNguoiDungFilter } = quanLyNguoiDungAction;
+  const { setDanhSachPhongFilter } = quanLyPhongChoThueAction;
   const { account } = images;
+  const placeHolderSearchUser = 'Nhập vào tài khoản hoặc họ tên người dùng';
+  const placeHolderSearchRoom = 'Nhập tên phòng';
+  const placeHolderSearchLocation = 'Nhập vị trí';
+  const { user } = userInfo;
 
   const HeaderMenuDropdownProfile = (
     <HeaderCSS.Menus>
@@ -84,10 +95,38 @@ function HeaderAdmin() {
     </HeaderCSS.Menus>
   );
 
+  const renderSearch = () => {
+    switch (true) {
+      case pathname === urlUserManager:
+        return (
+          <SearchInput
+            content={placeHolderSearchUser}
+            dispatchAction={setDanhSachNguoiDungFilter}
+          />
+        );
+
+      case pathname === urlRoomManager:
+        return (
+          <SearchInput content={placeHolderSearchRoom} dispatchAction={setDanhSachPhongFilter} />
+        );
+
+      case pathname === urlLocationManager:
+        return (
+          <SearchInput
+            content={placeHolderSearchLocation}
+            // dispatchAction={}
+          />
+        );
+      default: {
+        return null;
+      }
+    }
+  };
+
   return (
     <HeaderCSS.Container>
       <HeaderCSS.Content>
-        {urlUserManager === pathname ? <SearchInput /> : null}
+        {renderSearch()}
         <HeaderCSS.Dropdowns
           overlay={HeaderMenuDropdownProfile}
           placement='bottomLeft'
@@ -99,9 +138,11 @@ function HeaderAdmin() {
             aria-haspopup='true'
           >
             <img
-              className='object-cover w-8 h-8 rounded-full'
-              src={account}
-              alt={account}
+              className={`object-cover  rounded-full ${
+                userInfo.avatar ? 'border-2 w-10 h-10' : 'w-8 h-8'
+              }`}
+              src={userInfo.avatar ? userInfo.avatar : account}
+              alt={userInfo.avatar ? userInfo.avatar : account}
               aria-hidden='true'
             />
           </button>

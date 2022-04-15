@@ -1,7 +1,7 @@
 import { nanoid } from '@reduxjs/toolkit';
 import AdminTemplate from '@Templates/AdminTemplate';
 import HomeTemplate from '@Templates/HomeTemplate';
-import UserTemplate from '@Templates/UserTemplate';
+import UserTemplate from '@Templates/UserTemplate/UserTemplate';
 import React, { lazy } from 'react';
 
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
@@ -11,13 +11,19 @@ const RoomPage = lazy(() => import('@Pages/RoomPage'));
 const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
 const DashBoardPage = lazy(() => import('@Pages/AdminPage/DashBoardPage'));
 const LocationManagerPage = lazy(() => import('@Pages/AdminPage/LocationManagerPage'));
-const RoomManagerPage = lazy(() => import('@Pages/AdminPage/RoomManagerPage'));
 const UserManagerPage = lazy(() => import('@Pages/AdminPage/UserManagerPage'));
 const UserManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/UserManagerPage/UserManagerEditPage')
 );
 const UserManagerProfilePage = lazy(() =>
   import('@Pages/AdminPage/UserManagerPage/UserManagerProfilePage')
+);
+const RoomManagerPage = lazy(() => import('@Pages/AdminPage/RoomManagerPage'));
+const RoomManagerEditPage = lazy(() =>
+  import('@Pages/AdminPage/RoomManagerPage/RoomManagerEditPage')
+);
+const RoomManagerProfilePage = lazy(() =>
+  import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage/RoomManagerProfilePage')
 );
 
 export const routerUserTemplate = [
@@ -37,6 +43,11 @@ export const routerAdminTemplate = [
     componentPage: DashBoardPage,
   },
   { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER, componentPage: RoomManagerPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT, componentPage: RoomManagerEditPage },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE,
+    componentPage: RoomManagerProfilePage,
+  },
   { path: process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER, componentPage: LocationManagerPage },
   { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER, componentPage: UserManagerPage },
   { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT, componentPage: UserManagerEditPage },

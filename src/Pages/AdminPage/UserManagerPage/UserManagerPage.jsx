@@ -1,67 +1,99 @@
-import { selectQuanLyNguoiDung } from '@Redux/Selector/QuanLyNguoiDungSelector';
+import { ButtonCSS } from '@Components/Button';
+import Modal from '@Components/Modal';
+import { TableCSS } from '@Components/Table';
+import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { nanoid } from '@reduxjs/toolkit';
+import { userField } from '@Shared/Field/UserField';
 import History from '@Utils/Libs/History';
-import { getTableUserField } from '@Utils/User/TableUserField';
+import { sweetAlert } from '@Utils/Libs/SweetAlert';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
-import UserModal from './UserManagerModal';
+import UserManagerAdd from './UserManagerAdd';
 import { UserManagerPageCSS } from './UserManagerPage.styles';
+import { render } from 'react-dom';
+import ButtonScrollTop from '@Components/ButtonScrollTop';
 
 function UserManagerPage() {
-  const { selectDanhSachNguoiDung } = selectQuanLyNguoiDung;
-  const { getDanhSachNguoiDungAsync } = quanLyNguoiDungThunk;
-  const { xoaNguoiDungAsync } = quanLyNguoiDungThunk;
-  const { getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
   const dispatch = useDispatch();
-  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDung, _.isEqual);
+  const { tableColumnsUserField } = userField;
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const idTable = useRef(nanoid()).current;
-  const urlEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
-  const urlProfile = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE;
+  const urlUserEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
+  const urlUserProfile = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE;
+  const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
+  const { selectDanhSachNguoiDung } = quanLyNguoiDungSelector;
+  const { getDanhSachNguoiDungAsync, xoaNhieuNguoiDungAsync } = quanLyNguoiDungThunk;
+  const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
+  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDung, _.isEqual);
 
   useEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
 
+  useLayoutEffect(() => {
+    const antSpinNestedLoadingDom = document.querySelector('.ant-spin-nested-loading');
+    const scrollButtonTopDom = document.querySelector('#scroll-button-top');
+    if (antSpinNestedLoadingDom && !scrollButtonTopDom) {
+      const scrollButtonTopElem = document.createElement('div');
+      scrollButtonTopElem.setAttribute('id', 'scroll-button-top');
+      antSpinNestedLoadingDom.append(scrollButtonTopElem);
+      render(<ButtonScrollTop />, scrollButtonTopElem);
+    }
+  });
+
+  const onSelectChange = (selectedRowKeys) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const handleGetDetailUser = useCallback(
     async (idNguoiDung) => {
       await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
-      History.push(urlEdit);
+      History.push(urlUserEdit);
     },
-    [dispatch, getChiTietNguoiDungAsync, urlEdit]
+    [dispatch, getChiTietNguoiDungAsync, urlUserEdit]
   );
 
   const handleDeleteUser = useCallback(
-    (idNguoiDung) => {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          const result = await dispatch(xoaNguoiDungAsync(idNguoiDung));
-          if (result.error) return;
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
-        }
-      });
+    async (idNguoiDung) => {
+      const result = await sweetAlertDelete();
+      if (result.isConfirmed) {
+        const result = await dispatch(xoaNguoiDungAsync(idNguoiDung));
+        if (result.error) return;
+        sweetAlertSuccess();
+      }
     },
-    [dispatch, xoaNguoiDungAsync]
+    [dispatch, sweetAlertDelete, sweetAlertSuccess, xoaNguoiDungAsync]
   );
 
   const handleGetProfileUser = useCallback(
     async (idNguoiDung) => {
       await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
-      History.push(urlProfile);
+      History.push(urlUserProfile);
     },
-    [dispatch, getChiTietNguoiDungAsync, urlProfile]
+    [dispatch, getChiTietNguoiDungAsync, urlUserProfile]
   );
+
+  const handleDeleteAll = useCallback(async () => {
+    const result = await sweetAlertDelete();
+    if (result.isConfirmed) {
+      const result = await dispatch(xoaNhieuNguoiDungAsync(selectedRowKeys));
+      if (result.error) return;
+      setSelectedRowKeys([]);
+      sweetAlertSuccess();
+    }
+  }, [dispatch, selectedRowKeys, sweetAlertDelete, sweetAlertSuccess, xoaNhieuNguoiDungAsync]);
+
+  const handleRefreshData = useCallback(() => {
+    dispatch(getDanhSachNguoiDungAsync());
+  }, [dispatch, getDanhSachNguoiDungAsync]);
 
   const renderDataTable = useMemo(() => {
     return danhSachNguoiDung.map((nguoiDung, index) => {
@@ -69,27 +101,27 @@ function UserManagerPage() {
         ...nguoiDung,
         action: (
           <div>
-            <UserManagerPageCSS.ButtonShowProfile
+            <ButtonCSS.ShowProfile
               onClick={() => {
                 handleGetProfileUser(nguoiDung._id);
               }}
             >
               Xem thông tin chi tiết
-            </UserManagerPageCSS.ButtonShowProfile>
-            <UserManagerPageCSS.ButtonEdit
+            </ButtonCSS.ShowProfile>
+            <ButtonCSS.Edit
               onClick={() => {
                 handleGetDetailUser(nguoiDung._id);
               }}
             >
               Sửa
-            </UserManagerPageCSS.ButtonEdit>
-            <UserManagerPageCSS.ButtonDelete
+            </ButtonCSS.Edit>
+            <ButtonCSS.Delete
               onClick={() => {
                 handleDeleteUser(nguoiDung._id);
               }}
             >
               Xóa
-            </UserManagerPageCSS.ButtonDelete>
+            </ButtonCSS.Delete>
           </div>
         ),
       };
@@ -110,18 +142,24 @@ function UserManagerPage() {
 
   return (
     <UserManagerPageCSS.Container>
-      <UserModal
+      <Modal
         isModalVisible={isModalVisible}
         showModal={showModal}
         handleOk={handleOk}
         handleCancel={handleCancel}
+        handleDeleteAll={handleDeleteAll}
+        handleRefreshData={handleRefreshData}
+        content='Thêm quản trị viên'
+        Component={UserManagerAdd}
+        selectedRowKeys={selectedRowKeys}
       />
 
-      <UserManagerPageCSS.Table
-        columns={getTableUserField()}
+      <TableCSS.Table
+        columns={tableColumnsUserField}
         dataSource={renderDataTable}
         rowKey={(record) => record._id}
         key={idTable}
+        rowSelection={rowSelection}
       />
     </UserManagerPageCSS.Container>
   );

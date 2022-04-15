@@ -1,4 +1,3 @@
-import { colorPrimary } from '@Assets/Styles/Variables';
 import FormSignInPage from '@Pages/SignInPage/FormSignInPage';
 import React from 'react';
 import { SignInCSS } from './SignIn.styles';
@@ -65,7 +64,7 @@ function SignInPage() {
                 cx='364.43401'
                 cy='261.50202'
                 r='24.45'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <path
                 id='bbe451c3-febc-41ba-8083-4c8307a2e73e'
@@ -89,7 +88,7 @@ function SignInPage() {
                 cx='225.46401'
                 cy='427.41999'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <rect
                 id='ff33d889-4c74-4b91-85ef-b4882cc8fe76'
@@ -106,12 +105,12 @@ function SignInPage() {
                 cx='225.46401'
                 cy='496.43702'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <path
                 d='M660.69043,671.17188H591.62207a4.50493,4.50493,0,0,1-4.5-4.5v-24.208a4.50492,4.50492,0,0,1,4.5-4.5h69.06836a4.50491,4.50491,0,0,1,4.5,4.5v24.208A4.50492,4.50492,0,0,1,660.69043,671.17188Z'
                 transform='translate(-227.576 -76.46149)'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <circle
                 id='e12ee00d-aa4a-4413-a013-11d20b7f97f7'
@@ -119,7 +118,7 @@ function SignInPage() {
                 cx='247.97799'
                 cy='427.41999'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <circle
                 id='f58f497e-6949-45c8-be5f-eee2aa0f6586'
@@ -127,7 +126,7 @@ function SignInPage() {
                 cx='270.492'
                 cy='427.41999'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <circle
                 id='b4d4939a-c6e6-4f4d-ba6c-e8b05485017d'
@@ -135,7 +134,7 @@ function SignInPage() {
                 cx='247.97799'
                 cy='496.43702'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <circle
                 id='aff120b1-519b-4e96-ac87-836aa55663de'
@@ -143,7 +142,7 @@ function SignInPage() {
                 cx='270.492'
                 cy='496.43702'
                 r='6.902'
-                fill={`${colorPrimary}`}
+                fill={`var(--color-primary)`}
               />
               <path
                 id='f1094013-1297-477a-ac57-08eac07c4bd5'
