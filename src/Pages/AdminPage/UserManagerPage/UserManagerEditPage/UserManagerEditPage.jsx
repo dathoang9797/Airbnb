@@ -1,30 +1,31 @@
 import Form from '@Components/Form';
-import { selectQuanLyNguoiDung } from '@Redux/Selector/QuanLyNguoiDungSelector';
+import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { editUserSchema } from '@Shared/Schema/EditUserSchema';
-import { showWarning } from '@Utils/Alert/PopUp';
-import { editUserField } from '@Utils/User/EditUserField';
+import { showWarning } from '@/Utils/Common';
 import { useFormik } from 'formik';
 import _ from 'lodash';
 import moment from 'moment';
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
-import { UserManagerEditStyle } from './UserManagerEditPage.styles';
+import { UserManagerEditCSS } from './UserManagerEditPage.styles';
+import { userField } from '@Shared/Field/UserField';
 
 function UserManagerEdit() {
   const dispatch = useDispatch();
-  const { UserManagerEditContainer } = UserManagerEditStyle;
-  const { selectChiTietNguoiDung } = selectQuanLyNguoiDung;
+  const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
   const { capNhatNguoiDungAsync } = quanLyNguoiDungThunk;
   const client = process.env.REACT_APP_NGUOI_DUNG_CLIENT;
   const admin = process.env.REACT_APP_NGUOI_DUNG_ADMIN;
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
+  const { editUserField } = userField;
   const isHasChiTietNguoiDung = _.isEmpty(chiTietNguoiDung);
-  const initialValues = isHasChiTietNguoiDung
-    ? editUserField
-    : { ..._.omit(chiTietNguoiDung, ['__v', 'tickets', 'password', 'deleteAt', 'avatar']) };
+  const initialValues = {
+    ...editUserField,
+    ..._.omit(chiTietNguoiDung, ['__v', 'tickets', 'password', 'deleteAt', 'avatar']),
+  };
   const refChiTietNguoiDung = useRef(initialValues);
 
   const handleSubmitEditUser = (valuesUpDate) => {
@@ -40,7 +41,7 @@ function UserManagerEdit() {
 
   const handleChangeDatePicker = async (date) => {
     if (!date) return;
-    const ngaySinh = moment(date).format('DD/MM/YYYY');
+    const ngaySinh = moment(date).format('MM/DD/YYYY');
     await setFieldValue('birthday', ngaySinh);
   };
 
@@ -54,18 +55,17 @@ function UserManagerEdit() {
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: { ...initialValues },
+    initialValues,
     validationSchema: editUserSchema,
     onSubmit: handleSubmitEditUser,
   });
 
   const { setFieldValue, handleSubmit, handleChange, values, errors } = formik;
 
-  console.log({ values });
   return isHasChiTietNguoiDung ? (
     <Redirect to={urlUserManager} />
   ) : (
-    <UserManagerEditContainer>
+    <UserManagerEditCSS.Container>
       <Form.FormContainer onFinish={handleSubmit}>
         <Form.FormControl>
           <Form.FormGroup>
@@ -180,7 +180,7 @@ function UserManagerEdit() {
           <Form.FormButton type='submit'>UPDATE NOW</Form.FormButton>
         </Form.FormControl>
       </Form.FormContainer>
-    </UserManagerEditContainer>
+    </UserManagerEditCSS.Container>
   );
 }
 

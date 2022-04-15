@@ -1,19 +1,21 @@
 import { Form } from 'antd';
-import tw, { css, styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
-
-const { colorPrimary } = Variable;
+import tw, { styled } from 'twin.macro';
 
 const FormItem = styled(Form.Item)`
-  ${tw`mb-5`}
-  & .ant-form-item-explain-error {
+  .ant-form-item-explain-error {
     ${tw`relative top[5px]`}
   }
+
+  .ant-form-item-control-input {
+    min-height: auto;
+  }
+
   &:focus-within svg {
     ${tw`transition-all duration-300`}
-    color: ${colorPrimary} !important;
+    color: var(--color-primary) !important;
   }
 `;
+
 const FormGroup = styled.div`
   ${tw`w-full px-3 relative`}
 `;

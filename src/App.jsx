@@ -1,27 +1,22 @@
 import GlobalStyles from '@Assets/Styles/Global';
-import Spinner from '@Components/Spinner/Spinner';
-import { selectIsLoadingState } from '@Redux/Selector/LoadingSelect';
+import SpinnerFallBack from '@Components/SpinerFallBack';
+import Spinner from '@Components/Spinner';
 import { routerTemplates } from '@Routers/Router';
 import History from '@Utils/Libs/History';
-import React, { Suspense } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, Suspense } from 'react';
 import { Router, Switch } from 'react-router-dom';
 
 function App() {
-  const isLoading = useSelector(selectIsLoadingState);
-
-  // useEffect(() => {
-  //   document.querySelector('html').classList.add('dark');
-  // });
-
   return (
-    <Suspense fallback={<Spinner />}>
-      {isLoading ? <Spinner /> : null}
+    <Fragment>
       <GlobalStyles />
+      <Spinner />
       <Router history={History}>
-        <Switch>{routerTemplates}</Switch>
+        <Suspense fallback={<SpinnerFallBack />}>
+          <Switch>{routerTemplates}</Switch>
+        </Suspense>
       </Router>
-    </Suspense>
+    </Fragment>
   );
 }
 

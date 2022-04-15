@@ -1,15 +1,19 @@
 import { SearchInputCSS } from '@Components/SearchInput/SeachInput.styles';
-import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { debounce } from 'lodash';
 
-function SearchInput() {
+function SearchInput({ content, dispatchAction }) {
   const dispatch = useDispatch();
-  const { setDanhSachNguoiDungFilter } = quanLyNguoiDungAction;
+
+  //const handleSearch = (value) => dispatch(dispatchAction(value));
+
+  // const handleDebounce = debounce(handleSearch, 300);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
-    dispatch(setDanhSachNguoiDungFilter(e.target.value));
+    const { value } = e.target;
+    dispatch(dispatchAction(value));
+    //handleDebounce(value);
   };
 
   return (
@@ -27,7 +31,7 @@ function SearchInput() {
             type='text'
             placeholder=' '
             name='search'
-            childrenProps='Nhập vào tài khoản hoặc họ tên người dùng'
+            childrenProps={content}
             onChange={handleChange}
           />
         </SearchInputCSS.Item>

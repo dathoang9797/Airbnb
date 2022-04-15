@@ -1,6 +1,7 @@
 import Form from '@Components/Form';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { signUpUserSchema } from '@Shared/Schema/SignUpSchema';
+import { userField } from '@Shared/Field/UserField';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import React, { useState } from 'react';
@@ -8,12 +9,11 @@ import { useDispatch } from 'react-redux';
 
 function FormSignUpPage() {
   const dispatch = useDispatch();
+  const { signUpField } = userField;
   const { setRegisterUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
 
-  const handleSubmitRegister = (values) => {
-    dispatch(setRegisterUserInfoAsync(values));
-  };
+  const handleSubmitRegister = (values) => dispatch(setRegisterUserInfoAsync(values));
 
   const handleChangeTypeInput = () => {
     if (typeInput === 'password') {
@@ -25,7 +25,7 @@ function FormSignUpPage() {
 
   const handleChangeDatePicker = async (date) => {
     if (!date) return;
-    const birthDay = moment(date).format('DD/MM/YYYY');
+    const birthDay = moment(date).format('MM/DD/YYYY');
     await setFieldValue('birthday', birthDay);
   };
 
@@ -34,20 +34,12 @@ function FormSignUpPage() {
   };
 
   const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      phone: '',
-      birthday: '',
-      address: '',
-      gender: false,
-    },
+    initialValues: signUpField,
     validationSchema: signUpUserSchema,
     onSubmit: handleSubmitRegister,
   });
 
-  const { setFieldValue, handleSubmit, handleChange, errors } = formik;
+  const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
   return (
     <Form.FormContainer onFinish={handleSubmit}>
@@ -68,6 +60,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem
@@ -85,6 +78,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem
@@ -107,6 +101,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem
@@ -124,6 +119,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem
@@ -141,6 +137,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem
@@ -152,6 +149,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormGroup>
           <Form.FormItem label='Gender'>
@@ -159,6 +157,7 @@ function FormSignUpPage() {
           </Form.FormItem>
         </Form.FormGroup>
       </Form.FormControl>
+
       <Form.FormControl>
         <Form.FormButton type='submit'>SIGNUP NOW</Form.FormButton>
       </Form.FormControl>
