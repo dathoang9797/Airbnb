@@ -1,0 +1,5 @@
+{
+  "name": "CardImage",
+  "main": "./CardImage.jsx",
+  "private": true
+}

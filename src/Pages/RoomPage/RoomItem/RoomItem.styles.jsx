@@ -1,7 +1,4 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
-
-const { colorGreyMedium, colorGreyTextLight } = Variable;
 
 const RoomListRating = styled.div`
   display: flex;
@@ -24,12 +21,12 @@ const RoomListPriceNight = styled.div`
   }
   & span span {
     font-family: 'Circular Book';
-    color: ${colorGreyMedium};
+    color: var(--color-medium);
   }
 `;
 const RoomListPriceTotal = styled.div`
   font-size: 14px;
-  color: ${colorGreyTextLight};
+  color: var(--color-text-light);
   text-decoration: underline;
   margin-top: 2px;
 `;
@@ -72,7 +69,7 @@ const RoomListTitle = styled.div`
 
     &:after {
       opacity: 0;
-      background: ${colorGreyMedium};
+      background: var(--color-medium);
       position: absolute;
       content: '';
       width: 48px;

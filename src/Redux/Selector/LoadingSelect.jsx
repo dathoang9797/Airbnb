@@ -5,8 +5,4 @@ import { RootState } from '@Redux/store';
 
 export const selectIsLoadingState = (state: RootState) => state.LoadingReducer.isLoading;
 
-const selectLoadingState = {
-  selectIsLoadingState,
-};
-
-export default selectLoadingState;
+export const selectCountState = (state: RootState) => state.LoadingReducer.count;

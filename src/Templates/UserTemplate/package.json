@@ -1,0 +1,5 @@
+{
+  "name": "UserTemplates",
+  "main": "./UserTemplates.jsx",
+  "private": true
+}

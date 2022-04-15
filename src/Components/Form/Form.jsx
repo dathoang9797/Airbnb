@@ -2,9 +2,10 @@ import { FormCSS } from './Form.styles';
 import { FormButtonCSS } from './FormButton';
 import { FormDateCSS } from './FormDate';
 import { FormIconCSS } from './FormIcon';
-import FormInput from './FormInput';
 import { FromSwitchCSS } from './FormSwitch';
 import { FormSelectCSS } from './FormSelect';
+import { FormInputNumberCSS } from './FormInputNumber';
+import FormInput from './FormInput';
 
 const Form = {
   ...FormButtonCSS,
@@ -13,6 +14,7 @@ const Form = {
   ...FormDateCSS,
   ...FromSwitchCSS,
   ...FormSelectCSS,
+  ...FormInputNumberCSS,
   FormInput,
 };
 

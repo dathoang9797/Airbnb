@@ -1,8 +1,5 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
 import { Switch } from 'antd';
-
-const { colorPrimary } = Variable;
 
 const FormSwitch = styled(Switch)`
   &.ant-switch {
@@ -10,11 +7,11 @@ const FormSwitch = styled(Switch)`
   }
 
   &.ant-switch-checked {
-    background-color: ${colorPrimary};
+    background-color: var(--color-primary);
   }
 
   &.ant-switch-checked:focus {
-    box-shadow: 0 0 0 2px ${colorPrimary};
+    box-shadow: 0 0 0 2px var(--color-primary);
   }
 `;
 

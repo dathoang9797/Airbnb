@@ -1,20 +1,19 @@
 import tw, { styled } from 'twin.macro';
-import * as Variable from '@Assets/Styles/Variables';
 import { Select } from 'antd';
 
 const { Option } = Select;
-const { colorGreyTextDark } = Variable;
 
 const FormSelect = styled(Select)`
+  ${tw`rounded-[10px]`}
+
   &.ant-select {
     ${tw`border-gray-500 border-2 border-solid w-3/5`}
   }
-  &.ant-select .ant-select-selection-item,
-  &.ant-select .ant-select-arrow {
-    color: ${colorGreyTextDark};
-  }
 
-  border-radius: 10px;
+  .ant-select-selection-item,
+  .ant-select-arrow {
+    ${tw` color[var(--color-text-dark)!important]`}
+  }
 `;
 
 const FormOption = styled(Option)``;
