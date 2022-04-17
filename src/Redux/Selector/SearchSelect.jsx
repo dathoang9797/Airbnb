@@ -1,1 +1,5 @@
-export const selectSearchState = (state) => state.SearchReducer.searchValue;
+const selectSearchState = (state) => state.SearchReducer.searchValue;
+
+export const searchSelector = {
+  selectSearchState,
+};

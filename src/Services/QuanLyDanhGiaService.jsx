@@ -2,7 +2,7 @@ import AxiosClient from '@Utils/Http/AxiosClient';
 
 export const quanLyDanhGiaService = {
   layTatCaDanhGia(isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA;
+    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA_THEO_PHONG;
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 

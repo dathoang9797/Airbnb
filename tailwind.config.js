@@ -97,6 +97,16 @@ module.exports = {
       backgroundColor: {
         dark_mode_bg: "rgba(16 18 27 / 40%)",
         dark_mode_card_theme_bg: "rgb(146 151 179 / 13%)",
+        'orange-50': 'rgb(255 247 237)',
+        'orange-100': 'rgb(255 237 213)',
+        'orange-200': 'rgb(254 215 170)',
+        'orange-300': 'rgb(253 186 116)',
+        'orange-400': 'rgb(251 146 60)',
+        'orange-500': 'rgb(249 115 22)',
+        'orange-600': 'rgb(234 88 12)',
+        'orange-700': 'rgb(194 65 12)',
+        'orange-800': 'rgb(154 52 18)',
+        'orange-900': 'rgb(124 45 18)',
       },
       boxShadow: {
         design_code:

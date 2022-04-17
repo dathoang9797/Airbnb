@@ -8,6 +8,7 @@ import { history } from '@Utils/Libs';
 import { Menu } from 'antd';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { messageApp } from '@Utils/Common';
 
 function HeaderAdmin() {
   const userInfo = localService.getUserInfo();
@@ -19,9 +20,11 @@ function HeaderAdmin() {
   const urlLocationManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
   const { setSearchValue } = searchReducerAction;
   const { account } = images;
-  const placeHolderSearchUser = 'Nhập vào tài khoản hoặc họ tên người dùng';
-  const placeHolderSearchRoom = 'Nhập tên phòng';
-  const placeHolderSearchLocation = 'Nhập vị trí';
+  const {
+    messagePlaceHolderSearchRoom,
+    messagePlaceHolderSearchUser,
+    messagePlaceHolderSearchLocation,
+  } = messageApp;
 
   const handleLogOut = () => {
     localService.removeUserInfo();
@@ -49,13 +52,19 @@ function HeaderAdmin() {
   const renderSearch = () => {
     switch (true) {
       case pathname === urlUserManager:
-        return <SearchInput content={placeHolderSearchUser} dispatchAction={setSearchValue} />;
+        return (
+          <SearchInput content={messagePlaceHolderSearchUser} dispatchAction={setSearchValue} />
+        );
 
       case pathname === urlRoomManager:
-        return <SearchInput content={placeHolderSearchRoom} dispatchAction={setSearchValue} />;
+        return (
+          <SearchInput content={messagePlaceHolderSearchRoom} dispatchAction={setSearchValue} />
+        );
 
       case pathname === urlLocationManager:
-        return <SearchInput content={placeHolderSearchLocation} dispatchAction={setSearchValue} />;
+        return (
+          <SearchInput content={messagePlaceHolderSearchLocation} dispatchAction={setSearchValue} />
+        );
       default: {
         return null;
       }
