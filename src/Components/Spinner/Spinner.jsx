@@ -1,9 +1,10 @@
-import { selectIsLoadingState } from '@/Redux/Selector/LoadingSelect';
+import { loadingSelector } from '@/Redux/Selector/LoadingSelect';
 import React, { useLayoutEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { SpinnerCSS } from './Spinner.styles';
 
 const Spinner = () => {
+  const { selectIsLoadingState } = loadingSelector;
   const isLoading = useSelector(selectIsLoadingState);
   const spinRef = useRef(null);
   const idTimeOut = useRef(null);

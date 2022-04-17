@@ -5,7 +5,6 @@ import React from 'react';
 import { ModalCSS } from './Modal.style';
 
 function Modal(props) {
-  console.log('modal');
   const { PlusOutlined } = AntIcon;
   const {
     handleCancel,

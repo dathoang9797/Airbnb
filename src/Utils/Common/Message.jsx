@@ -35,6 +35,12 @@ const messageNameUserShouldNotEmpty = '*Tên người dùng không được đ�
 
 const messageNoDifferent = 'Không có thay đổi nào';
 
+const messagePlaceHolderSearchUser = 'Nhập vào tài khoản hoặc họ tên người dùng';
+
+const messagePlaceHolderSearchRoom = 'Nhập tên phòng';
+
+const messagePlaceHolderSearchLocation = 'Nhập vị trí';
+
 export const messageApp = {
   messagePasswordIsValid,
   messageNetWorkErr,
@@ -54,4 +60,7 @@ export const messageApp = {
   messageNameLocationShouldNotEmpty,
   messageNameUserShouldNotEmpty,
   messageNoDifferent,
+  messagePlaceHolderSearchUser,
+  messagePlaceHolderSearchRoom,
+  messagePlaceHolderSearchLocation,
 };

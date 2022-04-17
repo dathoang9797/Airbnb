@@ -9,6 +9,7 @@ import SpinnerFallBack from './SpinerFallBack';
 import Spinner from './Spinner';
 import { TableCSS } from './Table';
 import UpLoadImage from './UpLoadImage';
+import CardStats from './CardStats';
 
 export {
   ButtonCSS,
@@ -22,4 +23,5 @@ export {
   Spinner,
   TableCSS,
   UpLoadImage,
+  CardStats,
 };

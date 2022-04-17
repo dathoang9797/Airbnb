@@ -1,10 +1,11 @@
-import { selectSearchState } from '@/Redux/Selector/SearchSelect';
+import { searchSelector } from '@/Redux/Selector/SearchSelect';
 import { SearchInputCSS } from '@Components/SearchInput/SeachInput.styles';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function SearchInput({ content, dispatchAction }) {
   const dispatch = useDispatch();
+  const { selectSearchState } = searchSelector;
   const searchValue = useSelector(selectSearchState);
 
   const handleChange = (e) => {
