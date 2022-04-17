@@ -3,17 +3,20 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 const Container = styled.div`
   .ant-upload.ant-upload-select-picture-card:hover {
-    ${tw`border-color[var(--color-primary)]`}
+    ${tw`border-color[var(--color-primary)]`};
   }
   .ant-upload-select-picture {
-    ${tw` lg:w-[300px] md:w-[200px] 
-    sm:w-[200px]`}
+    ${tw` 
+    lg:w-[300px] 
+    md:w-[200px] 
+    sm:w-[200px]
+    `};
   }
 
   .ant-upload-select-picture-card {
-    ${tw`md:w-[80px] md:h-[80px]`}
-    ${tw`lg:w-[90px] lg:h-[90px]`}
-    ${tw`xl:w-[104px] xl:h-[104px]`}
+    ${tw`md:w-[80px] md:h-[80px]`};
+    ${tw`lg:w-[90px] lg:h-[90px]`};
+    ${tw`xl:w-[104px] xl:h-[104px]`};
   }
 
   .ant-upload.ant-upload-select {
@@ -41,8 +44,11 @@ const Container = styled.div`
     display: none;
   }
 
-  img {
-    ${tw`rounded-lg w-full h-full object-contain`};
+  span.lazy-load-image-background {
+    ${tw`display[block !important]`};
+    img {
+      ${tw`rounded-lg w-full h-full object-contain`};
+    }
   }
 `;
 

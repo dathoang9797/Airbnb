@@ -2,7 +2,7 @@ import React from 'react';
 import { HeaderStyle } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
-function Header() {
+function HeaderUser() {
   const { searchIcon, logo, globe, chevronDown, hamburger, account } = images;
 
   const {
@@ -47,4 +47,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(HeaderUser);

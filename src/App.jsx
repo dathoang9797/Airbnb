@@ -1,8 +1,7 @@
 import GlobalStyles from '@Assets/Styles/Global';
-import SpinnerFallBack from '@Components/SpinerFallBack';
-import Spinner from '@Components/Spinner';
+import { Spinner, SpinnerFallBack } from '@Components';
 import { routerTemplates } from '@Routers/Router';
-import History from '@Utils/Libs/History';
+import { history } from '@Utils/Libs';
 import React, { Fragment, Suspense } from 'react';
 import { Router, Switch } from 'react-router-dom';
 
@@ -11,7 +10,7 @@ function App() {
     <Fragment>
       <GlobalStyles />
       <Spinner />
-      <Router history={History}>
+      <Router history={history}>
         <Suspense fallback={<SpinnerFallBack />}>
           <Switch>{routerTemplates}</Switch>
         </Suspense>

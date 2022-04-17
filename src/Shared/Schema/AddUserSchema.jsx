@@ -1,10 +1,15 @@
 import * as yup from 'yup';
 import { regularPassWord, messageApp } from '@Utils/Common';
 
-const { messagePasswordIsValid, messageFieldIsRequire, messageEmailIsUnValid } = messageApp;
+const {
+  messagePasswordIsValid,
+  messageFieldIsRequire,
+  messageEmailIsUnValid,
+  messageNameUserShouldNotEmpty,
+} = messageApp;
 
 export const addUserSchema = yup.object().shape({
-  name: yup.string().required(messageFieldIsRequire),
+  name: yup.string().required(messageNameUserShouldNotEmpty),
   email: yup.string().required(messageFieldIsRequire).email(messageEmailIsUnValid),
   password: yup
     .string()

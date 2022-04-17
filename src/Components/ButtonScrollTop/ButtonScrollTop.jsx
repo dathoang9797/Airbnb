@@ -4,6 +4,7 @@ import { ButtonScrollTopCSS } from './ButtonScrollTop.styles';
 function ButtonScrollTop() {
   const [showButton, setShowButton] = useState(false);
   const { FaArrowUpCSS, LinkCSS } = ButtonScrollTopCSS;
+
   const handleScrollTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
   useEffect(() => {

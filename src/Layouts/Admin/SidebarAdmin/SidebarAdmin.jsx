@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { SiderBarCSS } from './SidebarAdmin.styles';
 
-export default function Siderbar() {
+function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
   const { logo } = images;
@@ -34,10 +34,10 @@ export default function Siderbar() {
             <NavLink to={process.env.REACT_APP_LINK_ADMIN_USER_MANAGER}>Quản lý người dùng</NavLink>
           </SiderBarCSS.MenuItem>
           <SiderBarCSS.MenuItem
-            key={process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER}
+            key={process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER}
             icon={<IoLocationOutline />}
           >
-            <NavLink to={process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER}>
+            <NavLink to={process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER}>
               Quản lý thông tin vị trí
             </NavLink>
           </SiderBarCSS.MenuItem>
@@ -54,3 +54,5 @@ export default function Siderbar() {
     </>
   );
 }
+
+export default React.memo(Siderbar);

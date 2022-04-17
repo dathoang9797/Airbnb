@@ -2,7 +2,7 @@ import React from 'react';
 import { FooterStyle } from '@Layouts/User/FooterUser/FooterUser.styles';
 import { FacebookOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
 
-function Footer() {
+function FooterUser() {
   return (
     <FooterStyle.FooterContainer>
       <FooterStyle.FooterTop>
@@ -124,4 +124,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(FooterUser);

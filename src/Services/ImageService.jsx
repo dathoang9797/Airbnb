@@ -8,6 +8,7 @@ export const imagesService = {
       headers: { isLoading },
       timeout: 30000,
     };
+
     const encodeUrl = encodeURI(imageUrl);
     const reader = new FileReader();
     const blob = await axiosClient.get(encodeUrl, config);
@@ -17,4 +18,5 @@ export const imagesService = {
       reader.onload = () => resolve(reader.result);
     });
   },
+  async resizeImage(imageUrl, width, height) {},
 };

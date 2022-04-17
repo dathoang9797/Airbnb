@@ -32,7 +32,7 @@ const ContentCSS = styled.div`
   }
 
   .ant-image {
-    ${tw`h-full flex-grow`};
+    ${tw`h-full  w-1/2 flex-grow`};
   }
 
   @media only screen and (max-width: 1200px) {

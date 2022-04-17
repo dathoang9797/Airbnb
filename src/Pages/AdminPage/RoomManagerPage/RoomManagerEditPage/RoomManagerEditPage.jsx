@@ -1,15 +1,16 @@
 import { editRoomSchema } from '@/Shared/Schema/EditRoomSchema';
+import { showWarning } from '@/Utils/Common';
 import Form from '@Components/Form';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
-import { showWarning } from '@/Utils/Common';
+import { roomField } from '@Shared/Field/RoomField';
 import { useFormik } from 'formik';
 import _ from 'lodash';
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { RoomManagerEditCSS } from './RoomManagerEditPage.styles';
-import { roomField } from '@Shared/Field/RoomField';
+import { messageApp } from '@Utils/Common';
 
 function RoomManagerEditPage() {
   const dispatch = useDispatch();
@@ -19,18 +20,18 @@ function RoomManagerEditPage() {
   const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
   const isHasChiTietPhongChoThue = _.isEmpty(chiTietPhongChoThue);
   const { editRoomField } = roomField;
-
   const initialValues = {
     ...editRoomField,
     ..._.omit(chiTietPhongChoThue, ['__v', 'deleteAt', 'image', 'locationId']),
   };
   const refChiTietNguoiDung = useRef(initialValues);
+  const { messageNoDifferent } = messageApp;
 
-  const handleSubmitEditUser = (valuesUpDate) => {
-    const noiDungCapNhat = _.omit(valuesUpDate, ['avatar']);
+  const handleSubmitEditRoom = (valuesUpDate) => {
+    const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
     const idRoom = valuesUpDate._id;
     if (_.isEqual(valuesUpDate, refChiTietNguoiDung.current)) {
-      showWarning('Không có thay đổi nào');
+      showWarning(messageNoDifferent);
       return;
     }
     const params = { idRoom, noiDungCapNhat };
@@ -49,7 +50,7 @@ function RoomManagerEditPage() {
     enableReinitialize: true,
     initialValues,
     validationSchema: editRoomSchema,
-    onSubmit: handleSubmitEditUser,
+    onSubmit: handleSubmitEditRoom,
   });
 
   const { setFieldValue, handleSubmit, handleChange, values, errors } = formik;
