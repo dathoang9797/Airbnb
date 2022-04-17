@@ -6,6 +6,8 @@ import { regularPassWord } from './RegularExpression';
 import { removeSpace } from './RemoveSpace';
 import { removeUnicode } from './RemoveUniconde';
 import { delay } from './Delay';
+import { filterSearchValue } from './FilterSearchValue';
+import { handleDataTable } from './HandleDataTable';
 
 export {
   capitalize,
@@ -18,4 +20,6 @@ export {
   removeSpace,
   removeUnicode,
   delay,
+  filterSearchValue,
+  handleDataTable,
 };

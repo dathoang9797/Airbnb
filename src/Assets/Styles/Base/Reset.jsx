@@ -99,6 +99,10 @@ export const ResetCSS = css`
   .ant-btn-primary:focus {
     ${tw`color[var(--color-primary)] border-[var(--color-light)] bg-[var(--color-white)]`}
   }
-
- 
+  .ant-dropdown-menu  {
+    ${tw`rounded-lg`}
+    li.ant-dropdown-menu-item {
+      ${tw`rounded-full mx-2 my-1 px-2 py-1 text-[var(--color-text-light)] text-sm hover:text-[#000] transition-all duration-300`};
+    }
+}
 `;

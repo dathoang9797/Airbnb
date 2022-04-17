@@ -29,6 +29,12 @@ const messageFieldIsRequire = '*Field is require!';
 
 const messageNameRoomShouldNotEmpty = '*Tên phòng không được để trống';
 
+const messageNameLocationShouldNotEmpty = '*Tên vị trí không được để trống';
+
+const messageNameUserShouldNotEmpty = '*Tên người dùng không được để trống';
+
+const messageNoDifferent = 'Không có thay đổi nào';
+
 export const messageApp = {
   messagePasswordIsValid,
   messageNetWorkErr,
@@ -45,4 +51,7 @@ export const messageApp = {
   messageFieldIsRequire,
   messageNameRoomShouldNotEmpty,
   messageEmailIsUnValid,
+  messageNameLocationShouldNotEmpty,
+  messageNameUserShouldNotEmpty,
+  messageNoDifferent,
 };

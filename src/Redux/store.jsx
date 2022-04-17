@@ -8,6 +8,7 @@ import QuanLyPhongChoThueReducer from '@Redux/Reducers/QuanLyPhongChoThueSlice';
 import QuanLyVeReducer from '@Redux/Reducers/QuanLyVeSlice';
 import QuanLyViTriReducer from '@Redux/Reducers/QuanLyViTriSlice';
 import QuanLyDanhGiaReducer from '@Redux/Reducers/QuanLyDanhGiaSlice';
+import SearchReducer from '@Redux/Reducers/SearchSlice';
 
 export const rootReducer = combineReducers({
   QuanLyNguoiDungReducer,
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
   QuanLyPhongChoThueReducer,
   QuanLyVeReducer,
   QuanLyViTriReducer,
+  SearchReducer,
 });
 
 const middlewaresConfig = process.env.NODE_ENV !== 'production' ? [logger] : [];

@@ -1,19 +1,16 @@
-import { ButtonCSS } from '@Components/Button';
-import Modal from '@Components/Modal';
-import { TableCSS } from '@Components/Table';
+import { history, sweetAlert } from '@/Utils/Libs';
+import { ButtonScrollTop, Modal, TableCSS } from '@Components';
 import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { userField } from '@Shared/Field/UserField';
-import History from '@Utils/Libs/History';
-import { sweetAlert } from '@Utils/Libs/SweetAlert';
+import { handleDataTable } from '@Utils/Common';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useMemo, useRef, useState, useLayoutEffect } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { render } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
 import { UserManagerPageCSS } from './UserManagerPage.styles';
-import { render } from 'react-dom';
-import ButtonScrollTop from '@Components/ButtonScrollTop';
 
 function UserManagerPage() {
   const dispatch = useDispatch();
@@ -24,10 +21,10 @@ function UserManagerPage() {
   const urlUserEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
   const urlUserProfile = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE;
   const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
-  const { selectDanhSachNguoiDung } = quanLyNguoiDungSelector;
+  const { selectDanhSachNguoiDungFilter } = quanLyNguoiDungSelector;
   const { getDanhSachNguoiDungAsync, xoaNhieuNguoiDungAsync } = quanLyNguoiDungThunk;
   const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
-  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDung, _.isEqual);
+  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDungFilter, _.isEqual);
 
   useEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());
@@ -53,33 +50,24 @@ function UserManagerPage() {
     onChange: onSelectChange,
   };
 
-  const handleGetDetailUser = useCallback(
-    async (idNguoiDung) => {
-      await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
-      History.push(urlUserEdit);
-    },
-    [dispatch, getChiTietNguoiDungAsync, urlUserEdit]
-  );
+  const handleGetDetailUser = async (idNguoiDung) => {
+    await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
+    history.push(urlUserEdit);
+  };
 
-  const handleDeleteUser = useCallback(
-    async (idNguoiDung) => {
-      const result = await sweetAlertDelete();
-      if (result.isConfirmed) {
-        const result = await dispatch(xoaNguoiDungAsync(idNguoiDung));
-        if (result.error) return;
-        sweetAlertSuccess();
-      }
-    },
-    [dispatch, sweetAlertDelete, sweetAlertSuccess, xoaNguoiDungAsync]
-  );
+  const handleDeleteUser = async (idNguoiDung) => {
+    const result = await sweetAlertDelete();
+    if (result.isConfirmed) {
+      const result = await dispatch(xoaNguoiDungAsync(idNguoiDung));
+      if (result.error) return;
+      sweetAlertSuccess();
+    }
+  };
 
-  const handleGetProfileUser = useCallback(
-    async (idNguoiDung) => {
-      await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
-      History.push(urlUserProfile);
-    },
-    [dispatch, getChiTietNguoiDungAsync, urlUserProfile]
-  );
+  const handleGetProfileUser = async (idNguoiDung) => {
+    await dispatch(getChiTietNguoiDungAsync(idNguoiDung));
+    history.push(urlUserProfile);
+  };
 
   const handleDeleteAll = useCallback(async () => {
     const result = await sweetAlertDelete();
@@ -95,38 +83,14 @@ function UserManagerPage() {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
 
-  const renderDataTable = useMemo(() => {
-    return danhSachNguoiDung.map((nguoiDung, index) => {
-      return {
-        ...nguoiDung,
-        action: (
-          <div>
-            <ButtonCSS.ShowProfile
-              onClick={() => {
-                handleGetProfileUser(nguoiDung._id);
-              }}
-            >
-              Xem thông tin chi tiết
-            </ButtonCSS.ShowProfile>
-            <ButtonCSS.Edit
-              onClick={() => {
-                handleGetDetailUser(nguoiDung._id);
-              }}
-            >
-              Sửa
-            </ButtonCSS.Edit>
-            <ButtonCSS.Delete
-              onClick={() => {
-                handleDeleteUser(nguoiDung._id);
-              }}
-            >
-              Xóa
-            </ButtonCSS.Delete>
-          </div>
-        ),
-      };
-    });
-  }, [danhSachNguoiDung, handleGetProfileUser, handleGetDetailUser, handleDeleteUser]);
+  const renderDataTable = () => {
+    const props = {
+      handleGetProfileItem: handleGetProfileUser,
+      handleGetDetailItem: handleGetDetailUser,
+      handleDeleteItem: handleDeleteUser,
+    };
+    return handleDataTable(danhSachNguoiDung, props);
+  };
 
   const showModal = useCallback(() => {
     setIsModalVisible(true);
@@ -156,7 +120,7 @@ function UserManagerPage() {
 
       <TableCSS.Table
         columns={tableColumnsUserField}
-        dataSource={renderDataTable}
+        dataSource={renderDataTable()}
         rowKey={(record) => record._id}
         key={idTable}
         rowSelection={rowSelection}
