@@ -5,10 +5,19 @@ import React from 'react';
 import { ModalCSS } from './Modal.style';
 
 function Modal(props) {
+  console.log('modal');
   const { PlusOutlined } = AntIcon;
-  //Write like this to clean this my opinion or use can destructuring all in one line
-  const { handleCancel, handleOk, isModalVisible, showModal } = props;
-  const { Component, content, selectedRowKeys, handleDeleteAll, handleRefreshData } = props;
+  const {
+    handleCancel,
+    handleOk,
+    isModalVisible,
+    showModal,
+    Component,
+    content,
+    selectedRowKeys,
+    handleDeleteAll,
+    handleRefreshData,
+  } = props;
   const hasSelected = selectedRowKeys.length > 0;
 
   return (
@@ -35,4 +44,4 @@ function Modal(props) {
   );
 }
 
-export default Modal;
+export default React.memo(Modal);

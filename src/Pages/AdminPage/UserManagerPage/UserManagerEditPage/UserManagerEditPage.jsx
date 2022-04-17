@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { UserManagerEditCSS } from './UserManagerEditPage.styles';
 import { userField } from '@Shared/Field/UserField';
+import { messageApp } from '@Utils/Common';
 
 function UserManagerEdit() {
   const dispatch = useDispatch();
@@ -27,12 +28,13 @@ function UserManagerEdit() {
     ..._.omit(chiTietNguoiDung, ['__v', 'tickets', 'password', 'deleteAt', 'avatar']),
   };
   const refChiTietNguoiDung = useRef(initialValues);
+  const { messageNoDifferent } = messageApp;
 
   const handleSubmitEditUser = (valuesUpDate) => {
-    const noiDungCapNhat = _.omit(valuesUpDate, ['avatar']);
+    const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
     const idNguoiDung = valuesUpDate._id;
     if (_.isEqual(valuesUpDate, refChiTietNguoiDung.current)) {
-      showWarning('Không có thay đổi nào');
+      showWarning(messageNoDifferent);
       return;
     }
     const params = { idNguoiDung, noiDungCapNhat };

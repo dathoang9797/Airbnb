@@ -2,7 +2,7 @@ import tw, { styled } from 'twin.macro';
 import FormInput from '@Components/Form/FormInput';
 
 const Container = styled.div`
-  ${tw`flex justify-center flex-1 lg:mr-32 h-8 transition-all duration-300`};
+  ${tw`flex justify-center flex-1  h-8`};
 `;
 
 const Content = styled.div`

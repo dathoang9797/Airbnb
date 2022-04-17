@@ -18,27 +18,12 @@ const initialState = {
   userInfo: {},
   danhSachNguoiDung: [],
   chiTietNguoiDung: {},
-  danhSachNguoiDungBackUp: [],
-  searchValue: '',
 };
 
 const quanLyNguoiDungSlice = createSlice({
   name: 'quanLyNguoiDungReducer',
   initialState,
-  reducers: {
-    setDanhSachNguoiDungFilter: (state, action) => {
-      state.searchValue = action.payload.trim().toLowerCase();
-      if (!state.searchValue.length) {
-        state.danhSachNguoiDung = state.danhSachNguoiDungBackUp;
-        return;
-      }
-
-      state.danhSachNguoiDung = state.danhSachNguoiDungBackUp.filter((nguoiDung, index) => {
-        if (!nguoiDung.name) return null;
-        return nguoiDung.name.toLowerCase().indexOf(state.searchValue) > -1;
-      });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(setUserInfoAsync.fulfilled, (state, action) => {
       state.userInfo = action.payload;
@@ -59,17 +44,7 @@ const quanLyNguoiDungSlice = createSlice({
     });
 
     builder.addCase(getDanhSachNguoiDungAsync.fulfilled, (state, action) => {
-      state.danhSachNguoiDungBackUp = action.payload;
-      const searchValue = state.searchValue.trim().toLowerCase();
-      if (!searchValue.length) {
-        state.danhSachNguoiDung = state.danhSachNguoiDungBackUp;
-        return;
-      }
-
-      state.danhSachNguoiDung = state.danhSachNguoiDungBackUp.filter((nguoiDung, index) => {
-        if (!nguoiDung.name) return null;
-        return nguoiDung.name.toLowerCase().indexOf(searchValue) > -1;
-      });
+      state.danhSachNguoiDung = action.payload;
     });
     builder.addCase(getDanhSachNguoiDungAsync.rejected, (state, action) => {
       if (action.payload) {
@@ -125,8 +100,8 @@ const quanLyNguoiDungSlice = createSlice({
     });
   },
 });
-const { setDanhSachNguoiDungFilter } = quanLyNguoiDungSlice.actions;
+const { setSearchValue } = quanLyNguoiDungSlice.actions;
 
-export const quanLyNguoiDungAction = { setDanhSachNguoiDungFilter };
+export const quanLyNguoiDungAction = { setSearchValue };
 
 export default quanLyNguoiDungSlice.reducer;

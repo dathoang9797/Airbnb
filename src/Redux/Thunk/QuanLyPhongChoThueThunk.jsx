@@ -1,9 +1,7 @@
-import History from '@Utils/Libs/History';
-import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { imagesService } from '@Services/ImageService';
 import { quanLyPhongChoThueService } from '@Services/QuanLyPhongChoThueService';
-import { showSuccess, messageApp } from '@Utils/Common';
+import { messageApp, showSuccess } from '@Utils/Common';
+import { history } from '@Utils/Libs';
 import _ from 'lodash';
 
 const {
@@ -18,10 +16,8 @@ const {
 
 const getDanhSachPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueAsync',
-  async (_, { rejectWithValue, dispatch, getState }) => {
+  async (_, { rejectWithValue, getState }) => {
     const result = await quanLyPhongChoThueService.layTatCaPhongChoThue();
-    const state = getState();
-    const danhSachPhongBackUp = state.QuanLyPhongChoThueReducer.danhSachPhongBackUp;
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -39,47 +35,7 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
       return rejectWithValue(messageDataIsEmpty);
     }
 
-    if (!danhSachPhongBackUp.length) {
-      const promisesArr = result.map(async (item, index) => {
-        const cloneItem = { ...item };
-        if (cloneItem.image) {
-          const result = await imagesService.convertUrlToBase64(cloneItem.image);
-          if (typeof result !== 'string') {
-            return cloneItem;
-          }
-          cloneItem.image = result;
-        }
-
-        return cloneItem;
-      });
-      return await Promise.all(promisesArr);
-    }
-
-    const filterResult = result.map((item, index) => {
-      const cloneItem = { ...item };
-      const cloneRoom = { ...danhSachPhongBackUp[index] };
-      if (cloneRoom?._id && cloneItem._id === cloneRoom._id) {
-        if (cloneItem.image && !cloneRoom.image) {
-          cloneRoom.image = cloneItem.image;
-          return cloneRoom;
-        }
-        return cloneRoom;
-      }
-      return cloneItem;
-    });
-
-    const promisesArr = filterResult.map(async (item, index) => {
-      const cloneItem = { ...item };
-      if (cloneItem.image) {
-        const result = await imagesService.convertUrlToBase64(cloneItem.image);
-        if (typeof result !== 'string') {
-          return cloneItem;
-        }
-        cloneItem.image = result;
-      }
-      return cloneItem;
-    });
-    return await Promise.all(promisesArr);
+    return result;
   }
 );
 
@@ -155,9 +111,6 @@ const xoaNhieuPhongAsync = createAsyncThunk(
       quanLyPhongChoThueService.xoaPhongChoThue(idNguoiDung)
     );
     const result = await Promise.all(promiseArr);
-    const state = getState();
-    const searchValue = state.QuanLyNguoiDungReducer.searchValue;
-    const { setDanhSachPhongFilter } = quanLyPhongChoThueAction;
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -168,10 +121,6 @@ const xoaNhieuPhongAsync = createAsyncThunk(
     }
 
     await dispatch(getDanhSachPhongChoThueAsync());
-
-    if (searchValue) {
-      dispatch(setDanhSachPhongFilter(searchValue));
-    }
   }
 );
 
@@ -179,9 +128,6 @@ const xoaPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/xoaPhongChoThueAsync',
   async (idRoom, { rejectWithValue, dispatch, getState }) => {
     const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
-    const state = getState();
-    const searchValue = state.QuanLyPhongChoThueReducer.searchValue;
-    const { setDanhSachPhongFilter } = quanLyPhongChoThueAction;
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -192,10 +138,6 @@ const xoaPhongChoThueAsync = createAsyncThunk(
     }
 
     await dispatch(getDanhSachPhongChoThueAsync());
-
-    if (searchValue) {
-      dispatch(setDanhSachPhongFilter(searchValue));
-    }
   }
 );
 
@@ -203,12 +145,11 @@ const taoPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/taoPhongChoThueAsync',
   async (phongChoThue, { rejectWithValue, dispatch, getState }) => {
     const state = getState();
-    const searchValue = state.QuanLyPhongChoThueReducer.searchValue;
-    const danhSachPhongBackUp = state.QuanLyPhongChoThueReducer.danhSachPhongBackUp;
-    const { name } = phongChoThue;
-    const { setDanhSachPhongFilter } = quanLyPhongChoThueAction;
 
-    if (danhSachPhongBackUp.filter((item) => item.name === name).length === 0) {
+    const danhSachPhongChoThue = state.QuanLyPhongChoThueReducer.danhSachPhongChoThue;
+    const { name } = phongChoThue;
+
+    if (danhSachPhongChoThue.filter((item) => item.name === name).length === 0) {
       const result = await quanLyPhongChoThueService.taoPhongChoThue(phongChoThue);
 
       if (!result) {
@@ -220,10 +161,6 @@ const taoPhongChoThueAsync = createAsyncThunk(
       }
 
       await dispatch(getDanhSachPhongChoThueAsync());
-
-      if (searchValue) {
-        dispatch(setDanhSachPhongFilter(searchValue));
-      }
       showSuccess(messageRegisterSucceed);
       return;
     }
@@ -269,7 +206,7 @@ const capNhatPhongChoThueAsync = createAsyncThunk(
     }
 
     showSuccess(messageUpdateSuccess);
-    History.goBack();
+    history.goBack();
   }
 );
 

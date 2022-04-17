@@ -14,41 +14,16 @@ const {
 
 const initialState = {
   danhSachPhongChoThue: [],
-  danhSachPhongBackUp: [],
-  searchValue: '',
   chiTietPhongChoThue: {},
 };
 
 const quanLyPhongChoThueSlice = createSlice({
   name: 'quanLyPhongChoThueReducer',
   initialState,
-  reducers: {
-    setDanhSachPhongFilter: (state, action) => {
-      state.searchValue = action.payload.trim().toLowerCase();
-      if (!state.searchValue.length) {
-        state.danhSachPhongChoThue = state.danhSachPhongBackUp;
-        return;
-      }
-
-      state.danhSachPhongChoThue = state.danhSachPhongBackUp.filter((phongChoThue, index) => {
-        if (!phongChoThue.name) return null;
-        return phongChoThue.name.toLowerCase().indexOf(state.searchValue) > -1;
-      });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getDanhSachPhongChoThueAsync.fulfilled, (state, action) => {
-      state.danhSachPhongBackUp = action.payload;
-      const searchValue = state.searchValue.trim().toLowerCase();
-      if (!searchValue.length) {
-        state.danhSachPhongChoThue = state.danhSachPhongBackUp;
-        return;
-      }
-
-      state.danhSachPhongChoThue = state.danhSachPhongBackUp.filter((nguoiDung, index) => {
-        if (!nguoiDung.name) return null;
-        return nguoiDung.name.toLowerCase().indexOf(searchValue) > -1;
-      });
+      state.danhSachPhongChoThue = action.payload;
     });
     builder.addCase(getDanhSachPhongChoThueAsync.rejected, (state, action) => {
       if (action.payload) {
@@ -67,7 +42,6 @@ const quanLyPhongChoThueSlice = createSlice({
         showError(action.error.message);
       }
     });
-
     builder.addCase(xoaPhongChoThueAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);

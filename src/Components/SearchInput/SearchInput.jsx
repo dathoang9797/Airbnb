@@ -1,19 +1,15 @@
+import { selectSearchState } from '@/Redux/Selector/SearchSelect';
 import { SearchInputCSS } from '@Components/SearchInput/SeachInput.styles';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { debounce } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 
 function SearchInput({ content, dispatchAction }) {
   const dispatch = useDispatch();
-
-  //const handleSearch = (value) => dispatch(dispatchAction(value));
-
-  // const handleDebounce = debounce(handleSearch, 300);
+  const searchValue = useSelector(selectSearchState);
 
   const handleChange = (e) => {
     const { value } = e.target;
     dispatch(dispatchAction(value));
-    //handleDebounce(value);
   };
 
   return (
@@ -33,6 +29,7 @@ function SearchInput({ content, dispatchAction }) {
             name='search'
             childrenProps={content}
             onChange={handleChange}
+            value={searchValue}
           />
         </SearchInputCSS.Item>
       </SearchInputCSS.Content>

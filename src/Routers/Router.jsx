@@ -11,6 +11,12 @@ const RoomPage = lazy(() => import('@Pages/RoomPage'));
 const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
 const DashBoardPage = lazy(() => import('@Pages/AdminPage/DashBoardPage'));
 const LocationManagerPage = lazy(() => import('@Pages/AdminPage/LocationManagerPage'));
+const LocationManagerEditPage = lazy(() =>
+  import('@Pages/AdminPage/LocationManagerPage/LocationManagerEditPage')
+);
+const LocationManagerProfilePage = lazy(() =>
+  import('@Pages/AdminPage/LocationManagerPage/LocationManagerProfilePage')
+);
 const UserManagerPage = lazy(() => import('@Pages/AdminPage/UserManagerPage'));
 const UserManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/UserManagerPage/UserManagerEditPage')
@@ -48,7 +54,15 @@ export const routerAdminTemplate = [
     path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE,
     componentPage: RoomManagerProfilePage,
   },
-  { path: process.env.REACT_APP_LINK_ADMIN_LOCATION_MANAGER, componentPage: LocationManagerPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER, componentPage: LocationManagerPage },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_EDIT,
+    componentPage: LocationManagerEditPage,
+  },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_PROFILE,
+    componentPage: LocationManagerProfilePage,
+  },
   { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER, componentPage: UserManagerPage },
   { path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT, componentPage: UserManagerEditPage },
   {
