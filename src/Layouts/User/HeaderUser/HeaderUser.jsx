@@ -1,49 +1,48 @@
-import React from 'react';
-import { HeaderStyle } from '@Layouts/User/HeaderUser/HeaderUser.styles';
+import React, { useState } from 'react';
+import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
 function HeaderUser() {
-  const { searchIcon, logo, globe, chevronDown, hamburger, account } = images;
-
-  const {
-    HeaderContainer,
-    HeaderLogo,
-    HeaderNav,
-    HeaderNavA,
-    HeaderNavButton,
-    HeaderSearch,
-    HeaderSearchIcon,
-  } = HeaderStyle;
-
+  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
+  const [state, setState] = useState(false);
+  const changeClassOnSroll = () => {
+    const scrollValue = document.documentElement.scrollTop;
+    if (scrollValue > 80) {
+      setState(true);
+    } else {
+      setState(false);
+    }
+  };
+  window.addEventListener('scroll', changeClassOnSroll);
   return (
-    <HeaderContainer>
-      <HeaderLogo>
+    <HeaderCSS.Container className={state ? 'active' : ''}>
+      <HeaderCSS.Logo>
         <img src={logo} alt='Logo' />
-      </HeaderLogo>
-      <HeaderSearch>
+      </HeaderCSS.Logo>
+      <HeaderCSS.Search>
         <button>Selected map area</button>
         <span />
         <button>1 Sep - 3 Sep</button>
         <span />
         <button>
           1 guest
-          <HeaderSearchIcon>
+          <HeaderCSS.SearchIcon>
             <img src={searchIcon} alt='Search Icon' />
-          </HeaderSearchIcon>
+          </HeaderCSS.SearchIcon>
         </button>
-      </HeaderSearch>
-      <HeaderNav>
-        <HeaderNavA>Become a host</HeaderNavA>
-        <HeaderNavButton className='header__nav__button-language'>
+      </HeaderCSS.Search>
+      <HeaderCSS.Nav>
+        <HeaderCSS.NavA>Become a host</HeaderCSS.NavA>
+        <HeaderCSS.NavButton className='header__nav__button-language'>
           <img src={globe} alt='Globe' />
           <img src={chevronDown} alt='Chevron down' />
-        </HeaderNavButton>
-        <HeaderNavButton className='header__nav__button-account'>
+        </HeaderCSS.NavButton>
+        <HeaderCSS.NavButton className='header__nav__button-account'>
           <img src={hamburger} alt='Hamburger' />
           <img src={account} alt='Account' />
-        </HeaderNavButton>
-      </HeaderNav>
-    </HeaderContainer>
+        </HeaderCSS.NavButton>
+      </HeaderCSS.Nav>
+    </HeaderCSS.Container>
   );
 }
 
