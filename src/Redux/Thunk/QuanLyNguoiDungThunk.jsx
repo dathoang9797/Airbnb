@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { messageApp, showSuccess } from '@/Utils/Common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { localService } from '@Services/LocalStorageService';
@@ -17,8 +18,9 @@ const {
   messageUpdateFailed,
 } = messageApp;
 
+
 const setUserInfoAsync = createAsyncThunk(
-  'quanLyNguoiDungReducer/setUserInfoAsync',
+  "quanLyNguoiDungReducer/setUserInfoAsync",
   async (ThongTinDangNhap, { rejectWithValue }) => {
     const result = await xacThucNguoiDungService.dangNhap(ThongTinDangNhap);
     const urlHome = process.env.REACT_APP_LINK_HOME;
@@ -32,6 +34,11 @@ const setUserInfoAsync = createAsyncThunk(
     }
 
     if ('message' in result && !('user' in result)) {
+
+      return rejectWithValue("Không thể đăng nhập");
+    }
+
+    if (!("user" in result)) {
       return rejectWithValue(result.message);
     }
 
@@ -243,6 +250,7 @@ const getChiTietNguoiDungAsync = createAsyncThunk(
     }
 
     return result;
+
   }
 );
 

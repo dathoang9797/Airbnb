@@ -1,8 +1,14 @@
+<<<<<<< HEAD:src/Layouts/User/HeaderUser/HeaderUser.jsx
 import React from 'react';
-import { HeaderStyle } from '@Layouts/User/HeaderUser/HeaderUser.styles';
+import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
-function HeaderUser() {
+ 
+
+function Header() {
+  const [state, setState] = useState(false);
+
+
   const { searchIcon, logo, globe, chevronDown, hamburger, account } = images;
 
   const {
@@ -13,12 +19,22 @@ function HeaderUser() {
     HeaderNavButton,
     HeaderSearch,
     HeaderSearchIcon,
-  } = HeaderStyle;
+  } = HeaderCSS;
 
+
+  const changeClassOnSroll = () => {
+    const scrollValue = document.documentElement.scrollTop;
+    if (scrollValue > 80) {
+      setState(true);
+    } else {
+      setState(false);
+    }
+  };
+  window.addEventListener("scroll", changeClassOnSroll);
   return (
-    <HeaderContainer>
+    <HeaderContainer className={state ? "active" : ""}>
       <HeaderLogo>
-        <img src={logo} alt='Logo' />
+        <img src={logo} alt="Logo" />
       </HeaderLogo>
       <HeaderSearch>
         <button>Selected map area</button>
@@ -28,19 +44,19 @@ function HeaderUser() {
         <button>
           1 guest
           <HeaderSearchIcon>
-            <img src={searchIcon} alt='Search Icon' />
+            <img src={searchIcon} alt="Search Icon" />
           </HeaderSearchIcon>
         </button>
       </HeaderSearch>
       <HeaderNav>
         <HeaderNavA>Become a host</HeaderNavA>
-        <HeaderNavButton className='header__nav__button-language'>
-          <img src={globe} alt='Globe' />
-          <img src={chevronDown} alt='Chevron down' />
+        <HeaderNavButton className="header__nav__button-language">
+          <img src={globe} alt="Globe" />
+          <img src={chevronDown} alt="Chevron down" />
         </HeaderNavButton>
-        <HeaderNavButton className='header__nav__button-account'>
-          <img src={hamburger} alt='Hamburger' />
-          <img src={account} alt='Account' />
+        <HeaderNavButton className="header__nav__button-account">
+          <img src={hamburger} alt="Hamburger" />
+          <img src={account} alt="Account" />
         </HeaderNavButton>
       </HeaderNav>
     </HeaderContainer>
