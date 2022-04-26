@@ -1,19 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { quanLyVeService } from '@Services/QuanLyVeService';
-import { messageApp, showSuccess } from '@Utils/Common';
-import { history } from '@Utils/Libs';
-import _ from 'lodash';
+import { messageApp } from '@Utils/Common';
+import { capitalize } from '@Utils/Common';
 
-const {
-  messageLoginFailed,
-  messageNameOrEmailIsExits,
-  messageNetWorkErr,
-  messageRegisterFailed,
-  messageRegisterSucceed,
-  messageUsersIsEmpty,
-  messageUpdateSuccess,
-  messageUpdateFailed,
-} = messageApp;
+const { messageNetWorkErr, messageUsersIsEmpty } = messageApp;
 
 const getDanhSachVeAsync = createAsyncThunk(
   'quanLyVeReducer/getDanhSachVeAsync',
@@ -33,7 +23,7 @@ const getDanhSachVeAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;

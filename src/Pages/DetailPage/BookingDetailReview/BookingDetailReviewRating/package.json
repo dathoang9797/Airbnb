@@ -1,0 +1,5 @@
+{
+  "name": "BookingDetailReviewRating",
+  "main": "./BookingDetailReviewRating.jsx",
+  "private": true
+}

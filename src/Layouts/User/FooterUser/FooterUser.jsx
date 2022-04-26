@@ -1,12 +1,13 @@
 import React from 'react';
-import { FooterStyle } from '@Layouts/User/FooterUser/FooterUser.styles';
+import { FooterCSS } from '@Layouts/User/FooterUser/FooterUser.styles';
 import { FacebookOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
 
 function FooterUser() {
+  const { Container, MenuItem, Top, Bottom, CopyRight, Social } = FooterCSS;
   return (
-    <FooterStyle.FooterContainer>
-      <FooterStyle.FooterTop>
-        <FooterStyle.FooterMenuItem>
+    <Container>
+      <Top>
+        <MenuItem>
           <div>
             <h1>Hỗ trợ</h1>
           </div>
@@ -31,8 +32,8 @@ function FooterUser() {
               <a href='#!'>Báo cáo lo ngại của hàng xóm</a>
             </li>
           </ul>
-        </FooterStyle.FooterMenuItem>
-        <FooterStyle.FooterMenuItem>
+        </MenuItem>
+        <MenuItem>
           <div>
             <h1>Cộng đồng</h1>
           </div>
@@ -47,8 +48,8 @@ function FooterUser() {
               <a href='#!'>Chống phân biệt đối xử</a>
             </li>
           </ul>
-        </FooterStyle.FooterMenuItem>
-        <FooterStyle.FooterMenuItem>
+        </MenuItem>
+        <MenuItem>
           <div>
             <h1>Đón tiếp khách</h1>
           </div>
@@ -70,8 +71,8 @@ function FooterUser() {
               <a href='#!'>Đón tiếp khách có trách nhiệm</a>
             </li>
           </ul>
-        </FooterStyle.FooterMenuItem>
-        <FooterStyle.FooterMenuItem>
+        </MenuItem>
+        <MenuItem>
           <div>
             <h1>Giới thiệu</h1>
           </div>
@@ -95,18 +96,18 @@ function FooterUser() {
               <a href='#!'>Airbnb Luxe</a>
             </li>
           </ul>
-        </FooterStyle.FooterMenuItem>
-      </FooterStyle.FooterTop>
-      <FooterStyle.FooterBottom>
-        <FooterStyle.FooterCopyRight>
+        </MenuItem>
+      </Top>
+      <Bottom>
+        <CopyRight>
           <span>© 2021 Copyright</span>
           <div>
             <a href='/terms/privacy_policy'>Quyền riêng tư</a>
             <a href='/terms'>Điều khoản</a>
             <a href='/sitemaps/v2'>Sơ đồ trang web</a>
           </div>
-        </FooterStyle.FooterCopyRight>
-        <FooterStyle.FooterSocial>
+        </CopyRight>
+        <Social>
           <a href='/terms/privacy_policy'>Tiếng Việt (VN)</a>
           <a href='/terms'>USD</a>
           <a href='/sitemaps/v2'>
@@ -118,10 +119,10 @@ function FooterUser() {
           <a href='/sitemaps/v2'>
             <InstagramOutlined />
           </a>
-        </FooterStyle.FooterSocial>
-      </FooterStyle.FooterBottom>
-    </FooterStyle.FooterContainer>
+        </Social>
+      </Bottom>
+    </Container>
   );
 }
 
-export default React.memo(FooterUser);
+export default FooterUser;

@@ -6,6 +6,11 @@ export const quanLyPhongChoThueService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
+  layPhongChoThueTheoViTri(locationId, isLoading = true) {
+    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
+    return AxiosClient.get(url, { params: { locationId }, headers: { isLoading } });
+  },
+
   layPhongChoThueTheoID(id, isLoading = true) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
     return AxiosClient.get(url, { headers: { isLoading } });

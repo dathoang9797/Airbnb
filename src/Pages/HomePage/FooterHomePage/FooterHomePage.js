@@ -1,6 +1,6 @@
 import React from "react";
 import "./footerHome.css";
-export default function FooterHomePage() {
+ function FooterHomePage() {
   return (
     <div className="footer pt-14 bg__color ">
       <div className="container">
@@ -181,3 +181,4 @@ export default function FooterHomePage() {
     </div>
   );
 }
+export default FooterHomePage

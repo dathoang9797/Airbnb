@@ -1,8 +1,22 @@
 import { css } from 'twin.macro';
 
 export const Mixins = {
-  backgroundLinearGradient: (deg) =>
+  backgroundLinearGradient: () =>
     css`
-      background: linear-gradient(${deg}deg, #ff388e 0, #ff385c 51%, #ff4638 100%) !important;
+      background: linear-gradient(
+        to right,
+        rgb(230, 30, 77) 0,
+        rgb(227, 28, 95) 51%,
+        rgb(230, 30, 77) 100%
+      ) !important;
+    `,
+  backgroundLinearGradientCancel: () =>
+    css`
+      background: linear-gradient(
+        to right,
+        rgb(221, 51, 94) 0,
+        rgb(221, 51, 51) 51%,
+        rgb(221, 51, 94)100%
+      ) !important;
     `,
 };

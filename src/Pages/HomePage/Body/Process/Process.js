@@ -1,6 +1,6 @@
 import React from "react";
 import "./Process.css";
-export default function Process() {
+ function Process() {
   return (
     <div className="py-lg-11 py-7 bg-light">
       <div className="container">
@@ -71,3 +71,5 @@ export default function Process() {
     </div>
   );
 }
+
+export default Process

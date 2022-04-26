@@ -10,17 +10,30 @@ const {
   xoaNhieuPhongAsync,
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,
+  getDanhSachPhongChoThueTheoViTriAsync,
+  getDanhSachPhongChoThueTheoDanhSachViTriAsync,
+  datPhongPhongChoThueAsync,
 } = quanLyPhongChoThueThunk;
 
 const initialState = {
   danhSachPhongChoThue: [],
   chiTietPhongChoThue: {},
+  danhSachPhongChoThueTheoViTri: [],
+  bookingRoom: {},
+  totalPriceBooking: 0,
 };
 
 const quanLyPhongChoThueSlice = createSlice({
   name: 'quanLyPhongChoThueReducer',
   initialState,
-  reducers: {},
+  reducers: {
+    setBookingRoomAction: (state, action) => {
+      state.bookingRoom = action.payload;
+    },
+    setTotalPriceBookingAction: (state, action) => {
+      state.totalPriceBooking = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getDanhSachPhongChoThueAsync.fulfilled, (state, action) => {
       state.danhSachPhongChoThue = action.payload;
@@ -77,11 +90,38 @@ const quanLyPhongChoThueSlice = createSlice({
         showError(action.error.message);
       }
     });
+    builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.fulfilled, (state, action) => {
+      state.danhSachPhongChoThueTheoViTri = action.payload;
+    });
+    builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(getDanhSachPhongChoThueTheoDanhSachViTriAsync.fulfilled, (state, action) => {
+      state.danhSachPhongChoThueTheoViTri = action.payload;
+    });
+    builder.addCase(getDanhSachPhongChoThueTheoDanhSachViTriAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(datPhongPhongChoThueAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
   },
 });
 
-const { setDanhSachPhongFilter } = quanLyPhongChoThueSlice.actions;
+const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueSlice.actions;
 
-export const quanLyPhongChoThueAction = { setDanhSachPhongFilter };
+export const quanLyPhongChoThueAction = { setBookingRoomAction, setTotalPriceBookingAction };
 
 export default quanLyPhongChoThueSlice.reducer;

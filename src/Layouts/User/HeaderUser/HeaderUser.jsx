@@ -1,26 +1,28 @@
-<<<<<<< HEAD:src/Layouts/User/HeaderUser/HeaderUser.jsx
-import React from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
- 
-
-function Header() {
+function HeaderUser() {
+  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
   const [state, setState] = useState(false);
-
-
-  const { searchIcon, logo, globe, chevronDown, hamburger, account } = images;
-
   const {
     HeaderContainer,
     HeaderLogo,
     HeaderNav,
-    HeaderNavA,
-    HeaderNavButton,
     HeaderSearch,
     HeaderSearchIcon,
+    HeaderNavA,
+    HeaderNavButton,
   } = HeaderCSS;
 
+  useLayoutEffect(() => {
+    const changeClassOnScroll = () => {
+      const scrollValue = document.documentElement.scrollTop;
+      setState(scrollValue > 80);
+    };
+    window.addEventListener('scroll', changeClassOnScroll);
+    return () => window.removeEventListener('scroll', changeClassOnScroll);
+  }, []);
 
   const changeClassOnSroll = () => {
     const scrollValue = document.documentElement.scrollTop;
@@ -30,11 +32,11 @@ function Header() {
       setState(false);
     }
   };
-  window.addEventListener("scroll", changeClassOnSroll);
+  window.addEventListener('scroll', changeClassOnSroll);
   return (
-    <HeaderContainer className={state ? "active" : ""}>
+    <HeaderContainer className={state ? 'active' : ''}>
       <HeaderLogo>
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt='Logo' />
       </HeaderLogo>
       <HeaderSearch>
         <button>Selected map area</button>
@@ -44,23 +46,23 @@ function Header() {
         <button>
           1 guest
           <HeaderSearchIcon>
-            <img src={searchIcon} alt="Search Icon" />
+            <img src={searchIcon} alt='Search Icon' />
           </HeaderSearchIcon>
         </button>
       </HeaderSearch>
       <HeaderNav>
         <HeaderNavA>Become a host</HeaderNavA>
-        <HeaderNavButton className="header__nav__button-language">
-          <img src={globe} alt="Globe" />
-          <img src={chevronDown} alt="Chevron down" />
+        <HeaderNavButton className='header__nav__button-language'>
+          <img src={globe} alt='Globe' />
+          <img src={chevronDown} alt='Chevron down' />
         </HeaderNavButton>
-        <HeaderNavButton className="header__nav__button-account">
-          <img src={hamburger} alt="Hamburger" />
-          <img src={account} alt="Account" />
+        <HeaderNavButton className='header__nav__button-account'>
+          <img src={hamburger} alt='Hamburger' />
+          <img src={account} alt='Account' />
         </HeaderNavButton>
       </HeaderNav>
     </HeaderContainer>
   );
 }
 
-export default React.memo(HeaderUser);
+export default HeaderUser;

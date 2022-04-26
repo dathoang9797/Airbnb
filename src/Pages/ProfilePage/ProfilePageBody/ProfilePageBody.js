@@ -1,6 +1,6 @@
 import React from "react";
 import "./ProfilePage.css";
-export default function ProfilePageBody() {
+function ProfilePageBody() {
   return (
     <div className="container">
       <div className="pt-52 pb-52 flex">
@@ -9,7 +9,8 @@ export default function ProfilePageBody() {
             <img
               className=" rounded-full w-full h-full center p-5"
               src="./img/chicago.jpg"
-              alt="Card image cap"
+
+              alt="./img/chicago.jpg"
             />
           </div>
           <div className="card-body">
@@ -36,14 +37,15 @@ export default function ProfilePageBody() {
               <div>
                 <h1 className="h5 font-weight-bold mb-5"> .... đã xác nhận</h1>
                 <p>
-                  <i class="fa fa-check">
+
+                  <i className="fa fa-check">
                     <span className="font-normal"> Địa chỉ mail</span>
                   </i>
                 </p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </div >
+            </div >
+          </div >
+        </div >
         <div className="ml-20 w-full">
           <div>
             <h1 className="h3 font-weight-bold ">Xin chào, tôi là ....</h1>
@@ -52,8 +54,9 @@ export default function ProfilePageBody() {
               <u>Chỉnh sửa hồ sơ</u>
             </h5>
             <h2 className=" mt-14 h4">
-              <i class="fa fa-star">
-                {" "}
+
+              <i className="fa fa-star">
+
                 <span> 0 đánh giá</span>
               </i>
             </h2>
@@ -62,9 +65,10 @@ export default function ProfilePageBody() {
               <u>Đánh giá của bạn</u>
             </h5>
             <hr />
-          </div>
-        </div>
-      </div>
-    </div>
+          </div >
+        </div >
+      </div >
+    </div >
   );
 }
+export default ProfilePageBody

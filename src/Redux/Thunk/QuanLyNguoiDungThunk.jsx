@@ -1,11 +1,11 @@
-<<<<<<< HEAD
-import { messageApp, showSuccess } from '@/Utils/Common';
+import { messageApp, showSuccess } from '@Utils/Common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { localService } from '@Services/LocalStorageService';
 import { quanLyNguoiDungService } from '@Services/QuanLyNguoiDungService';
 import { xacThucNguoiDungService } from '@Services/XacThucNguoiDungService';
 import _ from 'lodash';
-import { history } from '@/Utils/Libs';
+import { history } from '@Utils/Libs';
+import { capitalize } from '@Utils/Common';
 
 const {
   messageLoginFailed,
@@ -18,9 +18,8 @@ const {
   messageUpdateFailed,
 } = messageApp;
 
-
 const setUserInfoAsync = createAsyncThunk(
-  "quanLyNguoiDungReducer/setUserInfoAsync",
+  'quanLyNguoiDungReducer/setUserInfoAsync',
   async (ThongTinDangNhap, { rejectWithValue }) => {
     const result = await xacThucNguoiDungService.dangNhap(ThongTinDangNhap);
     const urlHome = process.env.REACT_APP_LINK_HOME;
@@ -34,15 +33,14 @@ const setUserInfoAsync = createAsyncThunk(
     }
 
     if ('message' in result && !('user' in result)) {
-
-      return rejectWithValue("Không thể đăng nhập");
+      return rejectWithValue(messageLoginFailed);
     }
 
-    if (!("user" in result)) {
-      return rejectWithValue(result.message);
+    if (!('user' in result)) {
+      return rejectWithValue(capitalize(result.message));
     }
 
-    showSuccess(result.message);
+    showSuccess(capitalize(result.message));
     result.user.token = result.token;
     localService.setUserInfo(result.user);
     history.push(urlHome);
@@ -74,7 +72,7 @@ const setRegisterUserInfoAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       showSuccess(messageRegisterSucceed);
@@ -103,7 +101,7 @@ const getDanhSachNguoiDungAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -124,7 +122,7 @@ const xoaNguoiDungAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachNguoiDungAsync());
@@ -138,7 +136,6 @@ const xoaNhieuNguoiDungAsync = createAsyncThunk(
       quanLyNguoiDungService.xoaNguoiDung(idNguoiDung)
     );
     const result = await Promise.all(promisesArr);
-    const state = getState();
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -149,7 +146,7 @@ const xoaNhieuNguoiDungAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachNguoiDungAsync());
@@ -170,7 +167,7 @@ const capNhatAnhDaiDienAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
   }
 );
@@ -193,7 +190,7 @@ const capNhatNguoiDungAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     showSuccess(messageUpdateSuccess);
@@ -220,7 +217,7 @@ const taoNguoiDungAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       await dispatch(getDanhSachNguoiDungAsync());
@@ -246,11 +243,10 @@ const getChiTietNguoiDungAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
-
   }
 );
 

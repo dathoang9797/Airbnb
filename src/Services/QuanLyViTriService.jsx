@@ -6,6 +6,11 @@ export const quanLyViTriService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
+  layViTriTheoTenThanhPho(location, isLoading = true) {
+    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
+    return AxiosClient.get(url, { params: { location }, headers: { isLoading } });
+  },
+
   layViTriTheoID(id, isLoading = true) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
     return AxiosClient.get(url, { headers: { isLoading } });

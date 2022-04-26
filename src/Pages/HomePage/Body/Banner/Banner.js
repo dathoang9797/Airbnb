@@ -5,7 +5,7 @@ import moment from "moment";
 import React, { Component } from "react";
 
 const { RangePicker } = DatePicker;
-export default class Banner extends Component {
+class Banner extends Component {
   state = {};
   onDateSelection = (value, dateString) => {
     console.log("Value:", value, "DateString:", dateString);
@@ -112,3 +112,5 @@ export default class Banner extends Component {
     );
   }
 }
+
+export default Banner

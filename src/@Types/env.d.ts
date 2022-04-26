@@ -5,6 +5,7 @@ declare namespace NodeJS {
     REACT_APP_LOCALSTORAGE_USER_INFO: string;
     REACT_APP_TOKEN_CYBERSOFT: string;
     REACT_APP_TOKEN_GEOCODE: string;
+    REACT_APP_API_KEY_GOOGLE: string;
 
     //Router Service
     REACT_APP_LINK_QUAN_LY_NGUOI_DUNG: string;

@@ -6,7 +6,7 @@ import Card from "./Card/Card";
 import Feature from "./Feture/Feature";
 import Process from "./Process/Process";
 
-export default function Body() {
+function Body() {
   return (
     <div className="d-flex flex-wrap w-100">
       <div className="flex-1">
@@ -53,3 +53,4 @@ export default function Body() {
     </div>
   );
 }
+export default Body

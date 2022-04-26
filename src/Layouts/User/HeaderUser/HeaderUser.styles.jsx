@@ -1,13 +1,4 @@
-<<<<<<< HEAD:src/Layouts/User/HeaderUser/HeaderUser.styles.jsx
 import tw, { styled, css } from 'twin.macro';
-=======
-import tw, { styled, css } from "twin.macro";
-import * as Variables from "@Assets/Styles/Variables";
-import { fontCircular } from "@Assets/Fonts/circular";
-
-const { colorGreyMedium, colorPrimary, colorGreyLight } = Variables;
-const { circularMedium } = fontCircular;
->>>>>>> d5290c618ec6633a3fff70b1dabd7c89247488bb:src/Layouts/Header/Header.styles.jsx
 
 const HeaderNavStyleCommon = css`
   ${tw`bg-transparent border-none flex justify-center items-center py-2.5 px-4 cursor-pointer text-decoration[none] h-12 text-[#222] border-radius[22px] transition-all duration-300`}

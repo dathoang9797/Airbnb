@@ -2,7 +2,7 @@ import { DatePicker } from 'antd';
 import tw, { styled } from 'twin.macro';
 
 const FormDatePicker = styled(DatePicker)`
-  ${tw`w-[80%] `}
+  ${tw`w-[80%] py-1`}
   &.ant-picker-status-error.ant-picker,
   &.ant-picker-status-error.ant-picker:not([disabled]):hover {
     ${tw`border-gray-500 border-2 border-solid rounded-lg bg-transparent`};
@@ -16,16 +16,16 @@ const FormDatePicker = styled(DatePicker)`
     border-color: var(--color-primary);
   }
 
-  & .ant-picker-input-placeholder > input {
+  .ant-picker-input-placeholder > input {
     color: var(--color-text-dark);
   }
 
-  & input::placeholder {
+  input::placeholder {
     color: var(--color-text-dark);
   }
 
-  & .ant-picker-suffix,
-  & .ant-picker-clear {
+  .ant-picker-suffix,
+  .ant-picker-clear {
     color: var(--color-text-dark);
   }
 `;

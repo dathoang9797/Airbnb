@@ -3,6 +3,7 @@ import { quanLyViTriService } from '@Services/QuanLyViTriService';
 import { messageApp, showSuccess } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
+import { capitalize } from '@Utils/Common';
 
 const {
   messageNetWorkErr,
@@ -28,7 +29,7 @@ const getDanhSachViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     if (!result.length) {
@@ -44,12 +45,16 @@ const getViTriTheoTenThanhPhoAsync = createAsyncThunk(
   async (location, { rejectWithValue }) => {
     const result = await quanLyViTriService.layViTriTheoTenThanhPho(location);
 
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
     if ('kind' in result && result.kind === 'ObjectId') {
       return rejectWithValue('Id này ko có');
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     if (!result.length) {
@@ -70,7 +75,7 @@ const getChiTietViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -92,7 +97,7 @@ const taoviTriAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       await dispatch(getDanhSachViTriAsync());
@@ -103,7 +108,7 @@ const taoviTriAsync = createAsyncThunk(
   }
 );
 
-const xoaNhieuPhongAsync = createAsyncThunk(
+const xoaNhieuViTrigAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
     const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
@@ -116,7 +121,7 @@ const xoaNhieuPhongAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachViTriAsync());
@@ -133,7 +138,7 @@ const xoaViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachViTriAsync());
@@ -154,7 +159,7 @@ const capNhatViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     showSuccess(messageUpdateSuccess);
@@ -167,7 +172,7 @@ export const quanLyViTriThunk = {
   getViTriTheoTenThanhPhoAsync,
   getChiTietViTriAsync,
   xoaViTriAsync,
-  xoaNhieuPhongAsync,
+  xoaNhieuViTrigAsync,
   taoviTriAsync,
   capNhatViTriAsync,
 };

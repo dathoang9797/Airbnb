@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import logger from 'redux-logger';
-
 import QuanLyNguoiDungReducer from '@Redux/Reducers/QuanLyNguoiDungSlice';
 import LoadingReducer from '@Redux/Reducers/LoadingSlice';
 import QuanLyPhongChoThueReducer from '@Redux/Reducers/QuanLyPhongChoThueSlice';

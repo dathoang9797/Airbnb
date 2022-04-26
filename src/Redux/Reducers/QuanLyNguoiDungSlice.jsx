@@ -1,6 +1,6 @@
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { createSlice } from '@reduxjs/toolkit';
-import { showError } from '@/Utils/Common';
+import { showError } from '@Utils/Common';
 
 const {
   setUserInfoAsync,

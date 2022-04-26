@@ -1,14 +1,16 @@
-import Footer from "@Layouts/Footer/Footer";
-import Header from "@Layouts/Header/Header";
+import FooterUser from "@Layouts/User/FooterUser";
+import HeaderUser from "@Layouts/User/HeaderUser";
 import React from "react";
 import ProfilePageBody from "./ProfilePageBody/ProfilePageBody";
 
-export default function () {
+function ProfilePage() {
   return (
     <div>
-      <Header />
+      <HeaderUser />
       <ProfilePageBody />
-      <Footer />
+      <FooterUser />
     </div>
   );
 }
+
+export default ProfilePage

@@ -2,24 +2,25 @@ import React from 'react';
 import { CartStatsCSS } from './CardStats.styles';
 
 function CardStats(props) {
+  const { Container, Content, Item, ItemIcon, ItemTitle } = CartStatsCSS;
   const { statSubtitle, statTitle, StatIconName, statIconColor } = props;
   return (
-    <CartStatsCSS.Container>
-      <CartStatsCSS.Content>
-        <CartStatsCSS.Item>
-          <CartStatsCSS.ItemTitle>
+    <Container>
+      <Content>
+        <Item>
+          <ItemTitle>
             <h1>{statSubtitle}</h1>
             <span>{statTitle}</span>
-          </CartStatsCSS.ItemTitle>
-          <CartStatsCSS.ItemIcon statIconColor={statIconColor}>
+          </ItemTitle>
+          <ItemIcon statIconColor={statIconColor}>
             <div>
               <StatIconName />
             </div>
-          </CartStatsCSS.ItemIcon>
-        </CartStatsCSS.Item>
-      </CartStatsCSS.Content>
-    </CartStatsCSS.Container>
+          </ItemIcon>
+        </Item>
+      </Content>
+    </Container>
   );
 }
 
-export default CardStats;
+export default React.memo(CardStats);

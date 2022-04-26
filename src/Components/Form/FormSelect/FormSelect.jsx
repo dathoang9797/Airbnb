@@ -4,7 +4,7 @@ import { Select } from 'antd';
 const { Option } = Select;
 
 const FormSelect = styled(Select)`
-  ${tw`rounded-[10px]`}
+  ${tw`rounded-[10px] py-1`}
 
   &.ant-select {
     ${tw`border-gray-500 border-2 border-solid w-3/5`}
@@ -12,7 +12,7 @@ const FormSelect = styled(Select)`
 
   .ant-select-selection-item,
   .ant-select-arrow {
-    ${tw` color[var(--color-text-dark)!important]`}
+    ${tw` color[var(--color-text-dark)]`}
   }
 `;
 

@@ -14,50 +14,50 @@ function UserManagerProfile() {
   const isHasChiTietNguoiDung = _.isEmpty(chiTietNguoiDung);
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const { address, avatar, birthday, email, gender, name, phone, tickets } = chiTietNguoiDung;
+  const { Container, Content, About, Desc, Grid, GridContent, GridItem, GridKey, Img } =
+    UserManagerProfileCSS;
 
   return isHasChiTietNguoiDung ? (
     <Redirect to={urlUserManager} />
   ) : (
-    <UserManagerProfileCSS.Container>
-      <UserManagerProfileCSS.Content>
-        <UserManagerProfileCSS.Desc>
-          <UserManagerProfileCSS.Img>
+    <Container>
+      <Content>
+        <Desc>
+          <Img>
             <img src={avatar ? avatar : account} alt={avatar} />
-          </UserManagerProfileCSS.Img>
-        </UserManagerProfileCSS.Desc>
+          </Img>
+        </Desc>
 
-        <UserManagerProfileCSS.About>
-          <UserManagerProfileCSS.Grid>
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Name </UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>{name}</UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+        <About>
+          <Grid>
+            <GridContent>
+              <GridKey>Name </GridKey>
+              <GridItem>{name}</GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Email:</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>{email}</UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+            <GridContent>
+              <GridKey>Email:</GridKey>
+              <GridItem>{email}</GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Address:</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>{address}</UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+            <GridContent>
+              <GridKey>Address:</GridKey>
+              <GridItem>{address}</GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Gender:</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>
-                {gender ? 'Nam' : 'Nữ'}
-              </UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+            <GridContent>
+              <GridKey>Gender:</GridKey>
+              <GridItem>{gender ? 'Nam' : 'Nữ'}</GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Phone:</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>{phone}</UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+            <GridContent>
+              <GridKey>Phone:</GridKey>
+              <GridItem>{phone}</GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Tickets:</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>
+            <GridContent>
+              <GridKey>Tickets:</GridKey>
+              <GridItem>
                 {tickets.map((ticket, index) => {
                   return (
                     <Fragment key={`${index}-${ticket}`}>
@@ -65,19 +65,17 @@ function UserManagerProfile() {
                     </Fragment>
                   );
                 })}
-              </UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
+              </GridItem>
+            </GridContent>
 
-            <UserManagerProfileCSS.GridContent>
-              <UserManagerProfileCSS.GridKey>Birthday</UserManagerProfileCSS.GridKey>
-              <UserManagerProfileCSS.GridItem>
-                {moment(birthday).format('DD/MM/YYYY')}
-              </UserManagerProfileCSS.GridItem>
-            </UserManagerProfileCSS.GridContent>
-          </UserManagerProfileCSS.Grid>
-        </UserManagerProfileCSS.About>
-      </UserManagerProfileCSS.Content>
-    </UserManagerProfileCSS.Container>
+            <GridContent>
+              <GridKey>Birthday</GridKey>
+              <GridItem>{moment(birthday).format('DD/MM/YYYY')}</GridItem>
+            </GridContent>
+          </Grid>
+        </About>
+      </Content>
+    </Container>
   );
 }
 
