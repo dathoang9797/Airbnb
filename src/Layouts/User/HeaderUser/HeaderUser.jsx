@@ -1,22 +1,40 @@
-import React from 'react';
-import { HeaderStyle } from '@Layouts/User/HeaderUser/HeaderUser.styles';
+import React, { useState, useLayoutEffect } from 'react';
+import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
 function HeaderUser() {
-  const { searchIcon, logo, globe, chevronDown, hamburger, account } = images;
-
+  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
+  const [state, setState] = useState(false);
   const {
     HeaderContainer,
     HeaderLogo,
     HeaderNav,
-    HeaderNavA,
-    HeaderNavButton,
     HeaderSearch,
     HeaderSearchIcon,
-  } = HeaderStyle;
+    HeaderNavA,
+    HeaderNavButton,
+  } = HeaderCSS;
 
+  useLayoutEffect(() => {
+    const changeClassOnScroll = () => {
+      const scrollValue = document.documentElement.scrollTop;
+      setState(scrollValue > 80);
+    };
+    window.addEventListener('scroll', changeClassOnScroll);
+    return () => window.removeEventListener('scroll', changeClassOnScroll);
+  }, []);
+
+  const changeClassOnSroll = () => {
+    const scrollValue = document.documentElement.scrollTop;
+    if (scrollValue > 80) {
+      setState(true);
+    } else {
+      setState(false);
+    }
+  };
+  window.addEventListener('scroll', changeClassOnSroll);
   return (
-    <HeaderContainer>
+    <HeaderContainer className={state ? 'active' : ''}>
       <HeaderLogo>
         <img src={logo} alt='Logo' />
       </HeaderLogo>
@@ -47,4 +65,4 @@ function HeaderUser() {
   );
 }
 
-export default React.memo(HeaderUser);
+export default HeaderUser;

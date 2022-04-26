@@ -1,0 +1,6 @@
+{
+    "name": "BookingDetailInfo",
+    "main": "./BookingDetailInfo.jsx",
+    "private": true
+  }
+  

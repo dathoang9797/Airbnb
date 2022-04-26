@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 import { Mixins } from '@Assets/Styles/Abstracts/Mixins';
 
-const FooterMenuItem = styled.section`
+const MenuItem = styled.section`
   ${tw`xl:flex-grow xl:flex-shrink-0 xl:flex-basis[0%] px-3 `};
 
   &:not(:last-child) {
@@ -38,7 +38,7 @@ const FooterMenuItem = styled.section`
     }
   }
 `;
-const FooterCopyRight = styled.div`
+const CopyRight = styled.div`
   ${tw`flex justify-center items-center mt-0 xl:flex-row  md:mt-2  md:flex-col sm:flex-col`};
   span,
   a {
@@ -52,7 +52,7 @@ const FooterCopyRight = styled.div`
     }
   }
 `;
-const FooterSocial = styled.div`
+const Social = styled.div`
   ${tw`flex justify-center items-center `};
   span,
   a {
@@ -69,7 +69,7 @@ const FooterSocial = styled.div`
   }
 `;
 
-const FooterBottom = styled.div`
+const Bottom = styled.div`
   ${tw`container m-auto py-6 border-t-1 border-gray-300 flex justify-between items-center`};
   ${tw`sm:flex-col-reverse`};
   ${tw`md:flex-col-reverse`};
@@ -77,25 +77,25 @@ const FooterBottom = styled.div`
   ${tw`xl:flex-grow px-3 xl:flex-row`};
 `;
 
-const FooterTop = styled.div`
-  ${tw`container -webkit-box-direction[normal !important] -webkit-box-orient[horizontal !important]`};
+const Top = styled.div`
+  ${tw`container -webkit-box-direction[normal !important] -webkit-box-orient[horizontal !important] `};
   ${tw`sm:mr-0 sm:max-w-full`};
   ${tw`md:flex md:flex-direction[column] md:py-10`};
   ${tw`xl:flex  xl:flex-row xl:py-12  xl:m-auto`};
 `;
 
-const FooterContainer = styled.footer`
+const Container = styled.footer`
   ${tw`bg-gray-100 text-center`};
   ${tw`sm:text-left sm:py-8`};
   ${tw`md:text-left md:py-0`};
   ${tw`xl:py-0`};
 `;
 
-export const FooterStyle = {
-  FooterContainer,
-  FooterBottom,
-  FooterTop,
-  FooterMenuItem,
-  FooterCopyRight,
-  FooterSocial,
+export const FooterCSS = {
+  Container,
+  Bottom,
+  Top,
+  MenuItem,
+  CopyRight,
+  Social,
 };

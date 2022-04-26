@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { localService } from '@Services/LocalStorageService';
 import { quanLyPhongChoThueService } from '@Services/QuanLyPhongChoThueService';
-import { messageApp, showSuccess } from '@Utils/Common';
+import { messageApp, showSuccess, capitalize } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
 
@@ -12,6 +13,8 @@ const {
   messageNameRoomIsExits,
   messageUpdateFailed,
   messageUpdateSuccess,
+
+  messageFailBooking,
 } = messageApp;
 
 const getDanhSachPhongChoThueAsync = createAsyncThunk(
@@ -28,7 +31,7 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     if (!result.length) {
@@ -53,7 +56,7 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     if (!result.length) {
@@ -99,7 +102,7 @@ const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
   }
 );
@@ -117,7 +120,7 @@ const xoaNhieuPhongAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachPhongChoThueAsync());
@@ -134,7 +137,7 @@ const xoaPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     await dispatch(getDanhSachPhongChoThueAsync());
@@ -157,7 +160,7 @@ const taoPhongChoThueAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       await dispatch(getDanhSachPhongChoThueAsync());
@@ -178,7 +181,7 @@ const getChiTietPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -202,11 +205,36 @@ const capNhatPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     showSuccess(messageUpdateSuccess);
     history.goBack();
+  }
+);
+
+const datPhongPhongChoThueAsync = createAsyncThunk(
+  'quanLyPhongChoThueReducer/datPhongPhongChoThueAsync',
+  async (dateBooking, { rejectWithValue, dispatch }) => {
+    const result = await quanLyPhongChoThueService.datPhongChoThue(dateBooking);
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if (_.isEmpty(result)) {
+      return rejectWithValue(messageFailBooking);
+    }
+
+    if ('message' in result && !('userDetail' in result)) {
+      return rejectWithValue(capitalize(result.message));
+    }
+
+    const userInfo = localService.getUserInfo();
+    const updateUserInfo = { ...userInfo, ...result.userDetail };
+    localService.setUserInfo(updateUserInfo);
+    showSuccess(capitalize(capitalize(result.message)));
+    return;
   }
 );
 
@@ -220,4 +248,5 @@ export const quanLyPhongChoThueThunk = {
   xoaNhieuPhongAsync,
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,
+  datPhongPhongChoThueAsync,
 };

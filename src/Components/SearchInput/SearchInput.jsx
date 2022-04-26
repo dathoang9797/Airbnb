@@ -7,6 +7,7 @@ function SearchInput({ content, dispatchAction }) {
   const dispatch = useDispatch();
   const { selectSearchState } = searchSelector;
   const searchValue = useSelector(selectSearchState);
+  const { Container, Content, Input, Item } = SearchInputCSS;
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -14,9 +15,9 @@ function SearchInput({ content, dispatchAction }) {
   };
 
   return (
-    <SearchInputCSS.Container>
-      <SearchInputCSS.Content>
-        <SearchInputCSS.Item>
+    <Container>
+      <Content>
+        <Item>
           <svg className='w-4 h-4' aria-hidden='true' fill='currentColor' viewBox='0 0 20 20'>
             <path
               fillRule='evenodd'
@@ -24,7 +25,7 @@ function SearchInput({ content, dispatchAction }) {
               clipRule='evenodd'
             />
           </svg>
-          <SearchInputCSS.Input
+          <Input
             type='text'
             placeholder=' '
             name='search'
@@ -32,9 +33,9 @@ function SearchInput({ content, dispatchAction }) {
             onChange={handleChange}
             value={searchValue}
           />
-        </SearchInputCSS.Item>
-      </SearchInputCSS.Content>
-    </SearchInputCSS.Container>
+        </Item>
+      </Content>
+    </Container>
   );
 }
 

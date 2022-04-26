@@ -22,4 +22,4 @@ function ButtonScrollTop() {
   );
 }
 
-export default React.memo(ButtonScrollTop);
+export default ButtonScrollTop;

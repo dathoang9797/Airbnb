@@ -1,16 +1,15 @@
-import { history, sweetAlert } from '@/Utils/Libs';
-import { ButtonScrollTop, Modal, TableCSS } from '@Components';
+import { TableCSS } from '@Components';
+import TabActionsAdmin from '@Layouts/Admin/TabActionsAdmin';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { roomField } from '@Shared/Field/RoomField';
-import { handleDataTable } from '@Utils/Common';
+import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
+import { history, sweetAlert } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { render } from 'react-dom';
+import React, { useEffect, useLayoutEffect, useRef, useState,Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
-import { RoomManagerPageCSS } from './RoomManagerPage.styles';
 
 function RoomManagerPage() {
   const dispatch = useDispatch();
@@ -23,27 +22,20 @@ function RoomManagerPage() {
   } = quanLyPhongChoThueThunk;
   const { tableColumnsRoomField } = roomField;
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const idTable = useRef(nanoid()).current;
   const urlRoomEdit = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT;
   const urlRoomProfile = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE;
   const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const { Table } = TableCSS;
 
   useEffect(() => {
     dispatch(getDanhSachPhongChoThueAsync());
   }, [dispatch, getDanhSachPhongChoThueAsync]);
 
   useLayoutEffect(() => {
-    const antSpinNestedLoadingDom = document.querySelector('.ant-spin-nested-loading');
-    const scrollButtonTopDom = document.querySelector('#scroll-button-top');
-    if (antSpinNestedLoadingDom && !scrollButtonTopDom) {
-      const scrollButtonTopElem = document.createElement('div');
-      scrollButtonTopElem.setAttribute('id', 'scroll-button-top');
-      antSpinNestedLoadingDom.append(scrollButtonTopElem);
-      render(<ButtonScrollTop />, scrollButtonTopElem);
-    }
-  });
+    addButtonScrollInDom();
+  }, []);
 
   const handleGetDetailRoom = async (idNguoiDung) => {
     await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));
@@ -82,54 +74,25 @@ function RoomManagerPage() {
     onChange: onSelectChange,
   };
 
-  const showModal = useCallback(() => {
-    setIsModalVisible(true);
-  }, []);
-
-  const handleOk = useCallback((values) => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleDeleteAll = useCallback(async () => {
-    const result = await sweetAlertDelete();
-    if (result.isConfirmed) {
-      const result = await dispatch(xoaNhieuPhongAsync(selectedRowKeys));
-      if (result.error) return;
-      setSelectedRowKeys([]);
-      sweetAlertSuccess();
-    }
-  }, [dispatch, selectedRowKeys, sweetAlertDelete, sweetAlertSuccess, xoaNhieuPhongAsync]);
-
-  const handleRefreshData = useCallback(() => {
-    dispatch(getDanhSachPhongChoThueAsync());
-  }, [dispatch, getDanhSachPhongChoThueAsync]);
-
   return (
-    <RoomManagerPageCSS.Container>
-      <Modal
-        isModalVisible={isModalVisible}
-        showModal={showModal}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        content='Thêm phòng'
-        handleDeleteAll={handleDeleteAll}
-        handleRefreshData={handleRefreshData}
-        Component={RoomManagerAdd}
+    <Fragment>
+      <TabActionsAdmin
+        contentModal={RoomManagerAdd}
+        setSelectedRowKeys={setSelectedRowKeys}
+        handleDeleteAllThunk={xoaNhieuPhongAsync}
+        handleRefreshDataThunk={getDanhSachPhongChoThueAsync}
         selectedRowKeys={selectedRowKeys}
+        contentButtonAction='Thêm Phòng'
       />
 
-      <TableCSS.Table
+      <Table
         columns={tableColumnsRoomField}
         dataSource={renderDataTable()}
         rowKey={(record) => record._id}
         key={idTable}
         rowSelection={rowSelection}
       />
-    </RoomManagerPageCSS.Container>
+    </Fragment>
   );
 }
 

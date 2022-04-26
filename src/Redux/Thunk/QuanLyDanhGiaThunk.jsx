@@ -1,19 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { quanLyDanhGiaService } from '@Services/QuanLyDanhGiaService';
-import { messageApp, showSuccess } from '@Utils/Common';
-import { history } from '@Utils/Libs';
-import _ from 'lodash';
+import { messageApp } from '@Utils/Common';
+import { capitalize } from '@Utils/Common';
 
-const {
-  messageLoginFailed,
-  messageNameOrEmailIsExits,
-  messageNetWorkErr,
-  messageRegisterFailed,
-  messageRegisterSucceed,
-  messageUsersIsEmpty,
-  messageUpdateSuccess,
-  messageUpdateFailed,
-} = messageApp;
+const { messageNetWorkErr, messageUsersIsEmpty } = messageApp;
 
 const getDanhSachDanhGiaAsync = createAsyncThunk(
   'quanLyDanhGiaReducer/getDanhSachDanhGiaAsync',
@@ -33,7 +23,7 @@ const getDanhSachDanhGiaAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;

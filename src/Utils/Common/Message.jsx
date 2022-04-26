@@ -1,7 +1,7 @@
 const messagePasswordIsValid =
   '*Passwords of at least eight (8) characters or more (longer is better). Use a combination of uppercase letters, lower case letters, numbers, and special characters';
 
-const messageNetWorkErr = 'Vui lòng thử lại,khi đường truyền ổn định';
+const messageNetWorkErr = 'Vui Lòng Thử Lại,Khi Đường Truyền Ổn Định';
 
 const messageUsersIsEmpty = 'Không có người dùng';
 
@@ -41,6 +41,10 @@ const messagePlaceHolderSearchRoom = 'Nhập tên phòng';
 
 const messagePlaceHolderSearchLocation = 'Nhập vị trí';
 
+const messageFailBooking = 'Đặt phòng thất bại';
+
+const messageWaringBooking = 'Vui lòng chọn ngày';
+
 export const messageApp = {
   messagePasswordIsValid,
   messageNetWorkErr,
@@ -63,4 +67,6 @@ export const messageApp = {
   messagePlaceHolderSearchUser,
   messagePlaceHolderSearchRoom,
   messagePlaceHolderSearchLocation,
+  messageFailBooking,
+  messageWaringBooking,
 };

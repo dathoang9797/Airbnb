@@ -1,0 +1,5 @@
+{
+  "name": "GridImagesDetail",
+  "main": "./GridImagesDetail.jsx",
+  "private": true
+}

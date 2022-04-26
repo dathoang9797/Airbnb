@@ -1,17 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
+import { createSlice } from '@reduxjs/toolkit';
 import { showError } from '@Utils/Common';
 
 const initialState = {
   danhSachViTri: [],
   chiTietViTri: {},
+  viTriTheoThanhPho: {},
+  province: '',
 };
 
 const {
   getChiTietViTriAsync,
   getDanhSachViTriAsync,
   getViTriTheoTenThanhPhoAsync,
-  xoaNhieuPhongAsync,
+  xoaNhieuViTrigAsync,
   xoaViTriAsync,
   taoviTriAsync,
   capNhatViTriAsync,
@@ -20,7 +22,11 @@ const {
 const quanLyViTriSlice = createSlice({
   name: 'quanLyViTriReducer',
   initialState,
-  reducers: {},
+  reducers: {
+    getProvinceAction: (state, action) => {
+      state.province = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getDanhSachViTriAsync.fulfilled, (state, action) => {
       state.danhSachViTri = action.payload;
@@ -49,7 +55,7 @@ const quanLyViTriSlice = createSlice({
         showError(action.error.message);
       }
     });
-    builder.addCase(xoaNhieuPhongAsync.rejected, (state, action) => {
+    builder.addCase(xoaNhieuViTrigAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
       } else {
@@ -70,7 +76,22 @@ const quanLyViTriSlice = createSlice({
         showError(action.error.message);
       }
     });
+    builder.addCase(getViTriTheoTenThanhPhoAsync.fulfilled, (state, action) => {
+      state.viTriTheoThanhPho = action.payload[0];
+    });
+    builder.addCase(getViTriTheoTenThanhPhoAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
   },
 });
 
+const { getProvinceAction } = quanLyViTriSlice.actions;
+
+export const quanLyViTriAction = {
+  getProvinceAction,
+};
 export default quanLyViTriSlice.reducer;

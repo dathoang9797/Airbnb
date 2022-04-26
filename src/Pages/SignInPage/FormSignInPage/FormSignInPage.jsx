@@ -1,5 +1,6 @@
 import Form from '@Components/Form';
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
+import { userField } from '@Shared/Field/UserField';
 import { signInUserSchema } from '@Shared/Schema/SignInSchema';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -9,6 +10,8 @@ function FormSignInPage() {
   const dispatch = useDispatch();
   const { setUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
+  const { signInField, renderUserField } = userField;
+  const { FormContainer, FormControl, FormButton } = Form;
 
   const handleChangeTypeInput = () => {
     if (typeInput === 'password') {
@@ -19,64 +22,32 @@ function FormSignInPage() {
   };
 
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
+    initialValues: signInField,
     validationSchema: signInUserSchema,
     onSubmit: (values) => {
       dispatch(setUserInfoAsync(values));
     },
   });
 
-  const { handleSubmit, handleChange, errors } = formik;
+  const { handleSubmit, handleChange, errors, values } = formik;
 
   return (
-    <Form.FormContainer onFinish={handleSubmit}>
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.email : ''}
-          >
-            <Form.FormUserOutlined />
-            <Form.FormInput
-              type='email'
-              placeholder=' '
-              name='email'
-              onChange={handleChange}
-              childrenProps='Your Email'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.password : ''}
-          >
-            <Form.FormLockOutlined />
-            {typeInput === 'password' ? (
-              <Form.FormEyeOutlined onClick={handleChangeTypeInput} />
-            ) : (
-              <Form.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
-            )}
-
-            <Form.FormInput
-              type={typeInput}
-              placeholder=' '
-              name='password'
-              onChange={handleChange}
-              childrenProps='Your PassWord'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-      <Form.FormControl>
-        <Form.FormButton type='submit'>SIGNIN NOW</Form.FormButton>
-      </Form.FormControl>
-    </Form.FormContainer>
+    <FormContainer onFinish={handleSubmit}>
+      {renderUserField(
+        typeInput,
+        signInField,
+        errors,
+        values,
+        handleChange,
+        handleChangeTypeInput,
+        null,
+        null,
+        null
+      )}
+      <FormControl>
+        <FormButton type='submit'>SIGNIN NOW</FormButton>
+      </FormControl>
+    </FormContainer>
   );
 }
 

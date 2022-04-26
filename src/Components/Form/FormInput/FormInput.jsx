@@ -1,17 +1,20 @@
 import React, { Fragment } from 'react';
 import { FormInputCSS } from './FormInput.styles';
 
-export default function FormInput(props) {
+function FormInput(props) {
   const { childrenProps, ...rest } = props;
+  const { FormInput, FormLabel, FormFieldSet, FormLegend, FormSpan } = FormInputCSS;
   return (
     <Fragment>
-      <FormInputCSS.FormInput {...rest} />
-      <FormInputCSS.FormLabel>{childrenProps}</FormInputCSS.FormLabel>
-      <FormInputCSS.FormFieldSet>
-        <FormInputCSS.FormLegend>
-          <FormInputCSS.FormSpan>{childrenProps}</FormInputCSS.FormSpan>
-        </FormInputCSS.FormLegend>
-      </FormInputCSS.FormFieldSet>
+      <FormInput {...rest} />
+      <FormLabel>{childrenProps}</FormLabel>
+      <FormFieldSet>
+        <FormLegend>
+          <FormSpan>{childrenProps}</FormSpan>
+        </FormLegend>
+      </FormFieldSet>
     </Fragment>
   );
 }
+
+export default React.memo(FormInput);

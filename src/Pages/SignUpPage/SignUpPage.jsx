@@ -1,13 +1,14 @@
 import React from 'react';
-import FormSignUpPage from '@Pages/SignUpPage/FormSignUpPage';
-import { SignUpStyle } from './SignUp.styles';
+import FormSignUpPage from './FormSignUpPage';
+import { SignUpCSS } from './SignUp.styles';
 
-function SignUpPage() {
+function Page() {
+  const { Container, Content, ContentLeft, ContentRight, Form } = SignUpCSS;
   return (
-    <SignUpStyle.SignUpContainer>
-      <SignUpStyle.SignUpForm>
-        <SignUpStyle.SignUpContent>
-          <SignUpStyle.SignUpContentLeft>
+    <Container>
+      <Form>
+        <Content>
+          <ContentLeft>
             <svg
               id='a87032b8-5b37-4b7e-a4d9-4dbfbe394641'
               data-name='Layer 1'
@@ -206,14 +207,14 @@ function SignUpPage() {
                 fill='#2f2e41'
               />
             </svg>
-          </SignUpStyle.SignUpContentLeft>
-          <SignUpStyle.SignUpContentRight>
+          </ContentLeft>
+          <ContentRight>
             <FormSignUpPage />
-          </SignUpStyle.SignUpContentRight>
-        </SignUpStyle.SignUpContent>
-      </SignUpStyle.SignUpForm>
-    </SignUpStyle.SignUpContainer>
+          </ContentRight>
+        </Content>
+      </Form>
+    </Container>
   );
 }
 
-export default SignUpPage;
+export default Page;

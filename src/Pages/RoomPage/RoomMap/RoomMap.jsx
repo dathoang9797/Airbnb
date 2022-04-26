@@ -1,4 +1,4 @@
-import Card from '@Components/Card';
+import CardPopup from '@Components/CardPopup';
 import GoogleMapReact from 'google-map-react';
 import React from 'react';
 
@@ -9,7 +9,7 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
       if (!place.features.length) return null;
       const center = place.features[0].center;
       return (
-        <Card
+        <CardPopup
           lat={center[1]}
           lng={center[0]}
           key={`${place.features[0].id}-${index}`}
@@ -21,7 +21,7 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
 
   return (
     <GoogleMapReact
-      bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY_GOOGLE_MAPS }}
+      bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY_GOOGLE }}
       defaultCenter={coordinates}
       center={coordinates}
       defaultZoom={14}

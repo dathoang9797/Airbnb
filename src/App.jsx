@@ -16,6 +16,7 @@ function App() {
         </Suspense>
       </Router>
     </Fragment>
+
   );
 }
 

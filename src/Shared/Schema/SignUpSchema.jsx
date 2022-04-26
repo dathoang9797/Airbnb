@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { regularPassWord, messageApp } from '@/Utils/Common';
+import { regularPassWord, messageApp } from '@Utils/Common';
 
 const { messagePasswordIsValid, messageFieldIsRequire, messageEmailIsUnValid } = messageApp;
 

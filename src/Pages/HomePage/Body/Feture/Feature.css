@@ -1,0 +1,5 @@
+.img-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
+  transition: all 0.3s;
+}
