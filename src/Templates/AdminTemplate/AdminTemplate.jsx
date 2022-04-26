@@ -5,7 +5,7 @@ import { localService } from '@Services/LocalStorageService';
 import { showWarning } from '@Utils/Common';
 import { Layout } from 'antd';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, Fragment } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { AdminTemplateCSS } from './AdminTemplate.style';
@@ -82,7 +82,7 @@ function AdminTemplate({ Component, ...restRoute }) {
   };
 
   return (
-    <Fragment>
+    <>
       {handleRender() || (
         <Route
           {...restRoute}
@@ -101,7 +101,7 @@ function AdminTemplate({ Component, ...restRoute }) {
           )}
         />
       )}
-    </Fragment>
+    </>
   );
 }
 

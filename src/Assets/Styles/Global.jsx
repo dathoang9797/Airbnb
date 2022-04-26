@@ -97,6 +97,13 @@ const CustomStyles = styled.createGlobalStyle`
       ${tw`rounded-full mx-2 my-1 px-2 py-1 text-[var(--color-text-light)] text-sm hover:text-[#000] transition-all duration-300`};
     }
   }
+
+  .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-start .ant-picker-cell-inner,
+  .ant-picker-cell-in-view.ant-picker-cell-range-end .ant-picker-cell-inner {
+    color: #fff;
+    background: var(--color-primary);
+  }
 `;
 
 const GlobalStyles = () => (

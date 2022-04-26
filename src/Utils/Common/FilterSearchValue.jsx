@@ -1,6 +1,17 @@
 export const filterSearchValue = (searchValue, data) => {
   return data.filter((item, index) => {
-    if (!item.name) return null;
-    return item.name.toLowerCase().indexOf(searchValue) > -1;
+    switch (true) {
+      case item.hasOwnProperty('name'): {
+        return item.name.toLowerCase().indexOf(searchValue) > -1;
+      }
+
+      case item.hasOwnProperty('content'): {
+        return item.content.toLowerCase().indexOf(searchValue) > -1;
+      }
+
+      default: {
+        return null;
+      }
+    }
   });
 };

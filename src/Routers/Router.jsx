@@ -10,7 +10,9 @@ const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
 const DetailPage = lazy(() => import('@Pages/DetailPage'));
 const RoomPage = lazy(() => import('@Pages/RoomPage'));
 const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
+
 const DashBoardPage = lazy(() => import('@Pages/AdminPage/DashBoardPage'));
+
 const LocationManagerPage = lazy(() => import('@Pages/AdminPage/LocationManagerPage'));
 const LocationManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/LocationManagerPage/LocationManagerEditPage')
@@ -25,6 +27,7 @@ const UserManagerEditPage = lazy(() =>
 const UserManagerProfilePage = lazy(() =>
   import('@Pages/AdminPage/UserManagerPage/UserManagerProfilePage')
 );
+
 const RoomManagerPage = lazy(() => import('@Pages/AdminPage/RoomManagerPage'));
 const RoomManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/RoomManagerPage/RoomManagerEditPage')
@@ -32,6 +35,8 @@ const RoomManagerEditPage = lazy(() =>
 const RoomManagerProfilePage = lazy(() =>
   import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage/RoomManagerProfilePage')
 );
+
+const EvaluateManagerPage = lazy(() => import('@/Pages/AdminPage/EvaluateManagerPage/EvaluateManagerPage'));
 
 export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_IN, componentPage: SignInPage },
@@ -69,11 +74,15 @@ export const routerAdminTemplate = [
     path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE,
     componentPage: UserManagerProfilePage,
   },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER,
+    componentPage: EvaluateManagerPage,
+  },
 ];
 
 const renderUserTemplate = (() => {
   //Need Declare same id to react can't switch case properly in react-router
-  const idUserTemplate = nanoid(); 
+  const idUserTemplate = nanoid();
   return routerUserTemplate.map(({ componentPage, path }) => (
     <UserTemplate key={idUserTemplate} Component={componentPage} path={path} exact />
   ));

@@ -12,7 +12,7 @@ function RoomManagerAdd({ handleOk }) {
   const { addRoomField, renderRoomField } = roomField;
   const { FormContainer, FormControl, FormButton } = Form;
 
-  const handleSubmitRegister = async (values, { resetForm }) => {
+  const handleSubmitAddRoom = async (values, { resetForm }) => {
     const result = await dispatch(taoPhongChoThueAsync(values));
     if (result.error) return;
     resetForm({ values: addRoomField });
@@ -30,7 +30,7 @@ function RoomManagerAdd({ handleOk }) {
   const formik = useFormik({
     initialValues: addRoomField,
     validationSchema: addRoomSchema,
-    onSubmit: handleSubmitRegister,
+    onSubmit: handleSubmitAddRoom,
   });
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;

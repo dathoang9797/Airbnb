@@ -8,7 +8,7 @@ import { messageApp } from '@Utils/Common';
 import { useFormik } from 'formik';
 import _ from 'lodash';
 import moment from 'moment';
-import React, {  useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
 import { UserManagerEditCSS } from './UserManagerEditPage.styles';

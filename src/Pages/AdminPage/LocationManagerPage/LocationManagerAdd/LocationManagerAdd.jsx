@@ -12,7 +12,7 @@ function LocationManagerAdd({ handleOk }) {
   const { addLocationField, renderLocationField } = locationField;
   const { FormContainer, FormControl, FormButton } = Form;
 
-  const handleSubmitRegister = async (values, { resetForm }) => {
+  const handleSubmitAddLocation = async (values, { resetForm }) => {
     const result = await dispatch(taoviTriAsync(values));
     if (result.error) return;
     resetForm({ values: addLocationField });
@@ -22,7 +22,7 @@ function LocationManagerAdd({ handleOk }) {
   const formik = useFormik({
     initialValues: addLocationField,
     validationSchema: addLocationSchema,
-    onSubmit: handleSubmitRegister,
+    onSubmit: handleSubmitAddLocation,
   });
 
   const handleInputNumber = (field) => {

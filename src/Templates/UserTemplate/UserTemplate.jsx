@@ -1,6 +1,6 @@
 import FooterUser from '@Layouts/User/FooterUser';
 import HeaderUser from '@Layouts/User/HeaderUser';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, useLocation } from 'react-router-dom';
 
 const UserTemplate = ({ Component, ...restRoute }) => {
@@ -16,11 +16,11 @@ const UserTemplate = ({ Component, ...restRoute }) => {
 
       default: {
         return (
-          <Fragment>
+          <>
             <HeaderUser />
             <Component {...propsRoute} />
             <FooterUser />
-          </Fragment>
+          </>
         );
       }
     }

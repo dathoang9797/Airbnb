@@ -6,23 +6,25 @@ export const quanLyDanhGiaService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
-  layDanhGiaTheoID(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
+  layDanhGiaTheoID(idDanhGia, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA}/${idDanhGia}`;
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
-  taoDanhGia(roomId, danhGia, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA_TAO_DANH_GIA;
-    return AxiosClient.post(url, danhGia, { params: { roomId }, headers: { isLoading } });
+  taoDanhGia(idDanhGia, contentDanhGia, isLoading = true) {
+    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA;
+    const params = idDanhGia ? { idDanhGia } : {};
+    return AxiosClient.post(url, contentDanhGia, { params, headers: { isLoading } });
   },
 
-  xoaDanhGia(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
+  xoaDanhGia(idDanhGia, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA}/${idDanhGia}`;
     return AxiosClient.delete(url, { headers: { isLoading } });
   },
 
-  capNhatDanhGia(id, DanhGiaCapNhat, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA + `/${id}`;
-    return AxiosClient.put(url, DanhGiaCapNhat, { headers: { isLoading } });
+  capNhatDanhGia(idDanhGia, noiDungDanhGiaCapNhat, isLoading = true) {
+    console.log({idDanhGia})
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_DANH_GIA}/${idDanhGia}`;
+    return AxiosClient.put(url, noiDungDanhGiaCapNhat, { headers: { isLoading } });
   },
 };

@@ -8,6 +8,7 @@ import Spinner from './Spinner';
 import { TableCSS } from './Table';
 import UpLoadImage from './UpLoadImage';
 import CardStats from './CardStats';
+import Modal from './Modal';
 
 export {
   ButtonCSS,
@@ -20,5 +21,5 @@ export {
   TableCSS,
   UpLoadImage,
   CardStats,
- 
+  Modal,
 };

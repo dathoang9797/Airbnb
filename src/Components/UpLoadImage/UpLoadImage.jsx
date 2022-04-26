@@ -2,7 +2,7 @@ import { localService } from '@/Services/LocalStorageService';
 import { showError, showSuccess } from '@Utils/Common';
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
-import React, { useEffect, useState, useCallback, Fragment } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useLocation } from 'react-router-dom';
@@ -111,7 +111,7 @@ function UpLoadImage({ idRoom, imageProp }) {
         name={handleKeyName()}
       >
         {imgRoom ? (
-          <Fragment>
+          <>
             <LazyLoadImage
               src={imgRoom}
               alt={imgRoom}
@@ -125,7 +125,7 @@ function UpLoadImage({ idRoom, imageProp }) {
             ) : (
               <Button icon={<UploadOutlined />}>Click to Update</Button>
             )}
-          </Fragment>
+          </>
         ) : (
           <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
