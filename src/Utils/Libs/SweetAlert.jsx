@@ -11,12 +11,12 @@ const sweetAlertDelete = (title = '', icon = '') => {
     showCancelButton: true,
     confirmButtonColor: primaryColor,
     cancelButtonColor: deleteColor,
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Yes, delete it!',
   });
 };
 
-const sweetAlertSuccess = () => {
-  return Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+const sweetAlertSuccess = (message) => {
+  return Swal.fire('Deleted!', message, 'success');
 };
 
 export const sweetAlert = {

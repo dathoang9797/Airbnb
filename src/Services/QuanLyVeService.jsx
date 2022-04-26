@@ -6,8 +6,8 @@ export const quanLyVeService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
-  layVeTheoID(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VE + `/${id}`;
+  layVeTheoID(idVe, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
@@ -26,13 +26,13 @@ export const quanLyVeService = {
     return AxiosClient.post(url, ve, { headers: { isLoading } });
   },
 
-  capNhatThongTinVe(id, ve, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VE + `/${id}`;
+  capNhatThongTinVe(idVe, ve, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
     return AxiosClient.put(url, ve, { headers: { isLoading } });
   },
 
-  xoaVe(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VE + `/${id}`;
+  xoaVe(idVe, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
     return AxiosClient.delete(url, { headers: { isLoading } });
   },
 };

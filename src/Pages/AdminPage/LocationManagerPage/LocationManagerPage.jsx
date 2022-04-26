@@ -5,9 +5,9 @@ import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { locationField } from '@Shared/Field/LocationField';
 import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
-import { history, sweetAlert } from '@Utils/Libs';
+import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, {  useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationManagerAdd from './LocationManagerAdd';
 
@@ -18,10 +18,9 @@ function LocationManagerPage() {
     quanLyViTriThunk;
   const { tableColumnsLocationField } = locationField;
   const danhSachViTri = useSelector(selectDanhViTriFilter, _.isEqual);
-  const idTable = useRef(nanoid()).current;
+  const idTable = useMemo(() => nanoid(), []);
   const urlLocationEdit = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_EDIT;
   const urlLocationProfile = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_PROFILE;
-  const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
 
@@ -44,12 +43,7 @@ function LocationManagerPage() {
   };
 
   const handleDeleteLocation = async (idRoom) => {
-    const result = await sweetAlertDelete();
-    if (result.isConfirmed) {
-      const result = await dispatch(xoaViTriAsync(idRoom));
-      if (result.error) return;
-      sweetAlertSuccess();
-    }
+    dispatch(xoaViTriAsync(idRoom));
   };
 
   const renderDataTable = () => {
@@ -71,7 +65,7 @@ function LocationManagerPage() {
   };
 
   return (
-    <Fragment>
+    <>
       <TabActionsAdmin
         contentModal={LocationManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
@@ -88,7 +82,7 @@ function LocationManagerPage() {
         key={idTable}
         rowSelection={rowSelection}
       />
-    </Fragment>
+    </>
   );
 }
 

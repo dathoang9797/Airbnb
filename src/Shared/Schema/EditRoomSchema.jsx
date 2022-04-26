@@ -4,7 +4,7 @@ import { messageApp } from '@Utils/Common';
 const { messageNameRoomShouldNotEmpty, messageFieldIsRequire } = messageApp;
 
 export const editRoomSchema = yup.object().shape({
-  _id: yup.string().required(messageNameRoomShouldNotEmpty),
+  _id: yup.string().required(messageFieldIsRequire),
   name: yup.string().required(messageNameRoomShouldNotEmpty),
   description: yup.string().required(messageFieldIsRequire),
   guests: yup.number().required(messageFieldIsRequire),

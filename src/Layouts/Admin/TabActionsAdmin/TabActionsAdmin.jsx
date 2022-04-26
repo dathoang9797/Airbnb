@@ -1,8 +1,7 @@
-import React, { useCallback, useState, Fragment } from 'react';
-import { sweetAlert } from '@Utils/Libs';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import TabButtonActions from './TabButtonActions';
-import TabModalActions from './TabModalActions';
+import Modal from '@Components/Modal';
 
 function TabActionsAdmin(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -14,7 +13,6 @@ function TabActionsAdmin(props) {
     handleDeleteAllThunk,
     handleRefreshDataThunk,
   } = props;
-  const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
   const dispatch = useDispatch();
 
   const showModal = useCallback(() => {
@@ -30,29 +28,17 @@ function TabActionsAdmin(props) {
   }, []);
 
   const handleDeleteAll = useCallback(async () => {
-    const result = await sweetAlertDelete();
-    if (result.isConfirmed) {
-      const result = await dispatch(handleDeleteAllThunk(selectedRowKeys));
-      if (result.error) return;
-      setSelectedRowKeys([]);
-      sweetAlertSuccess();
-    }
-  }, [
-    dispatch,
-    handleDeleteAllThunk,
-    selectedRowKeys,
-    setSelectedRowKeys,
-    sweetAlertDelete,
-    sweetAlertSuccess,
-  ]);
+    dispatch(handleDeleteAllThunk(selectedRowKeys));
+    setSelectedRowKeys([]);
+  }, [dispatch, handleDeleteAllThunk, selectedRowKeys, setSelectedRowKeys]);
 
   const handleRefreshData = useCallback(() => {
     dispatch(handleRefreshDataThunk());
   }, [dispatch, handleRefreshDataThunk]);
 
   return (
-    <Fragment>
-      <TabModalActions
+    <>
+      <Modal
         isModalVisible={isModalVisible}
         handleOk={handleOk}
         handleCancel={handleCancel}
@@ -66,7 +52,7 @@ function TabActionsAdmin(props) {
         handleRefreshData={handleRefreshData}
         selectedRowKeys={selectedRowKeys}
       />
-    </Fragment>
+    </>
   );
 }
 

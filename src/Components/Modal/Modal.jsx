@@ -1,11 +1,10 @@
-import { Modal } from 'antd';
 import React from 'react';
+import { Modal as ModalAnt } from 'antd';
 
-function TabModalActions(props) {
+function Modal(props) {
   const { handleCancel, handleOk, isModalVisible, Component } = props;
-
   return (
-    <Modal
+    <ModalAnt
       visible={isModalVisible}
       onOk={handleOk}
       onCancel={handleCancel}
@@ -13,8 +12,8 @@ function TabModalActions(props) {
       destroyOnClose
     >
       <Component handleOk={handleOk} />
-    </Modal>
+    </ModalAnt>
   );
 }
 
-export default React.memo(TabModalActions);
+export default React.memo(Modal);

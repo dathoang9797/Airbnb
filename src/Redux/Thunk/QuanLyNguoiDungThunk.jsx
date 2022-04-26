@@ -4,7 +4,7 @@ import { localService } from '@Services/LocalStorageService';
 import { quanLyNguoiDungService } from '@Services/QuanLyNguoiDungService';
 import { xacThucNguoiDungService } from '@Services/XacThucNguoiDungService';
 import _ from 'lodash';
-import { history } from '@Utils/Libs';
+import { history, sweetAlert } from '@Utils/Libs';
 import { capitalize } from '@Utils/Common';
 
 const {
@@ -13,10 +13,13 @@ const {
   messageNetWorkErr,
   messageRegisterFailed,
   messageRegisterSucceed,
-  messageUsersIsEmpty,
   messageUpdateSuccess,
   messageUpdateFailed,
+  messageDeleteUserSuccess,
+  messageUpdateImageProfileSuccess,
 } = messageApp;
+
+const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const setUserInfoAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/setUserInfoAsync',
@@ -92,10 +95,6 @@ const getDanhSachNguoiDungAsync = createAsyncThunk(
       return rejectWithValue(messageNetWorkErr);
     }
 
-    if (!result.length) {
-      return rejectWithValue(messageUsersIsEmpty);
-    }
-
     if (typeof result === 'string') {
       return rejectWithValue(result);
     }
@@ -111,45 +110,53 @@ const getDanhSachNguoiDungAsync = createAsyncThunk(
 const xoaNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNguoiDungAsync',
   async (idNguoiDung, { rejectWithValue, dispatch, getState }) => {
-    const result = await quanLyNguoiDungService.xoaNguoiDung(idNguoiDung);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const result = await quanLyNguoiDungService.xoaNguoiDung(idNguoiDung);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if (typeof result === 'string') {
+        return rejectWithValue(result);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachNguoiDungAsync());
+      sweetAlertSuccess(messageDeleteUserSuccess);
     }
-
-    if (typeof result === 'string') {
-      return rejectWithValue(result);
-    }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-
-    await dispatch(getDanhSachNguoiDungAsync());
   }
 );
 
 const xoaNhieuNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuNguoiDungAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
-    const promisesArr = idNguoiDungArr.map((idNguoiDung) =>
-      quanLyNguoiDungService.xoaNguoiDung(idNguoiDung)
-    );
-    const result = await Promise.all(promisesArr);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const promisesArr = idNguoiDungArr.map((idNguoiDung) =>
+        quanLyNguoiDungService.xoaNguoiDung(idNguoiDung)
+      );
+      const result = await Promise.all(promisesArr);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if (typeof result === 'string') {
+        return rejectWithValue(result);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachNguoiDungAsync());
+      sweetAlertSuccess(messageDeleteUserSuccess);
     }
-
-    if (typeof result === 'string') {
-      return rejectWithValue(result);
-    }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-
-    await dispatch(getDanhSachNguoiDungAsync());
   }
 );
 
@@ -169,6 +176,7 @@ const capNhatAnhDaiDienAsync = createAsyncThunk(
     if ('message' in result) {
       return rejectWithValue(capitalize(result.message));
     }
+    showSuccess(messageUpdateImageProfileSuccess);
   }
 );
 

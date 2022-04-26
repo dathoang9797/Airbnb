@@ -5,9 +5,9 @@ import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { userField } from '@Shared/Field/UserField';
 import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
-import { history, sweetAlert } from '@Utils/Libs';
+import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useRef, useState, Fragment } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
 
@@ -15,10 +15,9 @@ function UserManagerPage() {
   const dispatch = useDispatch();
   const { tableColumnsUserField } = userField;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const idTable = useRef(nanoid()).current;
+  const idTable = useMemo(() => nanoid(), []);
   const urlUserEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
   const urlUserProfile = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE;
-  const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
   const { selectDanhSachNguoiDungFilter } = quanLyNguoiDungSelector;
   const { getDanhSachNguoiDungAsync, xoaNhieuNguoiDungAsync } = quanLyNguoiDungThunk;
   const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
@@ -48,12 +47,7 @@ function UserManagerPage() {
   };
 
   const handleDeleteUser = async (idNguoiDung) => {
-    const result = await sweetAlertDelete();
-    if (result.isConfirmed) {
-      const result = await dispatch(xoaNguoiDungAsync(idNguoiDung));
-      if (result.error) return;
-      sweetAlertSuccess();
-    }
+    dispatch(xoaNguoiDungAsync(idNguoiDung));
   };
 
   const handleGetProfileUser = async (idNguoiDung) => {
@@ -71,7 +65,7 @@ function UserManagerPage() {
   };
 
   return (
-    <Fragment>
+    <>
       <TabActionsAdmin
         contentModal={UserManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
@@ -88,7 +82,7 @@ function UserManagerPage() {
         key={idTable}
         rowSelection={rowSelection}
       />
-    </Fragment>
+    </>
   );
 }
 

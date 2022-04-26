@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { localService } from '@Services/LocalStorageService';
 import { quanLyPhongChoThueService } from '@Services/QuanLyPhongChoThueService';
 import { messageApp, showSuccess, capitalize } from '@Utils/Common';
+import { sweetAlert } from '@Utils/Libs';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
 
@@ -9,13 +10,14 @@ const {
   messageNetWorkErr,
   messageRegisterSucceed,
   messageIdIsUnValid,
-  messageDataIsEmpty,
   messageNameRoomIsExits,
   messageUpdateFailed,
   messageUpdateSuccess,
-
   messageFailBooking,
+  messageDeleteRoomSuccess,
 } = messageApp;
+
+const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueAsync',
@@ -32,10 +34,6 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
 
     if ('message' in result) {
       return rejectWithValue(capitalize(result.message));
-    }
-
-    if (!result.length) {
-      return rejectWithValue(messageDataIsEmpty);
     }
 
     return result;
@@ -57,10 +55,6 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
 
     if ('message' in result) {
       return rejectWithValue(capitalize(result.message));
-    }
-
-    if (!result.length) {
-      return rejectWithValue(messageDataIsEmpty);
     }
 
     return result;
@@ -110,37 +104,45 @@ const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
 const xoaNhieuPhongAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
-    const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
-      quanLyPhongChoThueService.xoaPhongChoThue(idNguoiDung)
-    );
-    const result = await Promise.all(promiseArr);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
+        quanLyPhongChoThueService.xoaPhongChoThue(idNguoiDung)
+      );
+      const result = await Promise.all(promiseArr);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachPhongChoThueAsync());
+      sweetAlertSuccess(messageDeleteRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-
-    await dispatch(getDanhSachPhongChoThueAsync());
   }
 );
 
 const xoaPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/xoaPhongChoThueAsync',
   async (idRoom, { rejectWithValue, dispatch, getState }) => {
-    const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachPhongChoThueAsync());
+      sweetAlertSuccess(messageDeleteRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-
-    await dispatch(getDanhSachPhongChoThueAsync());
   }
 );
 
@@ -148,7 +150,6 @@ const taoPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/taoPhongChoThueAsync',
   async (phongChoThue, { rejectWithValue, dispatch, getState }) => {
     const state = getState();
-
     const danhSachPhongChoThue = state.QuanLyPhongChoThueReducer.danhSachPhongChoThue;
     const { name } = phongChoThue;
 
@@ -234,7 +235,6 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
     const updateUserInfo = { ...userInfo, ...result.userDetail };
     localService.setUserInfo(updateUserInfo);
     showSuccess(capitalize(capitalize(result.message)));
-    return;
   }
 );
 

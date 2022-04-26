@@ -12,20 +12,20 @@ function UserManagerFormAdd({ handleOk }) {
   const { taoNguoiDungAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
   const { addUserField, renderUserField } = userField;
+  const { FormContainer, FormControl, FormButton } = Form;
 
-  const handleSubmitRegister = async (values, { resetForm }) => {
+  const handleSubmitAddUser = async (values, { resetForm }) => {
     const result = await dispatch(taoNguoiDungAsync(values));
     if (result.error) return;
-    resetForm({ values: addUserField });
+    resetForm({ values: { ...addUserField, type: process.env.REACT_APP_NGUOI_DUNG_CLIENT } });
     handleOk();
   };
 
   const formik = useFormik({
-    initialValues: addUserField,
+    initialValues: { ...addUserField, type: process.env.REACT_APP_NGUOI_DUNG_CLIENT },
     validationSchema: addUserSchema,
-    onSubmit: handleSubmitRegister,
+    onSubmit: handleSubmitAddUser,
   });
-
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
   const handleChangeTypeInput = () => {
@@ -49,9 +49,10 @@ function UserManagerFormAdd({ handleOk }) {
   const handleChangeSelect = async (value) => {
     await setFieldValue('type', value);
   };
+  console.log({ values });
 
   return (
-    <Form.FormContainer onFinish={handleSubmit} size='small'>
+    <FormContainer onFinish={handleSubmit} size='small'>
       {renderUserField(
         typeInput,
         addUserField,
@@ -63,10 +64,10 @@ function UserManagerFormAdd({ handleOk }) {
         handleChangeSelect,
         handleChangeSwitch
       )}
-      <Form.FormControl>
-        <Form.FormButton type='submit'>SIGNIN NOW</Form.FormButton>
-      </Form.FormControl>
-    </Form.FormContainer>
+      <FormControl>
+        <FormButton type='submit'>ADD USER</FormButton>
+      </FormControl>
+    </FormContainer>
   );
 }
 

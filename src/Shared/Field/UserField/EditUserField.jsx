@@ -1,10 +1,11 @@
 export const editUserField = {
   _id: '',
-  address: '',
-  birthday: '',
   email: '',
+  password: '',
   name: '',
+  address: '',
   phone: '',
+  birthday: '',
   type: '',
   gender: false,
 };

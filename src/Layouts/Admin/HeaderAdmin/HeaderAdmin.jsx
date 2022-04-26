@@ -17,12 +17,16 @@ function HeaderAdmin() {
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
   const urlLocationManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
+  const urlEvaluateManager = process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER;
+  const urlTicketsManager = process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER;
   const { setSearchValue } = searchReducerAction;
   const { account } = images;
   const {
     messagePlaceHolderSearchRoom,
     messagePlaceHolderSearchUser,
     messagePlaceHolderSearchLocation,
+    messagePlaceHolderSearchEvaluate,
+    messagePlaceHolderSearchTicket,
   } = messageApp;
   const { Container, Content, Dropdowns, Menu } = HeaderCSS;
 
@@ -64,6 +68,16 @@ function HeaderAdmin() {
       case pathname === urlLocationManager:
         return (
           <SearchInput content={messagePlaceHolderSearchLocation} dispatchAction={setSearchValue} />
+        );
+
+      case pathname === urlEvaluateManager:
+        return (
+          <SearchInput content={messagePlaceHolderSearchEvaluate} dispatchAction={setSearchValue} />
+        );
+
+      case pathname === urlTicketsManager:
+        return (
+          <SearchInput content={messagePlaceHolderSearchTicket} dispatchAction={setSearchValue} />
         );
       default: {
         return null;
