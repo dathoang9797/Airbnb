@@ -2,7 +2,7 @@ import tw, { styled } from 'twin.macro';
 import { Button } from 'antd';
 import { Mixins } from '@Assets/Styles/Abstracts/Mixins';
 
-const {backgroundLinearGradient} = Mixins;
+const { backgroundLinearGradient } = Mixins;
 
 const ShowProfile = styled.button`
   ${tw`inline-block  border-2 border-green-500 text-green-500 font-medium  leading-tight uppercase rounded  hover:bg-green-500 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out px-1.5 py-1.5 text-[10px] mr-1`};
@@ -24,21 +24,21 @@ const Add = styled(Button)`
 
   &.ant-btn:hover,
   &.ant-btn:focus {
-    ${tw`bg-transparent color[var(--color-primary)] border-color[transparent]`};
+    ${tw`bg-transparent color[var(--color-primary)] border-color[transparent !important]`};
   }
 `;
 
 const Primary = styled(Button)`
   ${backgroundLinearGradient()};
-  ${tw`block w-full max-w-xs mx-auto  text-white rounded-lg px-2 py-2 font-semibold transition-all duration-300 bg-origin-border background-size[400% !important] filter[drop-shadow(22.9008px 11.4504px 68.7023px rgba(255, 56, 92, 0.1))] `};
+  ${tw`block w-full max-w-xs mx-auto  text-white rounded-lg px-2 py-2 font-semibold transition-all duration-300 bg-origin-border background-size[400% !important] filter[drop-shadow(22.9008px 11.4504px 68.7023px rgba(255, 56, 92, 0.1))] border-color[transparent !important]`};
 
   &.ant-btn:focus {
-    ${tw`outline-none shadow-none border-color[transparent] background[transparent] text-white`};
+    ${tw`outline-none shadow-none border-color[transparent !important] background[transparent] text-white`};
   }
 
   &.ant-btn:hover,
   &.ant-btn:active {
-    ${tw`text-white background-position[right center] box-shadow[0px 10px 15px 0px rgb(255 56 92 / 50%)]  border-color[transparent]`};
+    ${tw`text-white background-position[right center] box-shadow[0px 10px 15px 0px rgb(255 56 92 / 50%)]  border-color[transparent !important]`};
   }
 
   &.ant-btn[disabled],

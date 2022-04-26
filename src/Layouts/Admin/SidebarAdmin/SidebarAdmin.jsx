@@ -4,6 +4,8 @@ import { IoLocationOutline } from 'react-icons/io5';
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { SiderBarCSS } from './SidebarAdmin.styles';
+import { AiFillLike } from 'react-icons/ai';
+import { GiTicket } from 'react-icons/gi';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
@@ -43,6 +45,24 @@ function Siderbar() {
       ),
       icon: <CarryOutOutlined />,
       key: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER}>
+          Quản lý đánh giá
+        </NavLink>
+      ),
+      icon: <AiFillLike />,
+      key: process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER}>
+          Quản lý Vé
+        </NavLink>
+      ),
+      icon: <GiTicket />,
+      key: process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER,
     },
   ];
 

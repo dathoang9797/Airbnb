@@ -3,8 +3,8 @@ export const addUserField = {
     password: '',
     name: '',
     address: '',
-    birthday: '',
     phone: '',
+    birthday: '',
     type: '',
     gender: false,
   };

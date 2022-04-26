@@ -4,7 +4,13 @@ import { showError } from '@Utils/Common';
 
 const initialState = { danhSachDanhGia: [], chiTietDanhGia: {} };
 
-const { getDanhSachDanhGiaAsync } = quanLyDanhGiaThunk;
+const {
+  getDanhSachDanhGiaAsync,
+  xoadanhGiaAsync,
+  xoaNhieuDanhGiaAsync,
+  taoDanhGiaAsync,
+  capNhatDanhGiaAsync,
+} = quanLyDanhGiaThunk;
 
 const quanLyDanhGiaSlice = createSlice({
   name: 'quanLyDanhGiaReducer',
@@ -15,6 +21,34 @@ const quanLyDanhGiaSlice = createSlice({
       state.danhSachDanhGia = action.payload;
     });
     builder.addCase(getDanhSachDanhGiaAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(xoadanhGiaAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(xoaNhieuDanhGiaAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(taoDanhGiaAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(capNhatDanhGiaAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
       } else {

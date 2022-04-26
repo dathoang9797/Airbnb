@@ -5,9 +5,9 @@ import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { roomField } from '@Shared/Field/RoomField';
 import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
-import { history, sweetAlert } from '@Utils/Libs';
+import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useRef, useState,Fragment } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
 
@@ -22,10 +22,9 @@ function RoomManagerPage() {
   } = quanLyPhongChoThueThunk;
   const { tableColumnsRoomField } = roomField;
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
-  const idTable = useRef(nanoid()).current;
+  const idTable = useMemo(() => nanoid(), []);
   const urlRoomEdit = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT;
   const urlRoomProfile = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE;
-  const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
 
@@ -47,13 +46,8 @@ function RoomManagerPage() {
     history.push(urlRoomProfile);
   };
 
-  const handleDeleteRoom = async (idRoom) => {
-    const result = await sweetAlertDelete();
-    if (result.isConfirmed) {
-      const result = await dispatch(xoaPhongChoThueAsync(idRoom));
-      if (result.error) return;
-      sweetAlertSuccess();
-    }
+  const handleDeleteRoom = (idRoom) => {
+    dispatch(xoaPhongChoThueAsync(idRoom));
   };
 
   const renderDataTable = () => {
@@ -75,7 +69,7 @@ function RoomManagerPage() {
   };
 
   return (
-    <Fragment>
+    <>
       <TabActionsAdmin
         contentModal={RoomManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
@@ -92,7 +86,7 @@ function RoomManagerPage() {
         key={idTable}
         rowSelection={rowSelection}
       />
-    </Fragment>
+    </>
   );
 }
 
