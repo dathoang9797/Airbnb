@@ -44,11 +44,8 @@ const Container = styled.div`
     display: none;
   }
 
-  span.lazy-load-image-background {
-    ${tw`display[block !important]`};
-    img {
-      ${tw`rounded-lg w-full h-full object-contain`};
-    }
+  img {
+    ${tw`rounded-lg w-full h-full object-contain`};
   }
 `;
 

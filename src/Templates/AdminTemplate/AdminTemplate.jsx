@@ -19,6 +19,7 @@ function AdminTemplate({ Component, ...restRoute }) {
   const urlSignIn = process.env.REACT_APP_LINK_SIGN_IN;
   const urlHome = process.env.REACT_APP_LINK_HOME;
   const typeAdmin = process.env.REACT_APP_NGUOI_DUNG_ADMIN;
+  const { Container } = AdminTemplateCSS;
 
   useLayoutEffect(() => window.scrollTo(0, 0));
 
@@ -87,7 +88,7 @@ function AdminTemplate({ Component, ...restRoute }) {
         <Route
           {...restRoute}
           render={(propsRoute) => (
-            <AdminTemplateCSS.Container>
+            <Container>
               <ThemeProvider theme={theme}>
                 <Layout className='min-h-screen'>
                   <SidebarAdmin />
@@ -97,7 +98,7 @@ function AdminTemplate({ Component, ...restRoute }) {
                   </Layout>
                 </Layout>
               </ThemeProvider>
-            </AdminTemplateCSS.Container>
+            </Container>
           )}
         />
       )}

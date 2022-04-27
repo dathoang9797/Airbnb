@@ -4,10 +4,10 @@ import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSe
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { roomField } from '@Shared/Field/RoomField';
-import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
+import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
 
@@ -32,9 +32,7 @@ function RoomManagerPage() {
     dispatch(getDanhSachPhongChoThueAsync());
   }, [dispatch, getDanhSachPhongChoThueAsync]);
 
-  useLayoutEffect(() => {
-    addButtonScrollInDom();
-  }, []);
+  
 
   const handleGetDetailRoom = async (idNguoiDung) => {
     await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));

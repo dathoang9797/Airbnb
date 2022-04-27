@@ -2,14 +2,13 @@ import React from 'react';
 import { SpinnerDotCSS } from './SpinnerDot.styles';
 
 function SpinnerDot() {
-  const { SpinnerDotContainer, SpinnerDotFirstDot, SpinnerDotSecondDot, SpinnerDotThirdDot } =
-    SpinnerDotCSS;
+  const { Container, FirstDot, SecondDot, ThirdDot } = SpinnerDotCSS;
   return (
-    <SpinnerDotContainer>
-      <SpinnerDotFirstDot />
-      <SpinnerDotSecondDot />
-      <SpinnerDotThirdDot />
-    </SpinnerDotContainer>
+    <Container id='spinner-dot'>
+      <FirstDot />
+      <SecondDot />
+      <ThirdDot />
+    </Container>
   );
 }
 
