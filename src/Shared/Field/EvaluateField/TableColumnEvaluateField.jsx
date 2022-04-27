@@ -2,13 +2,13 @@ import moment from 'moment';
 
 export const tableColumnsEvaluateField = [
   {
-    title: 'Mã Vé',
+    title: 'Mã Đánh Giá',
     dataIndex: 'stt',
     key: 'stt',
     render: (text, record, index) => index + 1,
     onCell: (record) => {
       return {
-        'data-label': 'Mã Vé',
+        'data-label': 'Mã Đánh Giá',
       };
     },
   },
@@ -35,7 +35,7 @@ export const tableColumnsEvaluateField = [
   },
 
   {
-    title: 'Ngày tạo vé',
+    title: 'Ngày tạo đánh giá',
     dataIndex: 'created_at',
     key: 'created_at',
     render: (text, record, index) => moment(record.created_at).format('DD/MM/YYYY'),
@@ -52,18 +52,18 @@ export const tableColumnsEvaluateField = [
     },
     onCell: (record) => {
       return {
-        'data-label': 'Ngày tạo vé',
+        'data-label': 'Ngày tạo đánh giá',
       };
     },
   },
   {
-    title: 'Ngày cập nhật vé',
+    title: 'Ngày cập nhật đánh giá',
     dataIndex: 'updatedAt',
     key: 'updatedAt',
     render: (text, record, index) => moment(record.updatedAt).format('DD/MM/YYYY'),
     onCell: (record) => {
       return {
-        'data-label': 'Ngày cập nhật vé',
+        'data-label': 'Ngày cập nhật đánh giá',
       };
     },
     sorter: (a, b) => {

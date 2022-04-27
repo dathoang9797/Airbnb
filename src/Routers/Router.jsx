@@ -33,10 +33,12 @@ const RoomManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/RoomManagerPage/RoomManagerEditPage')
 );
 const RoomManagerProfilePage = lazy(() =>
-  import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage/RoomManagerProfilePage')
+  import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage')
 );
 
-const EvaluateManagerPage = lazy(() => import('@/Pages/AdminPage/EvaluateManagerPage/EvaluateManagerPage'));
+const EvaluateManagerPage = lazy(() => import('@Pages/AdminPage/EvaluateManagerPage'));
+
+const TicketManagerPage = lazy(() => import('@Pages/AdminPage/TicketManagerPage'));
 
 export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_IN, componentPage: SignInPage },
@@ -77,6 +79,10 @@ export const routerAdminTemplate = [
   {
     path: process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER,
     componentPage: EvaluateManagerPage,
+  },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER,
+    componentPage: TicketManagerPage,
   },
 ];
 

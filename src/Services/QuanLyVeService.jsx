@@ -3,7 +3,7 @@ import AxiosClient from '@Utils/Http/AxiosClient';
 export const quanLyVeService = {
   layDanhSachVe(isLoading = true) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VE;
-    return AxiosClient.get(url, { headers: { isLoading } });
+    return AxiosClient.get(url, { headers: { isLoading }, timeout: 30000 });
   },
 
   layVeTheoID(idVe, isLoading = true) {

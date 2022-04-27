@@ -1,8 +1,8 @@
 import tw, { styled } from 'twin.macro';
 
-const SpinnerDotContainer = tw.div`my-0 mx-auto text-center whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`;
+const Container = tw.div`my-0 mx-auto text-center whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`;
 
-const SpinnerDotFirstDot = styled.div`
+const FirstDot = styled.div`
   width: 6px;
   height: 6px;
   margin-right: 4px;
@@ -18,7 +18,7 @@ const SpinnerDotFirstDot = styled.div`
   animation-delay: -0.3s;
 `;
 
-const SpinnerDotSecondDot = styled.div`
+const SecondDot = styled.div`
   width: 6px;
   height: 6px;
   margin-right: 4px;
@@ -34,7 +34,7 @@ const SpinnerDotSecondDot = styled.div`
   animation-delay: -0.15s;
 `;
 
-const SpinnerDotThirdDot = styled.div`
+const ThirdDot = styled.div`
   width: 6px;
   height: 6px;
   margin-right: 4px;
@@ -50,8 +50,8 @@ const SpinnerDotThirdDot = styled.div`
 `;
 
 export const SpinnerDotCSS = {
-  SpinnerDotContainer,
-  SpinnerDotFirstDot,
-  SpinnerDotSecondDot,
-  SpinnerDotThirdDot,
+  Container,
+  FirstDot,
+  SecondDot,
+  ThirdDot,
 };

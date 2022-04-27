@@ -16,7 +16,7 @@ function ButtonScrollTop() {
   }, []);
 
   return (
-    <LinkCSS className={showButton ? 'fade-in' : ''} onClick={handleScrollTop}>
+    <LinkCSS className={showButton ? 'fade-in' : ''} onClick={handleScrollTop} id='scroll-top'>
       <FaArrowUpCSS />
     </LinkCSS>
   );

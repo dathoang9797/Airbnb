@@ -4,10 +4,10 @@ import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector
 import { quanLyNguoiDungThunk } from '@Redux/Thunk/QuanLyNguoiDungThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { userField } from '@Shared/Field/UserField';
-import { addButtonScrollInDom, handleDataTable } from '@Utils/Common';
+import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
 
@@ -28,9 +28,7 @@ function UserManagerPage() {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
 
-  useLayoutEffect(() => {
-    addButtonScrollInDom();
-  }, []);
+
 
   const onSelectChange = (selectedRowKeys) => {
     setSelectedRowKeys(selectedRowKeys);
