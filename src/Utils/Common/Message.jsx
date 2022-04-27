@@ -53,7 +53,7 @@ const messageDeleteUserSuccess = 'Xóa người dùng thành công';
 
 const messageDeleteEvaluateSuccess = 'Xóa đánh giá thành công';
 
-const messageDeleteRoomSuccess = 'Xoa phòng thành công';
+const messageDeleteRoomSuccess = 'Xóa phòng thành công';
 
 const messageDeleteLocationSuccess = 'Xóa vị trí thành công';
 

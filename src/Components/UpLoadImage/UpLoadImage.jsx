@@ -4,9 +4,10 @@ import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons
 import { Button, Upload } from 'antd';
 import React, { useEffect, useState, useCallback } from 'react';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useLocation } from 'react-router-dom';
 import { UpLoadImageCSS } from './UpLoadImage.styles';
+import SpinnerDot from '@Components/SpinnerDot';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 function UpLoadImage({ idRoom, imageProp }) {
   const userInfo = localService.getUserInfo();
@@ -115,7 +116,7 @@ function UpLoadImage({ idRoom, imageProp }) {
             <LazyLoadImage
               src={imgRoom}
               alt={imgRoom}
-              effect='opacity'
+              placeholder={<SpinnerDot />}
               scrollPosition={scrollPosition}
             />
             {loading ? (

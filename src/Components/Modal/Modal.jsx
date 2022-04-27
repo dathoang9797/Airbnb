@@ -3,6 +3,7 @@ import { Modal as ModalAnt } from 'antd';
 
 function Modal(props) {
   const { handleCancel, handleOk, isModalVisible, Component } = props;
+
   return (
     <ModalAnt
       visible={isModalVisible}

@@ -101,7 +101,13 @@ const Table = styled(TableAnt)`
     ${tw`text-[var(--color-primary)]`}
   }
 
+  .ant-pagination-prev:hover .ant-pagination-item-link,
+  .ant-pagination-next:hover .ant-pagination-item-link {
+    ${tw`text-[var(--color-primary)] border-[var(--color-primary)]`}
+  }
+
   .ant-pagination-item-active,
+  .ant-select:not(.ant-select-disabled):hover .ant-select-selector,
   .ant-pagination-item:hover {
     ${tw`border-[var(--color-primary)]`}
   }
