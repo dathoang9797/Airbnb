@@ -1,6 +1,6 @@
 import React from "react";
 import "./becomehost.css";
-export default function BecomeHost() {
+function BecomeHost() {
   return (
     <div
       className="py-52"
@@ -27,3 +27,5 @@ export default function BecomeHost() {
     </div>
   );
 }
+
+export default BecomeHost

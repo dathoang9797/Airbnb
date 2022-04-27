@@ -1,6 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { removeSpace, removeUnicode } from '@Utils/Common';
-import { filterSearchValue } from '@/Utils/Common';
+import { filterSearchValue } from '@Utils/Common';
+
+const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
 const selectDanhSachViTri = (state) => state.QuanLyViTriReducer.danhSachViTri;
 
@@ -8,29 +10,36 @@ const selectViTriTheoThanhPho = (state) => state.QuanLyViTriReducer.viTriTheoTha
 
 const selectChiTietViTri = (state) => state.QuanLyViTriReducer.chiTietViTri;
 
+const selectorProvince = (state) => state.QuanLyViTriReducer.province;
+
+const selectDanhSachViTriByProvince = (state) =>
+  createSelector(selectDanhSachViTri, selectorProvince, (danhSachViTri, province) => {
+    if (!province.length) {
+      return null;
+    }
+    return danhSachViTri.filter((viTri) => removeSpace(removeUnicode(viTri.province)) === province);
+  });
+
 const selectIdViTriTheoThanhPho = createSelector(
   selectViTriTheoThanhPho,
   (viTriTheoThanhPho) => viTriTheoThanhPho._id
 );
-
-const selectDanhSachViTriByProvince = (state) => state.QuanLyViTriReducer.danhSachViTriByProvince;
 
 const selectProvince = createSelector(selectDanhSachViTri, (danhSachViTri) => {
   if (!danhSachViTri.length) return;
   const provinceArr = danhSachViTri
     .map((viTri) => {
       return removeSpace(removeUnicode(viTri.province));
-    }) //Remove element duplicate
-    .filter(function (item, provinceIndex, thisProvinceArr) {
+    })
+    //Remove element duplicate
+    .filter((item, provinceIndex, thisProvinceArr) => {
       return thisProvinceArr.indexOf(item) === provinceIndex;
     }) //Remove element undefined
-    .filter(function (province) {
+    .filter((province) => {
       return province !== undefined;
     });
   return provinceArr;
 });
-
-const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
 const selectDanhViTriFilter = createSelector(
   selectDanhSachViTri,

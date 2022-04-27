@@ -1,6 +1,6 @@
 import React from "react";
 import "./Feature.css";
-export default function Feature() {
+function Feature() {
   return (
     <div className="py-lg-11 py-7 bg-light">
       <div className="container">
@@ -131,3 +131,5 @@ export default function Feature() {
     </div>
   );
 }
+
+export default Feature

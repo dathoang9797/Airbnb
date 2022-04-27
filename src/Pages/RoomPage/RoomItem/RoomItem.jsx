@@ -1,20 +1,6 @@
 import React from 'react';
-import { RoomItemStyle } from './RoomItem.styles';
+import { RoomItemCSS } from './RoomItem.styles';
 import { images } from '@Assets/Images';
-
-const {
-  RoomListImage,
-  RoomListItem,
-  RoomListContent,
-  RoomListTitle,
-  RoomListDesc,
-  RoomListDetail,
-  RoomListPrice,
-  RoomListPriceNight,
-  RoomListPriceTotal,
-  RoomListRating,
-} = RoomItemStyle;
-const { chevronLeft, chevronRight, heart, star } = images;
 
 function RoomItem({ phong }) {
   const {
@@ -36,9 +22,12 @@ function RoomItem({ phong }) {
     cableTV,
     image,
   } = phong;
+
+  const { chevronLeft, chevronRight, heart, star } = images;
+
   return (
-    <RoomListItem>
-      <RoomListImage>
+    <RoomItemCSS.Container>
+      <RoomItemCSS.Image>
         <button>
           <img src={chevronLeft} alt='Chevron Left' />
         </button>
@@ -53,9 +42,9 @@ function RoomItem({ phong }) {
             currentTarget.src = `https://picsum.photos/id/300/200`;
           }}
         />
-      </RoomListImage>
-      <RoomListContent>
-        <RoomListTitle>
+      </RoomItemCSS.Image>
+      <RoomItemCSS.Content>
+        <RoomItemCSS.Title>
           <div>
             <span className='greyText'>{name}</span>
             <h2>{description}</h2>
@@ -65,9 +54,9 @@ function RoomItem({ phong }) {
               <img src={heart} alt='Heart' />
             </button>
           </div>
-        </RoomListTitle>
+        </RoomItemCSS.Title>
         <div className='separator' />
-        <RoomListDesc>
+        <RoomItemCSS.Desc>
           <span className='greyText'>
             {guests} Guest {bedRoom} bedroom {bath ? `${bath} bath` : ''}
           </span>
@@ -77,25 +66,25 @@ function RoomItem({ phong }) {
             {indoorFireplace ? 'Indoor Fireplace .' : ''} {dryer ? 'Dryer .' : ''}
             {heating ? 'Heating .' : ''} {cableTV ? 'CableTV' : ''}
           </span>
-        </RoomListDesc>
-        <RoomListDetail>
-          <RoomListRating>
+        </RoomItemCSS.Desc>
+        <RoomItemCSS.Detail>
+          <RoomItemCSS.Rating>
             <img src={star} alt='Star' />
             <span>
               5 <span>(14)</span>
             </span>
-          </RoomListRating>
-          <RoomListPrice>
-            <RoomListPriceNight>
+          </RoomItemCSS.Rating>
+          <RoomItemCSS.Price>
+            <RoomItemCSS.PriceNight>
               £{price} <span> / night</span>
-            </RoomListPriceNight>
-            <RoomListPriceTotal>
+            </RoomItemCSS.PriceNight>
+            <RoomItemCSS.PriceTotal>
               <span>£57 total</span>
-            </RoomListPriceTotal>
-          </RoomListPrice>
-        </RoomListDetail>
-      </RoomListContent>
-    </RoomListItem>
+            </RoomItemCSS.PriceTotal>
+          </RoomItemCSS.Price>
+        </RoomItemCSS.Detail>
+      </RoomItemCSS.Content>
+    </RoomItemCSS.Container>
   );
 }
 

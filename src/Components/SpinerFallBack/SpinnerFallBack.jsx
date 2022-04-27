@@ -12,4 +12,4 @@ function SpinnerFallBack() {
   );
 }
 
-export default React.memo(SpinnerFallBack);
+export default SpinnerFallBack;

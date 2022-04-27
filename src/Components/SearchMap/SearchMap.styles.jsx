@@ -75,7 +75,7 @@ const MoveContentSearch = styled.div`
   }
 `;
 
-export const SeachMapCSS = {
+export const SearchMapCSS = {
   Container,
   Spinner,
   Move,

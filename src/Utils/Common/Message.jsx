@@ -1,9 +1,7 @@
 const messagePasswordIsValid =
   '*Passwords of at least eight (8) characters or more (longer is better). Use a combination of uppercase letters, lower case letters, numbers, and special characters';
 
-const messageNetWorkErr = 'Vui lòng thử lại,khi đường truyền ổn định';
-
-const messageUsersIsEmpty = 'Không có người dùng';
+const messageNetWorkErr = 'Vui Lòng Thử Lại, Khi Đường Truyền Ổn Định';
 
 const messageRegisterFailed = 'Đăng ký thất bại';
 
@@ -19,9 +17,7 @@ const messageUpdateFailed = 'Cập nhật thất bại';
 
 const messageUpdateSuccess = 'Cập nhật thành công';
 
-const messageIdIsUnValid = 'Id này ko có';
-
-const messageDataIsEmpty = 'Không có dữ liệu';
+const messageIdIsUnValid = 'Id này ko có hoặc id ko hợp lệ';
 
 const messageEmailIsUnValid = '*Email is invalid!';
 
@@ -41,10 +37,33 @@ const messagePlaceHolderSearchRoom = 'Nhập tên phòng';
 
 const messagePlaceHolderSearchLocation = 'Nhập vị trí';
 
+const messagePlaceHolderSearchEvaluate = 'Nhập nội dung đánh giá';
+
+const messagePlaceHolderSearchTicket = 'Nhập vé';
+
+const messageFailBooking = 'Đặt phòng thất bại';
+
+const messageWaringBooking = 'Vui lòng chọn ngày';
+
+const messageEvaluateSuccess = 'Tạo đánh giá thành công';
+
+const messageUpdateEvaluateSuccess = 'Cập nhật đánh giá thành công';
+
+const messageDeleteUserSuccess = 'Xóa người dùng thành công';
+
+const messageDeleteEvaluateSuccess = 'Xóa đánh giá thành công';
+
+const messageDeleteRoomSuccess = 'Xóa phòng thành công';
+
+const messageDeleteLocationSuccess = 'Xóa vị trí thành công';
+
+const messageDeleteTicketSuccess = 'Xóa vé thành công';
+
+const messageUpdateImageProfileSuccess = 'Xóa vé thành công';
+
 export const messageApp = {
   messagePasswordIsValid,
   messageNetWorkErr,
-  messageUsersIsEmpty,
   messageRegisterFailed,
   messageLoginFailed,
   messageRegisterSucceed,
@@ -52,7 +71,6 @@ export const messageApp = {
   messageUpdateFailed,
   messageIdIsUnValid,
   messageUpdateSuccess,
-  messageDataIsEmpty,
   messageNameRoomIsExits,
   messageFieldIsRequire,
   messageNameRoomShouldNotEmpty,
@@ -63,4 +81,16 @@ export const messageApp = {
   messagePlaceHolderSearchUser,
   messagePlaceHolderSearchRoom,
   messagePlaceHolderSearchLocation,
+  messageFailBooking,
+  messageWaringBooking,
+  messageEvaluateSuccess,
+  messageDeleteUserSuccess,
+  messageDeleteEvaluateSuccess,
+  messageDeleteRoomSuccess,
+  messageDeleteLocationSuccess,
+  messageDeleteTicketSuccess,
+  messagePlaceHolderSearchEvaluate,
+  messagePlaceHolderSearchTicket,
+  messageUpdateEvaluateSuccess,
+  messageUpdateImageProfileSuccess,
 };

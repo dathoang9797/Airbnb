@@ -1,8 +1,6 @@
-import { loadingReducerAction } from '@Redux/Reducers/LoadingSlice';
-import { store } from '@Redux/store';
-import { localService } from '@Services/LocalStorageService';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import queryString from 'query-string';
+import { handleChooseEndLoading, handleChooseStartLoading } from '@Utils/Common';
 
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_AIRBNB,
@@ -10,63 +8,39 @@ const axiosClient = axios.create({
   headers: {
     'Content-Type': 'application/json',
     tokenByClass: process.env.REACT_APP_TOKEN_CYBERSOFT,
+    isLoading: false,
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
 axiosClient.interceptors.request.use(
   (config) => {
-    // Do something before request is sent
-    const userInfo = localService.getUserInfo();
-    if (config.headers) {
-      const isLoading = config.headers.isLoading;
-      const { setRequestSpinnerStarted } = loadingReducerAction;
-      isLoading && store.dispatch(setRequestSpinnerStarted());
-      if (userInfo) config.headers.token = `${userInfo.token}`;
-    }
+    handleChooseStartLoading(config.headers);
     return config;
   },
-  (error) => {
-    // Do something with request error
-  }
+  (error) => {}
 );
 
 axiosClient.interceptors.response.use(
-  // Any status code that lie within the range of 2xx cause this function to trigger
-  // Do something with response data
   async (response) => {
-    if (response.config.headers) {
-      const isLoading = response.config.headers.isLoading;
-      const { setRequestSpinnerEnded } = loadingReducerAction;
-      isLoading && store.dispatch(setRequestSpinnerEnded());
-    }
-
+    handleChooseEndLoading(response.config.headers);
     if (response && response.data) {
       return response.data;
     }
     return response;
   },
-  (error: AxiosError) => {
-    const isLoading = error.config.headers?.isLoading;
-    const { setRequestSpinnerEnded } = loadingReducerAction;
-
+  (error) => {
     if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      isLoading && store.dispatch(setRequestSpinnerEnded());
+      handleChooseEndLoading(error.config.headers);
       return error.response.data;
     }
-    // The request was made but no response was received
-    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-    // http.ClientRequest in node.js
     if (error.request) {
-      isLoading && store.dispatch(setRequestSpinnerEnded());
+      handleChooseEndLoading(error.config.headers);
       console.log('🚀 ~ file: AxiosClient.ts ~ line 34 ~ error.request', error.request);
       return;
     }
-    // // Something happened in setting up the request that triggered an Error
     if (error.message) {
-      isLoading && store.dispatch(setRequestSpinnerEnded());
+      handleChooseEndLoading(error.config.headers);
       console.log('🚀 ~ file: AxiosClient.ts ~ line 39 ~ error.message', error.message);
       return;
     }

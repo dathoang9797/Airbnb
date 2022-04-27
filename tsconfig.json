@@ -22,7 +22,6 @@
     "importHelpers": true,
     // Ensure that .d.ts files are created by tsc, but not .js files
     "declaration": true,
-    "emitDeclarationOnly": true,
     // Ensure that Babel can safely transpile files in the TypeScript project
     "isolatedModules": true,
   },
@@ -32,6 +31,7 @@
   ],
   "exclude": [
     "node_modules",
-    "build"
+    "build",
+    ".next"
   ]
 }

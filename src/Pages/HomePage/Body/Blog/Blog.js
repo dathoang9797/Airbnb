@@ -1,6 +1,6 @@
 import React from "react";
 import "./Blog.css";
-export default function Blog() {
+function Blog() {
   return (
     <div className="py-lg-11 py-7">
       <div className="container">
@@ -106,3 +106,4 @@ export default function Blog() {
     </div>
   );
 }
+export default  Blog

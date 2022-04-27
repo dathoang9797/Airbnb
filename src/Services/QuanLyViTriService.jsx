@@ -6,8 +6,13 @@ export const quanLyViTriService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
-  layViTriTheoID(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+  layViTriTheoTenThanhPho(location, isLoading = true) {
+    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
+    return AxiosClient.get(url, { params: { location }, headers: { isLoading } });
+  },
+
+  layViTriTheoID(idViTri, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
@@ -21,18 +26,18 @@ export const quanLyViTriService = {
     return AxiosClient.post(url, viTri, { headers: { isLoading } });
   },
 
-  capNhatAnhChoViTri(id, formData, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH + `/${id}`;
+  capNhatAnhChoViTri(idViTri, formData, isLoading = true) {
+    const url = `${ process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH}/${idViTri}`
     return AxiosClient.post(url, formData, { headers: { isLoading } });
   },
 
-  capNhatThongTinViTri(id, viTri, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+  capNhatThongTinViTri(idViTri, viTri, isLoading = true) {
+     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
     return AxiosClient.put(url, viTri, { headers: { isLoading } });
   },
 
-  xoaViTri(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI + `/${id}`;
+  xoaViTri(idViTri, isLoading = true) {
+     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
     return AxiosClient.delete(url, { headers: { isLoading } });
   },
 };

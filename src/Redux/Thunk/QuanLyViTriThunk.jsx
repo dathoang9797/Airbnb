@@ -1,18 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { quanLyViTriService } from '@Services/QuanLyViTriService';
 import { messageApp, showSuccess } from '@Utils/Common';
-import { history } from '@Utils/Libs';
+import { history, sweetAlert } from '@Utils/Libs';
 import _ from 'lodash';
+import { capitalize } from '@Utils/Common';
 
 const {
   messageNetWorkErr,
   messageRegisterSucceed,
   messageIdIsUnValid,
-  messageDataIsEmpty,
   messageNameRoomIsExits,
   messageUpdateFailed,
   messageUpdateSuccess,
+  messageLocationRoomSuccess,
 } = messageApp;
+
+const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachViTriAsync = createAsyncThunk(
   'quanLyViTriReducer/getDanhSachViTriAsync',
@@ -28,11 +31,7 @@ const getDanhSachViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    if (!result.length) {
-      return rejectWithValue(messageDataIsEmpty);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -44,16 +43,16 @@ const getViTriTheoTenThanhPhoAsync = createAsyncThunk(
   async (location, { rejectWithValue }) => {
     const result = await quanLyViTriService.layViTriTheoTenThanhPho(location);
 
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
     if ('kind' in result && result.kind === 'ObjectId') {
       return rejectWithValue('Id này ko có');
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    if (!result.length) {
-      return rejectWithValue('Không có dữ liệu');
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -70,7 +69,7 @@ const getChiTietViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -81,10 +80,10 @@ const taoviTriAsync = createAsyncThunk(
   'quanLyviTriReducer/taoviTriAsync',
   async (viTri, { rejectWithValue, dispatch, getState }) => {
     const state = getState();
-    const danhSachviTri = state.QuanLyViTriReducer.danhSachviTri;
+    const danhSachViTri = state.QuanLyViTriReducer.danhSachViTri;
     const { name } = viTri;
 
-    if (danhSachviTri.filter((item) => item.name === name).length === 0) {
+    if (danhSachViTri.filter((item) => item.name === name).length === 0) {
       const result = await quanLyViTriService.taoViTri(viTri);
 
       if (!result) {
@@ -92,7 +91,7 @@ const taoviTriAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       await dispatch(getDanhSachViTriAsync());
@@ -103,40 +102,48 @@ const taoviTriAsync = createAsyncThunk(
   }
 );
 
-const xoaNhieuPhongAsync = createAsyncThunk(
+const xoaNhieuViTrigAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
-    const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
-      quanLyViTriService.xoaviTri(idNguoiDung)
-    );
-    const result = await Promise.all(promiseArr);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
+        quanLyViTriService.xoaviTri(idNguoiDung)
+      );
+      const result = await Promise.all(promiseArr);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachViTriAsync());
+      sweetAlertSuccess(messageLocationRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    await dispatch(getDanhSachViTriAsync());
   }
 );
 
 const xoaViTriAsync = createAsyncThunk(
   'quanLyViTriReducer/xoaViTriAsync',
   async (idLocation, { rejectWithValue, dispatch, getState }) => {
-    const result = await quanLyViTriService.xoaViTri(idLocation);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const result = await quanLyViTriService.xoaViTri(idLocation);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachViTriAsync());
+      sweetAlertSuccess(messageLocationRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    await dispatch(getDanhSachViTriAsync());
   }
 );
 
@@ -154,7 +161,7 @@ const capNhatViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     showSuccess(messageUpdateSuccess);
@@ -167,7 +174,7 @@ export const quanLyViTriThunk = {
   getViTriTheoTenThanhPhoAsync,
   getChiTietViTriAsync,
   xoaViTriAsync,
-  xoaNhieuPhongAsync,
+  xoaNhieuViTrigAsync,
   taoviTriAsync,
   capNhatViTriAsync,
 };

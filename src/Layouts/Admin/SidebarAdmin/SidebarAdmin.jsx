@@ -1,58 +1,92 @@
-import * as AntIcon from '@ant-design/icons';
+import { DashboardOutlined, UsergroupAddOutlined, CarryOutOutlined } from '@ant-design/icons';
 import { images } from '@Assets/Images';
 import { IoLocationOutline } from 'react-icons/io5';
-import React, { useState } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { SiderBarCSS } from './SidebarAdmin.styles';
+import { AiFillLike } from 'react-icons/ai';
+import { GiTicket } from 'react-icons/gi';
+import ButtonScrollTop from '@Components/ButtonScrollTop';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
   const { logo } = images;
+  const { Menus, SiderBar } = SiderBarCSS;
+  const countRef = useRef(null);
+  const onCollapse = (collapsed) => setCollapsed(collapsed);
 
-  const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
+  const items = [
+    {
+      label: <NavLink to={process.env.REACT_APP_LINK_ADMIN_DASH_BOARD}>DashBoard</NavLink>,
+      icon: <DashboardOutlined />,
+      key: process.env.REACT_APP_LINK_ADMIN_DASH_BOARD,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_USER_MANAGER}>Quản lý người dùng</NavLink>
+      ),
+      icon: <UsergroupAddOutlined />,
+      key: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER}>
+          Quản lý thông tin vị trí
+        </NavLink>
+      ),
+      icon: <IoLocationOutline />,
+      key: process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER}>Quản lý phòng cho thuê</NavLink>
+      ),
+      icon: <CarryOutOutlined />,
+      key: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER,
+    },
+    {
+      label: (
+        <NavLink to={process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER}>Quản lý đánh giá</NavLink>
+      ),
+      icon: <AiFillLike />,
+      key: process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER,
+    },
+    {
+      label: <NavLink to={process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER}>Quản lý Vé</NavLink>,
+      icon: <GiTicket />,
+      key: process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER,
+    },
+  ];
+
+  useLayoutEffect(() => {
+    const siderCollapsedDom = document.querySelector('.ant-layout-sider-collapsed');
+    const buttonScrollTopDom = document.querySelector('#scroll-top');
+    if (countRef.current) {
+      if (!siderCollapsedDom) {
+        buttonScrollTopDom.style.opacity = '0';
+        countRef.current += 1;
+        return;
+      }
+    }
+    buttonScrollTopDom.style.opacity = '1';
+    countRef.current += 1;
+  });
 
   return (
     <>
-      <SiderBarCSS.SiderBar collapsible collapsed={collapsed} onCollapse={onCollapse} id='side-bar'>
+      {' '}
+      <SiderBar collapsible collapsed={collapsed} onCollapse={onCollapse} id='side-bar'>
         <div>
           <a href='#a'>
             <img src={logo} alt={logo} />
           </a>
         </div>
-        <SiderBarCSS.Menus defaultSelectedKeys={[pathname]} mode='inline'>
-          <SiderBarCSS.MenuItem
-            key={process.env.REACT_APP_LINK_ADMIN_DASH_BOARD}
-            icon={<AntIcon.DashboardOutlined />}
-          >
-            <NavLink to={process.env.REACT_APP_LINK_ADMIN_DASH_BOARD}>DashBoard</NavLink>
-          </SiderBarCSS.MenuItem>
-          <SiderBarCSS.MenuItem
-            key={process.env.REACT_APP_LINK_ADMIN_USER_MANAGER}
-            icon={<AntIcon.UsergroupAddOutlined />}
-          >
-            <NavLink to={process.env.REACT_APP_LINK_ADMIN_USER_MANAGER}>Quản lý người dùng</NavLink>
-          </SiderBarCSS.MenuItem>
-          <SiderBarCSS.MenuItem
-            key={process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER}
-            icon={<IoLocationOutline />}
-          >
-            <NavLink to={process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER}>
-              Quản lý thông tin vị trí
-            </NavLink>
-          </SiderBarCSS.MenuItem>
-          <SiderBarCSS.MenuItem
-            key={process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER}
-            icon={<AntIcon.CarryOutOutlined />}
-          >
-            <NavLink to={process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER}>
-              Quản lý thông tin phòng
-            </NavLink>
-          </SiderBarCSS.MenuItem>
-        </SiderBarCSS.Menus>
-      </SiderBarCSS.SiderBar>
+        <Menus defaultSelectedKeys={[pathname]} mode='inline' items={items} />
+      </SiderBar>
+      <ButtonScrollTop />
     </>
   );
 }
 
-export default React.memo(Siderbar);
+export default Siderbar;

@@ -1,15 +1,18 @@
 import { nanoid } from '@reduxjs/toolkit';
 import AdminTemplate from '@Templates/AdminTemplate';
-import HomeTemplate from '@Templates/HomeTemplate';
-import UserTemplate from '@Templates/UserTemplate/UserTemplate';
+import UserTemplate from '@Templates/UserTemplate';
 import React, { lazy } from 'react';
 
+const HomePage = lazy(() => import('@Pages/HomePage/HomePage'));
+const ProfilePage = lazy(() => import('@Pages/ProfilePage/ProfilePage'));
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
 const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
 const DetailPage = lazy(() => import('@Pages/DetailPage'));
 const RoomPage = lazy(() => import('@Pages/RoomPage'));
 const NotFoundPage = lazy(() => import('@Pages/NotFoundPage'));
+
 const DashBoardPage = lazy(() => import('@Pages/AdminPage/DashBoardPage'));
+
 const LocationManagerPage = lazy(() => import('@Pages/AdminPage/LocationManagerPage'));
 const LocationManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/LocationManagerPage/LocationManagerEditPage')
@@ -24,20 +27,24 @@ const UserManagerEditPage = lazy(() =>
 const UserManagerProfilePage = lazy(() =>
   import('@Pages/AdminPage/UserManagerPage/UserManagerProfilePage')
 );
+
 const RoomManagerPage = lazy(() => import('@Pages/AdminPage/RoomManagerPage'));
 const RoomManagerEditPage = lazy(() =>
   import('@Pages/AdminPage/RoomManagerPage/RoomManagerEditPage')
 );
 const RoomManagerProfilePage = lazy(() =>
-  import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage/RoomManagerProfilePage')
+  import('@Pages/AdminPage/RoomManagerPage/RoomManagerProfilePage')
 );
+
+const EvaluateManagerPage = lazy(() => import('@Pages/AdminPage/EvaluateManagerPage'));
+
+const TicketManagerPage = lazy(() => import('@Pages/AdminPage/TicketManagerPage'));
 
 export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_IN, componentPage: SignInPage },
   { path: process.env.REACT_APP_LINK_SIGN_UP, componentPage: SignUpPage },
-];
-
-export const routerHomeTemplate = [
+  { path: process.env.REACT_APP_LINK_HOME, componentPage: HomePage },
+  { path: process.env.REACT_APP_LINK_PROFILE, componentPage: ProfilePage },
   { path: process.env.REACT_APP_LINK_DETAIL, componentPage: DetailPage },
   { path: process.env.REACT_APP_LINK_ROOM, componentPage: RoomPage },
   { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
@@ -69,19 +76,21 @@ export const routerAdminTemplate = [
     path: process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE,
     componentPage: UserManagerProfilePage,
   },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER,
+    componentPage: EvaluateManagerPage,
+  },
+  {
+    path: process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER,
+    componentPage: TicketManagerPage,
+  },
 ];
 
 const renderUserTemplate = (() => {
-  const idUserTemplate = nanoid(); //Need Declare same id to react can't switch case properly in react-router
+  //Need Declare same id to react can't switch case properly in react-router
+  const idUserTemplate = nanoid();
   return routerUserTemplate.map(({ componentPage, path }) => (
     <UserTemplate key={idUserTemplate} Component={componentPage} path={path} exact />
-  ));
-})();
-
-const renderHomeTemplate = (() => {
-  const idHomeTemplate = nanoid();
-  return routerHomeTemplate.map(({ componentPage, path }) => (
-    <HomeTemplate key={idHomeTemplate} Component={componentPage} path={path} exact />
   ));
 })();
 
@@ -92,8 +101,4 @@ const renderAdminTemplate = (() => {
   ));
 })();
 
-export const routerTemplates = [
-  ...renderAdminTemplate,
-  ...renderUserTemplate,
-  ...renderHomeTemplate,
-];
+export const routerTemplates = [...renderAdminTemplate, ...renderUserTemplate];

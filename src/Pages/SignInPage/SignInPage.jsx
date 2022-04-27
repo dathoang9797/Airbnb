@@ -1,13 +1,14 @@
-import FormSignInPage from '@Pages/SignInPage/FormSignInPage';
 import React from 'react';
+import FormSignInPage from './FormSignInPage';
 import { SignInCSS } from './SignIn.styles';
 
 function SignInPage() {
+  const { Container, Content, ContentLeft, ContentRight, Form } = SignInCSS;
   return (
-    <SignInCSS.Container>
-      <SignInCSS.Form>
-        <SignInCSS.Content>
-          <SignInCSS.ContentLeft>
+    <Container>
+      <Form>
+        <Content>
+          <ContentLeft>
             <svg
               id='a87032b8-5b37-4b7e-a4d9-4dbfbe394641'
               data-name='Layer 1'
@@ -206,13 +207,13 @@ function SignInPage() {
                 fill='#2f2e41'
               />
             </svg>
-          </SignInCSS.ContentLeft>
-          <SignInCSS.ContentRight>
+          </ContentLeft>
+          <ContentRight>
             <FormSignInPage />
-          </SignInCSS.ContentRight>
-        </SignInCSS.Content>
-      </SignInCSS.Form>
-    </SignInCSS.Container>
+          </ContentRight>
+        </Content>
+      </Form>
+    </Container>
   );
 }
 

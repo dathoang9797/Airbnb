@@ -2,8 +2,7 @@ import "./NavBar.css";
 import React, { useState, useEffect } from "react";
 import { images } from "@Assets/Images";
 import "animate.css";
-
-export default function NavBar() {
+function NavBar() {
   const { logo } = images;
 
   const [state, setState] = useState(false);
@@ -142,3 +141,5 @@ export default function NavBar() {
     </div>
   );
 }
+
+export default NavBar

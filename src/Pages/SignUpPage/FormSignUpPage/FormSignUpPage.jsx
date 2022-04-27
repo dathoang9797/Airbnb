@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 
 function FormSignUpPage() {
   const dispatch = useDispatch();
-  const { signUpField } = userField;
+  const { signUpField, renderUserField } = userField;
   const { setRegisterUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
 
@@ -43,120 +43,17 @@ function FormSignUpPage() {
 
   return (
     <Form.FormContainer onFinish={handleSubmit}>
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.name : ''}
-          >
-            <Form.FormUserOutlined />
-            <Form.FormInput
-              type='text'
-              placeholder=' '
-              name='name'
-              onChange={handleChange}
-              childrenProps='Your Name'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.email : ''}
-          >
-            <Form.FormMailOutlined />
-            <Form.FormInput
-              type='email'
-              placeholder=' '
-              name='email'
-              onChange={handleChange}
-              childrenProps='Your Email'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.password : ''}
-          >
-            <Form.FormLockOutlined />
-            {typeInput === 'password' ? (
-              <Form.FormEyeOutlined onClick={handleChangeTypeInput} />
-            ) : (
-              <Form.FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
-            )}
-            <Form.FormInput
-              type='password'
-              placeholder=' '
-              name='password'
-              onChange={handleChange}
-              childrenProps='Your PassWord'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.phone : ''}
-          >
-            <Form.FormPhoneOutlined />
-            <Form.FormInput
-              type='text'
-              placeholder=' '
-              name='phone'
-              onChange={handleChange}
-              childrenProps='Your Phone'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.address : ''}
-          >
-            <Form.FormHomeOutlined />
-            <Form.FormInput
-              type='text'
-              placeholder=' '
-              name='address'
-              onChange={handleChange}
-              childrenProps='Your Address'
-            />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem
-            validateStatus={errors ? 'error' : 'success'}
-            help={errors ? errors.birthday : ''}
-            label='Birthday'
-          >
-            <Form.FormDatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
-
-      <Form.FormControl>
-        <Form.FormGroup>
-          <Form.FormItem label='Gender'>
-            <Form.FormSwitch onChange={handleChangeSwitch} />
-          </Form.FormItem>
-        </Form.FormGroup>
-      </Form.FormControl>
+      {renderUserField(
+        typeInput,
+        signUpField,
+        errors,
+        values,
+        handleChange,
+        handleChangeTypeInput,
+        handleChangeDatePicker,
+        null,
+        handleChangeSwitch
+      )}
 
       <Form.FormControl>
         <Form.FormButton type='submit'>SIGNUP NOW</Form.FormButton>

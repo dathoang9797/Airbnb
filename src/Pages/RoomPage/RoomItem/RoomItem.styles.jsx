@@ -1,194 +1,107 @@
 import tw, { styled } from 'twin.macro';
 
-const RoomListRating = styled.div`
-  display: flex;
-  margin-top: auto;
-  img {
-    width: 14px;
-    margin-right: 4px;
-  }
-  span {
-    font-family: 'Circular Medium';
-  }
-`;
-
-const RoomListPriceNight = styled.div`
-  font-size: 18px;
-  font-family: 'Circular Bold';
-  & span {
-    font-size: 18px;
-    font-family: 'Circular Bold';
-  }
-  & span span {
-    font-family: 'Circular Book';
-    color: var(--color-medium);
-  }
-`;
-const RoomListPriceTotal = styled.div`
-  font-size: 14px;
-  color: var(--color-text-light);
-  text-decoration: underline;
-  margin-top: 2px;
-`;
-
-const RoomListPrice = styled.div`
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-`;
-
-const RoomListDetail = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: auto;
-`;
-
-const RoomListDesc = styled.div`
-  padding-top: 15px;
-  span {
-    display: block;
-    margin-bottom: 5px;
-  }
-`;
-
-const RoomListTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  button {
-    background: none;
-    border: none;
-    outline: none;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 0;
-    cursor: pointer;
-
-    &:after {
-      opacity: 0;
-      background: var(--color-medium);
-      position: absolute;
-      content: '';
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      z-index: -1;
-      transition: all 0.3s;
-    }
-    &:hover:after {
-      opacity: 1;
-    }
-    h2 {
-      font-size: 18px;
-      font-family: 'Circular Book';
-      color: var(--grey-text-dark);
-      margin: 5px 0 15px;
-      font-weight: 400;
-    }
-  }
-`;
-
-const RoomListContent = styled.div`
-  width: calc(100% - 300px);
-  padding-left: 15px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const RoomListImage = styled.div`
-  width: 300px;
-  height: 200px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  &::before {
-    position: absolute;
-    content: 'SUPERHOST';
-    background: white;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-    border-radius: 4px;
-    padding: 4px 8px;
-    top: 10px;
-    left: 10px;
-    letter-spacing: 0.48px;
-    font-size: 12px;
-    font-family: 'Circular Medium';
-    text-transform: uppercase;
-  }
-  button {
-    position: absolute;
-    top: 50%;
-    width: 32px;
-    height: 32px;
-    background: white;
-    border-radius: 50%;
-    overflow: hidden;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    opacity: 0;
-    transition: 0.1s ease-in;
-    cursor: pointer;
-  }
-
-  & button:hover {
-    opacity: 1 !important;
-  }
-
-  & button img {
-    width: 10px;
-    height: 10px;
-  }
-
-  & button:first-of-type {
-    left: 10px;
-  }
-
-  & button:last-of-type {
-    right: 10px;
-  }
-
-  & img {
-    object-fit: cover;
-    height: 100%;
-    width: 100%;
-  }
-`;
-
-const RoomListItem = styled.div`
-  border-top: 1px solid #ebebeb;
-  padding: 24px 0;
-  display: flex;
-  &:hover ${RoomListImage} button {
-    opacity: 0.7;
-  }
+const Container = styled.div`
+  ${tw`font-family[Circular] border-t-1 border-color[#ebebeb] py-6 flex`}
   .greyText {
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--grey-text-light);
-    font-family: 'Circular Light';
+    ${tw`text-sm color[var(--color-text-light)]`}
   }
   .separator {
-    width: 32px;
-    height: 1px;
-    background: var(--grey-med);
+    ${tw`w-8 h-[1px] background-color[var(--color-medium)]`}
   }
 `;
 
-export const RoomItemStyle = {
-  RoomListImage,
-  RoomListItem,
-  RoomListContent,
-  RoomListTitle,
-  RoomListDesc,
-  RoomListDetail,
-  RoomListPrice,
-  RoomListPriceTotal,
-  RoomListPriceNight,
-  RoomListRating,
+const Rating = styled.div`
+  ${tw`flex mt-auto`}
+  img {
+    ${tw`w-3.5 mr-1`}
+  }
+`;
+
+const PriceNight = styled.div`
+  ${tw`font-size[18px] font-bold `}
+`;
+
+const PriceTotal = styled.div`
+  ${tw`text-sm color[var(--color-text-light)] underline mt-0.5`}
+`;
+
+const Price = styled.div`
+  ${tw`text-right flex flex-col`}
+`;
+
+const Detail = styled.div`
+  ${tw`flex justify-between mt-auto`}
+`;
+
+const Desc = styled.div`
+  ${tw`pt-[15px]`};
+  span {
+    ${tw`block mb-1.5`}
+  }
+`;
+
+const Title = styled.div`
+  ${tw`flex justify-between text-justify font-semibold`}
+  button {
+    ${tw`w-8 h-8 bg-none outline-none relative flex items-center justify-center border-none p-0 cursor-pointer`}
+
+    &:after {
+      ${tw`opacity-0 background-color[var(--color-medium)] absolute w-12 h-12 border-radius[50%] content z-index[-1] transition-all duration-300`}
+    }
+    &:hover:after {
+      ${tw`opacity-100`}
+    }
+  }
+`;
+
+const Content = styled.div`
+  ${tw`w-[calc(100% - 300px)] pl-4 flex flex-col`}
+`;
+
+const Image = styled.div`
+  ${tw`width[300px] height[200px] border-radius[10px] overflow-hidden relative`};
+
+  ${Container}:hover & button {
+    ${tw`opacity-70`};
+  }
+
+  &::before {
+    ${tw`absolute content['SUPERHOST'] bg-white box-shadow[0px 2px 4px rgba(0, 0, 0, 0.18)] rounded py-1 px-2 top-2.5 left-2.5 letter-spacing[0.48px] text-xs  uppercase`};
+  }
+  button {
+    ${tw`absolute top-1/2 w-8 h-8 bg-white border-radius[50%] overflow-hidden p-0 flex justify-center items-center border-none transition-all duration-300 cursor-pointer opacity-0`};
+  }
+
+  button:hover {
+    ${tw`opacity-100`};
+  }
+
+  button img {
+    ${tw`w-2.5 h-2.5`}
+  }
+
+  button:first-of-type {
+    ${tw`left-2.5`}
+  }
+
+  button:last-of-type {
+    ${tw`right-2.5`}
+  }
+
+  img {
+    ${tw`object-cover w-full h-full`}
+  }
+`;
+
+export const RoomItemCSS = {
+  Image,
+  Container,
+  Content,
+  Title,
+  Desc,
+  Detail,
+  Price,
+  PriceTotal,
+  PriceNight,
+  Rating,
 };

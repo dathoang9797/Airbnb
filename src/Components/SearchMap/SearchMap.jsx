@@ -1,12 +1,16 @@
 import React from 'react';
-import { SeachMapCSS } from './SearchMap.styles';
+
+import { SearchMapCSS } from './SearchMap.styles';
 
 function SearchMap() {
+  const { Move, Container, MoveContentSearch, MoveLabel, MoveSpan, Spinner, SpinnerButton } =
+    SearchMapCSS;
+
   return (
-    <SeachMapCSS.Container>
-      <SeachMapCSS.Spinner>
+    <Container>
+      <Spinner>
         <div style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 6px 16px' }}>
-          <SeachMapCSS.SpinnerButton>
+          <SpinnerButton>
             <div>
               <span>
                 <span />
@@ -14,14 +18,15 @@ function SearchMap() {
                 <span />
               </span>
             </div>
-          </SeachMapCSS.SpinnerButton>
+
+          </SpinnerButton>
         </div>
-      </SeachMapCSS.Spinner>
-      <SeachMapCSS.Move>
+      </Spinner>
+      <Move>
         <div style={{ boxShadow: 'rgb(0 0 0 / 12%) 0px 6px 16px' }}>
           <div>
-            <SeachMapCSS.MoveLabel>
-              <SeachMapCSS.MoveSpan>
+            <MoveLabel>
+              <MoveSpan>
                 <input type='checkbox' defaultChecked />
                 <span>
                   <span>
@@ -36,15 +41,16 @@ function SearchMap() {
                     </svg>
                   </span>
                 </span>
-              </SeachMapCSS.MoveSpan>
-              <SeachMapCSS.MoveContentSearch>
+
+              </MoveSpan>
+              <MoveContentSearch>
                 <span>Search as I move the map</span>
-              </SeachMapCSS.MoveContentSearch>
-            </SeachMapCSS.MoveLabel>
+              </MoveContentSearch>
+            </MoveLabel>
           </div>
         </div>
-      </SeachMapCSS.Move>
-    </SeachMapCSS.Container>
+      </Move>
+    </Container>
   );
 }
 

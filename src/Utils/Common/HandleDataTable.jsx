@@ -2,34 +2,50 @@ import { ButtonCSS } from '@/Components/Button';
 
 export const handleDataTable = (
   data,
-  { handleGetProfileItem, handleGetDetailItem, handleDeleteItem }
+  { handleGetProfileItem, handleGetDetailItem, handleDeleteItem, handleUpdateItem }
 ) => {
+  const { ShowProfile, Edit, Delete } = ButtonCSS;
   return data.map((item, index) => {
     return {
       ...item,
       action: (
         <div>
-          <ButtonCSS.ShowProfile
-            onClick={() => {
-              handleGetProfileItem(item._id);
-            }}
-          >
-            Xem thông tin chi tiết
-          </ButtonCSS.ShowProfile>
-          <ButtonCSS.Edit
-            onClick={() => {
-              handleGetDetailItem(item._id);
-            }}
-          >
-            Sửa
-          </ButtonCSS.Edit>
-          <ButtonCSS.Delete
-            onClick={() => {
-              handleDeleteItem(item._id);
-            }}
-          >
-            Xóa
-          </ButtonCSS.Delete>
+          {handleGetProfileItem ? (
+            <ShowProfile
+              onClick={() => {
+                handleGetProfileItem(item._id);
+              }}
+            >
+              Xem thông tin chi tiết
+            </ShowProfile>
+          ) : null}
+
+          {handleGetDetailItem ? (
+            <Edit
+              onClick={() => {
+                handleGetDetailItem(item._id);
+              }}
+            >
+              Sửa
+            </Edit>
+          ) : handleUpdateItem ? (
+            <Edit
+              onClick={() => {
+                handleUpdateItem(item._id);
+              }}
+            >
+              Sửa
+            </Edit>
+          ) : null}
+          {handleDeleteItem ? (
+            <Delete
+              onClick={() => {
+                handleDeleteItem(item._id);
+              }}
+            >
+              Xóa
+            </Delete>
+          ) : null}
         </div>
       ),
     };

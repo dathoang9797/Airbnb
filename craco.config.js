@@ -1,5 +1,4 @@
 const path = require('path');
-var webpack = require('webpack');
 
 module.exports = {
   webpack: {
@@ -35,6 +34,7 @@ module.exports = {
       '@utils': path.resolve(__dirname, './src/utils'),
       '@admin': path.resolve(__dirname, './src/admin'),
     },
+    plugins: [],
   },
   babel: {
     plugins: [

@@ -8,6 +8,8 @@ import { removeUnicode } from './RemoveUniconde';
 import { delay } from './Delay';
 import { filterSearchValue } from './FilterSearchValue';
 import { handleDataTable } from './HandleDataTable';
+import { handleChooseEndLoading, handleChooseStartLoading } from './HandleChooseLoading';
+import { renderUtilityIcon } from './RenderUtilityIcon';
 
 export {
   capitalize,
@@ -22,4 +24,8 @@ export {
   delay,
   filterSearchValue,
   handleDataTable,
+  handleChooseEndLoading,
+  handleChooseStartLoading,
+  renderUtilityIcon,
+  
 };

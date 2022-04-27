@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { localService } from '@Services/LocalStorageService';
 import { quanLyPhongChoThueService } from '@Services/QuanLyPhongChoThueService';
-import { messageApp, showSuccess } from '@Utils/Common';
+import { messageApp, showSuccess, capitalize } from '@Utils/Common';
+import { sweetAlert } from '@Utils/Libs';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
 
@@ -8,11 +10,14 @@ const {
   messageNetWorkErr,
   messageRegisterSucceed,
   messageIdIsUnValid,
-  messageDataIsEmpty,
   messageNameRoomIsExits,
   messageUpdateFailed,
   messageUpdateSuccess,
+  messageFailBooking,
+  messageDeleteRoomSuccess,
 } = messageApp;
+
+const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueAsync',
@@ -28,11 +33,7 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    if (!result.length) {
-      return rejectWithValue(messageDataIsEmpty);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -53,11 +54,7 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    if (!result.length) {
-      return rejectWithValue(messageDataIsEmpty);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -99,7 +96,7 @@ const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
   }
 );
@@ -107,37 +104,45 @@ const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
 const xoaNhieuPhongAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
-    const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
-      quanLyPhongChoThueService.xoaPhongChoThue(idNguoiDung)
-    );
-    const result = await Promise.all(promiseArr);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
+        quanLyPhongChoThueService.xoaPhongChoThue(idNguoiDung)
+      );
+      const result = await Promise.all(promiseArr);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachPhongChoThueAsync());
+      sweetAlertSuccess(messageDeleteRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    await dispatch(getDanhSachPhongChoThueAsync());
   }
 );
 
 const xoaPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/xoaPhongChoThueAsync',
   async (idRoom, { rejectWithValue, dispatch, getState }) => {
-    const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
 
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachPhongChoThueAsync());
+      sweetAlertSuccess(messageDeleteRoomSuccess);
     }
-
-    if ('message' in result) {
-      return rejectWithValue(result.message);
-    }
-
-    await dispatch(getDanhSachPhongChoThueAsync());
   }
 );
 
@@ -145,7 +150,6 @@ const taoPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/taoPhongChoThueAsync',
   async (phongChoThue, { rejectWithValue, dispatch, getState }) => {
     const state = getState();
-
     const danhSachPhongChoThue = state.QuanLyPhongChoThueReducer.danhSachPhongChoThue;
     const { name } = phongChoThue;
 
@@ -157,7 +161,7 @@ const taoPhongChoThueAsync = createAsyncThunk(
       }
 
       if ('message' in result) {
-        return rejectWithValue(result.message);
+        return rejectWithValue(capitalize(result.message));
       }
 
       await dispatch(getDanhSachPhongChoThueAsync());
@@ -178,7 +182,7 @@ const getChiTietPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
@@ -202,11 +206,35 @@ const capNhatPhongChoThueAsync = createAsyncThunk(
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     showSuccess(messageUpdateSuccess);
     history.goBack();
+  }
+);
+
+const datPhongPhongChoThueAsync = createAsyncThunk(
+  'quanLyPhongChoThueReducer/datPhongPhongChoThueAsync',
+  async (dateBooking, { rejectWithValue, dispatch }) => {
+    const result = await quanLyPhongChoThueService.datPhongChoThue(dateBooking);
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if (_.isEmpty(result)) {
+      return rejectWithValue(messageFailBooking);
+    }
+
+    if ('message' in result && !('userDetail' in result)) {
+      return rejectWithValue(capitalize(result.message));
+    }
+
+    const userInfo = localService.getUserInfo();
+    const updateUserInfo = { ...userInfo, ...result.userDetail };
+    localService.setUserInfo(updateUserInfo);
+    showSuccess(capitalize(capitalize(result.message)));
   }
 );
 
@@ -220,4 +248,5 @@ export const quanLyPhongChoThueThunk = {
   xoaNhieuPhongAsync,
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,
+  datPhongPhongChoThueAsync,
 };

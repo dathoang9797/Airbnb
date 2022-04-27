@@ -4,11 +4,10 @@ import SearchInput from '@Components/SearchInput';
 import { HeaderCSS } from '@Layouts/Admin/HeaderAdmin/HeaderAdmin.styles';
 import { searchReducerAction } from '@Redux/Reducers/SearchSlice';
 import { localService } from '@Services/LocalStorageService';
+import { messageApp } from '@Utils/Common';
 import { history } from '@Utils/Libs';
-import { Menu } from 'antd';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { messageApp } from '@Utils/Common';
 
 function HeaderAdmin() {
   const userInfo = localService.getUserInfo();
@@ -18,13 +17,18 @@ function HeaderAdmin() {
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
   const urlLocationManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
+  const urlEvaluateManager = process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER;
+  const urlTicketsManager = process.env.REACT_APP_LINK_ADMIN_TICKETS_MANAGER;
   const { setSearchValue } = searchReducerAction;
   const { account } = images;
   const {
     messagePlaceHolderSearchRoom,
     messagePlaceHolderSearchUser,
     messagePlaceHolderSearchLocation,
+    messagePlaceHolderSearchEvaluate,
+    messagePlaceHolderSearchTicket,
   } = messageApp;
+  const { Container, Content, Dropdowns, Menu } = HeaderCSS;
 
   const handleLogOut = () => {
     localService.removeUserInfo();
@@ -32,22 +36,22 @@ function HeaderAdmin() {
     window.location.reload();
   };
 
-  const HeaderMenuDropdownProfile = (
-    <Menu>
-      <Menu.Item
-        icon={<UserOutlined />}
-        key={1}
-        onClick={() => {
-          history.push(urlProfile);
-        }}
-      >
-        Profile
-      </Menu.Item>
-      <Menu.Item icon={<LogoutOutlined />} key={2} onClick={handleLogOut}>
-        LogOut
-      </Menu.Item>
-    </Menu>
-  );
+  const items = [
+    {
+      label: 'Profile',
+      onClick: () => {
+        history.push(urlProfile);
+      },
+      icon: <UserOutlined />,
+    },
+    {
+      label: ' LogOut',
+      onClick: () => {
+        handleLogOut();
+      },
+      icon: <LogoutOutlined />,
+    },
+  ];
 
   const renderSearch = () => {
     switch (true) {
@@ -65,6 +69,16 @@ function HeaderAdmin() {
         return (
           <SearchInput content={messagePlaceHolderSearchLocation} dispatchAction={setSearchValue} />
         );
+
+      case pathname === urlEvaluateManager:
+        return (
+          <SearchInput content={messagePlaceHolderSearchEvaluate} dispatchAction={setSearchValue} />
+        );
+
+      case pathname === urlTicketsManager:
+        return (
+          <SearchInput content={messagePlaceHolderSearchTicket} dispatchAction={setSearchValue} />
+        );
       default: {
         return null;
       }
@@ -72,12 +86,12 @@ function HeaderAdmin() {
   };
 
   return (
-    <HeaderCSS.Container>
-      <HeaderCSS.Content>
+    <Container>
+      <Content>
         {renderSearch()}
-        <HeaderCSS.Dropdowns
+        <Dropdowns
           placement='bottomRight'
-          overlay={HeaderMenuDropdownProfile}
+          overlay={<Menu items={items} />}
           arrow={{ pointAtCenter: true }}
         >
           <button aria-label='Account' aria-haspopup='true'>
@@ -88,10 +102,10 @@ function HeaderAdmin() {
               aria-hidden='true'
             />
           </button>
-        </HeaderCSS.Dropdowns>
-      </HeaderCSS.Content>
-    </HeaderCSS.Container>
+        </Dropdowns>
+      </Content>
+    </Container>
   );
 }
 
-export default React.memo(HeaderAdmin);
+export default HeaderAdmin;

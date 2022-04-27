@@ -6,8 +6,13 @@ export const quanLyPhongChoThueService = {
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
-  layPhongChoThueTheoID(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+  layPhongChoThueTheoViTri(locationId, isLoading = true) {
+    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE;
+    return AxiosClient.get(url, { params: { locationId }, headers: { isLoading } });
+  },
+
+  layPhongChoThueTheoID(idRoom, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE}/${idRoom}`;
     return AxiosClient.get(url, { headers: { isLoading } });
   },
 
@@ -21,18 +26,18 @@ export const quanLyPhongChoThueService = {
     return AxiosClient.post(url, datPhongChoThue, { headers: { isLoading } });
   },
 
-  capNhatHinhAnhPhongChoThue(id, formData, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_CAP_NHAT_ANH + `/${id}`;
+  capNhatHinhAnhPhongChoThue(idRoom, formData, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE_CAP_NHAT_ANH}/${idRoom}`;
     return AxiosClient.post(url, formData, { headers: { isLoading } });
   },
 
-  capNhatThongTinPhongChoThue(id, phongChoThue, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+  capNhatThongTinPhongChoThue(idRoom, phongChoThue, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE}/${idRoom}`;
     return AxiosClient.put(url, phongChoThue, { headers: { isLoading } });
   },
 
-  xoaPhongChoThue(id, isLoading = true) {
-    const url = process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE + `/${id}`;
+  xoaPhongChoThue(idRoom, isLoading = true) {
+    const url = `${process.env.REACT_APP_LINK_QUAN_LY_PHONG_CHO_THUE}/${idRoom}`;
     return AxiosClient.delete(url, { headers: { isLoading } });
   },
 };

@@ -11,5 +11,9 @@ export const Variables = css`
     --color-text-light: rgb(113, 113, 113);
     --color-text-dark: #222;
     --color-white: #fff;
+    --color-primary-rgb: 255, 56, 92;
+    --color-primary-rgb-without-semi-colon: 255 56 92;
+    --color-border-datepicker: rgb(255, 56, 92);
+    --color-box-shadow-datepicker: rgba(255, 56, 92, 1);
   }
 `;

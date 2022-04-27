@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { filterSearchValue } from '@/Utils/Common';
+import { filterSearchValue } from '@Utils/Common';
 
 const selectDanhSachPhongChoThue = (state) => state.QuanLyPhongChoThueReducer.danhSachPhongChoThue;
 
@@ -7,6 +7,10 @@ const selectDanhSachPhongChoThueTheoViTri = (state) =>
   state.QuanLyPhongChoThueReducer.danhSachPhongChoThueTheoViTri;
 
 const selectChiTietPhongChoThue = (state) => state.QuanLyPhongChoThueReducer.chiTietPhongChoThue;
+
+const selectBookingRoom = (state) => state.QuanLyPhongChoThueReducer.bookingRoom;
+
+const selectTotalPriceBooking = (state) => state.QuanLyPhongChoThueReducer.totalPriceBooking;
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
@@ -26,4 +30,6 @@ export const quanLyPhongChoThueSelector = {
   selectDanhSachPhongChoThueTheoViTri,
   selectChiTietPhongChoThue,
   selectDanhSachPhongFilter,
+  selectBookingRoom,
+  selectTotalPriceBooking,
 };

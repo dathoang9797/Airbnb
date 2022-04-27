@@ -1,19 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { quanLyVeService } from '@Services/QuanLyVeService';
-import { messageApp, showSuccess } from '@Utils/Common';
-import { history } from '@Utils/Libs';
-import _ from 'lodash';
+import { messageApp, capitalize } from '@Utils/Common';
+import { sweetAlert } from '@Utils/Libs';
 
-const {
-  messageLoginFailed,
-  messageNameOrEmailIsExits,
-  messageNetWorkErr,
-  messageRegisterFailed,
-  messageRegisterSucceed,
-  messageUsersIsEmpty,
-  messageUpdateSuccess,
-  messageUpdateFailed,
-} = messageApp;
+const { messageNetWorkErr, messageIdIsUnValid, messageDeleteTicketSuccess } = messageApp;
+
+const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachVeAsync = createAsyncThunk(
   'quanLyVeReducer/getDanhSachVeAsync',
@@ -24,22 +16,129 @@ const getDanhSachVeAsync = createAsyncThunk(
       return rejectWithValue(messageNetWorkErr);
     }
 
-    if (!result.length) {
-      return rejectWithValue(messageUsersIsEmpty);
-    }
-
     if (typeof result === 'string') {
       return rejectWithValue(result);
     }
 
     if ('message' in result) {
-      return rejectWithValue(result.message);
+      return rejectWithValue(capitalize(result.message));
     }
 
     return result;
   }
 );
 
+const getChiTietVeAsync = createAsyncThunk(
+  'quanLyVeReducer/getChiTietVeAsync',
+  async (idVe, { rejectWithValue }) => {
+    const result = await quanLyVeService.layVeTheoID(idVe);
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if ('message' in result) {
+      return rejectWithValue(capitalize(result.message));
+    }
+
+    return result;
+  }
+);
+
+const getDanhSachVeTheoNguoiDungAsync = createAsyncThunk(
+  'quanLyVeReducer/getDanhSachVeTheoNguoiDungAsync',
+  async (userId, { rejectWithValue }) => {
+    const result = await quanLyVeService.layDanhSachVeTheoNguoiDung(userId);
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if ('kind' in result && result.kind === 'ObjectId') {
+      return rejectWithValue(messageIdIsUnValid);
+    }
+
+    if ('message' in result) {
+      return rejectWithValue(capitalize(result.message));
+    }
+
+    return result;
+  }
+);
+
+const getDanhSachVeTheoPhongAsync = createAsyncThunk(
+  'quanLyVeReducer/getDanhSachVeTheoPhongAsync',
+  async (roomId, { rejectWithValue }) => {
+    const result = await quanLyVeService.layDanhSachVeTheoPhong(roomId);
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if ('kind' in result && result.kind === 'ObjectId') {
+      return rejectWithValue(messageIdIsUnValid);
+    }
+
+    if ('message' in result) {
+      return rejectWithValue(capitalize(result.message));
+    }
+
+    return result;
+  }
+);
+
+const xoaNhieuVeAsync = createAsyncThunk(
+  'quanLyNguoiDungReducer/xoaNhieuVeAsync',
+  async (idTicketArr, { rejectWithValue, dispatch, getState }) => {
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const promisesArr = idTicketArr.map((idVe) => quanLyVeService.xoaVe(idVe));
+      const result = await Promise.all(promisesArr);
+
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if (typeof result === 'string') {
+        return rejectWithValue(result);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachVeAsync());
+      sweetAlertSuccess(messageDeleteTicketSuccess);
+    }
+  }
+);
+
+const xoaVeAsync = createAsyncThunk(
+  'quanLyVeReducer/xoaVeAsync',
+  async (idTicket, { rejectWithValue, dispatch, getState }) => {
+    const confirmResult = await sweetAlertDelete();
+    if (confirmResult.isConfirmed) {
+      const result = await quanLyVeService.xoaVe(idTicket);
+
+      if (!result) {
+        return rejectWithValue(messageNetWorkErr);
+      }
+
+      if ('message' in result) {
+        return rejectWithValue(capitalize(result.message));
+      }
+
+      await dispatch(getDanhSachVeAsync());
+      sweetAlertSuccess(messageDeleteTicketSuccess);
+    }
+  }
+);
+
 export const quanLyVeThunk = {
   getDanhSachVeAsync,
+  getChiTietVeAsync,
+  getDanhSachVeTheoNguoiDungAsync,
+  getDanhSachVeTheoPhongAsync,
+  xoaVeAsync,
+  xoaNhieuVeAsync,
 };

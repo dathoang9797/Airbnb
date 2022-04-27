@@ -1,0 +1,5 @@
+{
+  "name": "TabButtonActions",
+  "main": "./TabButtonActions.jsx",
+  "private": true
+}
