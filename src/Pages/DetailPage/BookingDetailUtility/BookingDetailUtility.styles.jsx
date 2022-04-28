@@ -22,12 +22,14 @@ const IconContent = styled.div`
 const IconContentItem = styled.div`
   ${tw`relative w-full mx-0 px-1.5`}
 
+ 
+
   @media (min-width: 744px) {
-    ${tw`px-2`}
+    ${tw`px-2 width[30% !important]`}
   }
 
   @media (min-width: 1128px) {
-    ${tw`width[50% !important] margin-left[8px !important] margin-right[8px !important]`};
+    ${tw`width[30% !important] margin-left[8px !important] margin-right[8px !important]`};
   }
 `;
 
@@ -42,21 +44,7 @@ const IconContentItemDesc = styled.div`
     }
   }
   @media (min-width: 744px) {
-    ${tw`-webkit-box-pack[end] justify-end flex-row-reverse max-width[  max-width: 83.33333333333334%]`};
-  }
-`;
-
-const ButtonShowAllUtil = styled.div`
-  ${tw`mt-4`};
-  a {
-    ${tw`text-base font-semibold outline-none transition-shadow duration-300 color[#222] text-center rounded-lg border-1 border-solid padding[14px 24px] border-color[#222] bg-white `};
-    &:hover {
-      ${tw`border-color[#000] background-color[#f7f7f7] underline`};
-    }
-  }
-
-  @media (min-width: 744px) {
-    ${tw`mt-6`};
+    ${tw`-webkit-box-pack[end] justify-end flex-row-reverse   max-width[83.33333333333334%]`};
   }
 `;
 
@@ -66,5 +54,4 @@ export const BookingDetailUtilityCSS = {
   IconContent,
   IconContentItem,
   IconContentItemDesc,
-  ButtonShowAllUtil,
 };

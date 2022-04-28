@@ -42,7 +42,7 @@ function RoomPage() {
   }, [danhSachPhongChoThueTheoViTri, maxValue, minValue]);
   const regionRef = useRef(null);
   const numberEachPage = useMemo(() => 10, []);
-
+  const { Container, Content, Filter, List, MainContent, Map, Pagination, Scarcity } = RoomCSS;
   console.log({ danhSachPhongChoThueTheoViTri });
   console.log({ danhSachViTriByProvince });
   console.log({ danhSachPhongChoThueTheoViTriSlice });
@@ -118,7 +118,7 @@ function RoomPage() {
         {danhSachPhongChoThueTheoViTriSlice.map((phong) => {
           return <RoomItem key={phong._id} phong={phong} />;
         })}
-        <RoomCSS.Pagination
+        <Pagination
           defaultCurrent={1}
           defaultPageSize={numberEachPage}
           onChange={handleChange}
@@ -129,19 +129,19 @@ function RoomPage() {
   };
 
   return (
-    <RoomCSS.Container>
+    <Container>
       <SearchMap />
-      <RoomCSS.Content>
+      <Content>
         <span>300+ stays · 1 Sep - 3 Sep · 1 guest</span>
         <h1>Stays in selected map area</h1>
-        <RoomCSS.Filter>
+        <Filter>
           <button className='mr-2'>Cancellation flexibility</button>
           <button className='mr-2'>Type of place</button>
           <button className='mr-2'>Price</button>
           <button className='mr-2'>Instant book</button>
           <button className='mr-2'>More filters</button>
-        </RoomCSS.Filter>
-        <RoomCSS.Scarcity>
+        </Filter>
+        <Scarcity>
           <img src={calendar} alt='Calendar' />
           <span>
             <span>
@@ -149,20 +149,20 @@ function RoomPage() {
             </span>
           </span>
           You may want to book soon.
-        </RoomCSS.Scarcity>
-        <RoomCSS.List>{renderPhongChoThue()}</RoomCSS.List>
-      </RoomCSS.Content>
-      <RoomCSS.Map>
-        <RoomCSS.MainContent>
+        </Scarcity>
+        <List>{renderPhongChoThue()}</List>
+      </Content>
+      <Map>
+        <MainContent>
           <RoomMap
             coordinates={coordinates}
             places={places}
             danhSachPhongChoThueTheoViTriSlice={danhSachPhongChoThueTheoViTriSlice}
             setCoordinates={setCoordinates}
           />
-        </RoomCSS.MainContent>
-      </RoomCSS.Map>
-    </RoomCSS.Container>
+        </MainContent>
+      </Map>
+    </Container>
   );
 }
 

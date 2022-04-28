@@ -6,9 +6,9 @@ import SearchInput from './SearchInput';
 import SpinnerFallBack from './SpinerFallBack';
 import Spinner from './Spinner';
 import { TableCSS } from './Table';
-import UpLoadImage from './UpLoadImage';
+import UpLoadImageTable from './UpLoadImageTable';
+import UploadImageProfile from './UploadImageProfile';
 import CardStats from './CardStats';
-import Modal from './Modal';
 
 export {
   ButtonCSS,
@@ -19,7 +19,7 @@ export {
   SpinnerFallBack,
   Spinner,
   TableCSS,
-  UpLoadImage,
+  UpLoadImageTable,
+  UploadImageProfile,
   CardStats,
-  Modal,
 };

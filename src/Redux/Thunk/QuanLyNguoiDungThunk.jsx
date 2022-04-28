@@ -16,7 +16,6 @@ const {
   messageUpdateSuccess,
   messageUpdateFailed,
   messageDeleteUserSuccess,
-  messageUpdateImageProfileSuccess,
 } = messageApp;
 
 const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
@@ -160,26 +159,6 @@ const xoaNhieuNguoiDungAsync = createAsyncThunk(
   }
 );
 
-const capNhatAnhDaiDienAsync = createAsyncThunk(
-  'quanLyNguoiDungReducer/capNhatAnhDaiDienAsync',
-  async (avatarCapNhap, { rejectWithValue }) => {
-    const result = await quanLyNguoiDungService.capNhatAnhDaiDienNguoiDung(avatarCapNhap);
-
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
-    }
-
-    if (typeof result === 'string') {
-      return rejectWithValue(result);
-    }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-    showSuccess(messageUpdateImageProfileSuccess);
-  }
-);
-
 const capNhatNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/capNhatNguoiDungAsync',
   async ({ idNguoiDung, noiDungCapNhat }, { rejectWithValue, dispatch }) => {
@@ -203,6 +182,41 @@ const capNhatNguoiDungAsync = createAsyncThunk(
 
     showSuccess(messageUpdateSuccess);
     History.goBack();
+  }
+);
+
+const capNhatProfileAsync = createAsyncThunk(
+  'quanLyNguoiDungReducer/capNhatProfileAsync',
+  async (
+    { idNguoiDung, noiDungCapNhat, isLoading, isLoadingPopup },
+    { rejectWithValue, dispatch }
+  ) => {
+    const result = await quanLyNguoiDungService.capNhatNguoiDung(
+      idNguoiDung,
+      noiDungCapNhat,
+      isLoading,
+      isLoadingPopup
+    );
+
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
+    }
+
+    if (_.isEmpty(result)) {
+      return rejectWithValue(messageUpdateFailed);
+    }
+
+    if (typeof result === 'string') {
+      return rejectWithValue(result);
+    }
+
+    if ('message' in result) {
+      return rejectWithValue(capitalize(result.message));
+    }
+    const userInfo = localService.getUserInfo();
+    const userUpdate = { ...userInfo, ...result };
+    localService.setUserInfo(userUpdate);
+    showSuccess(messageUpdateSuccess);
   }
 );
 
@@ -265,7 +279,7 @@ export const quanLyNguoiDungThunk = {
   xoaNguoiDungAsync,
   capNhatNguoiDungAsync,
   getChiTietNguoiDungAsync,
-  capNhatAnhDaiDienAsync,
   taoNguoiDungAsync,
   xoaNhieuNguoiDungAsync,
+  capNhatProfileAsync,
 };

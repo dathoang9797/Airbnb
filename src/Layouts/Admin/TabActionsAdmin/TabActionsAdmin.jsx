@@ -1,31 +1,22 @@
-import React, { useCallback, useState } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { ButtonCSS } from '@Components/Button';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import TabButtonActions from './TabButtonActions';
-import Modal from '@Components/Modal';
+import { TabActionAdminCSS } from './TabActionAdmin.styles';
 
 function TabActionsAdmin(props) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const {
-    contentModal,
     selectedRowKeys,
     contentButtonAction,
     setSelectedRowKeys,
     handleDeleteAllThunk,
     handleRefreshDataThunk,
+    showModal,
   } = props;
+  const { Add, Primary } = ButtonCSS;
+  const hasSelected = !selectedRowKeys.length;
+  const { Container } = TabActionAdminCSS;
   const dispatch = useDispatch();
-
-  const showModal = useCallback(() => {
-    setIsModalVisible(true);
-  }, []);
-
-  const handleOk = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
 
   const handleDeleteAll = useCallback(async () => {
     dispatch(handleDeleteAllThunk(selectedRowKeys));
@@ -37,22 +28,19 @@ function TabActionsAdmin(props) {
   }, [dispatch, handleRefreshDataThunk]);
 
   return (
-    <>
-      <Modal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        Component={contentModal}
-      />
-
-      <TabButtonActions
-        content={contentButtonAction}
-        showModal={showModal}
-        handleDeleteAll={handleDeleteAll}
-        handleRefreshData={handleRefreshData}
-        selectedRowKeys={selectedRowKeys}
-      />
-    </>
+    <Container>
+      <Add
+        onClick={() => {
+          showModal();
+        }}
+      >
+        {contentButtonAction} <PlusOutlined />
+      </Add>
+      <Primary disabled={hasSelected} onClick={handleDeleteAll} className='mr-4'>
+        Delete All
+      </Primary>
+      <Primary onClick={handleRefreshData}>Refresh Data</Primary>
+    </Container>
   );
 }
 

@@ -1,20 +1,29 @@
-import { DashboardOutlined, UsergroupAddOutlined, CarryOutOutlined } from '@ant-design/icons';
+import { CarryOutOutlined, DashboardOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { images } from '@Assets/Images';
-import { IoLocationOutline } from 'react-icons/io5';
-import React, { useState, useLayoutEffect, useRef } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { SiderBarCSS } from './SidebarAdmin.styles';
+import ButtonScrollTop from '@Components/ButtonScrollTop';
+import React, { useState } from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { GiTicket } from 'react-icons/gi';
-import ButtonScrollTop from '@Components/ButtonScrollTop';
+import { IoLocationOutline } from 'react-icons/io5';
+import { NavLink, useLocation } from 'react-router-dom';
+import { SiderBarCSS } from './SidebarAdmin.styles';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
   const { logo } = images;
   const { Menus, SiderBar } = SiderBarCSS;
-  const countRef = useRef(null);
-  const onCollapse = (collapsed) => setCollapsed(collapsed);
+
+  const onCollapse = (collapsed) => {
+    const buttonScrollTopDom = document.querySelector('#scroll-top');
+    const siderCollapsedDom = document.querySelector('.ant-layout-sider-collapsed');
+    if (!siderCollapsedDom) {
+      buttonScrollTopDom.classList.remove('fade-in');
+    } else {
+      buttonScrollTopDom.classList.add('fade-in');
+    }
+    setCollapsed(collapsed);
+  };
 
   const items = [
     {
@@ -59,23 +68,8 @@ function Siderbar() {
     },
   ];
 
-  useLayoutEffect(() => {
-    const siderCollapsedDom = document.querySelector('.ant-layout-sider-collapsed');
-    const buttonScrollTopDom = document.querySelector('#scroll-top');
-    if (countRef.current) {
-      if (!siderCollapsedDom) {
-        buttonScrollTopDom.style.opacity = '0';
-        countRef.current += 1;
-        return;
-      }
-    }
-    buttonScrollTopDom.style.opacity = '1';
-    countRef.current += 1;
-  });
-
   return (
     <>
-      {' '}
       <SiderBar collapsible collapsed={collapsed} onCollapse={onCollapse} id='side-bar'>
         <div>
           <a href='#a'>

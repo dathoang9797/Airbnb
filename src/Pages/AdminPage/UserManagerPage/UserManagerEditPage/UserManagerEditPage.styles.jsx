@@ -1,9 +1,7 @@
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 
-const Container = styled.div`
-  width: 100%;
-  max-width: 500px;
-  margin: 40px auto;
+const Container = tw.div`
+  w-full max-w-[500px] my-10 mx-auto
 `;
 
 export const UserManagerEditCSS = {

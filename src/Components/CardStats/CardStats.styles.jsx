@@ -1,4 +1,4 @@
-import tw, { styled, css } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 
 const Container = styled.section`
   ${tw`relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg`};

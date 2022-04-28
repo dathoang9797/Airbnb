@@ -2,7 +2,7 @@ import { ButtonCSS } from '@/Components/Button';
 
 export const handleDataTable = (
   data,
-  { handleGetProfileItem, handleGetDetailItem, handleDeleteItem, handleUpdateItem }
+  { handleGetProfileItem, handleUpdateItem, handleDeleteItem }
 ) => {
   const { ShowProfile, Edit, Delete } = ButtonCSS;
   return data.map((item, index) => {
@@ -19,16 +19,7 @@ export const handleDataTable = (
               Xem thông tin chi tiết
             </ShowProfile>
           ) : null}
-
-          {handleGetDetailItem ? (
-            <Edit
-              onClick={() => {
-                handleGetDetailItem(item._id);
-              }}
-            >
-              Sửa
-            </Edit>
-          ) : handleUpdateItem ? (
+          {handleUpdateItem ? (
             <Edit
               onClick={() => {
                 handleUpdateItem(item._id);

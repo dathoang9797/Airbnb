@@ -1,10 +1,9 @@
-export const editUserField = {
+export const updateProfileField = {
   _id: '',
   email: '',
   name: '',
   address: '',
   phone: '',
   birthday: '',
-  type: '',
   gender: false,
 };
