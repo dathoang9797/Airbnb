@@ -1,17 +1,18 @@
+import { TableCSS } from '@Components';
+import ModalHoc from '@HOC/ModalHoc';
 import TabActionsAdmin from '@Layouts/Admin/TabActionsAdmin';
 import { quanLyVeSelector } from '@Redux/Selector/QuanLyVeSelector';
 import { quanLyVeThunk } from '@Redux/Thunk/QuanLyVeThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { ticketField } from '@Shared/Field/TicketField';
-import {  handleDataTable } from '@Utils/Common';
-import React, { useEffect, useMemo, useState, useCallback, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { TableCSS, Modal } from '@Components';
+import { handleDataTable } from '@Utils/Common';
 import _ from 'lodash';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import TicketManagerAdd from './TicketManagerAdd';
 import TicketManagerEdit from './TicketManagerEdit';
 
-function TicketManagerPage() {
+function TicketManagerPage(props) {
   const dispatch = useDispatch();
   const { selectDanhSachVeFilter } = quanLyVeSelector;
   const { getDanhSachVeAsync, xoaVeAsync, xoaNhieuVeAsync } = quanLyVeThunk;
@@ -20,38 +21,29 @@ function TicketManagerPage() {
   const danhSachVe = useSelector(selectDanhSachVeFilter, _.isEqual);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const idVe = useRef(null);
+  const { showModal, handlePropsContentModal, handleContentModal } = props;
 
   useEffect(() => {
     dispatch(getDanhSachVeAsync());
   }, [dispatch, getDanhSachVeAsync]);
 
-  const handleDeleteTicket = (idTicket) => {
-    dispatch(xoaVeAsync(idTicket));
+  const handleDeleteTicket = (idVe) => {
+    dispatch(xoaVeAsync(idVe));
   };
 
-  const handleOk = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleOpenUpdateModal = (idTicket) => {
-    idVe.current = idTicket;
-    setIsModalVisible(true);
+  const handleUpdateModal = (idVe) => {
+    handlePropsContentModal({ danhSachVe, idVe });
+    handleContentModal(TicketManagerEdit);
+    showModal();
   };
 
   const renderDataTable = () => {
-    const props = {
+    const propsFieldAction = {
       handleGetProfileItem: null,
-      handleGetDetailItem: null,
+      handleUpdateItem: handleUpdateModal,
       handleDeleteItem: handleDeleteTicket,
-      handleUpdateItem: handleOpenUpdateModal,
     };
-    return handleDataTable(danhSachVe, props);
+    return handleDataTable(danhSachVe, propsFieldAction);
   };
 
   const onSelectChange = (selectedRowKeys) => {
@@ -63,29 +55,20 @@ function TicketManagerPage() {
     onChange: onSelectChange,
   };
 
+  const handleShowModal = () => {
+    handleContentModal(TicketManagerAdd);
+    showModal();
+  };
+
   return (
     <>
-      <Modal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        Component={() => {
-          return (
-            <TicketManagerEdit
-              danhSachVe={danhSachVe}
-              idDanhGia={idVe.current}
-              handleOk={handleOk}
-            />
-          );
-        }}
-      />
       <TabActionsAdmin
-        contentModal={TicketManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuVeAsync}
         handleRefreshDataThunk={getDanhSachVeAsync}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vé'
+        showModal={handleShowModal}
       />
       <Table
         columns={tableColumnsTicketField}
@@ -98,4 +81,4 @@ function TicketManagerPage() {
   );
 }
 
-export default TicketManagerPage;
+export default ModalHoc(TicketManagerPage);

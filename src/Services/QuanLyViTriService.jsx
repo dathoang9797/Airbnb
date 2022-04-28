@@ -1,43 +1,43 @@
 import AxiosClient from '@Utils/Http/AxiosClient';
 
 export const quanLyViTriService = {
-  layTatCaViTri(isLoading = true) {
+  layTatCaViTri(isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-    return AxiosClient.get(url, { headers: { isLoading } });
+    return AxiosClient.get(url, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  layViTriTheoTenThanhPho(location, isLoading = true) {
+  layViTriTheoTenThanhPho(location, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-    return AxiosClient.get(url, { params: { location }, headers: { isLoading } });
+    return AxiosClient.get(url, { params: { location }, headers: { isLoading  , isLoadingPopup } });
   },
 
-  layViTriTheoID(idViTri, isLoading = true) {
+  layViTriTheoID(idViTri, isLoading =true , isLoadingPopup) {
     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
-    return AxiosClient.get(url, { headers: { isLoading } });
+    return AxiosClient.get(url, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  layViTriTheoDanhGia(valueate, isLoading = true) {
+  layViTriTheoDanhGia(valueate, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_DANH_GIA;
-    return AxiosClient.get(url, { params: { valueate }, headers: { isLoading } });
+    return AxiosClient.get(url, { params: { valueate }, headers: { isLoading  , isLoadingPopup } });
   },
 
-  taoViTri(viTri, isLoading = true) {
+  taoViTri(viTri, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VI_TRI;
-    return AxiosClient.post(url, viTri, { headers: { isLoading } });
+    return AxiosClient.post(url, viTri, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  capNhatAnhChoViTri(idViTri, formData, isLoading = true) {
+  capNhatAnhChoViTri(idViTri, formData, isLoading =true , isLoadingPopup) {
     const url = `${ process.env.REACT_APP_LINK_QUAN_LY_VI_TRI_CAP_NHAT_ANH}/${idViTri}`
-    return AxiosClient.post(url, formData, { headers: { isLoading } });
+    return AxiosClient.post(url, formData, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  capNhatThongTinViTri(idViTri, viTri, isLoading = true) {
+  capNhatThongTinViTri(idViTri, viTri, isLoading =true , isLoadingPopup) {
      const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
-    return AxiosClient.put(url, viTri, { headers: { isLoading } });
+    return AxiosClient.put(url, viTri, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  xoaViTri(idViTri, isLoading = true) {
+  xoaViTri(idViTri, isLoading =true , isLoadingPopup) {
      const url = `${process.env.REACT_APP_LINK_QUAN_LY_VI_TRI}/${idViTri}`;
-    return AxiosClient.delete(url, { headers: { isLoading } });
+    return AxiosClient.delete(url, { headers: { isLoading  , isLoadingPopup } });
   },
 };

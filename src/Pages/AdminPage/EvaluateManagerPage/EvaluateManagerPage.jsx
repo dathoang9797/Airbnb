@@ -1,18 +1,19 @@
-import { TableCSS, Modal } from '@Components';
+import { TableCSS } from '@Components';
+import ModalHoc from '@HOC/ModalHoc';
 import TabActionsAdmin from '@Layouts/Admin/TabActionsAdmin';
 import { quanLyDanhGiaSelector } from '@Redux/Selector/QuanLyDanhGiaSelector';
 import { quanLyDanhGiaThunk } from '@Redux/Thunk/QuanLyDanhGiaThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { evaluateField } from '@Shared/Field/EvaluateField';
-import {  handleDataTable } from '@Utils/Common';
-import React, { useEffect, useMemo, useState, useCallback, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { handleDataTable } from '@Utils/Common';
+import React, { useEffect, useMemo, useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import EvaluateManagerAdd from './EvaluateManagerAdd';
 import EvaluateManagerEdit from './EvaluateManagerEdit';
-import { shallowEqual } from 'react-redux';
 
-function EvaluateManagerPage() {
+function EvaluateManagerPage(props) {
   const dispatch = useDispatch();
+  const { showModal, handlePropsContentModal, handleContentModal } = props;
   const { selectDanhSachDanhGiaFilter } = quanLyDanhGiaSelector;
   const { getDanhSachDanhGiaAsync, xoadanhGiaAsync, xoaNhieuDanhGiaAsync } = quanLyDanhGiaThunk;
   const { tableColumnsEvaluateField } = evaluateField;
@@ -20,40 +21,28 @@ function EvaluateManagerPage() {
   const idTable = useMemo(() => nanoid(), []);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const idDanhGia = useRef(null);
 
   useEffect(() => {
     dispatch(getDanhSachDanhGiaAsync());
   }, [dispatch, getDanhSachDanhGiaAsync]);
 
- 
-
   const handleDeleteEvaluate = (idEvaluate) => {
     dispatch(xoadanhGiaAsync(idEvaluate));
   };
 
-  const handleOk = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleCancel = useCallback(() => {
-    setIsModalVisible(false);
-  }, []);
-
-  const handleOpenUpdateModal = (idRoom) => {
-    idDanhGia.current = idRoom;
-    setIsModalVisible(true);
+  const handleUpdateModal = (idRoom) => {
+    handlePropsContentModal({ danhSachDanhGia, idDanhGia: idRoom });
+    handleContentModal(EvaluateManagerEdit);
+    showModal();
   };
 
   const renderDataTable = () => {
-    const props = {
+    const propsFieldAction = {
       handleGetProfileItem: null,
-      handleGetDetailItem: null,
       handleDeleteItem: handleDeleteEvaluate,
-      handleUpdateItem: handleOpenUpdateModal,
+      handleUpdateItem: handleUpdateModal,
     };
-    return handleDataTable(danhSachDanhGia, props);
+    return handleDataTable(danhSachDanhGia, propsFieldAction);
   };
 
   const onSelectChange = (selectedRowKeys) => {
@@ -65,27 +54,18 @@ function EvaluateManagerPage() {
     onChange: onSelectChange,
   };
 
+  const handleShowModal = () => {
+    handleContentModal(EvaluateManagerAdd);
+    showModal();
+  };
+
   return (
     <>
-      <Modal
-        isModalVisible={isModalVisible}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-        Component={() => {
-          return (
-            <EvaluateManagerEdit
-              danhSachDanhGia={danhSachDanhGia}
-              idDanhGia={idDanhGia.current}
-              handleOk={handleOk}
-            />
-          );
-        }}
-      />
       <TabActionsAdmin
-        contentModal={EvaluateManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuDanhGiaAsync}
         handleRefreshDataThunk={getDanhSachDanhGiaAsync}
+        showModal={handleShowModal}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Đánh Giá'
       />
@@ -100,4 +80,4 @@ function EvaluateManagerPage() {
   );
 }
 
-export default EvaluateManagerPage;
+export default ModalHoc(EvaluateManagerPage);

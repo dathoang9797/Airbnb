@@ -4,7 +4,7 @@ import UserTemplate from '@Templates/UserTemplate';
 import React, { lazy } from 'react';
 
 const HomePage = lazy(() => import('@Pages/HomePage/HomePage'));
-const ProfilePage = lazy(() => import('@Pages/ProfilePage/ProfilePage'));
+const ProfilePage = lazy(() => import('@Pages/ProfilePage'));
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
 const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
 const DetailPage = lazy(() => import('@Pages/DetailPage'));

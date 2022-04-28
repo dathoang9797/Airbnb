@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { SearchMapCSS } from './SearchMap.styles';
 
 function SearchMap() {
@@ -17,6 +18,7 @@ function SearchMap() {
                 <span />
               </span>
             </div>
+
           </SpinnerButton>
         </div>
       </Spinner>
@@ -39,6 +41,7 @@ function SearchMap() {
                     </svg>
                   </span>
                 </span>
+
               </MoveSpan>
               <MoveContentSearch>
                 <span>Search as I move the map</span>

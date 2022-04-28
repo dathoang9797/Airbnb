@@ -104,6 +104,10 @@ const CustomStyles = styled.createGlobalStyle`
     color: #fff;
     background: var(--color-primary);
   }
+
+  .ant-picker-header-view button:hover {
+    ${tw`color[var(--color-primary)] `};
+  }
 `;
 
 const GlobalStyles = () => (

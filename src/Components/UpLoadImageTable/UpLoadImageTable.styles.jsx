@@ -57,7 +57,7 @@ const LoadingContentCSS = styled.div`
   ${tw`content absolute z-50 inset-0 flex justify-center items-center text-white background-color[rgba(0, 0, 0, 0.5)] cursor-pointer transition-opacity duration-300 rounded-lg`};
 `;
 
-export const UpLoadImageCSS = {
+export const UpLoadImageTableCSS = {
   Container,
   LoadingOutlinedCSS,
   LoadingContentCSS,

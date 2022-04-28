@@ -1,38 +1,38 @@
 import AxiosClient from '@Utils/Http/AxiosClient';
 
 export const quanLyVeService = {
-  layDanhSachVe(isLoading = true) {
+  layDanhSachVe(isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VE;
-    return AxiosClient.get(url, { headers: { isLoading }, timeout: 30000 });
+    return AxiosClient.get(url, { headers: { isLoading  , isLoadingPopup }, timeout: 30000 });
   },
 
-  layVeTheoID(idVe, isLoading = true) {
+  layVeTheoID(idVe, isLoading =true , isLoadingPopup) {
     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
-    return AxiosClient.get(url, { headers: { isLoading } });
+    return AxiosClient.get(url, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  layDanhSachVeTheoNguoiDung(userId, isLoading = true) {
+  layDanhSachVeTheoNguoiDung(userId, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VE_THEO_NGUOI_DUNG;
-    return AxiosClient.get(url, { params: { userId }, headers: { isLoading } });
+    return AxiosClient.get(url, { params: { userId }, headers: { isLoading  , isLoadingPopup } });
   },
 
-  layDanhSachVeTheoPhong(roomId, isLoading = true) {
+  layDanhSachVeTheoPhong(roomId, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VE_THEO_PHONG;
-    return AxiosClient.get(url, { params: { roomId }, headers: { isLoading } });
+    return AxiosClient.get(url, { params: { roomId }, headers: { isLoading  , isLoadingPopup } });
   },
 
-  taoVe(ve, isLoading = true) {
+  taoVe(ve, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_QUAN_LY_VE;
-    return AxiosClient.post(url, ve, { headers: { isLoading } });
+    return AxiosClient.post(url, ve, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  capNhatThongTinVe(idVe, ve, isLoading = true) {
+  capNhatThongTinVe(idVe, ve, isLoading =true , isLoadingPopup) {
     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
-    return AxiosClient.put(url, ve, { headers: { isLoading } });
+    return AxiosClient.put(url, ve, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  xoaVe(idVe, isLoading = true) {
+  xoaVe(idVe, isLoading =true , isLoadingPopup) {
     const url = `${process.env.REACT_APP_LINK_QUAN_LY_VE}/${idVe}`;
-    return AxiosClient.delete(url, { headers: { isLoading } });
+    return AxiosClient.delete(url, { headers: { isLoading  , isLoadingPopup } });
   },
 };

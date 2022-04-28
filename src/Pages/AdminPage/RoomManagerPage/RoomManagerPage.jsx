@@ -10,8 +10,9 @@ import _ from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
+import ModalHoc from '@HOC/ModalHoc';
 
-function RoomManagerPage() {
+function RoomManagerPage(props) {
   const dispatch = useDispatch();
   const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
   const {
@@ -27,12 +28,11 @@ function RoomManagerPage() {
   const urlRoomProfile = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
+  const { showModal, handleContentModal } = props;
 
   useEffect(() => {
     dispatch(getDanhSachPhongChoThueAsync());
   }, [dispatch, getDanhSachPhongChoThueAsync]);
-
-  
 
   const handleGetDetailRoom = async (idNguoiDung) => {
     await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));
@@ -49,12 +49,12 @@ function RoomManagerPage() {
   };
 
   const renderDataTable = () => {
-    const props = {
+    const propsFieldAction = {
       handleGetProfileItem: handleGetProfileRoom,
-      handleGetDetailItem: handleGetDetailRoom,
+      handleUpdateItem: handleGetDetailRoom,
       handleDeleteItem: handleDeleteRoom,
     };
-    return handleDataTable(danhSachPhongChoThue, props);
+    return handleDataTable(danhSachPhongChoThue, propsFieldAction);
   };
 
   const onSelectChange = (selectedRowKeys) => {
@@ -66,15 +66,20 @@ function RoomManagerPage() {
     onChange: onSelectChange,
   };
 
+  const handleShowModal = () => {
+    handleContentModal(RoomManagerAdd);
+    showModal();
+  };
+
   return (
     <>
       <TabActionsAdmin
-        contentModal={RoomManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuPhongAsync}
         handleRefreshDataThunk={getDanhSachPhongChoThueAsync}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Phòng'
+        showModal={handleShowModal}
       />
 
       <Table
@@ -88,4 +93,4 @@ function RoomManagerPage() {
   );
 }
 
-export default RoomManagerPage;
+export default ModalHoc(RoomManagerPage);

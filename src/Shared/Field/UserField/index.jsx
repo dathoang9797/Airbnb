@@ -1,5 +1,6 @@
 import { addUserField } from './AddUserField';
 import { editUserField } from './EditUserField';
+import { updateProfileField } from './UpdateProfileField';
 import { signUpField } from './SignUpField';
 import { signInField } from './SignInField';
 import { renderUserField } from './RenderUserField';
@@ -12,4 +13,5 @@ export const userField = {
   signInField,
   renderUserField,
   tableColumnsUserField,
+  updateProfileField,
 };

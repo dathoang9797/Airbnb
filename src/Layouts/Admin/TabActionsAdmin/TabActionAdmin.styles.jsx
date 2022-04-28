@@ -9,12 +9,11 @@ const Container = styled.div`
   ${tw`md:text-base md:py-1 md:px-12`};
   ${tw`lg:text-lg lg:py-2 lg:px-14`};
   ${tw`xl:text-xl xl:py-3 xl:px-16`};
-
   ${Primary} {
     ${tw`m-0 w-auto py-0 text-sm`}
   }
 `;
 
-export const TabButtonActionsCSS = {
+export const TabActionAdminCSS = {
   Container,
 };

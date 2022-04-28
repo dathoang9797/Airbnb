@@ -1,11 +1,11 @@
-import { localService } from '@/Services/LocalStorageService';
+import { localService } from '@Services/LocalStorageService';
 import { showError, showSuccess } from '@Utils/Common';
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
 import React, { useEffect, useState, useCallback } from 'react';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 import { useLocation } from 'react-router-dom';
-import { UpLoadImageCSS } from './UpLoadImage.styles';
+import { UpLoadImageTableCSS } from './UpLoadImageTable.styles';
 import SpinnerDot from '@Components/SpinnerDot';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
@@ -24,7 +24,7 @@ function UpLoadImage({ idRoom, imageProp }) {
     tokenByClass: tokenCyberSoft,
     token: tokenUser,
   };
-  const { Container, LoadingContentCSS, LoadingOutlinedCSS } = UpLoadImageCSS;
+  const { Container, LoadingContentCSS, LoadingOutlinedCSS } = UpLoadImageTableCSS;
 
   useEffect(() => {
     const handleScroll = () => {

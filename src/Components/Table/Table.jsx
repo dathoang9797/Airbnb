@@ -91,6 +91,13 @@ const Table = styled(TableAnt)`
     ${tw`m-0`}
   }
 
+  .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+    .ant-select-selector {
+     {
+      ${tw`border-[var(--color-primary)] box-shadow[0 0 0 2px rgb(var( --color-primary-rgb-without-semi-colon) / 20%)]`}
+    }
+  }
+
   .ant-table-filter-trigger.active,
   .ant-table-column-sorter-up.active,
   .ant-table-column-sorter-down.active,

@@ -1,13 +1,13 @@
 import AxiosClient from '@Utils/Http/AxiosClient';
 
 export const xacThucNguoiDungService = {
-  dangNhap(user, isLoading = true) {
+  dangNhap(user, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_XAC_THUC_NGUOI_DUNG_DANG_NHAP;
-    return AxiosClient.post(url, user, { headers: { isLoading } });
+    return AxiosClient.post(url, user, { headers: { isLoading  , isLoadingPopup } });
   },
 
-  dangKy(user, isLoading = true) {
+  dangKy(user, isLoading =true , isLoadingPopup) {
     const url = process.env.REACT_APP_LINK_XAC_THUC_NGUOI_DUNG_DANG_KY;
-    return AxiosClient.post(url, user, { headers: { isLoading } });
+    return AxiosClient.post(url, user, { headers: { isLoading  , isLoadingPopup } });
   },
 };

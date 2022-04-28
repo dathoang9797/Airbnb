@@ -5,15 +5,7 @@ import { images } from '@Assets/Images';
 function HeaderUser() {
   const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
   const [state, setState] = useState(false);
-  const {
-    HeaderContainer,
-    HeaderLogo,
-    HeaderNav,
-    HeaderSearch,
-    HeaderSearchIcon,
-    HeaderNavA,
-    HeaderNavButton,
-  } = HeaderCSS;
+  const { Container, Logo, Nav, Search, SearchIcon, NavA, NavButton } = HeaderCSS;
 
   useLayoutEffect(() => {
     const changeClassOnScroll = () => {
@@ -34,34 +26,34 @@ function HeaderUser() {
   };
   window.addEventListener('scroll', changeClassOnSroll);
   return (
-    <HeaderContainer className={state ? 'active' : ''}>
-      <HeaderLogo>
+    <Container className={state ? 'active' : ''}>
+      <Logo>
         <img src={logo} alt='Logo' />
-      </HeaderLogo>
-      <HeaderSearch>
+      </Logo>
+      <Search>
         <button>Selected map area</button>
         <span />
         <button>1 Sep - 3 Sep</button>
         <span />
         <button>
           1 guest
-          <HeaderSearchIcon>
+          <SearchIcon>
             <img src={searchIcon} alt='Search Icon' />
-          </HeaderSearchIcon>
+          </SearchIcon>
         </button>
-      </HeaderSearch>
-      <HeaderNav>
-        <HeaderNavA>Become a host</HeaderNavA>
-        <HeaderNavButton className='header__nav__button-language'>
+      </Search>
+      <Nav>
+        <NavA>Become a host</NavA>
+        <NavButton className='__nav__button-language'>
           <img src={globe} alt='Globe' />
           <img src={chevronDown} alt='Chevron down' />
-        </HeaderNavButton>
-        <HeaderNavButton className='header__nav__button-account'>
+        </NavButton>
+        <NavButton className='__nav__button-account'>
           <img src={hamburger} alt='Hamburger' />
           <img src={account} alt='Account' />
-        </HeaderNavButton>
-      </HeaderNav>
-    </HeaderContainer>
+        </NavButton>
+      </Nav>
+    </Container>
   );
 }
 

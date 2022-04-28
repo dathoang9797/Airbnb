@@ -4,14 +4,15 @@ import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { locationField } from '@Shared/Field/LocationField';
-import {  handleDataTable } from '@Utils/Common';
+import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, {  useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationManagerAdd from './LocationManagerAdd';
+import ModalHoc from '@HOC/ModalHoc';
 
-function LocationManagerPage() {
+function LocationManagerPage(props) {
   const dispatch = useDispatch();
   const { selectDanhViTriFilter } = quanLyViTriSelector;
   const { getDanhSachViTriAsync, getChiTietViTriAsync, xoaNhieuViTrigAsync, xoaViTriAsync } =
@@ -23,12 +24,11 @@ function LocationManagerPage() {
   const urlLocationProfile = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_PROFILE;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
+  const { showModal, handleContentModal } = props;
 
   useEffect(() => {
     dispatch(getDanhSachViTriAsync());
   }, [dispatch, getDanhSachViTriAsync]);
-
-
 
   const handleGetDetailLocation = async (idLocation) => {
     await dispatch(getChiTietViTriAsync(idLocation));
@@ -45,12 +45,12 @@ function LocationManagerPage() {
   };
 
   const renderDataTable = () => {
-    const props = {
+    const propsFieldAction = {
       handleGetProfileItem: handleGetProfileLocation,
-      handleGetDetailItem: handleGetDetailLocation,
+      handleUpdateItem: handleGetDetailLocation,
       handleDeleteItem: handleDeleteLocation,
     };
-    return handleDataTable(danhSachViTri, props);
+    return handleDataTable(danhSachViTri, propsFieldAction);
   };
 
   const onSelectChange = (selectedRowKeys) => {
@@ -62,15 +62,20 @@ function LocationManagerPage() {
     onChange: onSelectChange,
   };
 
+  const handleShowModal = () => {
+    handleContentModal(LocationManagerAdd);
+    showModal();
+  };
+
   return (
     <>
       <TabActionsAdmin
-        contentModal={LocationManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuViTrigAsync}
         handleRefreshDataThunk={getDanhSachViTriAsync}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vị Trí'
+        showModal={handleShowModal}
       />
 
       <Table
@@ -84,4 +89,4 @@ function LocationManagerPage() {
   );
 }
 
-export default LocationManagerPage;
+export default ModalHoc(LocationManagerPage);

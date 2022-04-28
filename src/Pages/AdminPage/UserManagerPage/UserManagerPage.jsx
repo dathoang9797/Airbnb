@@ -10,8 +10,9 @@ import _ from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
+import ModalHoc from '@HOC/ModalHoc';
 
-function UserManagerPage() {
+function UserManagerPage(props) {
   const dispatch = useDispatch();
   const { tableColumnsUserField } = userField;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -23,12 +24,11 @@ function UserManagerPage() {
   const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
   const danhSachNguoiDung = useSelector(selectDanhSachNguoiDungFilter, _.isEqual);
   const { Table } = TableCSS;
+  const { showModal, handleContentModal } = props;
 
   useEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
-
-
 
   const onSelectChange = (selectedRowKeys) => {
     setSelectedRowKeys(selectedRowKeys);
@@ -54,23 +54,28 @@ function UserManagerPage() {
   };
 
   const renderDataTable = () => {
-    const props = {
+    const propsFieldAction = {
       handleGetProfileItem: handleGetProfileUser,
-      handleGetDetailItem: handleGetDetailUser,
+      handleUpdateItem: handleGetDetailUser,
       handleDeleteItem: handleDeleteUser,
     };
-    return handleDataTable(danhSachNguoiDung, props);
+    return handleDataTable(danhSachNguoiDung, propsFieldAction);
+  };
+
+  const handleShowModal = () => {
+    handleContentModal(UserManagerAdd);
+    showModal();
   };
 
   return (
     <>
       <TabActionsAdmin
-        contentModal={UserManagerAdd}
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuNguoiDungAsync}
         handleRefreshDataThunk={getDanhSachNguoiDungAsync}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm quản trị viên'
+        showModal={handleShowModal}
       />
 
       <Table
@@ -84,4 +89,4 @@ function UserManagerPage() {
   );
 }
 
-export default UserManagerPage;
+export default ModalHoc(UserManagerPage);

@@ -9,7 +9,7 @@ const {
   xoaNguoiDungAsync,
   capNhatNguoiDungAsync,
   getChiTietNguoiDungAsync,
-  capNhatAnhDaiDienAsync,
+  capNhatProfileAsync,
   taoNguoiDungAsync,
   xoaNhieuNguoiDungAsync,
 } = quanLyNguoiDungThunk;
@@ -67,13 +67,6 @@ const quanLyNguoiDungSlice = createSlice({
         showError(action.error.message);
       }
     });
-    builder.addCase(capNhatAnhDaiDienAsync.rejected, (state, action) => {
-      if (action.payload) {
-        showError(action.payload);
-      } else {
-        showError(action.error.message);
-      }
-    });
     builder.addCase(taoNguoiDungAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
@@ -92,6 +85,13 @@ const quanLyNguoiDungSlice = createSlice({
       }
     });
     builder.addCase(capNhatNguoiDungAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
+    builder.addCase(capNhatProfileAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
       } else {

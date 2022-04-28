@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-function TicketManagerEdit() {
-  return (
-    <div>TicketManagerEdit</div>
-  )
+function TicketManagerEdit(props) {
+  return <div>TicketManagerEdit</div>;
 }
 
-export default TicketManagerEdit
+export default TicketManagerEdit;

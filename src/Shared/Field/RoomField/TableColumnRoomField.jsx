@@ -1,4 +1,4 @@
-import UpLoadImage from '@Components/UpLoadImage';
+import UpLoadImageTable from '@Components/UpLoadImageTable';
 
 export const tableColumnsRoomField = [
     {
@@ -60,7 +60,7 @@ export const tableColumnsRoomField = [
         return !record.image;
       },
       render: (text, record, index) => {
-        return <UpLoadImage key={record._id} idRoom={record._id} imageProp={record.image} />;
+        return <UpLoadImageTable key={record._id} idRoom={record._id} imageProp={record.image} />;
       },
     },
     {
