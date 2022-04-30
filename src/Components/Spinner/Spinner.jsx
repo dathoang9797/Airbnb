@@ -9,7 +9,8 @@ const Spinner = () => {
   const spinRef = useRef(null);
   const timeOut1 = useRef(null);
   const timeOut2 = useRef(null);
-
+  const { Container, Ripple } = SpinnerCSS;
+  
   useLayoutEffect(() => {
     clearTimeout(timeOut1.current);
     clearTimeout(timeOut2.current);
@@ -28,12 +29,12 @@ const Spinner = () => {
   });
 
   return (
-    <SpinnerCSS.Container ref={spinRef} className='animate__animated'>
-      <SpinnerCSS.Ripple>
+    <Container ref={spinRef} className='animate__animated'>
+      <Ripple>
         <div></div>
         <div></div>
-      </SpinnerCSS.Ripple>
-    </SpinnerCSS.Container>
+      </Ripple>
+    </Container>
   );
 };
 

@@ -21,22 +21,26 @@ import { DashBoardPageCSS } from './DashBoardPage.styles';
 
 function DashBoardPage() {
   const dispatch = useDispatch();
+  const { CardStatsContent, Container, Content, Item } = DashBoardPageCSS;
+
   const { selectDanhSachDanhGia } = quanLyDanhGiaSelector;
   const { selectDanhSachNguoiDung } = quanLyNguoiDungSelector;
   const { selectDanhSachPhongChoThue } = quanLyPhongChoThueSelector;
   const { selectDanhSachVe } = quanLyVeSelector;
   const { selectDanhSachViTri } = quanLyViTriSelector;
-  const { CardStatsContent, Container, Content, Item } = DashBoardPageCSS;
+  
   const { getDanhSachDanhGiaAsync } = quanLyDanhGiaThunk;
   const { getDanhSachNguoiDungAsync } = quanLyNguoiDungThunk;
   const { getDanhSachPhongChoThueAsync } = quanLyPhongChoThueThunk;
   const { getDanhSachVeAsync } = quanLyVeThunk;
   const { getDanhSachViTriAsync } = quanLyViTriThunk;
+
   const danhSachDanhGia = useSelector(selectDanhSachDanhGia, _.isEqual);
   const danhSachNguoiDung = useSelector(selectDanhSachNguoiDung, _.isEqual);
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongChoThue, _.isEqual);
   const danhSachVe = useSelector(selectDanhSachVe, _.isEqual);
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
+  
   const totalDanhSachDanhGia = danhSachDanhGia.length;
   const totalDanhSachNguoiDung = danhSachNguoiDung.length;
   const totalDanhSachPhongChoThue = danhSachPhongChoThue.length;

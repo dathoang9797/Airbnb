@@ -23,8 +23,8 @@ const quanLyViTriSlice = createSlice({
   name: 'quanLyViTriReducer',
   initialState,
   reducers: {
-    getProvinceAction: (state, action) => {
-      state.province = action.payload;
+    setProvinceAction: (state, action) => {
+      state.province = action.payload[0];
     },
   },
   extraReducers: (builder) => {
@@ -89,9 +89,9 @@ const quanLyViTriSlice = createSlice({
   },
 });
 
-const { getProvinceAction } = quanLyViTriSlice.actions;
+const { setProvinceAction } = quanLyViTriSlice.actions;
 
 export const quanLyViTriAction = {
-  getProvinceAction,
+  setProvinceAction,
 };
 export default quanLyViTriSlice.reducer;

@@ -13,18 +13,21 @@ import LocationManagerAdd from './LocationManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
 
 function LocationManagerPage(props) {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
   const dispatch = useDispatch();
-  const { selectDanhViTriFilter } = quanLyViTriSelector;
-  const { getDanhSachViTriAsync, getChiTietViTriAsync, xoaNhieuViTrigAsync, xoaViTriAsync } =
-    quanLyViTriThunk;
   const { tableColumnsLocationField } = locationField;
-  const danhSachViTri = useSelector(selectDanhViTriFilter, _.isEqual);
   const idTable = useMemo(() => nanoid(), []);
   const urlLocationEdit = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_EDIT;
   const urlLocationProfile = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_PROFILE;
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
   const { showModal, handleContentModal } = props;
+
+  const { selectDanhViTriFilter } = quanLyViTriSelector;
+  const { getDanhSachViTriAsync, getChiTietViTriAsync, xoaNhieuViTrigAsync, xoaViTriAsync } =
+    quanLyViTriThunk;
+
+  const danhSachViTri = useSelector(selectDanhViTriFilter, _.isEqual);
 
   useEffect(() => {
     dispatch(getDanhSachViTriAsync());

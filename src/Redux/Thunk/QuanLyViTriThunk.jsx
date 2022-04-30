@@ -48,7 +48,7 @@ const getViTriTheoTenThanhPhoAsync = createAsyncThunk(
     }
 
     if ('kind' in result && result.kind === 'ObjectId') {
-      return rejectWithValue('Id này ko có');
+      return rejectWithValue(messageIdIsUnValid);
     }
 
     if ('message' in result) {

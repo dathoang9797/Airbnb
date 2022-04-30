@@ -14,12 +14,18 @@ import { RoomManagerEditCSS } from './RoomManagerEditPage.styles';
 
 function RoomManagerEditPage() {
   const dispatch = useDispatch();
-  const { capNhatPhongChoThueAsync } = quanLyPhongChoThueThunk;
-  const { selectChiTietPhongChoThue } = quanLyPhongChoThueSelector;
   const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
-  const { messageNoDifferent } = messageApp;
-  const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
   const { editRoomField, renderRoomField } = roomField;
+  const { messageNoDifferent } = messageApp;
+  const { Container } = RoomManagerEditCSS;
+  const { FormContainer, FormControl, FormButton } = Form;
+
+  const { capNhatPhongChoThueAsync } = quanLyPhongChoThueThunk;
+
+  const { selectChiTietPhongChoThue } = quanLyPhongChoThueSelector;
+
+  const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
+
   const isHasChiTietPhongChoThue = useMemo(
     () => _.isEmpty(chiTietPhongChoThue),
     [chiTietPhongChoThue]
@@ -31,8 +37,6 @@ function RoomManagerEditPage() {
     };
   }, [chiTietPhongChoThue, editRoomField]);
   const refChiTietNguoiDung = useRef(initialValues);
-  const { Container } = RoomManagerEditCSS;
-  const { FormContainer, FormControl, FormButton } = Form;
 
   const handleSubmitEditRoom = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);

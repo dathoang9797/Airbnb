@@ -4,15 +4,17 @@ import React from 'react';
 
 function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setCoordinates }) {
   const renderPlaces = () => {
-    if (places.length !== danhSachPhongChoThueTheoViTriSlice.length) return;
+    if (!places.length || !danhSachPhongChoThueTheoViTriSlice.length) return;
     return places.map((place, index) => {
-      if (!place.features.length) return null;
-      const center = place.features[0].center;
+      if (!place.length || !danhSachPhongChoThueTheoViTriSlice[index]) return null;
       return (
         <CardPopup
-          lat={center[1]}
-          lng={center[0]}
-          key={`${place.features[0].id}-${index}`}
+          onClick={(e) => {
+            console.log({ e });
+          }}
+          lat={place[0].geometry.location.lat}
+          lng={place[0].geometry.location.lng}
+          key={`${place[0].place_id}-${index}`}
           phong={danhSachPhongChoThueTheoViTriSlice[index]}
         />
       );
@@ -26,16 +28,11 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
       center={coordinates}
       defaultZoom={14}
       margin={[50, 50, 50, 50]}
-      // options={''}
       onChange={(e) => {
-        console.log({ e });
         setCoordinates({ lat: e.center.lat, lng: e.center.lng });
       }}
-      onChildClick={(e) => {
-        console.log('click');
-      }}
     >
-      {places ? renderPlaces() : null}
+      {renderPlaces()}
     </GoogleMapReact>
   );
 }

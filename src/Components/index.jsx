@@ -9,6 +9,8 @@ import { TableCSS } from './Table';
 import UpLoadImageTable from './UpLoadImageTable';
 import UploadImageProfile from './UploadImageProfile';
 import CardStats from './CardStats';
+import SpinnerMap from './SpinnerMap';
+import SearchMap from './SearchMap';
 
 export {
   ButtonCSS,
@@ -22,4 +24,6 @@ export {
   UpLoadImageTable,
   UploadImageProfile,
   CardStats,
+  SearchMap,
+  SpinnerMap,
 };

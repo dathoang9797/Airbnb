@@ -7,6 +7,7 @@ import { Vendors } from './Vendors';
 import { ModalReviewCSS } from './Components/ModalReviewCSS';
 import { DatePickerCSS } from './Components/DatePickerCSS';
 import { SweetAlertCSS } from './Components/SweetAlertCSS';
+import { PopoverCSS } from './Components/PopoverCSS';
 import 'antd/dist/antd.css';
 import 'animate.css';
 import '@/index.css';
@@ -18,6 +19,7 @@ const CustomStyles = styled.createGlobalStyle`
   ${ModalReviewCSS};
   ${DatePickerCSS};
   ${SweetAlertCSS};
+  ${PopoverCSS};
 
   .ant-dropdown-arrow {
     --tw-bg-opacity: 1;

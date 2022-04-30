@@ -5,8 +5,12 @@ import { handleChooseEndLoading, handleChooseStartLoading } from '@Utils/Common'
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL_AIRBNB,
   timeout: 3000,
+  mode: 'no-cors',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    'Access-Control-Allow-Headers': 'Content-Type',
     tokenByClass: process.env.REACT_APP_TOKEN_CYBERSOFT,
     isLoading: false,
   },

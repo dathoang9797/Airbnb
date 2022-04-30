@@ -42,8 +42,13 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
 
 const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueTheoViTriAsync',
-  async (idViTri, { rejectWithValue }) => {
-    const result = await quanLyPhongChoThueService.layPhongChoThueTheoViTri(idViTri);
+  async ({ idViTriArr, isLoading, isLoadingPopup }, { rejectWithValue }) => {
+    const promiseArr = idViTriArr.map((idViTri) =>
+      quanLyPhongChoThueService.layPhongChoThueTheoViTri(idViTri, isLoading, isLoadingPopup)
+    );
+    const result = await Promise.all(promiseArr);
+    console.log({ idViTriArr });
+    console.log({ result });
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -57,25 +62,7 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
       return rejectWithValue(capitalize(result.message));
     }
 
-    return result;
-  }
-);
-
-const getDanhSachPhongChoThueTheoDanhSachViTriAsync = createAsyncThunk(
-  'quanLyPhongChoThueReducer/getDanhSachPhongChoThueTheoDanhSachViTriAsync',
-  async (dsViTri, { rejectWithValue }) => {
-    const promiseList = [];
-    const result = [];
-    dsViTri.forEach((viTri) => {
-      const { _id } = viTri;
-      const promise = quanLyPhongChoThueService.layPhongChoThueTheoViTri(_id);
-      promiseList.push(promise);
-    });
-    const resultArr = await Promise.all(promiseList);
-    resultArr.forEach((resultItem) => {
-      result.push(...resultItem);
-    });
-    return result;
+    return result.flat();
   }
 );
 
@@ -241,7 +228,6 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
 export const quanLyPhongChoThueThunk = {
   getDanhSachPhongChoThueAsync,
   getDanhSachPhongChoThueTheoViTriAsync,
-  getDanhSachPhongChoThueTheoDanhSachViTriAsync,
   xoaPhongChoThueAsync,
   taoPhongChoThueAsync,
   capNhatHinhAnhPhongChoThueAsync,

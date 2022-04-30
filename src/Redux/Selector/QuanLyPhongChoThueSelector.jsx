@@ -3,9 +3,6 @@ import { filterSearchValue } from '@Utils/Common';
 
 const selectDanhSachPhongChoThue = (state) => state.QuanLyPhongChoThueReducer.danhSachPhongChoThue;
 
-const selectDanhSachPhongChoThueTheoViTri = (state) =>
-  state.QuanLyPhongChoThueReducer.danhSachPhongChoThueTheoViTri;
-
 const selectChiTietPhongChoThue = (state) => state.QuanLyPhongChoThueReducer.chiTietPhongChoThue;
 
 const selectBookingRoom = (state) => state.QuanLyPhongChoThueReducer.bookingRoom;
@@ -13,6 +10,9 @@ const selectBookingRoom = (state) => state.QuanLyPhongChoThueReducer.bookingRoom
 const selectTotalPriceBooking = (state) => state.QuanLyPhongChoThueReducer.totalPriceBooking;
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
+
+const selectDanhSachPhongChoThueTheoViTri = (state) =>
+  state.QuanLyPhongChoThueReducer.danhSachPhongChoThueTheoViTri;
 
 const selectDanhSachPhongFilter = createSelector(
   selectDanhSachPhongChoThue,

@@ -1,13 +1,15 @@
 import tw, { styled } from 'twin.macro';
 
 const Container = styled.div`
-  ${tw`font-family[Circular] border-t-1 border-color[#ebebeb] py-6 flex`}
+  ${tw`font-family[Circular] border-t-1 border-color[#ebebeb] py-6 flex flex-col `}
   .greyText {
     ${tw`text-sm color[var(--color-text-light)]`}
   }
   .separator {
     ${tw`w-8 h-[1px] background-color[var(--color-medium)]`}
   }
+
+  ${tw`md:flex-row md:flex`}
 `;
 
 const Rating = styled.div`
@@ -41,7 +43,7 @@ const Desc = styled.div`
 `;
 
 const Title = styled.div`
-  ${tw`flex justify-between text-justify font-semibold`}
+  ${tw`flex justify-between text-justify font-semibold `}
   button {
     ${tw`w-8 h-8 bg-none outline-none relative flex items-center justify-center border-none p-0 cursor-pointer`}
 
@@ -52,14 +54,19 @@ const Title = styled.div`
       ${tw`opacity-100`}
     }
   }
+  h2 {
+    ${tw`mt-2`};
+  }
 `;
 
 const Content = styled.div`
-  ${tw`w-[calc(100% - 300px)] pl-4 flex flex-col`}
+  ${tw`w-full pl-4 flex flex-col  mt-3`}
+  ${tw`md:w-[calc(100% - 300px)] md:mt-0`}
 `;
 
 const Image = styled.div`
-  ${tw`width[300px] height[200px] border-radius[10px] overflow-hidden relative`};
+  ${tw`w-full height[200px] border-radius[10px] overflow-hidden relative`};
+  ${tw`md:width[300px] `}
 
   ${Container}:hover & button {
     ${tw`opacity-70`};

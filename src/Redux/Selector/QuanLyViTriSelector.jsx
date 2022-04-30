@@ -12,17 +12,23 @@ const selectChiTietViTri = (state) => state.QuanLyViTriReducer.chiTietViTri;
 
 const selectorProvince = (state) => state.QuanLyViTriReducer.province;
 
-const selectDanhSachViTriByProvince = (state) =>
-  createSelector(selectDanhSachViTri, selectorProvince, (danhSachViTri, province) => {
-    if (!province.length) {
-      return null;
-    }
-    return danhSachViTri.filter((viTri) => removeSpace(removeUnicode(viTri.province)) === province);
-  });
+const selectIdViTriTheoThanhPho = createSelector(selectViTriTheoThanhPho, (viTriTheoThanhPho) => {
+  return viTriTheoThanhPho._id;
+});
 
-const selectIdViTriTheoThanhPho = createSelector(
-  selectViTriTheoThanhPho,
-  (viTriTheoThanhPho) => viTriTheoThanhPho._id
+const selectDanhSachViTriByProvince = createSelector(
+  selectDanhSachViTri,
+  selectorProvince,
+  (danhSachViTri, province) => {
+    if (!province) {
+      return [];
+    }
+    const result = danhSachViTri.filter(
+      (viTri) => removeSpace(removeUnicode(viTri.province)) === province
+    );
+
+    return result;
+  }
 );
 
 const selectProvince = createSelector(selectDanhSachViTri, (danhSachViTri) => {
