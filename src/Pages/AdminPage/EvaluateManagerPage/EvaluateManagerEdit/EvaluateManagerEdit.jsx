@@ -10,22 +10,26 @@ import { showWarning, messageApp } from '@Utils/Common';
 
 function EvaluateManagerEdit(props) {
   const dispatch = useDispatch();
-  const { capNhatDanhGiaAsync } = quanLyDanhGiaThunk;
   const { editEvaluateField } = evaluateField;
   const { FormContainer, FormControl, FormGroup, FormItem, FormInput, FormButton } = Form;
   const { danhSachDanhGia, idDanhGia, handleOk } = props;
+  const { messageNoDifferent } = messageApp;
+
   const chiTietDanhGia = useMemo(
     () => danhSachDanhGia.find((danhGia) => danhGia._id === idDanhGia),
     [danhSachDanhGia, idDanhGia]
   );
+
   const initialValues = useMemo(() => {
     return {
       ...editEvaluateField,
       ..._.omit(chiTietDanhGia, ['deleteAt', 'created_at', 'deleteAt', 'updatedAt', '__v']),
     };
   }, [chiTietDanhGia, editEvaluateField]);
+
   const refChiTietDanhGia = useRef(initialValues);
-  const { messageNoDifferent } = messageApp;
+
+  const { capNhatDanhGiaAsync } = quanLyDanhGiaThunk;
 
   const handleSubmitEditEvaluate = async (valuesUpDate, { resetForm }) => {
     const content = _.omit(values, ['_id']);

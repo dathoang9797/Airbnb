@@ -8,9 +8,10 @@ import { useDispatch } from 'react-redux';
 
 function RoomManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
-  const { taoPhongChoThueAsync } = quanLyPhongChoThueThunk;
   const { addRoomField, renderRoomField } = roomField;
   const { FormContainer, FormControl, FormButton } = Form;
+
+  const { taoPhongChoThueAsync } = quanLyPhongChoThueThunk;
 
   const handleSubmitAddRoom = async (values, { resetForm }) => {
     const result = await dispatch(taoPhongChoThueAsync(values));

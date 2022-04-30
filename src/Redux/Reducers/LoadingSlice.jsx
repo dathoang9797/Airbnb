@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   isLoading: false,
   isLoadingPopUp: false,
-  count: 0,
+  countIsLoading: 0,
+  countIsLoadingPopup: 0,
 };
 
 const loadingSlice = createSlice({
@@ -11,22 +12,22 @@ const loadingSlice = createSlice({
   initialState,
   reducers: {
     setRequestSpinnerStarted: (state) => {
-      state.count++;
+      state.countIsLoading++;
       state.isLoading = true;
     },
     setRequestSpinnerEnded: (state) => {
-      state.count--;
-      if (state.count <= 0) {
+      state.countIsLoading--;
+      if (state.countIsLoading <= 0) {
         state.isLoading = false;
       }
     },
     setRequestSpinnerStartedPopup: (state) => {
-      state.count++;
+      state.countIsLoadingPopup++;
       state.isLoadingPopUp = true;
     },
     setRequestSpinnerEndedPopup: (state) => {
-      state.count--;
-      if (state.count <= 0) {
+      state.countIsLoadingPopup--;
+      if (state.countIsLoadingPopup <= 0) {
         state.isLoadingPopUp = false;
       }
     },

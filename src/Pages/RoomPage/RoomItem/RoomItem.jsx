@@ -3,6 +3,7 @@ import { RoomItemCSS } from './RoomItem.styles';
 import { images } from '@Assets/Images';
 
 function RoomItem({ phong }) {
+  console.log({ phong });
   const {
     name,
     guests,
@@ -21,13 +22,17 @@ function RoomItem({ phong }) {
     heating,
     cableTV,
     image,
+    locationId,
   } = phong;
+
+  const { Container, Content, Image, Title, Desc, Detail, Price, PriceNight, Rating, PriceTotal } =
+    RoomItemCSS;
 
   const { chevronLeft, chevronRight, heart, star } = images;
 
   return (
-    <RoomItemCSS.Container>
-      <RoomItemCSS.Image>
+    <Container>
+      <Image>
         <button>
           <img src={chevronLeft} alt='Chevron Left' />
         </button>
@@ -42,21 +47,21 @@ function RoomItem({ phong }) {
             currentTarget.src = `https://picsum.photos/id/300/200`;
           }}
         />
-      </RoomItemCSS.Image>
-      <RoomItemCSS.Content>
-        <RoomItemCSS.Title>
+      </Image>
+      <Content>
+        <Title>
           <div>
             <span className='greyText'>{name}</span>
             <h2>{description}</h2>
           </div>
           <div>
             <button>
-              <img src={heart} alt='Heart' />
+              <img src={heart} alt={heart} />
             </button>
           </div>
-        </RoomItemCSS.Title>
+        </Title>
         <div className='separator' />
-        <RoomItemCSS.Desc>
+        <Desc>
           <span className='greyText'>
             {guests} Guest {bedRoom} bedroom {bath ? `${bath} bath` : ''}
           </span>
@@ -66,25 +71,25 @@ function RoomItem({ phong }) {
             {indoorFireplace ? 'Indoor Fireplace .' : ''} {dryer ? 'Dryer .' : ''}
             {heating ? 'Heating .' : ''} {cableTV ? 'CableTV' : ''}
           </span>
-        </RoomItemCSS.Desc>
-        <RoomItemCSS.Detail>
-          <RoomItemCSS.Rating>
+        </Desc>
+        <Detail>
+          <Rating>
             <img src={star} alt='Star' />
             <span>
-              5 <span>(14)</span>
+              {locationId.valueate}
             </span>
-          </RoomItemCSS.Rating>
-          <RoomItemCSS.Price>
-            <RoomItemCSS.PriceNight>
+          </Rating>
+          <Price>
+            <PriceNight>
               £{price} <span> / night</span>
-            </RoomItemCSS.PriceNight>
-            <RoomItemCSS.PriceTotal>
+            </PriceNight>
+            <PriceTotal>
               <span>£57 total</span>
-            </RoomItemCSS.PriceTotal>
-          </RoomItemCSS.Price>
-        </RoomItemCSS.Detail>
-      </RoomItemCSS.Content>
-    </RoomItemCSS.Container>
+            </PriceTotal>
+          </Price>
+        </Detail>
+      </Content>
+    </Container>
   );
 }
 

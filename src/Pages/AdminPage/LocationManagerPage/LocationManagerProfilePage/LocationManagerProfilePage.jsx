@@ -7,13 +7,16 @@ import { LocationManagerProfileCSS } from './LocationManagerProfilePage.styles';
 import { Redirect } from 'react-router';
 
 function LocationManagerProfilePage() {
-  const { selectChiTietViTri } = quanLyViTriSelector;
-  const chiTietViTri = useSelector(selectChiTietViTri, _.isEqual);
-  const isHasChiTietViTri = _.isEmpty(chiTietViTri);
   const urlLocationsManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
   const { image, province, name, country, valueate } = chiTietViTri;
   const { ContainerCSS, ContentCSS, ImageCSS, ProfileCSS, DescCSS, TitleCSS } =
     LocationManagerProfileCSS;
+
+  const { selectChiTietViTri } = quanLyViTriSelector;
+
+  const chiTietViTri = useSelector(selectChiTietViTri, _.isEqual);
+
+  const isHasChiTietViTri = _.isEmpty(chiTietViTri);
 
   return isHasChiTietViTri ? (
     <Redirect to={urlLocationsManager} />

@@ -15,11 +15,17 @@ import { UserManagerEditCSS } from './UserManagerEditPage.styles';
 
 function UserManagerEdit() {
   const dispatch = useDispatch();
-  const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
-  const { capNhatNguoiDungAsync } = quanLyNguoiDungThunk;
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
-  const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
   const { editUserField, renderUserField } = userField;
+  const { messageNoDifferent } = messageApp;
+  const { FormContainer, FormControl, FormButton } = Form;
+
+  const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
+
+  const { capNhatNguoiDungAsync } = quanLyNguoiDungThunk;
+
+  const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
+
   const isHasChiTietNguoiDung = useMemo(() => _.isEmpty(chiTietNguoiDung), [chiTietNguoiDung]);
   const initialValues = useMemo(() => {
     return {
@@ -27,9 +33,8 @@ function UserManagerEdit() {
       ..._.omit(chiTietNguoiDung, ['__v', 'tickets', 'password', 'deleteAt', 'avatar']),
     };
   }, [chiTietNguoiDung, editUserField]);
+  
   const refChiTietNguoiDung = useRef(initialValues);
-  const { messageNoDifferent } = messageApp;
-  const { FormContainer, FormControl, FormButton } = Form;
 
   const handleSubmitEditUser = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);

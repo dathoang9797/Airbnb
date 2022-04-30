@@ -11,7 +11,6 @@ const {
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,
   getDanhSachPhongChoThueTheoViTriAsync,
-  getDanhSachPhongChoThueTheoDanhSachViTriAsync,
   datPhongPhongChoThueAsync,
 } = quanLyPhongChoThueThunk;
 
@@ -94,16 +93,6 @@ const quanLyPhongChoThueSlice = createSlice({
       state.danhSachPhongChoThueTheoViTri = action.payload;
     });
     builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.rejected, (state, action) => {
-      if (action.payload) {
-        showError(action.payload);
-      } else {
-        showError(action.error.message);
-      }
-    });
-    builder.addCase(getDanhSachPhongChoThueTheoDanhSachViTriAsync.fulfilled, (state, action) => {
-      state.danhSachPhongChoThueTheoViTri = action.payload;
-    });
-    builder.addCase(getDanhSachPhongChoThueTheoDanhSachViTriAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);
       } else {

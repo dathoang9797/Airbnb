@@ -1,52 +1,23 @@
 import tw, { styled } from 'twin.macro';
 
 const Container = styled.div`
-  ${tw`whitespace-nowrap z-10 absolute mt-6 left-1/2 -translate-x-1/2`};
-`;
+  ${tw`whitespace-nowrap z-10 absolute mt-6 left-1/2 -translate-x-1/2  transition-all duration-300 -webkit-box-pack[center] -webkit-box-align[center] bg-white box-shadow[rgb(0 0 0 / 12%) 0px 6px 16px] rounded-lg inline-flex items-center justify-center flex-row h-10 top[15%]`};
 
-const Spinner = styled.span`
-  div {
-    ${tw`h-10 flex-row background-color[rgb(255 255 255) !important]  rounded-lg inline-flex items-center justify-center transition-all duration-300`};
+  /* @media (max-width: 1100px) {
+    ${tw`display[none !important]`};
+  } */
 
-    &:hover {
-      ${tw`background-color[rgb(247, 247, 247) !important]`};
-    }
+  &:hover {
+    ${tw`bg-white`};
   }
 `;
 
-const SpinnerButton = styled.button`
-  button {
-    ${tw`inline-flex items-center justify-center h-full w-full  bg-none border-2 border-transparent py-0 px-3.5  color[rgb(34, 34, 34) !important] rounded-lg outline-none`};
-
-    div {
-      ${tw`-webkit-box-pack[center] -webkit-box-align[center] flex items-center justify-center h-full  w-10`};
-      span {
-        & > :first-child {
-          ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.3s] align-middle`};
-        }
-
-        & ~ :nth-child(2) {
-          ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.15s] align-middle`};
-        }
-
-        & ~ :last-child {
-          ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both]  align-middle`};
-        }
-      }
-    }
-  }
-`;
-
-const Move = styled(Spinner)`
-  div {
-    & > div {
-      ${tw`whitespace-nowrap color[rgb(34,34,34) ] px-3 table-cell`};
-    }
-  }
+const Move = styled.div`
+  ${tw`whitespace-nowrap color[rgb(34,34,34) ] px-3 table-cell`};
 `;
 
 const MoveLabel = styled.label`
-  ${tw`-webkit-box-align[center] flex items-center cursor-pointer`};
+  ${tw`-webkit-box-align[center] flex items-center cursor-pointer m-0`};
 `;
 
 const MoveSpan = styled.span`
@@ -77,9 +48,7 @@ const MoveContentSearch = styled.div`
 
 export const SearchMapCSS = {
   Container,
-  Spinner,
   Move,
-  SpinnerButton,
   MoveContentSearch,
   MoveSpan,
   MoveLabel,

@@ -12,15 +12,20 @@ import EvaluateManagerAdd from './EvaluateManagerAdd';
 import EvaluateManagerEdit from './EvaluateManagerEdit';
 
 function EvaluateManagerPage(props) {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const idTable = useMemo(() => nanoid(), []);
+
   const dispatch = useDispatch();
   const { showModal, handlePropsContentModal, handleContentModal } = props;
-  const { selectDanhSachDanhGiaFilter } = quanLyDanhGiaSelector;
-  const { getDanhSachDanhGiaAsync, xoadanhGiaAsync, xoaNhieuDanhGiaAsync } = quanLyDanhGiaThunk;
   const { tableColumnsEvaluateField } = evaluateField;
-  const danhSachDanhGia = useSelector(selectDanhSachDanhGiaFilter, shallowEqual);
-  const idTable = useMemo(() => nanoid(), []);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
+
+  const { selectDanhSachDanhGiaFilter } = quanLyDanhGiaSelector;
+
+  const { getDanhSachDanhGiaAsync, xoadanhGiaAsync, xoaNhieuDanhGiaAsync } = quanLyDanhGiaThunk;
+
+  const danhSachDanhGia = useSelector(selectDanhSachDanhGiaFilter, shallowEqual);
+  
 
   useEffect(() => {
     dispatch(getDanhSachDanhGiaAsync());

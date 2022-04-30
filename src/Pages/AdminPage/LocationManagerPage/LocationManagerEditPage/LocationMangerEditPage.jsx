@@ -14,12 +14,18 @@ import { LocationManagerEditCSS } from './LocationManagerEditPage.styles';
 
 function LocationMangerEditPage() {
   const dispatch = useDispatch();
-  const { capNhatViTriAsync } = quanLyViTriThunk;
-  const { selectChiTietViTri } = quanLyViTriSelector;
   const urlLocationsManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
   const { editLocationField, renderLocationField } = locationField;
   const { messageNoDifferent } = messageApp;
+  const { Container } = LocationManagerEditCSS;
+  const { FormContainer, FormControl, FormButton } = Form;
+
+  const { capNhatViTriAsync } = quanLyViTriThunk;
+
+  const { selectChiTietViTri } = quanLyViTriSelector;
+
   const chiTietViTri = useSelector(selectChiTietViTri, _.isEqual);
+
   const isHasChiTietViTri = useMemo(() => _.isEmpty(chiTietViTri), [chiTietViTri]);
   const initialValues = useMemo(() => {
     return {
@@ -28,8 +34,6 @@ function LocationMangerEditPage() {
     };
   }, [chiTietViTri, editLocationField]);
   const refChiTietNguoiDung = useRef(initialValues);
-  const { Container } = LocationManagerEditCSS;
-  const { FormContainer, FormControl, FormButton } = Form;
 
   const handleSubmitEditLocation = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);

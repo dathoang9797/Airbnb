@@ -8,11 +8,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 function UserManagerFormAdd({ handleOk }) {
-  const dispatch = useDispatch();
-  const { taoNguoiDungAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
+  
+  const dispatch = useDispatch();
   const { addUserField, renderUserField } = userField;
   const { FormContainer, FormControl, FormButton } = Form;
+  
+  const { taoNguoiDungAsync } = quanLyNguoiDungThunk;
 
   const handleSubmitAddUser = async (values, { resetForm }) => {
     const result = await dispatch(taoNguoiDungAsync(values));

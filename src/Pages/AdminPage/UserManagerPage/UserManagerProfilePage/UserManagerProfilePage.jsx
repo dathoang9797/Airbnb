@@ -9,13 +9,16 @@ import { images } from '@Assets/Images';
 const { account } = images;
 
 function UserManagerProfile() {
-  const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
-  const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
-  const isHasChiTietNguoiDung = _.isEmpty(chiTietNguoiDung);
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const { address, avatar, birthday, email, gender, name, phone, tickets } = chiTietNguoiDung;
   const { Container, Content, About, Desc, Grid, GridContent, GridItem, GridKey, Img } =
     UserManagerProfileCSS;
+
+  const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
+
+  const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
+
+  const isHasChiTietNguoiDung = _.isEmpty(chiTietNguoiDung);
 
   return isHasChiTietNguoiDung ? (
     <Redirect to={urlUserManager} />

@@ -13,18 +13,22 @@ import UserManagerAdd from './UserManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
 
 function UserManagerPage(props) {
-  const dispatch = useDispatch();
-  const { tableColumnsUserField } = userField;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const dispatch = useDispatch();
   const idTable = useMemo(() => nanoid(), []);
   const urlUserEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
   const urlUserProfile = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_PROFILE;
-  const { selectDanhSachNguoiDungFilter } = quanLyNguoiDungSelector;
-  const { getDanhSachNguoiDungAsync, xoaNhieuNguoiDungAsync } = quanLyNguoiDungThunk;
-  const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
-  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDungFilter, _.isEqual);
+  const { tableColumnsUserField } = userField;
   const { Table } = TableCSS;
   const { showModal, handleContentModal } = props;
+
+  const { selectDanhSachNguoiDungFilter } = quanLyNguoiDungSelector;
+
+  const { getDanhSachNguoiDungAsync, xoaNhieuNguoiDungAsync } = quanLyNguoiDungThunk;
+  const { xoaNguoiDungAsync, getChiTietNguoiDungAsync } = quanLyNguoiDungThunk;
+
+  const danhSachNguoiDung = useSelector(selectDanhSachNguoiDungFilter, _.isEqual);
 
   useEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());

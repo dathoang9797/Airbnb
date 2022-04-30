@@ -51,10 +51,7 @@ export const routerUserTemplate = [
 ];
 
 export const routerAdminTemplate = [
-  {
-    path: [process.env.REACT_APP_LINK_ADMIN, process.env.REACT_APP_LINK_ADMIN_DASH_BOARD],
-    componentPage: DashBoardPage,
-  },
+  { path: [process.env.REACT_APP_LINK_ADMIN_DASH_BOARD], componentPage: DashBoardPage },
   { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER, componentPage: RoomManagerPage },
   { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT, componentPage: RoomManagerEditPage },
   {

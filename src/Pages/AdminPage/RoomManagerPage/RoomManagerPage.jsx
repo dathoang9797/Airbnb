@@ -14,21 +14,24 @@ import ModalHoc from '@HOC/ModalHoc';
 
 function RoomManagerPage(props) {
   const dispatch = useDispatch();
-  const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
+  const urlRoomEdit = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT;
+  const urlRoomProfile = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE;
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const { Table } = TableCSS;
+  const { showModal, handleContentModal } = props;
+  const { tableColumnsRoomField } = roomField;
+  const idTable = useMemo(() => nanoid(), []);
+
   const {
     getDanhSachPhongChoThueAsync,
     xoaPhongChoThueAsync,
     xoaNhieuPhongAsync,
     getChiTietPhongChoThueAsync,
   } = quanLyPhongChoThueThunk;
-  const { tableColumnsRoomField } = roomField;
+  
+  const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
+
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
-  const idTable = useMemo(() => nanoid(), []);
-  const urlRoomEdit = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT;
-  const urlRoomProfile = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_PROFILE;
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const { Table } = TableCSS;
-  const { showModal, handleContentModal } = props;
 
   useEffect(() => {
     dispatch(getDanhSachPhongChoThueAsync());

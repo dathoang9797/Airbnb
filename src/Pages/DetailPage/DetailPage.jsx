@@ -15,11 +15,14 @@ import TitleDetail from './TitleDetail';
 
 function DetailPage() {
   const dispatch = useDispatch();
+  const { DetailContainer, ContentLeft, ContentRight, BookingContainer } = DetailPageCSS;
+
   const { selectDanhSachDanhGia } = quanLyDanhGiaSelector;
   const { selectChiTietPhongChoThue } = quanLyPhongChoThueSelector;
-  const { DetailContainer, ContentLeft, ContentRight, BookingContainer } = DetailPageCSS;
+
   const { getDanhSachDanhGiaAsync } = quanLyDanhGiaThunk;
   const { getChiTietPhongChoThueAsync } = quanLyPhongChoThueThunk;
+
   const danhSachDanhGia = useSelector(selectDanhSachDanhGia, shallowEqual);
   const chiTietPhong = useSelector(selectChiTietPhongChoThue, _.isEqual);
 
