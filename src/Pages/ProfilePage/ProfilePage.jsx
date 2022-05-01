@@ -46,7 +46,7 @@ function ProfilePage(props) {
         <CardImage>
           <img src={imgRoom || account} alt={imgRoom || account} />
         </CardImage>
-        <UploadImageProfile setImgRoom={setImgRoom} token={token}>
+        <UploadImageProfile setImgRoom={setImgRoom} token={token} userInfo={userInfo} >
           <CardTitleUploadImage>Cập nhật ảnh</CardTitleUploadImage>
         </UploadImageProfile>
         <CardBody>

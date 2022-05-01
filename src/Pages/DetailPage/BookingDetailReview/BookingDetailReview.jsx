@@ -5,6 +5,7 @@ import BookingDetailReviewPoint from './BookingDetailReviewPoint';
 import BookingDetailReviewTitle from './BookingDetailReviewTitle';
 import BookingDetailReviewModal from './BookingDetailReviewModal';
 import ModalHoc from '@HOC/ModalHoc';
+import { CloseOutlined } from '@ant-design/icons';
 
 function BookingDetailReview(props) {
   const { Container, Content, ButtonClose, ButtonOpen } = BookingDetailReviewCSS;
@@ -18,16 +19,7 @@ function BookingDetailReview(props) {
 
   const closeIcon = (
     <ButtonClose>
-      <svg
-        viewBox='0 0 32 32'
-        xmlns='http://www.w3.org/2000/svg'
-        aria-hidden='true'
-        role='presentation'
-        focusable='false'
-      >
-        <path d='m6 6 20 20' />
-        <path d='m26 6-20 20' />
-      </svg>
+      <CloseOutlined />
     </ButtonClose>
   );
 

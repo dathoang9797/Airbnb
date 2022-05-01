@@ -19,20 +19,23 @@ const selectIdViTriTheoThanhPho = createSelector(selectViTriTheoThanhPho, (viTri
 const selectDanhSachViTriByProvince = createSelector(
   selectDanhSachViTri,
   selectorProvince,
-  (danhSachViTri, province) => {
-    if (!province) {
+  (danhSachViTri, provinces) => {
+    if (!provinces.length) {
       return [];
     }
-    const result = danhSachViTri.filter(
-      (viTri) => removeSpace(removeUnicode(viTri.province)) === province
-    );
 
-    return result;
+    const result = provinces.map((province) => {
+      return danhSachViTri.filter((viTri) => {
+        return removeSpace(removeUnicode(viTri.province)) === province;
+      });
+    });
+
+    return result.flat();
   }
 );
 
-const selectProvince = createSelector(selectDanhSachViTri, (danhSachViTri) => {
-  if (!danhSachViTri.length) return;
+const selectDanhSachProvince = createSelector(selectDanhSachViTri, (danhSachViTri) => {
+  if (!danhSachViTri.length) return [];
   const provinceArr = danhSachViTri
     .map((viTri) => {
       return removeSpace(removeUnicode(viTri.province));
@@ -63,7 +66,7 @@ export const quanLyViTriSelector = {
   selectViTriTheoThanhPho,
   selectIdViTriTheoThanhPho,
   selectDanhSachViTriByProvince,
-  selectProvince,
+  selectDanhSachProvince,
   selectDanhViTriFilter,
   selectChiTietViTri,
 };

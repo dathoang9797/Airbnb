@@ -19,9 +19,6 @@ const ButtonClose = styled.span`
   &:hover:before {
     ${tw`transition-all duration-300 background-color[rgb(247, 247, 247)]`}
   }
-  svg {
-    ${tw`block fill[none] h-4 w-4 stroke-current stroke-width[3] overflow-visible`};
-  }
 `;
 
 const ButtonOpen = styled.button`

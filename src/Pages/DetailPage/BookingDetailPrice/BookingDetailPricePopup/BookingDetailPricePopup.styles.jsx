@@ -1,12 +1,12 @@
-import { Collapse } from 'antd';
 import tw, { styled } from 'twin.macro';
+import { Popover } from 'antd';
 
-const { Panel } = Collapse;
+const Container = styled(Popover)`
+  ${tw`w-full flex-1 inset[0px 0px -1px !important]   relative bg-none  z-50 overflow-hidden margin-bottom[24px !important]`};
+  &:after {
+    ${tw`content absolute top-0 left-0 w-full h-full border[1px solid #b0b0b0] border-radius[0px 0px 8px 8px !important] cursor-pointer`};
 
-const Container = styled(Collapse)`
-  ${tw`w-full flex-1 inset[0px 0px -1px] border-color[#b0b0b0] border-1  relative bg-none border-radius[0px 0px 8px 8px] z-50 overflow-hidden border-bottom[1px solid #b0b0b0 !important]`};
-  &:focus-within {
-    ${tw`border-color[#222] border-2 border-bottom[2px solid #222!important]`};
+    ${(props) => (props.visible ? tw`  border[2px solid #222!important]   ` : '')};
   }
 
   &.ant-collapse > .ant-collapse-item {
@@ -56,12 +56,12 @@ const ItemArrow = styled.div`
   }
 `;
 
-const Popup = styled(Panel)`
-  ${tw`box-shadow[rgb(0 0 0 / 15%) 0px 2px 6px, rgb(0 0 0 / 7%) 0px 0px 0px 1px] box-border w-full overflow-hidden`};
+const Popup = styled.div`
+  ${tw`box-shadow[rgb(0 0 0 / 15%) 0px 2px 6px, rgb(0 0 0 / 7%) 0px 0px 0px 1px] box-border w-full overflow-hidden px-6 py-2 rounded-lg`};
 `;
 
 const PopupCountUser = tw.div`
-mb-5 mt-2 -webkit-box-align[center] flex items-center w-full color[rgb(34, 34, 34)] font-normal
+mb-4 mt-2 -webkit-box-align[center] flex items-center w-full color[rgb(34, 34, 34)] font-normal
  
 `;
 
@@ -87,11 +87,12 @@ const PopupCountUserChangeValue = styled.div`
     &:hover {
       ${tw`color[rgb(34, 34, 34)] border-color[rgb(34, 34, 34)] bg-white`}
     }
+
     span {
-      ${tw`h-6 w-6 p-1.5`};
+      ${tw`h-6 w-6 p-1.5 color[rgb(34, 34, 34)] flex items-center`};
 
       svg {
-        ${tw`block fill[none] h-3 w-3 stroke-current stroke-width[5.33333] overflow-visible`};
+        ${tw` color[rgb(34, 34, 34)]`};
       }
     }
   }
@@ -111,7 +112,7 @@ const PopupClose = styled.div`
   }
 `;
 
-export const BookingDetailPriceDatePopupCSS = {
+export const BookingDetailPricePopupCSS = {
   Container,
   Item,
   ItemGuest,

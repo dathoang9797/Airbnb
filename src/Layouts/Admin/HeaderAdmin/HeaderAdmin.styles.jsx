@@ -5,10 +5,15 @@ const { Header } = Layout;
 
 const Container = styled(Header)`
   ${tw` flex items-center justify-end z-10 py-4 px-8 bg-white shadow-md dark:bg-gray-800 `}
+  &.ant-layout-header{
+    ${tw`height[auto] line-height[0px]`}
+    ${tw`md:height[64px] md:line-height[64px]`}
+  }
 `;
 
 const Content = styled.div`
-  ${tw`w-full flex items-center justify-end h-full  mx-auto text-purple-600 dark:text-purple-300`}
+  ${tw`w-full flex flex-col-reverse  items-center justify-end h-full  mx-auto text-purple-600 dark:text-purple-300`}
+  ${tw`md:flex-row`}
 `;
 
 const Dropdowns = styled(Dropdown)`

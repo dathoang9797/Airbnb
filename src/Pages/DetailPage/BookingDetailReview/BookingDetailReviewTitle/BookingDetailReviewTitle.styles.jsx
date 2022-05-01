@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 const Container = styled.div`
   ${tw`mb-8 color[#222] font-semibold text-2xl`};
   & > span:first-child {
-    ${tw`mr-2 color[var(--color-primary)] inline-flex`};
+    ${tw`mr-2 color[var(--color-primary)] inline-flex  items-center`};
     svg {
       ${tw`block h-4 w-4 fill-current`};
     }

@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 const ContentRight = styled.div`
-  ${tw`w-full py-10 px-5 `};
+  ${tw`w-full py-10 px-5 m-0`};
   ${tw`md:w-1/2 md:px-10`};
 `;
 
@@ -22,7 +22,9 @@ const Form = styled.div`
 `;
 
 const Container = styled.div`
-  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-1 pt-24 pb-14`};
+  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-5 py-5`};
+  ${tw`md:pt-16 md:pb-12 md:px-10`};
+
 `;
 
 export const SignUpCSS = {

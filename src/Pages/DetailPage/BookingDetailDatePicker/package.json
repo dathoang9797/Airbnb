@@ -1,0 +1,5 @@
+{
+  "name": "BookingDetailDatePicker",
+  "main": "./BookingDetailDatePicker.jsx",
+  "private": true
+}

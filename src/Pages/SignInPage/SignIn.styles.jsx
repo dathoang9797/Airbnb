@@ -4,7 +4,8 @@ const ContentRight = styled.div`
   ${tw`w-full  py-20 px-5  relative`};
   ${tw`md:w-1/2 md:px-10`};
   form {
-    ${tw`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-max-w-114`};
+    ${tw`static w-full max-w-none top-0 left-0 translate-x-0 translate-y-0`};
+    ${tw`md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2  md:max-w-max-w-114`};
   }
 `;
 
@@ -24,7 +25,8 @@ const Form = styled.div`
 `;
 
 const Container = styled.div`
-  ${tw`min-w-full min-h-screen bg-gray-400 flex items-center justify-center px-5 py-5`}
+  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-5 py-0 `};
+  ${tw` md:py-10 md:px-10`};
 `;
 
 export const SignInCSS = {

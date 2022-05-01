@@ -26,7 +26,7 @@ const Spinner = () => {
         }, 500);
       }, 1000);
     }
-  });
+  },[isLoading]);
 
   return (
     <Container ref={spinRef} className='animate__animated'>

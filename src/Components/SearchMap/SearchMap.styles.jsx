@@ -30,11 +30,8 @@ const MoveSpan = styled.span`
   & > span {
     ${tw`inline-block border-1 h-6 w-6 text-center overflow-hidden align-top border-radius[4px] 
     text-white border-color[rgb(34, 34, 34)] background-color[rgb(34, 34, 34)]`};
-    span {
-      ${tw`--webkit-box-pack[center] --webkit-box-align[center] block items-center justify-center w-full h-full mt-0.5 margin-left[3px] text-white`}
-      svg {
-        ${tw`block fill[none] h-4 w-4 stroke[currentColor] stroke-width[4] overflow-visible`}
-      }
+    svg {
+      ${tw`h-full`}
     }
   }
 `;

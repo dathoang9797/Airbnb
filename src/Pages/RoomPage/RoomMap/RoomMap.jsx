@@ -1,17 +1,14 @@
 import CardPopup from '@Components/CardPopup';
 import GoogleMapReact from 'google-map-react';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setCoordinates }) {
-  const renderPlaces = () => {
+  const renderPlaces = useMemo(() => {
     if (!places.length || !danhSachPhongChoThueTheoViTriSlice.length) return;
     return places.map((place, index) => {
       if (!place.length || !danhSachPhongChoThueTheoViTriSlice[index]) return null;
       return (
         <CardPopup
-          onClick={(e) => {
-            console.log({ e });
-          }}
           lat={place[0].geometry.location.lat}
           lng={place[0].geometry.location.lng}
           key={`${place[0].place_id}-${index}`}
@@ -19,7 +16,7 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
         />
       );
     });
-  };
+  }, [danhSachPhongChoThueTheoViTriSlice, places]);
 
   return (
     <GoogleMapReact
@@ -32,7 +29,7 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
         setCoordinates({ lat: e.center.lat, lng: e.center.lng });
       }}
     >
-      {renderPlaces()}
+      {renderPlaces}
     </GoogleMapReact>
   );
 }
