@@ -45,13 +45,13 @@ export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_SIGN_UP, componentPage: SignUpPage },
   { path: process.env.REACT_APP_LINK_HOME, componentPage: HomePage },
   { path: process.env.REACT_APP_LINK_PROFILE, componentPage: ProfilePage },
-  { path: process.env.REACT_APP_LINK_DETAIL, componentPage: DetailPage },
+  { path: process.env.REACT_APP_LINK_DETAIL + '/:idRoom', componentPage: DetailPage },
   { path: process.env.REACT_APP_LINK_ROOM, componentPage: RoomPage },
   { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
 ];
 
 export const routerAdminTemplate = [
-  { path: [process.env.REACT_APP_LINK_ADMIN_DASH_BOARD], componentPage: DashBoardPage },
+  { path: process.env.REACT_APP_LINK_ADMIN_DASH_BOARD, componentPage: DashBoardPage },
   { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER, componentPage: RoomManagerPage },
   { path: process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER_EDIT, componentPage: RoomManagerEditPage },
   {

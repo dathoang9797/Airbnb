@@ -3,8 +3,9 @@ import { RoomItemCSS } from './RoomItem.styles';
 import { images } from '@Assets/Images';
 
 function RoomItem({ phong }) {
-  console.log({ phong });
+  const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;
   const {
+    _id,
     name,
     guests,
     bedRoom,
@@ -31,7 +32,7 @@ function RoomItem({ phong }) {
   const { chevronLeft, chevronRight, heart, star } = images;
 
   return (
-    <Container>
+    <Container to={`${urlDetailPage}/${_id}`}>
       <Image>
         <button>
           <img src={chevronLeft} alt='Chevron Left' />
@@ -75,9 +76,7 @@ function RoomItem({ phong }) {
         <Detail>
           <Rating>
             <img src={star} alt='Star' />
-            <span>
-              {locationId.valueate}
-            </span>
+            <span>{locationId ? locationId.valueate : 0}</span>
           </Rating>
           <Price>
             <PriceNight>

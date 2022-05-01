@@ -32,12 +32,9 @@ const PricingContent = styled.div`
 const PricingEvaluate = styled.div`
   ${tw`mt-2`}
   div {
-    ${tw`-webkit-box-align[baseline] items-baseline flex text-sm`};
+    ${tw`-webkit-box-align[baseline] items-center flex text-sm`};
     & > span:first-child {
       ${tw`text-xs text-center color[var(--color-primary)]`};
-      svg {
-        ${tw`block h-3 w-3 fill-current`};
-      }
     }
     & > span:nth-child(2) {
       ${tw`color[rgb(34, 34, 34)] pl-1 font-semibold`};

@@ -24,7 +24,7 @@ const quanLyViTriSlice = createSlice({
   initialState,
   reducers: {
     setProvinceAction: (state, action) => {
-      state.province = action.payload[0];
+      state.province = action.payload;
     },
   },
   extraReducers: (builder) => {

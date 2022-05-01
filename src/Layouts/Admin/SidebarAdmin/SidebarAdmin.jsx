@@ -1,7 +1,7 @@
 import { CarryOutOutlined, DashboardOutlined, UsergroupAddOutlined } from '@ant-design/icons';
 import { images } from '@Assets/Images';
 import ButtonScrollTop from '@Components/ButtonScrollTop';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { GiTicket } from 'react-icons/gi';
 import { IoLocationOutline } from 'react-icons/io5';
@@ -10,20 +10,29 @@ import { SiderBarCSS } from './SidebarAdmin.styles';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
+  const [widthSidebar, setWidthSideBar] = useState(230);
+  const [widthCollapsed, setWidthCollapsed] = useState(60);
   const { pathname } = useLocation();
   const { logo } = images;
   const { Menus, SiderBar } = SiderBarCSS;
 
-  const onCollapse = (collapsed) => {
-    const buttonScrollTopDom = document.querySelector('#scroll-top');
-    const siderCollapsedDom = document.querySelector('.ant-layout-sider-collapsed');
-    if (!siderCollapsedDom) {
-      buttonScrollTopDom.classList.remove('fade-in');
-    } else {
-      buttonScrollTopDom.classList.add('fade-in');
-    }
-    setCollapsed(collapsed);
-  };
+  const onCollapse = (collapsed) => setCollapsed(collapsed);
+
+  useEffect(() => {
+    const handleResizeScreenX = () => {
+      console.log(window.innerWidth);
+      if (window.innerWidth <= 992) {
+        setWidthSideBar(200);
+        setWidthCollapsed(40);
+        return;
+      } else {
+        setWidthSideBar(230);
+        setWidthCollapsed(60);
+      }
+    };
+    window.addEventListener('resize', handleResizeScreenX);
+    return () => window.removeEventListener('resize', handleResizeScreenX);
+  });
 
   const items = [
     {
@@ -70,7 +79,14 @@ function Siderbar() {
 
   return (
     <>
-      <SiderBar collapsible collapsed={collapsed} onCollapse={onCollapse} id='side-bar'>
+      <SiderBar
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        id='side-bar'
+        width={widthSidebar}
+        collapsedWidth={widthCollapsed}
+      >
         <div>
           <a href='#a'>
             <img src={logo} alt={logo} />
@@ -78,7 +94,7 @@ function Siderbar() {
         </div>
         <Menus defaultSelectedKeys={[pathname]} mode='inline' items={items} />
       </SiderBar>
-      <ButtonScrollTop />
+      <ButtonScrollTop className='fade-in'/>
     </>
   );
 }

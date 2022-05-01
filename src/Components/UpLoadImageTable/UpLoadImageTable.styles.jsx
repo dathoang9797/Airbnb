@@ -7,9 +7,9 @@ const Container = styled.div`
   }
   .ant-upload-select-picture {
     ${tw` 
-    lg:w-[300px] 
-    md:w-[200px] 
-    sm:w-[200px]
+    lg:w-[300px !important] lg:h-[200px !important]
+    md:w-[200px !important] md:h-[150px !important]
+    sm:w-[200px !important] sm:h-[150px !important]
     `};
   }
 
@@ -45,7 +45,7 @@ const Container = styled.div`
   }
 
   img {
-    ${tw`rounded-lg w-full h-full object-contain`};
+    ${tw`rounded-lg w-full h-full object-cover`};
   }
 `;
 

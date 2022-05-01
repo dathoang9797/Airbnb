@@ -5,13 +5,18 @@ import { signInUserSchema } from '@Shared/Schema/SignInSchema';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { FormSignInPageCSS } from './FormSignInPage.styles';
 
 function FormSignInPage() {
-  const dispatch = useDispatch();
-  const { setUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
-  const { signInField, renderUserField } = userField;
+
+  const dispatch = useDispatch();
   const { FormContainer, FormControl, FormButton } = Form;
+  const { NotHaveAccountLink } = FormSignInPageCSS;
+  const { signInField, renderUserField } = userField;
+
+  const { setUserInfoAsync } = quanLyNguoiDungThunk;
 
   const handleChangeTypeInput = () => {
     if (typeInput === 'password') {
@@ -47,6 +52,9 @@ function FormSignInPage() {
       <FormControl>
         <FormButton type='submit'>SIGNIN NOW</FormButton>
       </FormControl>
+      <NotHaveAccountLink>
+        <NavLink to={process.env.REACT_APP_LINK_SIGN_UP}>Bạn chưa có tài khoản ?</NavLink>
+      </NotHaveAccountLink>
     </FormContainer>
   );
 }

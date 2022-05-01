@@ -15,8 +15,14 @@ const ImagesContainer = styled.div`
   ${tw`relative height[0]  min-height[100%] min-w-full   padding-top[50%]`};
 `;
 
-const ImagesContent = styled.div`
+const ImagesContentLeft = styled.div`
   ${tw`absolute top-0 left-0 w-full h-full`};
+`;
+
+const ImagesContentRight = styled.div`
+  ${tw`hidden`};
+  ${tw`md:flex md:justify-center md: items-center`};
+
 `;
 
 const ImagesItemCommonCSS = css`
@@ -48,7 +54,8 @@ const ImagesItemChangeHeight = css`
 
 const ImagesItemFirst = styled.div`
   ${ImagesItemCommonCSS};
-  ${tw`h-full width[50%] left[0px] top[0px] absolute`};
+  ${tw`h-full  absolute w-full  `};
+  ${tw`md:width[50%] md:left[0px] md:top[0px]`}
 `;
 
 const ImagesItemSecond = styled.div`
@@ -119,7 +126,8 @@ export const GridImagesDetailCSS = {
   Content,
   ImagesContainer,
   ButtonShowImage,
-  ImagesContent,
+  ImagesContentLeft,
+  ImagesContentRight,
   ImagesItemFirst,
   ImagesItemSecond,
   ImagesItemsThird,

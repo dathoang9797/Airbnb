@@ -1,7 +1,7 @@
 import tw, { css } from 'twin.macro';
 
 export const DatePickerCSS = css`
-  #datePicker-17_modal {
+  #date-picker_modal {
     ${tw`top[5%] left[15%] bg-transparent backdrop-filter[unset]`};
 
     button[data-id='button-icon-element'] {
@@ -37,7 +37,9 @@ export const DatePickerCSS = css`
     td[role='gridcell'] div.esqqhf,
     td[role='gridcell'] div.jCKzHR,
     td[role='gridcell'] div.jztmMv,
-    td[role='gridcell'] div.cWUvNl {
+    td[role='gridcell'] div.cWUvNl,
+    td[role='gridcell'] div.hgxmAV,
+    td[role='gridcell'] div.hEpUKJ, {
       button {
         &[data-selected='true'],
         &:focus[data-selected='true'],
@@ -65,7 +67,8 @@ export const DatePickerCSS = css`
 
     td[role='gridcell'] div.iunbWn,
     td[role='gridcell'] div.jsQYfv,
-    td[role='gridcell'] div.cWUvNl {
+    td[role='gridcell'] div.cWUvNl,
+    td[role='gridcell'] div.kTnhxE {
       background: rgba(255, 56, 9, 0.2);
       background: linear-gradient(to left, rgba(255, 56, 9, 0.2), rgba(255, 56, 9, 0));
       background: linear-gradient(
@@ -127,7 +130,8 @@ export const DatePickerCSS = css`
       );
     }
 
-    td[role='gridcell'] div.gLkOtR {
+    td[role='gridcell'] div.gLkOtR,
+    td[role='gridcell'] div.hgxmAV {
       background: rgba(255, 56, 9, 0.2);
       background: linear-gradient(to right, rgba(255, 56, 9, 0.2), rgba(255, 56, 9, 0));
       background: linear-gradient(
@@ -176,6 +180,7 @@ export const DatePickerCSS = css`
     .jUiQSI:active,
     .jUiQSI:visited {
       color: var(--color-primary);
+      box-shadow: 0 0 2px var(--color-primary);
     }
 
     .jUiQSI:visited .sc-jnlKLf:focus,

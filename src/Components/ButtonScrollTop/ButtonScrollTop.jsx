@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ButtonScrollTopCSS } from './ButtonScrollTop.styles';
 
-function ButtonScrollTop() {
+function ButtonScrollTop(props) {
   const [showButton, setShowButton] = useState(false);
   const { FaArrowUpCSS, LinkCSS } = ButtonScrollTopCSS;
 
@@ -16,7 +16,7 @@ function ButtonScrollTop() {
   }, []);
 
   return (
-    <LinkCSS className={showButton ? 'fade-in' : ''} onClick={handleScrollTop} id='scroll-top'>
+    <LinkCSS className={showButton ? 'fade-in' : ''} onClick={handleScrollTop} id='scroll-top' {...props}>
       <FaArrowUpCSS />
     </LinkCSS>
   );

@@ -11,7 +11,7 @@ const Menus = styled(Menu)`
   }
 
   &.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    ${tw`bg-white dark:bg-gray-800`}
+    ${tw`bg-white dark:bg-gray-800`};
 
     svg {
       color: var(--color-primary);
@@ -22,11 +22,11 @@ const Menus = styled(Menu)`
   }
 
   & .ant-menu-item {
-    ${tw`transition-all duration-300`};
-    ${tw`sm:text-xs sm:px-0`};
+    ${tw`transition-all duration-300 text-sm line-height[40px]`};
+    ${tw`sm:px-0`};
     ${tw`md:text-xs md:px-2`};
-    ${tw`lg:text-sm lg:px-4`};
-    ${tw`xl:text-sm xl:px-6`};
+    ${tw`lg:px-4`};
+    ${tw`xl:px-6`};
 
     span,
     svg {
@@ -79,20 +79,17 @@ const Menus = styled(Menu)`
 
 const SiderBar = styled(Sider)`
   ${tw`z-20  overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0 flex-none border-t-1 border-r-1  w-full`};
-  ${tw`lg:min-width[230px !important]`};
 
   &.ant-layout-sider-collapsed {
     color: var(--color-primary);
-    ${tw`min-w-[60px !important] max-w-[60px !important] w-[100% !important]`}
 
     div.ant-layout-sider-trigger {
-      ${tw`bg-white dark:bg-gray-800 border-t-1 border-r-1 dark:border-gray-600 `}
-      width: 60px !important;
+      ${tw`bg-white border-t-1 border-r-1 `}
     }
   }
 
   div.ant-layout-sider-children {
-    ${tw`py-4 text-gray-500 dark:text-gray-400 `}
+    ${tw`py-4   `}
     div {
       ${tw` md:px-1.5 sm:px-2`}
     }
@@ -102,10 +99,7 @@ const SiderBar = styled(Sider)`
     }
   }
   div.ant-layout-sider-trigger {
-    color: var(--color-primary);
-    ${tw`bg-white dark:bg-gray-800 border-t-1 border-r-1 dark:border-gray-600`}
-
-    ${tw`lg:width[230px !important]`};
+    ${tw`bg-white border-t-1 border-r-1  color[var(--color-primary)]`}
   }
 `;
 

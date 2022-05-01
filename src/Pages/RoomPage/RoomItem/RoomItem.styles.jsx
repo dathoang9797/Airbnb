@@ -1,15 +1,18 @@
 import tw, { styled } from 'twin.macro';
+import { NavLink } from 'react-router-dom';
 
-const Container = styled.div`
-  ${tw`font-family[Circular] border-t-1 border-color[#ebebeb] py-6 flex flex-col `}
+const Container = styled(NavLink)`
+  ${tw`font-family[Circular] border-t-1 border-color[#ebebeb] py-6 flex flex-col  transition-all duration-300`}
+  ${tw`md:flex-row md:flex`};
   .greyText {
     ${tw`text-sm color[var(--color-text-light)]`}
   }
   .separator {
     ${tw`w-8 h-[1px] background-color[var(--color-medium)]`}
   }
-
-  ${tw`md:flex-row md:flex`}
+  &:hover {
+    ${tw`color[var(--color-primary)]`}
+  }
 `;
 
 const Rating = styled.div`

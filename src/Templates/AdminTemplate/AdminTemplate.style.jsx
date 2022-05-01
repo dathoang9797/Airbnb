@@ -5,8 +5,12 @@ const { LinkCSS } = ButtonScrollTopCSS;
 
 const Container = styled.div`
   & ${LinkCSS} {
-    ${tw`bottom-0 right-0 m-0 left-[180px] w-[2.5rem] h-[3rem] z-index[9999]`};
-    ${tw`lg:left-[210px]`}
+    ${tw`bottom-12  left-0 m-0 translate-x-0  z-index[9999]`};
+    ${tw`lg:left-2.5`};
+  }
+
+  #admin-template{
+    ${tw`min-w-[345px]`};
   }
 `;
 

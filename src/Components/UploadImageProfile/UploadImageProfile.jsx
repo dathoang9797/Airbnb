@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { showError, showSuccess } from '@Utils/Common';
 import { Upload } from 'antd';
 import SpinnerDot from '@Components/SpinnerDot';
+import { localService } from '@/Services/LocalStorageService';
 
-function UploadImageProfile({ children, setImgRoom, token }) {
+function UploadImageProfile({ children, setImgRoom, token, userInfo }) {
   const [loading, setLoading] = useState(false);
   const urlAirBnb = process.env.REACT_APP_BASE_URL_AIRBNB;
   const tokenCyberSoft = process.env.REACT_APP_TOKEN_CYBERSOFT;
@@ -46,6 +47,8 @@ function UploadImageProfile({ children, setImgRoom, token }) {
       const baseImg64 = await getBase64(originFileObj);
       setImgRoom(baseImg64);
       setLoading(false);
+      userInfo.avatar = baseImg64;
+      localService.setUserInfo(userInfo);
       showSuccess(`${name} File Update Thành Công`);
       return;
     }

@@ -1,9 +1,12 @@
 import ButtonScrollTop from '@Components/ButtonScrollTop';
 import { quanLyDanhGiaSelector, quanLyPhongChoThueSelector } from '@Redux/Selector';
 import { quanLyDanhGiaThunk, quanLyPhongChoThueThunk } from '@Redux/Thunk';
+import { geoCodeService } from '@Services/GeoCodeService';
 import _ from 'lodash';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState,useLayoutEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import BookingDetailDatePicker from './BookingDetailDatePicker';
 import BookingDetailInfo from './BookingDetailInfo';
 import BookingDetailMap from './BookingDetailMap';
 import BookingDetailPrice from './BookingDetailPrice';
@@ -14,7 +17,10 @@ import GridImagesDetail from './GridImagesDetail';
 import TitleDetail from './TitleDetail';
 
 function DetailPage() {
+  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+
   const dispatch = useDispatch();
+  const { idRoom } = useParams();
   const { DetailContainer, ContentLeft, ContentRight, BookingContainer } = DetailPageCSS;
 
   const { selectDanhSachDanhGia } = quanLyDanhGiaSelector;
@@ -27,10 +33,7 @@ function DetailPage() {
   const chiTietPhong = useSelector(selectChiTietPhongChoThue, _.isEqual);
 
   const {
-    deleteAt,
     _id,
-    locationId,
-    __v,
     name,
     guests,
     bedRoom,
@@ -48,14 +51,23 @@ function DetailPage() {
     heating,
     cableTV,
     image,
+    locationId,
   } = chiTietPhong;
 
   useEffect(() => {
     Promise.all([
       dispatch(getDanhSachDanhGiaAsync()),
-      dispatch(getChiTietPhongChoThueAsync('61699651efe193001c0a5bda')),
+      dispatch(getChiTietPhongChoThueAsync(idRoom)),
     ]);
-  }, [dispatch, getChiTietPhongChoThueAsync, getDanhSachDanhGiaAsync]);
+  }, [dispatch, getChiTietPhongChoThueAsync, getDanhSachDanhGiaAsync, idRoom]);
+
+  useEffect(() => {
+    if (!locationId?.province) return;
+    geoCodeService.getGeoCodeByAddress(name, locationId.province, true,false).then((data) => {
+      const { lat, lng } = data[0].geometry.location;
+      setCoordinates({ lat, lng });
+    });
+  }, [name, locationId]);
 
   return (
     <DetailContainer>
@@ -81,12 +93,13 @@ function DetailPage() {
             heating={heating}
             cableTV={cableTV}
           />
+          <BookingDetailDatePicker price={price} roomId={_id} />
         </ContentLeft>
         <ContentRight>
           <BookingDetailPrice price={price} roomId={_id} />
         </ContentRight>
         <BookingDetailReview danhSachDanhGia={danhSachDanhGia} />
-        <BookingDetailMap />
+        <BookingDetailMap coordinates={coordinates} province={locationId?.province ?? ''} />
       </BookingContainer>
       <ButtonScrollTop />
     </DetailContainer>

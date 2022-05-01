@@ -12,7 +12,7 @@ const InputNumber = styled(InputNumberAnt)`
   }
 
   svg {
-    ${tw` color[var(--color-primary) ]`}
+    ${tw`color[var(--color-primary) ]`}
   }
 `;
 

@@ -1,63 +1,72 @@
 import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
+import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import moment from 'moment';
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DatePickerModal } from 'react-rainbow-components';
-import { useDispatch } from 'react-redux';
-import { BookingDetailPriceDateCSS } from './BookingDetailPriceDate.styles';
-import BookingDetailPriceDatePopup from './BookingDetailPriceDatePopup';
-import { batch } from 'react-redux';
+import { batch, shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { BookingDetailPriceDateModalCSS } from './BookingDetailPriceDateModal.styles';
 
 function BookingDetailPriceDate(props) {
-  const { Container, Content, Heading, Title, Item, Button, CheckIn, CheckOut } =
-    BookingDetailPriceDateCSS;
-  const dispatch = useDispatch();
-  const { roomId, price } = props;
-  const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueAction;
   const [isOpen, setIsOpen] = useState(false);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [date, setDate] = useState({ startDate: null, endDate: null });
   const [valueDatePicker, setValueDatePicker] = useState(null);
-  const minDate = useMemo(() => new Date(), []);
-  const maxDate = useMemo(() => new Date(moment().add(6, 'M')), []);
+  const dispatch = useDispatch();
+
+  const { Container, Content, Heading, Title, Item, Button, CheckIn, CheckOut } =
+    BookingDetailPriceDateModalCSS;
+  const { roomId, price } = props;
   const addDayStr = 'Thêm Ngày';
+  const dateFormat = 'DD-MM-YYYY';
+  const minDate = new Date();
+  const maxDate = new Date(moment().add(6, 'M'));
+
+  const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueAction;
+
+  const { selectBookingRoom } = quanLyPhongChoThueSelector;
+
+  const bookingRoom = useSelector(selectBookingRoom, shallowEqual);
+
+  const { checkIn, checkOut } = bookingRoom;
+
+  useEffect(() => {
+    if (checkIn && checkOut) {
+      setDate({
+        startDate: moment(checkIn).format(dateFormat),
+        endDate: moment(checkOut).format(dateFormat),
+      });
+    }
+  }, [checkIn, checkOut]);
+
+  const handleOpen = () => setIsOpen(!isOpen);
 
   const handlePrice = (checkIn, checkOut) => {
     if (checkIn && checkOut) {
       const day = moment(checkOut).diff(moment(checkIn), 'days');
-      console.log({ day });
       return (price * day).toLocaleString();
     }
     return (price * 1).toLocaleString();
   };
 
   const formatDates = (dates) => {
-    const dateFormat = 'DD-MM-YYYY';
     if (dates) {
       const startDay = moment(dates[0]).format(dateFormat);
-      console.log({ startDay });
       if (dates.length > 1) {
         const endDay = moment(dates[1]).format(dateFormat);
-        return {
-          startDay,
-          endDay,
-        };
+        return { startDay, endDay };
       }
-      return {
-        startDay,
-      };
+      return { startDay };
     }
     return '';
   };
 
   const handleDatePickerChange = async (value) => {
     const { startDay, endDay } = formatDates(value);
-    const checkIn = startDay ? moment(startDay, 'DD-MM-YYYY').toISOString() : '';
-    const checkOut = endDay ? moment(endDay, 'DD-MM-YYYY').toISOString() : '';
+    const checkIn = startDay ? moment(startDay, dateFormat).toISOString() : '';
+    const checkOut = endDay ? moment(endDay, dateFormat).toISOString() : '';
     const params = { roomId, checkIn, checkOut };
 
     if (startDay && endDay) {
-      setStartDate(startDay);
-      setEndDate(endDay);
+      setDate({ startDate: startDay, endDate: endDay });
       setValueDatePicker(value);
       setIsOpen(!isOpen);
       const totalPrice = handlePrice(checkIn, checkOut);
@@ -69,13 +78,11 @@ function BookingDetailPriceDate(props) {
     }
 
     if (startDay) {
-      setStartDate(startDay);
+      setDate({ ...date, startDate: startDay });
       setValueDatePicker(value);
       return;
     }
   };
-
-  const handleOpen = () => setIsOpen(!isOpen);
 
   return (
     <Container>
@@ -97,26 +104,23 @@ function BookingDetailPriceDate(props) {
         onRequestClose={() => setIsOpen(false)}
         selectionType='range'
         locale='vi-VN'
-        id='datePicker-17_modal'
+        id='date-picker_modal'
         minDate={minDate}
         maxDate={maxDate}
       />
       <Content>
-        <Item>
+        <Item isOpen={isOpen}>
           <Button type='button' onClick={handleOpen}>
             <CheckIn>
               <h1>Nhận phòng</h1>
-              <span>{startDate ? startDate : addDayStr}</span>
+              <span>{date.startDate ? date.startDate : addDayStr}</span>
             </CheckIn>
             <CheckOut>
               <h1>Trả phòng</h1>
-              <span>{endDate ? endDate : addDayStr}</span>
+              <span>{date.endDate ? date.endDate : addDayStr}</span>
             </CheckOut>
           </Button>
         </Item>
-      </Content>
-      <Content>
-        <BookingDetailPriceDatePopup />
       </Content>
     </Container>
   );

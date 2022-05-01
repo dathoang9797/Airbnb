@@ -44,10 +44,7 @@ const DescLeftFirst = styled.span`
   ${tw`-webkit-box-align[center ] min-width[0px ] margin-top[8px ] align-items[center ]display[inline-flex] color[rgb(34, 34, 34)]`};
   & > span:first-child {
     ${tw`-webkit-box-align[center] color[var(--color-primary)] 
-      items-center inline-flex mr-1 min-width[14px]`}
-    svg {
-      ${tw`block h-3.5 w-3.5 fill[currentColor]`};
-    }
+      items-center inline-flex  mr-1 min-width[14px]`}
   }
   & > span:last-child {
     ${tw`text-sm pl-1 font-semibold underline`}
@@ -78,7 +75,7 @@ const DescRightContentItem = styled.div`
   span {
     ${tw`mr-2`}
     svg {
-      ${tw`block fill[none] h-4 w-4 stroke[currentcolor] stroke-width[2] overflow-visible`};
+      ${tw` h-4 w-4 `};
     }
   }
 `;

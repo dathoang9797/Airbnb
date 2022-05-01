@@ -6,21 +6,27 @@ import { messageApp, showWarning } from '@Utils/Common';
 import { useFormik } from 'formik';
 import _ from 'lodash';
 import moment from 'moment';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadingSelector } from '@Redux/Selector/LoadingSelect';
 import SpinnerDot from '@Components/SpinnerDot';
 
 function ProfileUpdate({ handleOk, fieldProfileUpdate }) {
+  const [typeInput, setTypeInput] = useState('password');
   const dispatch = useDispatch();
-  const { capNhatProfileAsync } = quanLyNguoiDungThunk;
+
   const { updateProfileField, renderUserField } = userField;
   const initialValues = { ...updateProfileField, ...fieldProfileUpdate };
-  const refChiTietNguoiDung = useRef(initialValues);
   const { messageNoDifferent } = messageApp;
   const { FormContainer, FormControl, FormButton } = Form;
+
+  const { capNhatProfileAsync } = quanLyNguoiDungThunk;
+
   const { selectIsLoadingPopupState } = loadingSelector;
+
   const isLoadingPopup = useSelector(selectIsLoadingPopupState);
+
+  const refChiTietNguoiDung = useRef(initialValues);
 
   const handleSubmitEditUser = async (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
@@ -32,6 +38,14 @@ function ProfileUpdate({ handleOk, fieldProfileUpdate }) {
     const params = { idNguoiDung, noiDungCapNhat, isLoading: false, isLoadingPopup: true };
     await dispatch(capNhatProfileAsync(params));
     handleOk();
+  };
+
+  const handleChangeTypeInput = () => {
+    if (typeInput === 'password') {
+      setTypeInput('text');
+    } else {
+      setTypeInput('password');
+    }
   };
 
   const handleChangeDatePicker = async (date) => {
@@ -64,12 +78,12 @@ function ProfileUpdate({ handleOk, fieldProfileUpdate }) {
       ) : (
         <FormContainer onFinish={handleSubmit}>
           {renderUserField(
-            null,
+            typeInput,
             updateProfileField,
             errors,
             values,
             handleChange,
-            null,
+            handleChangeTypeInput,
             handleChangeDatePicker,
             handleChangeSelect,
             handleChangeSwitch

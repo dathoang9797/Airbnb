@@ -1,12 +1,22 @@
 import * as yup from 'yup';
-import { messageApp } from '@Utils/Common';
+import { messageApp, regularPassWord } from '@Utils/Common';
 
-const { messageEmailIsUnValid, messageFieldIsRequire, messageNameUserShouldNotEmpty } = messageApp;
+const {
+  messageEmailIsUnValid,
+  messageFieldIsRequire,
+  messageNameUserShouldNotEmpty,
+  messagePasswordIsValid,
+} = messageApp;
 
 export const updateProfileSchema = yup.object().shape({
   _id: yup.string().required(messageFieldIsRequire),
   name: yup.string().required(messageNameUserShouldNotEmpty),
   email: yup.string().required(messageFieldIsRequire).email(messageEmailIsUnValid),
+  password: yup
+    .string()
+    .required(messageFieldIsRequire)
+    .min(8)
+    .matches(regularPassWord, messagePasswordIsValid),
   phone: yup
     .string()
     .required()

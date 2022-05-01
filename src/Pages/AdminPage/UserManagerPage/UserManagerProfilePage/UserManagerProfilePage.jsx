@@ -10,14 +10,13 @@ const { account } = images;
 
 function UserManagerProfile() {
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
-  const { address, avatar, birthday, email, gender, name, phone, tickets } = chiTietNguoiDung;
   const { Container, Content, About, Desc, Grid, GridContent, GridItem, GridKey, Img } =
     UserManagerProfileCSS;
 
   const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
 
   const chiTietNguoiDung = useSelector(selectChiTietNguoiDung, _.isEqual);
-
+  const { address, avatar, birthday, email, gender, name, phone, tickets } = chiTietNguoiDung;
   const isHasChiTietNguoiDung = _.isEmpty(chiTietNguoiDung);
 
   return isHasChiTietNguoiDung ? (

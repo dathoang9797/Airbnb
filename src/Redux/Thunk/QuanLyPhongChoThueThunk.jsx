@@ -43,13 +43,12 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
 const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueTheoViTriAsync',
   async ({ idViTriArr, isLoading, isLoadingPopup }, { rejectWithValue }) => {
+    console.log({idViTriArr})
     const promiseArr = idViTriArr.map((idViTri) =>
       quanLyPhongChoThueService.layPhongChoThueTheoViTri(idViTri, isLoading, isLoadingPopup)
     );
     const result = await Promise.all(promiseArr);
-    console.log({ idViTriArr });
     console.log({ result });
-
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
     }
@@ -222,6 +221,7 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
     const updateUserInfo = { ...userInfo, ...result.userDetail };
     localService.setUserInfo(updateUserInfo);
     showSuccess(capitalize(capitalize(result.message)));
+    history.goBack()
   }
 );
 

@@ -138,7 +138,7 @@ const Table = styled(TableAnt)`
 
     th.ant-table-column-has-sorters,
     th.ant-table-selection-column {
-      ${tw`table-cell border-b-0 border-t-0 font-size[0.8em] padding-left[15px !important]`};
+      ${tw`p-0 table-cell border-b-0 border-t-0 font-size[0.8em]`}
     }
 
     tr {

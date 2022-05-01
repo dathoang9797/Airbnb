@@ -117,7 +117,7 @@ const ButtonCollapse = styled.button`
   } */
 
   svg {
-    ${tw`block fill[none] h-4 w-4 stroke-current stroke-width[4] overflow-visible`}
+    ${tw` h-4 w-4 `}
   }
 `;
 

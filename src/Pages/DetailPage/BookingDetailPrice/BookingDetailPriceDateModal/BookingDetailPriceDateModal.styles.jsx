@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 const Container = tw.div`
-  relative mb-4 rounded-lg bg-white font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif]
+  relative  rounded-lg bg-white  font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif] 
 `;
 
 const Content = tw.div`
@@ -10,9 +10,10 @@ const Content = tw.div`
 `;
 
 const Item = styled.div`
-  ${tw`w-full flex[1 1 0%] inset[0px 0px -1px] border-radius[8px 8px 0px 0px] border-color[#b0b0b0]  border-1 z-0  border-b-0`};
-  &:focus-within {
-    ${tw`border-color[#222] border-2`};
+  ${tw`w-full flex[1 1 0%] inset[0px 0px -1px] z-20`};
+  &:after {
+    ${tw`content absolute top-0 left-0 w-full h-full border[1px solid #b0b0b0] border-radius[8px 8px 0px 0px !important] border-b-0 z-index[-1]`};
+    ${(props) => (props.isOpen ? tw`border[2px solid #222!important]  ` : '')};
   }
 `;
 
@@ -53,7 +54,7 @@ const Heading = styled.div`
   }
 `;
 
-export const BookingDetailPriceDateCSS = {
+export const BookingDetailPriceDateModalCSS = {
   Container,
   Content,
   Item,

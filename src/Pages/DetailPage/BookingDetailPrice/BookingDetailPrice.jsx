@@ -2,7 +2,8 @@ import React from 'react';
 import { BookingDetailPriceCSS } from './BookingDetailPrice.styles';
 import BookingDetailPriceBill from './BookingDetailPriceBill';
 import BookingDetailPriceHeader from './BookingDetailPriceHeader';
-import BookingDetailPriceDate from './BookingDetailPriceDate';
+import BookingDetailPriceDateModal from './BookingDetailPriceDateModal';
+import BookingDetailPricePopup from './BookingDetailPricePopup';
 
 const BookingDetailPrice = (props) => {
   const { Container, Booking, BookingContent } = BookingDetailPriceCSS;
@@ -13,8 +14,9 @@ const BookingDetailPrice = (props) => {
       <Booking>
         <BookingContent>
           <BookingDetailPriceHeader price={price} />
-          <BookingDetailPriceDate roomId={roomId} price={price} />
-          <BookingDetailPriceBill price={price}/>
+          <BookingDetailPriceDateModal roomId={roomId} price={price} />
+          <BookingDetailPricePopup />
+          <BookingDetailPriceBill price={price} />
         </BookingContent>
       </Booking>
     </Container>
