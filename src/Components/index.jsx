@@ -1,6 +1,5 @@
 import { ButtonCSS } from './Button';
 import ButtonScrollTop from './ButtonScrollTop';
-import CardPopup from './CardPopup';
 import Form from './Form';
 import SearchInput from './SearchInput';
 import SpinnerFallBack from './SpinerFallBack';
@@ -15,7 +14,6 @@ import SearchMap from './SearchMap';
 export {
   ButtonCSS,
   ButtonScrollTop,
-  CardPopup,
   Form,
   SearchInput,
   SpinnerFallBack,

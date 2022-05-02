@@ -18,6 +18,7 @@ const initialState = {
   danhSachPhongChoThue: [],
   chiTietPhongChoThue: {},
   danhSachPhongChoThueTheoViTri: [],
+  danhSachPhongChoThueTheoViTriBackUp: [],
   bookingRoom: {},
   totalPriceBooking: 0,
 };
@@ -90,7 +91,12 @@ const quanLyPhongChoThueSlice = createSlice({
       }
     });
     builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.fulfilled, (state, action) => {
-      state.danhSachPhongChoThueTheoViTri = action.payload;
+      if (action.payload.length > 0) {
+        state.danhSachPhongChoThueTheoViTri = action.payload;
+        state.danhSachPhongChoThueTheoViTriBackUp = action.payload;
+      } else {
+        state.danhSachPhongChoThueTheoViTri = state.danhSachPhongChoThueTheoViTriBackUp;
+      }
     });
     builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.rejected, (state, action) => {
       if (action.payload) {

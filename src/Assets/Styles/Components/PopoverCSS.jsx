@@ -3,7 +3,7 @@ import tw, { css } from 'twin.macro';
 export const PopoverCSS = css`
   .wrap-card-popup {
     ${tw`p-0 bg-white rounded-lg box-shadow[ 0 0 0 1px rgb(0 0 0 / 32%)] color[#222] pointer-events-auto font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
-    overflow: hidden]`};
+    ] overflow-hidden`};
     .ant-popover-arrow {
       ${tw`hidden`};
     }

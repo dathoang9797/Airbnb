@@ -1,10 +1,10 @@
 import React from 'react';
-import { CardPopupCSS } from './CardPopup.styles';
+import { RoomCardCSS } from './RoomCard.styles';
 
-function CardPopup(props) {
-  // console.log({ props });
+function RoomCard(props) {
   const { phong } = props;
-  const { description, image, price, name, locationId } = phong;
+  const { description, image, price, name, locationId, _id } = phong;
+  const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;
   const {
     Container,
     Button,
@@ -18,10 +18,10 @@ function CardPopup(props) {
     PopoverPrice,
     PopoverRating,
     Rate,
-  } = CardPopupCSS;
+  } = RoomCardCSS;
 
   const title = (
-    <PopoverLink href='/rooms/574807036190872888?location=Th%C3%A0nh%20ph%E1%BB%91%20H%E1%BB%93%20Ch%C3%AD%20Minh&amp;previous_page_section_name=1001&amp;federated_search_id=c3e81b3f-cd1c-4cad-a41e-9b27fb3a8ec8'>
+    <PopoverLink to={`${urlDetailPage}/${_id}`}>
       <img src={image} alt={image} />
     </PopoverLink>
   );
@@ -69,4 +69,4 @@ function CardPopup(props) {
   );
 }
 
-export default React.memo(CardPopup);
+export default React.memo(RoomCard);

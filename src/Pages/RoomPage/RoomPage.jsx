@@ -10,7 +10,7 @@ import { geoCodeService } from '@Services/GeoCodeService';
 import { removeSpace, removeUnicode } from '@Utils/Common';
 import { Layout } from 'antd';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState, useLayoutEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import RoomItem from './RoomItem';
@@ -66,6 +66,8 @@ function RoomPage() {
     setCollapsed(!collapsed);
   };
 
+  useLayoutEffect(() => window.scrollTo(0, 0));
+
   useEffect(() => {
     Promise.all([
       dispatch(getViTriTheoTenThanhPhoAsync('Cầu Sông Hàn')),
@@ -99,7 +101,7 @@ function RoomPage() {
     if (isLoadingPopup) return setShowSpinnerMap(true);
     const waitingCloseLoadingPopup = setTimeout(() => {
       setShowSpinnerMap(false);
-    }, 2000);
+    }, 500);
     return () => clearTimeout(waitingCloseLoadingPopup);
   }, [isLoadingPopup]);
 
@@ -150,7 +152,7 @@ function RoomPage() {
     return (
       <>
         {danhSachPhongChoThueTheoViTriSlice.map((phong) => {
-          return <RoomItem key={phong._id} phong={phong} />;
+          return <RoomItem key={phong._id} phong={phong} showSpinnerMap={showSpinnerMap} />;
         })}
         <Pagination
           defaultCurrent={1}
@@ -160,29 +162,27 @@ function RoomPage() {
         />
       </>
     );
-  }, [danhSachPhongChoThueTheoViTri.length, danhSachPhongChoThueTheoViTriSlice]);
+  }, [danhSachPhongChoThueTheoViTri.length, danhSachPhongChoThueTheoViTriSlice, showSpinnerMap]);
 
   return (
     <Container>
       <Layout>
         <ContentSider trigger={null} collapsible collapsed={collapsed}>
-          <span>300+ stays · 1 Sep - 3 Sep · 1 guest</span>
-          <h1>Stays in selected map area</h1>
-          <Filter>
+          <span>Hơn 300 chỗ ở tại khu vực trên bản đồ</span>
+
+          {/* <Filter>
             <button className='mr-2'>Cancellation flexibility</button>
             <button className='mr-2'>Type of place</button>
             <button className='mr-2'>Price</button>
             <button className='mr-2'>Instant book</button>
             <button className='mr-2'>More filters</button>
-          </Filter>
+          </Filter> */}
           <Scarcity>
             <img src={calendar} alt='Calendar' />
             <span>
-              <span>
-                67% of places in Lake District for your dates and guests are already booked.
-              </span>
+              Hơn 95.000 khách đã ở tại Thành phố Hồ Chí Minh. Trung bình họ xếp hạng chỗ ở của mình
+              ở mức 4.8/5 sao.
             </span>
-            You may want to book soon.
           </Scarcity>
           <List>{renderPhongChoThue}</List>
         </ContentSider>

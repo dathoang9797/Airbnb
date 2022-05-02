@@ -3,9 +3,9 @@ import tw, { styled } from 'twin.macro';
 const Container = styled.div`
   ${tw`whitespace-nowrap z-10 absolute mt-6 left-1/2 -translate-x-1/2  transition-all duration-300 -webkit-box-pack[center] -webkit-box-align[center] bg-white box-shadow[rgb(0 0 0 / 12%) 0px 6px 16px] rounded-lg inline-flex items-center justify-center flex-row h-10 top[15%]`};
 
-  /* @media (max-width: 1100px) {
-    ${tw`display[none !important]`};
-  } */
+  @media (max-width: 1100px) {
+    ${tw` top[5%]`};
+  }
 
   &:hover {
     ${tw`bg-white`};
