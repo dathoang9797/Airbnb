@@ -1,6 +1,8 @@
 import tw, { styled } from 'twin.macro';
 
-const Container = tw.div`my-0 mx-auto text-center whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`;
+const Container = styled.div`
+  ${tw`my-0 mx-auto text-center whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+`;
 
 const FirstDot = styled.div`
   width: 6px;

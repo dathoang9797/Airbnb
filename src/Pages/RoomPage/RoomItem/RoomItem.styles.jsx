@@ -7,9 +7,7 @@ const Container = styled(NavLink)`
   .greyText {
     ${tw`text-sm color[var(--color-text-light)]`}
   }
-  .separator {
-    ${tw`w-8 h-[1px] background-color[var(--color-medium)]`}
-  }
+
   &:hover {
     ${tw`color[var(--color-primary)]`}
   }
@@ -26,27 +24,12 @@ const PriceNight = styled.div`
   ${tw`font-size[18px] font-bold `}
 `;
 
-const PriceTotal = styled.div`
-  ${tw`text-sm color[var(--color-text-light)] underline mt-0.5`}
-`;
-
 const Price = styled.div`
   ${tw`text-right flex flex-col`}
 `;
 
-const Detail = styled.div`
-  ${tw`flex justify-between mt-auto`}
-`;
-
-const Desc = styled.div`
-  ${tw`pt-[15px]`};
-  span {
-    ${tw`block mb-1.5`}
-  }
-`;
-
 const Title = styled.div`
-  ${tw`flex justify-between text-justify font-semibold `}
+  ${tw`flex justify-between text-justify font-semibold mb-2.5`}
   button {
     ${tw`w-8 h-8 bg-none outline-none relative flex items-center justify-center border-none p-0 cursor-pointer`}
 
@@ -62,14 +45,24 @@ const Title = styled.div`
   }
 `;
 
+const Desc = styled.div`
+  span {
+    ${tw`block mb-1.5`}
+  }
+`;
+
+const Detail = styled.div`
+  ${tw`flex justify-between mt-auto`}
+`;
+
 const Content = styled.div`
   ${tw`w-full pl-4 flex flex-col  mt-3`}
   ${tw`md:w-[calc(100% - 300px)] md:mt-0`}
 `;
 
 const Image = styled.div`
-  ${tw`w-full height[200px] border-radius[10px] overflow-hidden relative`};
-  ${tw`md:width[300px] `}
+  ${tw`w-full height[300px] border-radius[10px] overflow-hidden relative`};
+  ${tw`md:width[300px] md:h-auto`}
 
   ${Container}:hover & button {
     ${tw`opacity-70`};
@@ -111,7 +104,6 @@ export const RoomItemCSS = {
   Desc,
   Detail,
   Price,
-  PriceTotal,
   PriceNight,
   Rating,
 };

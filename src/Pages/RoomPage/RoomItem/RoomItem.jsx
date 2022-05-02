@@ -1,8 +1,9 @@
 import React from 'react';
 import { RoomItemCSS } from './RoomItem.styles';
 import { images } from '@Assets/Images';
+import RoomSpinner from './RoomSpinner';
 
-function RoomItem({ phong }) {
+function RoomItem({ phong, showSpinnerMap }) {
   const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;
   const {
     _id,
@@ -31,7 +32,9 @@ function RoomItem({ phong }) {
 
   const { chevronLeft, chevronRight, heart, star } = images;
 
-  return (
+  return showSpinnerMap ? (
+    <RoomSpinner />
+  ) : (
     <Container to={`${urlDetailPage}/${_id}`}>
       <Image>
         <button>
@@ -61,10 +64,9 @@ function RoomItem({ phong }) {
             </button>
           </div>
         </Title>
-        <div className='separator' />
         <Desc>
           <span className='greyText'>
-            {guests} Guest {bedRoom} bedroom {bath ? `${bath} bath` : ''}
+            {guests} Guest . {bedRoom} bedroom . {bath ? `${bath} bath` : ''}
           </span>
           <span className='greyText'>
             {kitchen ? 'Kitchen .' : ''} {wifi ? 'Wifi .' : ''} {gym ? 'Gym .' : ''}
@@ -82,9 +84,6 @@ function RoomItem({ phong }) {
             <PriceNight>
               £{price} <span> / night</span>
             </PriceNight>
-            <PriceTotal>
-              <span>£57 total</span>
-            </PriceTotal>
           </Price>
         </Detail>
       </Content>

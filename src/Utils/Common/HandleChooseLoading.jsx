@@ -32,15 +32,11 @@ export const handleChooseEndLoading = (headers) => {
 
   if (headers.isLoading) {
     store.dispatch(setRequestSpinnerEnded());
-    const userInfo = localService.getUserInfo();
-    if (userInfo) headers.token = userInfo.token;
     return;
   }
 
   if (headers.isLoadingPopup) {
     store.dispatch(setRequestSpinnerEndedPopup());
-    const userInfo = localService.getUserInfo();
-    if (userInfo) headers.token = userInfo.token;
     return;
   }
 };

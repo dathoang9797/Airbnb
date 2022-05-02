@@ -1,6 +1,7 @@
 import tw, { styled } from 'twin.macro';
 import { Popover as PopoverAnt } from 'antd';
 import { Rate as RateAnt } from 'antd';
+import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
   ${tw`absolute bottom-0 z-0 pointer-events-auto translate[calc(-50% + 0px), calc(50% + 0px)] transition-transform duration-300 ease-in-out left-1/2 font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif] font-semibold `}
@@ -38,7 +39,7 @@ const Popover = styled(PopoverAnt)`
 
 const ContentPopover = styled.div``;
 
-const PopoverLink = styled.a`
+const PopoverLink = styled(NavLink)`
   ${tw`h-[250px] inline-block w-[300px]`};
 
   img {
@@ -76,7 +77,7 @@ const Rate = styled(RateAnt)`
   ${tw`color[var(--color-primary)] text-sm mr-1`};
 `;
 
-export const CardPopupCSS = {
+export const RoomCardCSS = {
   Container,
   Content,
   Button,

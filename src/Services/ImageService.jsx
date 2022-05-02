@@ -1,11 +1,11 @@
 import axiosClient from '@Utils/Http/AxiosClient';
 
 export const imagesService = {
-  async convertUrlToBase64(imageUrl, isLoading =true , isLoadingPopup) {
+  async convertUrlToBase64(imageUrl, isLoading = true, isLoadingPopup = false) {
     if (imageUrl.startsWith('data:')) return imageUrl;
     const config = {
       responseType: 'blob',
-      headers: { isLoading  , isLoadingPopup },
+      headers: { isLoading, isLoadingPopup },
       timeout: 30000,
     };
 

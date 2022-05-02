@@ -1,4 +1,4 @@
-import CardPopup from '@Components/CardPopup';
+import RoomCard from './RoomCard';
 import GoogleMapReact from 'google-map-react';
 import React, { useMemo } from 'react';
 
@@ -8,7 +8,7 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setC
     return places.map((place, index) => {
       if (!place.length || !danhSachPhongChoThueTheoViTriSlice[index]) return null;
       return (
-        <CardPopup
+        <RoomCard
           lat={place[0].geometry.location.lat}
           lng={place[0].geometry.location.lng}
           key={`${place[0].place_id}-${index}`}

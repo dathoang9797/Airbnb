@@ -3,12 +3,52 @@ import tw, { styled } from 'twin.macro';
 
 const { Sider } = Layout;
 
+const Container = styled.main`
+  ${tw`relative pt-20 pb-6 font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    ]`}
+
+  .ant-pagination-item-active {
+    ${tw`font-medium bg-white border-color[var(--color-primary)]`};
+  }
+
+  .ant-pagination-item:hover {
+    ${tw`transition-all duration-300 border-color[var(--color-primary)]`};
+  }
+
+  .ant-pagination-prev:hover .ant-pagination-item-link,
+  .ant-pagination-next:hover .ant-pagination-item-link {
+    ${tw`color[var(--color-primary)] border-color[var(--color-primary)]`};
+  }
+
+  .ant-layout-has-sider {
+    ${tw`flex-col`}
+
+    @media (max-width: 1100px) {
+      ${tw`flex-col-reverse`};
+    }
+  }
+
+  #scroll-top {
+    ${tw`right[45px] bottom[23px]`};
+
+    @media (max-width: 1050px) {
+      ${tw`right[0] `};
+    }
+  }
+`;
+
 const Map = styled.div`
   ${tw`background-color[pink] w-[ calc(100% - 840px)] absolute right-0 top-0 bottom-0 transition-all duration-300`}
+  @media (max-width: 1100px) {
+    ${tw`static w-full`};
+  }
 `;
 
 const MainContent = styled.div`
   ${tw`height[100vh] flex items-center justify-center sticky top-0`}
+  @media (max-width: 1100px) {
+    ${tw`height[450px]`};
+  }
 `;
 
 const Pagination = styled(PaginationAnt)`
@@ -18,17 +58,14 @@ const Pagination = styled(PaginationAnt)`
 const List = styled.div``;
 
 const Scarcity = styled.div`
-  ${tw`flex items-center pt-[30px] pb-5`};
+  ${tw`flex items-center py-4 font-normal `};
   img {
     ${tw` mr-[15px]`};
-  }
-  span span {
-    ${tw` font-bold`}
   }
 `;
 
 const Filter = styled.div`
-  ${tw`pt-[15px]`}
+  ${tw` pt-3.5`}
 
   button {
     ${tw`mr-1.5 py-2 px-4 outline-none bg-transparent m-0 border-1 border-color[#b0b0b0] border-radius[30px] transition-all duration-300`}
@@ -39,13 +76,7 @@ const Filter = styled.div`
 `;
 
 const ContentSider = styled(Sider)`
-  ${tw`min-h-[calc(100vh - 80px) !important] max-width[100% !important] width[100% !important] padding[60px 24px 0 !important] background-color[white !important] min-width[840px !important]
-   flex[0 0 200px !important]
-  `}
-
-  @media (max-width: 860px) {
-    ${tw` min-width[100% !important] `};
-  }
+  ${tw` max-width[840px !important] min-width[840px !important] width[100% !important] px-6 py-6 background-color[white !important]  flex[0 0 200px !important]  font-normal`}
 
   &.ant-layout-sider {
     ${tw`transition-all duration-300`}
@@ -55,9 +86,10 @@ const ContentSider = styled(Sider)`
     ${tw`min-h-[0 !important] max-width[0 !important] width[0 !important] padding[0!important] background-color[white !important] min-width[0 !important]
    flex[0 0 0 !important]
     `}
+
     .ant-layout-sider-children,
     ${Filter} {
-      ${tw`transition-all duration-300 opacity-0 invisible`}
+      ${tw`transition-all duration-300 opacity-0 invisible cursor-text`}
     }
   }
 
@@ -67,41 +99,11 @@ const ContentSider = styled(Sider)`
 
   .ant-layout-sider-children,
   ${Filter} {
-    ${tw`transition-all duration-300 opacity-100 visible`}
+    ${tw`transition-all duration-300 opacity-100 visible cursor-text`}
   }
 
-  h1 {
-    ${tw`mt-[18px ] font-size[34px ]`}
-  }
-`;
-
-const Container = styled.main`
-  ${tw`relative pt-20 pb-6 font-family[Circular]`}
-
-  .ant-pagination-item-active {
-    font-weight: 500;
-    background: #fff;
-    border-color: var(--color-primary);
-  }
-
-  .ant-pagination-item:hover {
-    border-color: var(--color-primary);
-    transition: all 0.3s;
-  }
-
-  .ant-pagination-prev:hover .ant-pagination-item-link,
-  .ant-pagination-next:hover .ant-pagination-item-link {
-    color: var(--color-primary);
-    border-color: var(--color-primary);
-  }
-
-  #scroll-top {
-    right: 45px;
-    bottom: 23px;
-
-    @media (max-width: 1050px) {
-      right: 0;
-    }
+  @media (max-width: 1100px) {
+    ${tw`max-width[100% !important] min-width[100% !important]`};
   }
 `;
 
@@ -112,12 +114,12 @@ const ButtonCollapse = styled.button`
     ${tw`outline-none`}
   }
 
-  /* @media (max-width: 1100px) {
-    ${tw`display[none !important]`};
-  } */
-
   svg {
     ${tw` h-4 w-4 `}
+  }
+
+  @media (max-width: 1100px) {
+    ${tw`hidden`};
   }
 `;
 
