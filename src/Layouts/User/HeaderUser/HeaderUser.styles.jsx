@@ -81,6 +81,7 @@ const Nav = styled(Logo)`
 const Container = styled.header`
   ${tw`h-[80px] px-6 flex items-center w-full fixed z-20 bg-white justify-between box-shadow[rgba(0, 0, 0, 0.08) 0px 1px 12px 
    ]`};
+  
 `;
 
 export const HeaderCSS = {

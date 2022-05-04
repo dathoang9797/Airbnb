@@ -1,9 +1,13 @@
 import React from 'react';
 import { FooterCSS } from '@Layouts/User/FooterUser/FooterUser.styles';
 import { FacebookOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
+import { HiOutlineGlobeAlt } from 'react-icons/hi';
+import { MdAttachMoney } from 'react-icons/md';
 
 function FooterUser() {
+  const date = new Date();
   const { Container, MenuItem, Top, Bottom, CopyRight, Social } = FooterCSS;
+  
   return (
     <Container>
       <Top>
@@ -100,7 +104,7 @@ function FooterUser() {
       </Top>
       <Bottom>
         <CopyRight>
-          <span>© 2021 Copyright</span>
+          <span>© {date.getFullYear()} Copyright</span>
           <div>
             <a href='/terms/privacy_policy'>Quyền riêng tư</a>
             <a href='/terms'>Điều khoản</a>
@@ -108,8 +112,13 @@ function FooterUser() {
           </div>
         </CopyRight>
         <Social>
-          <a href='/terms/privacy_policy'>Tiếng Việt (VN)</a>
-          <a href='/terms'>USD</a>
+          <a href='/terms/privacy_policy' className='flex justify-center items-center'>
+            <HiOutlineGlobeAlt className='text-base mr-1' /> Tiếng Việt (VN)
+          </a>
+          <a href='/terms' className='flex justify-center items-center'>
+            <MdAttachMoney className='text-base ' />
+            USD
+          </a>
           <a href='/sitemaps/v2'>
             <FacebookOutlined />
           </a>

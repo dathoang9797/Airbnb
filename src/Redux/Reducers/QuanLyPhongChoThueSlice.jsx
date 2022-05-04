@@ -18,7 +18,6 @@ const initialState = {
   danhSachPhongChoThue: [],
   chiTietPhongChoThue: {},
   danhSachPhongChoThueTheoViTri: [],
-  danhSachPhongChoThueTheoViTriBackUp: [],
   bookingRoom: {},
   totalPriceBooking: 0,
 };
@@ -32,6 +31,9 @@ const quanLyPhongChoThueSlice = createSlice({
     },
     setTotalPriceBookingAction: (state, action) => {
       state.totalPriceBooking = action.payload;
+    },
+    setResetDanhSachPhongChoThueTheoViTriAction: (state, action) => {
+      state.danhSachPhongChoThueTheoViTri = [];
     },
   },
   extraReducers: (builder) => {
@@ -91,12 +93,7 @@ const quanLyPhongChoThueSlice = createSlice({
       }
     });
     builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.fulfilled, (state, action) => {
-      if (action.payload.length > 0) {
-        state.danhSachPhongChoThueTheoViTri = action.payload;
-        state.danhSachPhongChoThueTheoViTriBackUp = action.payload;
-      } else {
-        state.danhSachPhongChoThueTheoViTri = state.danhSachPhongChoThueTheoViTriBackUp;
-      }
+      state.danhSachPhongChoThueTheoViTri = action.payload;
     });
     builder.addCase(getDanhSachPhongChoThueTheoViTriAsync.rejected, (state, action) => {
       if (action.payload) {
@@ -115,8 +112,16 @@ const quanLyPhongChoThueSlice = createSlice({
   },
 });
 
-const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueSlice.actions;
+const {
+  setBookingRoomAction,
+  setTotalPriceBookingAction,
+  setResetDanhSachPhongChoThueTheoViTriAction,
+} = quanLyPhongChoThueSlice.actions;
 
-export const quanLyPhongChoThueAction = { setBookingRoomAction, setTotalPriceBookingAction };
+export const quanLyPhongChoThueAction = {
+  setBookingRoomAction,
+  setTotalPriceBookingAction,
+  setResetDanhSachPhongChoThueTheoViTriAction,
+};
 
 export default quanLyPhongChoThueSlice.reducer;

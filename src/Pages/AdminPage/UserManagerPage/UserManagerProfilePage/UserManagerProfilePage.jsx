@@ -6,12 +6,12 @@ import _ from 'lodash';
 import { Redirect } from 'react-router';
 import moment from 'moment';
 import { images } from '@Assets/Images';
-const { account } = images;
 
 function UserManagerProfile() {
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const { Container, Content, About, Desc, Grid, GridContent, GridItem, GridKey, Img } =
     UserManagerProfileCSS;
+  const { account } = images;
 
   const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
 

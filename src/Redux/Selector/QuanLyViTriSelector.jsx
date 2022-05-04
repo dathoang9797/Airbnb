@@ -6,30 +6,20 @@ const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
 const selectDanhSachViTri = (state) => state.QuanLyViTriReducer.danhSachViTri;
 
-const selectViTriTheoThanhPho = (state) => state.QuanLyViTriReducer.viTriTheoThanhPho;
-
 const selectChiTietViTri = (state) => state.QuanLyViTriReducer.chiTietViTri;
 
-const selectorProvince = (state) => state.QuanLyViTriReducer.province;
-
-const selectIdViTriTheoThanhPho = createSelector(selectViTriTheoThanhPho, (viTriTheoThanhPho) => {
-  return viTriTheoThanhPho._id;
-});
+const selectorProvinces = (state) => state.QuanLyViTriReducer.provinces;
 
 const selectDanhSachViTriByProvince = createSelector(
   selectDanhSachViTri,
-  selectorProvince,
+  selectorProvinces,
   (danhSachViTri, provinces) => {
-    if (!provinces.length) {
-      return [];
-    }
-
+    if (!provinces.length) return [];
     const result = provinces.map((province) => {
       return danhSachViTri.filter((viTri) => {
-        return removeSpace(removeUnicode(viTri.province)) === province;
+        return removeSpace(removeUnicode(viTri.province)) === removeSpace(removeUnicode(province));
       });
     });
-
     return result.flat();
   }
 );
@@ -46,6 +36,9 @@ const selectDanhSachProvince = createSelector(selectDanhSachViTri, (danhSachViTr
     }) //Remove element undefined
     .filter((province) => {
       return province !== undefined;
+    }) //Remove element empty
+    .filter((province) => {
+      return province.length !== 0;
     });
   return provinceArr;
 });
@@ -63,8 +56,6 @@ const selectDanhViTriFilter = createSelector(
 
 export const quanLyViTriSelector = {
   selectDanhSachViTri,
-  selectViTriTheoThanhPho,
-  selectIdViTriTheoThanhPho,
   selectDanhSachViTriByProvince,
   selectDanhSachProvince,
   selectDanhViTriFilter,

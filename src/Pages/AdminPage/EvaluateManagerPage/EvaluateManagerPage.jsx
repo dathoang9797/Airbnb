@@ -12,10 +12,10 @@ import EvaluateManagerAdd from './EvaluateManagerAdd';
 import EvaluateManagerEdit from './EvaluateManagerEdit';
 
 function EvaluateManagerPage(props) {
+  const dispatch  = useDispatch();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const idTable = useMemo(() => nanoid(), []);
-
-  const dispatch = useDispatch();
+  
   const { showModal, handlePropsContentModal, handleContentModal } = props;
   const { tableColumnsEvaluateField } = evaluateField;
   const { Table } = TableCSS;

@@ -4,11 +4,11 @@ import { ButtonScrollTopCSS } from './ButtonScrollTop.styles';
 function ButtonScrollTop(props) {
   const [showButton, setShowButton] = useState(false);
   const { FaArrowUpCSS, LinkCSS } = ButtonScrollTopCSS;
-
   const handleScrollTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
   useEffect(() => {
     const handleShowButton = () => {
+     
       setShowButton(window.scrollY > 1);
     };
     window.addEventListener('scroll', handleShowButton);
@@ -22,4 +22,4 @@ function ButtonScrollTop(props) {
   );
 }
 
-export default ButtonScrollTop;
+export default React.memo(ButtonScrollTop);

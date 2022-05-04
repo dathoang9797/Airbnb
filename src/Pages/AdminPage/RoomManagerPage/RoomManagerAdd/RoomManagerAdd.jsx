@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 
 function RoomManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
-  const { addRoomField, renderRoomField } = roomField;
+  const { addRoomField, renderFormRoomField } = roomField;
   const { FormContainer, FormControl, FormButton } = Form;
 
   const { taoPhongChoThueAsync } = quanLyPhongChoThueThunk;
@@ -38,7 +38,7 @@ function RoomManagerAdd({ handleOk }) {
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
-      {renderRoomField(
+      {renderFormRoomField(
         addRoomField,
         errors,
         values,

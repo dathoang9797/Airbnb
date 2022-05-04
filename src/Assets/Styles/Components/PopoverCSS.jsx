@@ -8,6 +8,10 @@ export const PopoverCSS = css`
       ${tw`hidden`};
     }
 
+    .ant-popover-content {
+      ${tw`inline-block w-[250px]`};
+    }
+
     .ant-popover-placement-bottom,
     .ant-popover-placement-bottomLeft,
     .ant-popover-placement-bottomRight {

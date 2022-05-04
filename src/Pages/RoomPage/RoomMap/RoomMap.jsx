@@ -2,23 +2,25 @@ import RoomCard from './RoomCard';
 import GoogleMapReact from 'google-map-react';
 import React, { useMemo } from 'react';
 
-function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTriSlice, setCoordinates }) {
+function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTri, setCoordinates }) {
+  const { lat, lng } = coordinates;
+
   const renderPlaces = useMemo(() => {
-    if (!places.length || !danhSachPhongChoThueTheoViTriSlice.length) return;
+    if (!places.length || !danhSachPhongChoThueTheoViTri.length) return;
     return places.map((place, index) => {
-      if (!place.length || !danhSachPhongChoThueTheoViTriSlice[index]) return null;
+      if (!place.length || !danhSachPhongChoThueTheoViTri[index]) return null;
       return (
         <RoomCard
           lat={place[0].geometry.location.lat}
           lng={place[0].geometry.location.lng}
           key={`${place[0].place_id}-${index}`}
-          phong={danhSachPhongChoThueTheoViTriSlice[index]}
+          phong={danhSachPhongChoThueTheoViTri[index]}
         />
       );
     });
-  }, [danhSachPhongChoThueTheoViTriSlice, places]);
+  }, [danhSachPhongChoThueTheoViTri, places]);
 
-  return (
+  return !lat || !lng ? null : (
     <GoogleMapReact
       bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY_GOOGLE }}
       defaultCenter={coordinates}

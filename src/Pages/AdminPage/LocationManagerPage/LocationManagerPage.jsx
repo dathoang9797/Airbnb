@@ -45,6 +45,8 @@ function LocationManagerPage(props) {
 
   const handleDeleteLocation = async (idRoom) => {
     dispatch(xoaViTriAsync(idRoom));
+    setSelectedRowKeys([]);
+
   };
 
   const renderDataTable = () => {

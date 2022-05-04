@@ -23,14 +23,12 @@ function AdminTemplate({ Component, ...restRoute }) {
 
   useLayoutEffect(() => window.scrollTo(0, 0));
 
-
   useLayoutEffect(() => {
     const handleScroll = () => {
       const antLayoutSiderTrigger = document.querySelector('.ant-layout-sider-trigger');
       const sideBar = document.querySelector('#side-bar');
       const buttonScrollTop = document.querySelector('#scroll-top');
-      console.log({ antLayoutSiderTrigger, sideBar, buttonScrollTop });
-      console.log(window.scrollX);
+
       if (antLayoutSiderTrigger && sideBar) {
         if (
           pathname === urlAdminUser ||

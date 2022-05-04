@@ -6,11 +6,7 @@ const Container = styled.div`
     ${tw`border-color[var(--color-primary)]`};
   }
   .ant-upload-select-picture {
-    ${tw` 
-    lg:w-[300px !important] lg:h-[200px !important]
-    md:w-[200px !important] md:h-[150px !important]
-    sm:w-[200px !important] sm:h-[150px !important]
-    `};
+    ${tw` w-[250px !important] sm:h-[150px !important] `};
   }
 
   .ant-upload-select-picture-card {

@@ -10,7 +10,7 @@ const {
   FormSwitch,
 } = Form;
 
-export const renderRoomField = (
+export const renderFormRoomField = (
   field = null,
   errors = null,
   values = null,

@@ -3,8 +3,8 @@ import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
 import { images } from '@Assets/Images';
 
 function HeaderUser() {
-  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
   const [state, setState] = useState(false);
+  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
   const { Container, Logo, Nav, Search, SearchIcon, NavA, NavButton } = HeaderCSS;
 
   useLayoutEffect(() => {
@@ -24,6 +24,7 @@ function HeaderUser() {
       setState(false);
     }
   };
+  
   window.addEventListener('scroll', changeClassOnSroll);
   return (
     <Container className={state ? 'active' : ''}>

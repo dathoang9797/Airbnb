@@ -11,7 +11,7 @@ function UserManagerFormAdd({ handleOk }) {
   const [typeInput, setTypeInput] = useState('password');
   
   const dispatch = useDispatch();
-  const { addUserField, renderUserField } = userField;
+  const { addUserField, renderFormUserField } = userField;
   const { FormContainer, FormControl, FormButton } = Form;
   
   const { taoNguoiDungAsync } = quanLyNguoiDungThunk;
@@ -55,7 +55,7 @@ function UserManagerFormAdd({ handleOk }) {
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
-      {renderUserField(
+      {renderFormUserField(
         typeInput,
         addUserField,
         errors,

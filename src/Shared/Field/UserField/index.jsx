@@ -3,7 +3,7 @@ import { editUserField } from './EditUserField';
 import { updateProfileField } from './UpdateProfileField';
 import { signUpField } from './SignUpField';
 import { signInField } from './SignInField';
-import { renderUserField } from './RenderUserField';
+import { renderFormUserField } from './FormUserField';
 import { tableColumnsUserField } from './TableColumnUserField';
 
 export const userField = {
@@ -11,7 +11,7 @@ export const userField = {
   editUserField,
   signUpField,
   signInField,
-  renderUserField,
+  renderFormUserField,
   tableColumnsUserField,
   updateProfileField,
 };

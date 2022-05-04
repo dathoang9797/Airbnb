@@ -1,11 +1,11 @@
 import { addLocationField } from './AddLocationFied';
 import { editLocationField } from './EditLocationField';
-import { renderLocationField } from './RenderFieldLocation';
+import { renderFormLocationField } from './FormFieldLocation';
 import { tableColumnsLocationField } from './TableColumnLocationField';
 
 export const locationField = {
   addLocationField,
   editLocationField,
-  renderLocationField,
+  renderFormLocationField,
   tableColumnsLocationField,
 };

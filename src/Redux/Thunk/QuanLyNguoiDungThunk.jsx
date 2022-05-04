@@ -78,7 +78,7 @@ const setRegisterUserInfoAsync = createAsyncThunk(
       }
 
       showSuccess(messageRegisterSucceed);
-      History.push(urlSignIn);
+      history.push(urlSignIn);
       return;
     }
     return rejectWithValue(messageNameOrEmailIsExits);
@@ -181,7 +181,7 @@ const capNhatNguoiDungAsync = createAsyncThunk(
     }
 
     showSuccess(messageUpdateSuccess);
-    History.goBack();
+    history.goBack();
   }
 );
 

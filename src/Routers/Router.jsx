@@ -3,7 +3,7 @@ import AdminTemplate from '@Templates/AdminTemplate';
 import UserTemplate from '@Templates/UserTemplate';
 import React, { lazy } from 'react';
 
-const HomePage = lazy(() => import('@Pages/HomePage/HomePage'));
+const HomePage = lazy(() => import('@Pages/HomePage'));
 const ProfilePage = lazy(() => import('@Pages/ProfilePage'));
 const SignInPage = lazy(() => import('@Pages/SignInPage'));
 const SignUpPage = lazy(() => import('@Pages/SignUpPage'));
@@ -46,7 +46,7 @@ export const routerUserTemplate = [
   { path: process.env.REACT_APP_LINK_HOME, componentPage: HomePage },
   { path: process.env.REACT_APP_LINK_PROFILE, componentPage: ProfilePage },
   { path: process.env.REACT_APP_LINK_DETAIL + '/:idRoom', componentPage: DetailPage },
-  { path: process.env.REACT_APP_LINK_ROOM, componentPage: RoomPage },
+  { path: process.env.REACT_APP_LINK_ROOM + '/:cityName', componentPage: RoomPage },
   { path: process.env.REACT_APP_LINK_NOT_FOUND, componentPage: NotFoundPage },
 ];
 
