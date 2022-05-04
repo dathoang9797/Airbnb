@@ -10,6 +10,15 @@ import heart from './heart.svg';
 import searchIcon from './searchIcon.svg';
 import star from './star.svg';
 import svg30 from './svg30.svg';
+import tphcm from './tphcm.jpg';
+import haNoi from './hanoi.jpg';
+import daNang from './daNang.jpg';
+import phuQuoc from './PhuQuoc.jpg';
+import nhaTrang from './NhaTrang.jpg';
+import vungTau from './VungTau.jpg';
+import canTho from './CanTho.jpg';
+import heroImgOne from './hero-img-one.jpg';
+import hoiAn from './HoiAn.jpg';
 
 export const images = {
   logo,
@@ -24,4 +33,13 @@ export const images = {
   searchIcon,
   star,
   svg30,
+  tphcm,
+  haNoi,
+  daNang,
+  phuQuoc,
+  nhaTrang,
+  vungTau,
+  canTho,
+  heroImgOne,
+  hoiAn,
 };

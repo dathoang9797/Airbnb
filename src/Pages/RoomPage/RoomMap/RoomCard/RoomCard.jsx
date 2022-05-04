@@ -22,7 +22,14 @@ function RoomCard(props) {
 
   const title = (
     <PopoverLink to={`${urlDetailPage}/${_id}`}>
-      <img src={image} alt={image} />
+      <img
+        src={image ?? `https://picsum.photos/id/250/200`}
+        alt={image}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src = `https://picsum.photos/id/250/200`;
+        }}
+      />
     </PopoverLink>
   );
 
@@ -38,7 +45,7 @@ function RoomCard(props) {
         <PopoverTitle>{locationId ? Rating : 'Chưa có đánh giá nào'} </PopoverTitle>
         <PopoverParagraph>{name}</PopoverParagraph>
         <PopoverParagraph>
-          {description.length >= 30 ? description.substring(0, 30) + '...' : description}
+          {description.length > 40 ? description.substring(0, 40) + '...' : description}
         </PopoverParagraph>
         <PopoverPrice>
           <span>${price.toLocaleString()}</span>

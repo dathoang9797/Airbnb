@@ -23,7 +23,7 @@ const {
   FormSwitch,
 } = Form;
 
-export const renderUserField = (
+export const renderFormUserField = (
   typeInput = null,
   field = null,
   errors = null,
@@ -92,9 +92,9 @@ export const renderUserField = (
               >
                 <FormLockOutlined />
                 {typeInput === 'password' ? (
-                  <FormEyeOutlined onClick={handleChangeTypeInput} />
-                ) : (
                   <FormEyeInvisibleOutlined onClick={handleChangeTypeInput} />
+                ) : (
+                  <FormEyeOutlined onClick={handleChangeTypeInput} />
                 )}
                 <FormInput
                   type={typeInput}

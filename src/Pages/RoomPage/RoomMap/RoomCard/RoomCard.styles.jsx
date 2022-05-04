@@ -40,7 +40,7 @@ const Popover = styled(PopoverAnt)`
 const ContentPopover = styled.div``;
 
 const PopoverLink = styled(NavLink)`
-  ${tw`h-[250px] inline-block w-[300px]`};
+ 
 
   img {
     ${tw`h-full w-full object-cover`};
@@ -48,7 +48,7 @@ const PopoverLink = styled(NavLink)`
 `;
 
 const PopoverDesc = styled.div`
-  ${tw`pt-3 px-4`};
+  ${tw`py-3 px-2`};
 `;
 
 const PopoverTitle = styled.span`
@@ -56,7 +56,7 @@ const PopoverTitle = styled.span`
 `;
 
 const PopoverParagraph = styled.p`
-  ${tw`mb-0.5 overflow-clip text-base text-overflow[ellipsis] -webkit-box-orient[vertical] -webkit-line-clamp[1] color[#222] font-normal display[-webkit-box]`};
+  ${tw`mb-0.5 overflow-clip text-base text-overflow[ellipsis] -webkit-box-orient[vertical] -webkit-line-clamp[1] color[#222] font-normal `};
 `;
 
 const PopoverPrice = styled.div`

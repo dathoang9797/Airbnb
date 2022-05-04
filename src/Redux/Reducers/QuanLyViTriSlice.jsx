@@ -5,14 +5,12 @@ import { showError } from '@Utils/Common';
 const initialState = {
   danhSachViTri: [],
   chiTietViTri: {},
-  viTriTheoThanhPho: {},
-  province: '',
+  provinces: [],
 };
 
 const {
   getChiTietViTriAsync,
   getDanhSachViTriAsync,
-  getViTriTheoTenThanhPhoAsync,
   xoaNhieuViTrigAsync,
   xoaViTriAsync,
   taoviTriAsync,
@@ -23,8 +21,8 @@ const quanLyViTriSlice = createSlice({
   name: 'quanLyViTriReducer',
   initialState,
   reducers: {
-    setProvinceAction: (state, action) => {
-      state.province = action.payload;
+    setProvincesAction: (state, action) => {
+      state.provinces = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -76,22 +74,12 @@ const quanLyViTriSlice = createSlice({
         showError(action.error.message);
       }
     });
-    builder.addCase(getViTriTheoTenThanhPhoAsync.fulfilled, (state, action) => {
-      state.viTriTheoThanhPho = action.payload[0];
-    });
-    builder.addCase(getViTriTheoTenThanhPhoAsync.rejected, (state, action) => {
-      if (action.payload) {
-        showError(action.payload);
-      } else {
-        showError(action.error.message);
-      }
-    });
   },
 });
 
-const { setProvinceAction } = quanLyViTriSlice.actions;
+const { setProvincesAction } = quanLyViTriSlice.actions;
 
 export const quanLyViTriAction = {
-  setProvinceAction,
+  setProvincesAction,
 };
 export default quanLyViTriSlice.reducer;

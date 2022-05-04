@@ -11,6 +11,11 @@ export const tableColumnsTicketField = [
         'data-label': 'Mã Vé',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'Mã Vé',
+      };
+    },
   },
   {
     title: 'Người đặt',
@@ -28,6 +33,11 @@ export const tableColumnsTicketField = [
       }
     },
     onCell: (record) => {
+      return {
+        'data-label': 'Người đặt',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Người đặt',
       };
@@ -55,6 +65,11 @@ export const tableColumnsTicketField = [
         'data-label': 'Content',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'Content',
+      };
+    },
   },
   {
     title: 'Tên phòng',
@@ -73,6 +88,11 @@ export const tableColumnsTicketField = [
       }
     },
     onCell: (record) => {
+      return {
+        'data-label': 'Ngày tạo vé',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Ngày tạo vé',
       };
@@ -110,6 +130,11 @@ export const tableColumnsTicketField = [
         'data-label': 'CheckOut',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'CheckOut',
+      };
+    },
     sorter: (a, b) => {
       if (a.checkOut && b.checkOut) {
         const checkOutA = a.checkOut.toLowerCase();
@@ -127,6 +152,11 @@ export const tableColumnsTicketField = [
     dataIndex: 'action',
     key: 'action',
     onCell: (record) => {
+      return {
+        'data-label': 'Thao tác',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Thao tác',
       };

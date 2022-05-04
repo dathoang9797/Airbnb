@@ -15,7 +15,7 @@ import { RoomManagerEditCSS } from './RoomManagerEditPage.styles';
 function RoomManagerEditPage() {
   const dispatch = useDispatch();
   const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
-  const { editRoomField, renderRoomField } = roomField;
+  const { editRoomField, renderFormRoomField } = roomField;
   const { messageNoDifferent } = messageApp;
   const { Container } = RoomManagerEditCSS;
   const { FormContainer, FormControl, FormButton } = Form;
@@ -71,7 +71,7 @@ function RoomManagerEditPage() {
   ) : (
     <Container>
       <FormContainer onFinish={handleSubmit} size='small'>
-        {renderRoomField(
+        {renderFormRoomField(
           editRoomField,
           errors,
           values,

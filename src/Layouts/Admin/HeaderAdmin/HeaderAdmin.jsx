@@ -33,7 +33,6 @@ function HeaderAdmin() {
   const handleLogOut = () => {
     localService.removeUserInfo();
     history.push(urlSignIn);
-    window.location.reload();
   };
 
   const items = [

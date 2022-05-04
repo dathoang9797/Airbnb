@@ -50,6 +50,7 @@ function UserManagerPage(props) {
 
   const handleDeleteUser = async (idNguoiDung) => {
     dispatch(xoaNguoiDungAsync(idNguoiDung));
+    setSelectedRowKeys([]);
   };
 
   const handleGetProfileUser = async (idNguoiDung) => {

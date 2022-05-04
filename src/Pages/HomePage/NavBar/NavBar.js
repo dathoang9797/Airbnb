@@ -1,10 +1,7 @@
 import "./NavBar.css";
-import React, { useState, useEffect } from "react";
-import { images } from "@Assets/Images";
+import React, { useState } from "react";
 import "animate.css";
 function NavBar() {
-  const { logo } = images;
-
   const [state, setState] = useState(false);
   const changeClassOnSroll = () => {
     const scrollValue = document.documentElement.scrollTop;

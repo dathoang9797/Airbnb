@@ -5,7 +5,7 @@ import { Mixins } from '@Assets/Styles/Abstracts/Mixins';
 const { backgroundLinearGradient } = Mixins;
 
 const ShowProfile = styled.button`
-  ${tw`inline-block  border-2 border-green-500 text-green-500 font-medium  leading-tight uppercase rounded  hover:bg-green-500 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out px-1.5 py-1.5 text-[10px] mr-1`};
+  ${tw`inline-block  border-2 border-green-500 text-green-500 font-bold  leading-tight uppercase rounded  hover:bg-green-500 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out px-1.5 py-1.5 text-[10px] mr-1`};
   ${tw`lg:text-xs`};
 `;
 

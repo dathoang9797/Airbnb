@@ -1,6 +1,8 @@
 import tw, { styled } from 'twin.macro';
 import { Mixins } from '@Assets/Styles/Abstracts/Mixins';
 
+const { backgroundLinearGradient } = Mixins;
+
 const MenuItem = styled.section`
   ${tw`xl:flex-grow xl:flex-shrink-0 xl:flex-basis[0%] px-3 `};
 
@@ -39,7 +41,7 @@ const MenuItem = styled.section`
   }
 `;
 const CopyRight = styled.div`
-  ${tw`flex justify-center items-center mt-0 xl:flex-row  md:mt-2  md:flex-col sm:flex-col`};
+  ${tw`flex justify-center items-center mt-0 xl:flex-row    md:flex-col sm:flex-col`};
   span,
   a {
     ${tw`mr-4 transition-all  duration-300  md:pb-0.5`};
@@ -70,11 +72,11 @@ const Social = styled.div`
 `;
 
 const Bottom = styled.div`
-  ${tw`container m-auto py-6 border-t-1 border-gray-300 flex justify-between items-center`};
-  ${tw`sm:flex-col-reverse`};
-  ${tw`md:flex-col-reverse`};
-  ${tw`lg:flex-col-reverse`};
-  ${tw`xl:flex-grow px-3 xl:flex-row`};
+  ${tw`px-20 m-auto py-6  flex justify-between items-center flex-col-reverse relative`};
+  ${tw`xl:flex-grow  xl:flex-row`};
+  &:after {
+    ${tw`w-[calc(100% - 160px)] border-t-1 border-gray-300 content absolute py-10`}
+  }
 `;
 
 const Top = styled.div`

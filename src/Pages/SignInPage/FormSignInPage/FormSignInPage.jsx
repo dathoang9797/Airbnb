@@ -14,7 +14,7 @@ function FormSignInPage() {
   const dispatch = useDispatch();
   const { FormContainer, FormControl, FormButton } = Form;
   const { NotHaveAccountLink } = FormSignInPageCSS;
-  const { signInField, renderUserField } = userField;
+  const { signInField, renderFormUserField } = userField;
 
   const { setUserInfoAsync } = quanLyNguoiDungThunk;
 
@@ -38,7 +38,7 @@ function FormSignInPage() {
 
   return (
     <FormContainer onFinish={handleSubmit}>
-      {renderUserField(
+      {renderFormUserField(
         typeInput,
         signInField,
         errors,

@@ -15,7 +15,7 @@ import { LocationManagerEditCSS } from './LocationManagerEditPage.styles';
 function LocationMangerEditPage() {
   const dispatch = useDispatch();
   const urlLocationsManager = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER;
-  const { editLocationField, renderLocationField } = locationField;
+  const { editLocationField, renderFormLocationField } = locationField;
   const { messageNoDifferent } = messageApp;
   const { Container } = LocationManagerEditCSS;
   const { FormContainer, FormControl, FormButton } = Form;
@@ -64,7 +64,7 @@ function LocationMangerEditPage() {
   ) : (
     <Container>
       <FormContainer onFinish={handleSubmit} size='small'>
-        {renderLocationField(editLocationField, errors, values, handleChange, handleInputNumber)}
+        {renderFormLocationField(editLocationField, errors, values, handleChange, handleInputNumber)}
         <FormControl>
           <FormButton type='submit'>EDIT LOCATION</FormButton>
         </FormControl>

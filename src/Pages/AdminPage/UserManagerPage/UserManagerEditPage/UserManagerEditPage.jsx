@@ -16,7 +16,7 @@ import { UserManagerEditCSS } from './UserManagerEditPage.styles';
 function UserManagerEdit() {
   const dispatch = useDispatch();
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
-  const { editUserField, renderUserField } = userField;
+  const { editUserField, renderFormUserField } = userField;
   const { messageNoDifferent } = messageApp;
   const { FormContainer, FormControl, FormButton } = Form;
 
@@ -75,7 +75,7 @@ function UserManagerEdit() {
   ) : (
     <UserManagerEditCSS.Container>
       <FormContainer onFinish={handleSubmit}>
-        {renderUserField(
+        {renderFormUserField(
           null,
           editUserField,
           errors,

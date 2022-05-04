@@ -15,7 +15,7 @@ function ProfileUpdate({ handleOk, fieldProfileUpdate }) {
   const [typeInput, setTypeInput] = useState('password');
   const dispatch = useDispatch();
 
-  const { updateProfileField, renderUserField } = userField;
+  const { updateProfileField, renderFormUserField } = userField;
   const initialValues = { ...updateProfileField, ...fieldProfileUpdate };
   const { messageNoDifferent } = messageApp;
   const { FormContainer, FormControl, FormButton } = Form;
@@ -77,7 +77,7 @@ function ProfileUpdate({ handleOk, fieldProfileUpdate }) {
         <SpinnerDot />
       ) : (
         <FormContainer onFinish={handleSubmit}>
-          {renderUserField(
+          {renderFormUserField(
             typeInput,
             updateProfileField,
             errors,

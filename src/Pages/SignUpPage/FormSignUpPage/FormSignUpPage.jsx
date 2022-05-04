@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 
 function FormSignUpPage() {
   const dispatch = useDispatch();
-  const { signUpField, renderUserField } = userField;
+  const { signUpField, renderFormUserField } = userField;
   const { setRegisterUserInfoAsync } = quanLyNguoiDungThunk;
   const [typeInput, setTypeInput] = useState('password');
 
@@ -43,7 +43,7 @@ function FormSignUpPage() {
 
   return (
     <Form.FormContainer onFinish={handleSubmit}>
-      {renderUserField(
+      {renderFormUserField(
         typeInput,
         signUpField,
         errors,

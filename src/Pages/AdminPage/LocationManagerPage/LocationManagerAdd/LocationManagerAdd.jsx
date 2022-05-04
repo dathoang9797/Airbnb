@@ -9,7 +9,7 @@ import { addLocationSchema } from '@Shared/Schema/AddLocationSchema';
 function LocationManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
   const { taoviTriAsync } = quanLyViTriThunk;
-  const { addLocationField, renderLocationField } = locationField;
+  const { addLocationField, renderFormLocationField } = locationField;
   const { FormContainer, FormControl, FormButton } = Form;
 
   const handleSubmitAddLocation = async (values, { resetForm }) => {
@@ -33,7 +33,7 @@ function LocationManagerAdd({ handleOk }) {
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
-      {renderLocationField(addLocationField, errors, values, handleChange, handleInputNumber)}
+      {renderFormLocationField(addLocationField, errors, values, handleChange, handleInputNumber)}
       <FormControl>
         <FormButton type='submit'>ADD LOCATION</FormButton>
       </FormControl>

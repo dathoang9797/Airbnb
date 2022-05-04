@@ -2,7 +2,7 @@ import Form from '@Components/Form';
 
 const { FormControl, FormGroup, FormItem, FormInput, InputNumber } = Form;
 
-export const renderLocationField = (
+export const renderFormLocationField = (
   field = null,
   errors = null,
   values = null,

@@ -4,7 +4,7 @@ import tw, { styled } from 'twin.macro';
 const { Sider } = Layout;
 
 const Container = styled.main`
-  ${tw`relative pt-20 pb-6 font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+  ${tw`relative pt-20 font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
     ]`}
 
   .ant-pagination-item-active {
@@ -20,8 +20,12 @@ const Container = styled.main`
     ${tw`color[var(--color-primary)] border-color[var(--color-primary)]`};
   }
 
+  .ant-layout{
+    ${tw`min-height[100vh]`};
+  }
+
   .ant-layout-has-sider {
-    ${tw`flex-col`}
+    ${tw`flex-direction[initial]`}
 
     @media (max-width: 1100px) {
       ${tw`flex-col-reverse`};
@@ -38,7 +42,7 @@ const Container = styled.main`
 `;
 
 const Map = styled.div`
-  ${tw`background-color[pink] w-[ calc(100% - 840px)] absolute right-0 top-0 bottom-0 transition-all duration-300`}
+  ${tw`background-color[pink] w-[calc(100% - 60%)] absolute right-0 top-0 bottom-0 transition-all duration-300`}
   @media (max-width: 1100px) {
     ${tw`static w-full`};
   }
@@ -76,7 +80,7 @@ const Filter = styled.div`
 `;
 
 const ContentSider = styled(Sider)`
-  ${tw` max-width[840px !important] min-width[840px !important] width[100% !important] px-6 py-6 background-color[white !important]  flex[0 0 200px !important]  font-normal`}
+  ${tw` max-width[60% !important] min-width[60% !important] width[100% !important] px-6 py-6 background-color[white !important]  flex[0 0 200px !important]  font-normal  `}
 
   &.ant-layout-sider {
     ${tw`transition-all duration-300`}

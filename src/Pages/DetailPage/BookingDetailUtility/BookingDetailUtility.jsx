@@ -9,7 +9,6 @@ function BookingDetailUtility(propsUtility) {
     IconContent,
     IconContentItem,
     IconContentItemDesc,
-    ButtonShowAllUtil,
   } = BookingDetailUtilityCSS;
 
   const renderUtility = () => {

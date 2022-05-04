@@ -28,7 +28,7 @@ function RoomManagerPage(props) {
     xoaNhieuPhongAsync,
     getChiTietPhongChoThueAsync,
   } = quanLyPhongChoThueThunk;
-  
+
   const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
 
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
@@ -49,6 +49,7 @@ function RoomManagerPage(props) {
 
   const handleDeleteRoom = (idRoom) => {
     dispatch(xoaPhongChoThueAsync(idRoom));
+    setSelectedRowKeys([]);
   };
 
   const renderDataTable = () => {

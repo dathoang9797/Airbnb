@@ -38,27 +38,6 @@ const getDanhSachViTriAsync = createAsyncThunk(
   }
 );
 
-const getViTriTheoTenThanhPhoAsync = createAsyncThunk(
-  'quanLyViTriReducer/getViTriTheoTenThanhPhoAsync',
-  async (location, { rejectWithValue }) => {
-    const result = await quanLyViTriService.layViTriTheoTenThanhPho(location);
-
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
-    }
-
-    if ('kind' in result && result.kind === 'ObjectId') {
-      return rejectWithValue(messageIdIsUnValid);
-    }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-
-    return result;
-  }
-);
-
 const getChiTietViTriAsync = createAsyncThunk(
   'quanLyViTriReducer/getChiTietViTriAsync',
   async (idViTri, { rejectWithValue }) => {
@@ -171,7 +150,6 @@ const capNhatViTriAsync = createAsyncThunk(
 
 export const quanLyViTriThunk = {
   getDanhSachViTriAsync,
-  getViTriTheoTenThanhPhoAsync,
   getChiTietViTriAsync,
   xoaViTriAsync,
   xoaNhieuViTrigAsync,

@@ -11,6 +11,11 @@ export const tableColumnsEvaluateField = [
         'data-label': 'Mã Đánh Giá',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'Mã Đánh Giá',
+      };
+    },
   },
   {
     title: 'Nội Dung',
@@ -28,6 +33,11 @@ export const tableColumnsEvaluateField = [
       }
     },
     onCell: (record) => {
+      return {
+        'data-label': 'Content',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Content',
       };
@@ -55,6 +65,11 @@ export const tableColumnsEvaluateField = [
         'data-label': 'Ngày tạo đánh giá',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'Ngày tạo đánh giá',
+      };
+    },
   },
   {
     title: 'Ngày cập nhật đánh giá',
@@ -62,6 +77,11 @@ export const tableColumnsEvaluateField = [
     key: 'updatedAt',
     render: (text, record, index) => moment(record.updatedAt).format('DD/MM/YYYY'),
     onCell: (record) => {
+      return {
+        'data-label': 'Ngày cập nhật đánh giá',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Ngày cập nhật đánh giá',
       };
@@ -83,6 +103,11 @@ export const tableColumnsEvaluateField = [
     dataIndex: 'action',
     key: 'action',
     onCell: (record) => {
+      return {
+        'data-label': 'Thao tác',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Thao tác',
       };

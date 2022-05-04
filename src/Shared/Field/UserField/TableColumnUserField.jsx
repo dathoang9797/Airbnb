@@ -12,6 +12,11 @@ export const tableColumnsUserField = [
         'data-label': 'STT',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'STT',
+      };
+    },
   },
   {
     title: 'Họ Tên',
@@ -30,6 +35,11 @@ export const tableColumnsUserField = [
       }
     },
     onCell: (record) => {
+      return {
+        'data-label': 'Họ Tên',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Họ Tên',
       };
@@ -56,6 +66,11 @@ export const tableColumnsUserField = [
         'data-label': 'Email',
       };
     },
+    onHeaderCell: () => {
+      return {
+        'data-label': 'Email',
+      };
+    },
   },
   {
     title: 'Hình Ảnh',
@@ -68,6 +83,11 @@ export const tableColumnsUserField = [
       return <Avatar src={record.avatar} alt={record.avatar} />;
     },
     onCell: (record) => {
+      return {
+        'data-label': 'Hình Ảnh',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Hình Ảnh',
       };
@@ -124,12 +144,22 @@ export const tableColumnsUserField = [
         'data-label': 'Loại Tài Khoản',
       };
     },
+    onHeaderCell: (record) => {
+      return {
+        'data-label': 'Loại Tài Khoản',
+      };
+    },
   },
   {
     title: 'Thao tác',
     dataIndex: 'action',
     key: 'action',
     onCell: (record) => {
+      return {
+        'data-label': 'Thao tác',
+      };
+    },
+    onHeaderCell: (record) => {
       return {
         'data-label': 'Thao tác',
       };
