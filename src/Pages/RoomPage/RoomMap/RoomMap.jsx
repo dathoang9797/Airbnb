@@ -23,7 +23,6 @@ function RoomMap({ coordinates, places, danhSachPhongChoThueTheoViTri, setCoordi
   return !lat || !lng ? null : (
     <GoogleMapReact
       bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY_GOOGLE }}
-      defaultCenter={coordinates}
       center={coordinates}
       defaultZoom={14}
       margin={[50, 50, 50, 50]}

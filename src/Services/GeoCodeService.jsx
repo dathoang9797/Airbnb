@@ -38,14 +38,15 @@ export const geoCodeService = {
         .then((data) => {
           handleChooseEndLoading(header);
           const results = data.results;
-          const lengthThanhPho = 'thanhpho';
-          
+          console.log({ results });
+          const thanhPho = 'thanhpho';
+
           const provinces = results[0].address_components
             .map((item, index) => {
               const province = item.long_name;
               const formatProvince = removeUnicode(removeSpace(province));
-              if (formatProvince === 'thanhphohoian') {
-                return formatProvince.slice(lengthThanhPho.length);
+              if (formatProvince.includes(thanhPho)) {
+                return formatProvince.slice(thanhPho.length);
               }
               return formatProvince;
             })

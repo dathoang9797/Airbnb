@@ -78,4 +78,6 @@ export const provincesVietNam = [
   'Hue',
   'TP.Hue',
   'Tp.Ho Chi Minh',
+  'Ba Ria',
+  'Da Lat',
 ];
