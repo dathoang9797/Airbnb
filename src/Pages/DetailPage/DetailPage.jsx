@@ -3,7 +3,7 @@ import { quanLyDanhGiaSelector, quanLyPhongChoThueSelector } from '@Redux/Select
 import { quanLyDanhGiaThunk, quanLyPhongChoThueThunk } from '@Redux/Thunk';
 import { geoCodeService } from '@Services/GeoCodeService';
 import _ from 'lodash';
-import React, { useEffect, useState,useLayoutEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BookingDetailDatePicker from './BookingDetailDatePicker';
@@ -17,7 +17,7 @@ import GridImagesDetail from './GridImagesDetail';
 import TitleDetail from './TitleDetail';
 
 function DetailPage() {
-  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
+  const [place, setPlace] = useState({ lat: 0, lng: 0, address: '' });
 
   const dispatch = useDispatch();
   const { idRoom } = useParams();
@@ -63,9 +63,10 @@ function DetailPage() {
 
   useEffect(() => {
     if (!locationId?.province) return;
-    geoCodeService.getGeoCodeByAddress(name, locationId.province, true,false).then((data) => {
+    geoCodeService.getGeoCodeByAddress(name, locationId.province, true, false).then((data) => {
       const { lat, lng } = data[0].geometry.location;
-      setCoordinates({ lat, lng });
+      const address = data[0].formatted_address;
+      setPlace({ lat, lng, address });
     });
   }, [name, locationId]);
 
@@ -99,7 +100,7 @@ function DetailPage() {
           <BookingDetailPrice price={price} roomId={_id} />
         </ContentRight>
         <BookingDetailReview danhSachDanhGia={danhSachDanhGia} />
-        <BookingDetailMap coordinates={coordinates} province={locationId?.province ?? ''} />
+        <BookingDetailMap place={place} province={locationId?.province ?? ''} />
       </BookingContainer>
       <ButtonScrollTop />
     </DetailContainer>

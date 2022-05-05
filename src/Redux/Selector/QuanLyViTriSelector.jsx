@@ -1,14 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { removeSpace, removeUnicode } from '@Utils/Common';
-import { filterSearchValue } from '@Utils/Common';
-
-const selectSearchValue = (state) => state.SearchReducer.searchValue;
+import { provincesVietNam } from '@Utils/Common';
 
 const selectDanhSachViTri = (state) => state.QuanLyViTriReducer.danhSachViTri;
 
 const selectChiTietViTri = (state) => state.QuanLyViTriReducer.chiTietViTri;
 
 const selectorProvinces = (state) => state.QuanLyViTriReducer.provinces;
+
+const selectorCityName = (state) => state.QuanLyViTriReducer.cityName;
 
 const selectDanhSachViTriByProvince = createSelector(
   selectDanhSachViTri,
@@ -39,25 +39,23 @@ const selectDanhSachProvince = createSelector(selectDanhSachViTri, (danhSachViTr
     }) //Remove element empty
     .filter((province) => {
       return province.length !== 0;
+    })
+    .filter((province) => {
+      return province.length !== 1;
     });
-  return provinceArr;
+  return provincesVietNam
+    .map((provinceVietNam) => {
+      return provinceArr.filter(
+        (province) => removeSpace(removeUnicode(provinceVietNam)) === province
+      );
+    })
+    .flat();
 });
-
-const selectDanhViTriFilter = createSelector(
-  selectDanhSachViTri,
-  selectSearchValue,
-  (danhSachViTri, searchValue) => {
-    if (!searchValue.length) return danhSachViTri;
-    const searchValueFormat = searchValue.trim().toLowerCase();
-    const cloneDanhSachViTri = [...danhSachViTri];
-    return filterSearchValue(searchValueFormat, cloneDanhSachViTri);
-  }
-);
 
 export const quanLyViTriSelector = {
   selectDanhSachViTri,
   selectDanhSachViTriByProvince,
   selectDanhSachProvince,
-  selectDanhViTriFilter,
   selectChiTietViTri,
+  selectorCityName,
 };

@@ -10,6 +10,7 @@ import { filterSearchValue } from './FilterSearchValue';
 import { handleDataTable } from './HandleDataTable';
 import { handleChooseEndLoading, handleChooseStartLoading } from './HandleChooseLoading';
 import { renderUtilityIcon } from './RenderUtilityIcon';
+import { provincesVietNam } from './ProvincesVietNam';
 
 export {
   capitalize,
@@ -27,5 +28,5 @@ export {
   handleChooseEndLoading,
   handleChooseStartLoading,
   renderUtilityIcon,
-  
+  provincesVietNam,
 };

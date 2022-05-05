@@ -27,8 +27,7 @@ function RoomItem({ phong, showSpinnerMap }) {
     locationId,
   } = phong;
 
-  const { Container, Content, Image, Title, Desc, Detail, Price, PriceNight, Rating, PriceTotal } =
-    RoomItemCSS;
+  const { Container, Content, Image, Title, Desc, Detail, Price, PriceNight, Rating } = RoomItemCSS;
 
   const { chevronLeft, chevronRight, heart, star } = images;
 

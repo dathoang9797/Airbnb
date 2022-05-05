@@ -27,7 +27,7 @@ const MenuItem = styled.section`
 
         &:after {
           ${tw`transition-all duration-300 content absolute left-0 bottom-0 w-0 h-[3px]`};
-          ${Mixins.backgroundLinearGradient(114.58)};
+          ${backgroundLinearGradient(114.58)};
         }
       }
 

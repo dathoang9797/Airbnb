@@ -1,0 +1,5 @@
+{
+  "name": "NavBar",
+  "main": "./NavBar.jsx",
+  "private": true
+}

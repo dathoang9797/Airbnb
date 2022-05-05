@@ -87,7 +87,7 @@ const setRegisterUserInfoAsync = createAsyncThunk(
 
 const getDanhSachNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/getDanhSachNguoiDungAsync',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     const result = await quanLyNguoiDungService.layTatCaNguoiDung();
 
     if (!result) {
@@ -108,7 +108,7 @@ const getDanhSachNguoiDungAsync = createAsyncThunk(
 
 const xoaNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNguoiDungAsync',
-  async (idNguoiDung, { rejectWithValue, dispatch, getState }) => {
+  async (idNguoiDung, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const result = await quanLyNguoiDungService.xoaNguoiDung(idNguoiDung);
@@ -133,7 +133,7 @@ const xoaNguoiDungAsync = createAsyncThunk(
 
 const xoaNhieuNguoiDungAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuNguoiDungAsync',
-  async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
+  async (idNguoiDungArr, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const promisesArr = idNguoiDungArr.map((idNguoiDung) =>

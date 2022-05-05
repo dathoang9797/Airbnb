@@ -9,7 +9,6 @@ function Banner() {
   const { heroImgOne } = images;
 
   const onDateSelection = (value, dateString) => {
-    console.log('Value:', value, 'DateString:', dateString);
     this.setState({
       DateAndTime: value,
       formattedDateAndTime: dateString,
@@ -31,7 +30,7 @@ function Banner() {
             backgroundImage: `url(${heroImgOne})`,
           }}
         ></span>
-        <div className='relative flex flex-col justify-center  z-10'>
+        <div className='relative flex flex-col justify-center  z-10' style={{ height: 600 }}>
           <div className='container banner__content'>
             <div className='row justify-centerter'>
               <div className='col-lg-12 col-md-12 col-sm-12 col-12'>

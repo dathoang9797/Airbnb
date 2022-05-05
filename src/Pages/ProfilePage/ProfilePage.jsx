@@ -15,8 +15,6 @@ function ProfilePage(props) {
   const { account } = images;
   const [imgRoom, setImgRoom] = useState('' || avatar);
 
-  console.log({props})
-
   const handleShowModal = () => {
     handleContentModal(ProfileUpdate);
     handlePropsContentModal({ fieldProfileUpdate });
@@ -46,7 +44,7 @@ function ProfilePage(props) {
         <CardImage>
           <img src={imgRoom || account} alt={imgRoom || account} />
         </CardImage>
-        <UploadImageProfile setImgRoom={setImgRoom} token={token} userInfo={userInfo} >
+        <UploadImageProfile setImgRoom={setImgRoom} token={token} userInfo={userInfo}>
           <CardTitleUploadImage>Cập nhật ảnh</CardTitleUploadImage>
         </UploadImageProfile>
         <CardBody>

@@ -21,7 +21,7 @@ const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueAsync',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     const result = await quanLyPhongChoThueService.layTatCaPhongChoThue();
 
     if (!result) {
@@ -43,12 +43,11 @@ const getDanhSachPhongChoThueAsync = createAsyncThunk(
 const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/getDanhSachPhongChoThueTheoViTriAsync',
   async ({ idViTriArr, isLoading, isLoadingPopup }, { rejectWithValue }) => {
-    console.log({idViTriArr})
     const promiseArr = idViTriArr.map((idViTri) =>
       quanLyPhongChoThueService.layPhongChoThueTheoViTri(idViTri, isLoading, isLoadingPopup)
     );
     const result = await Promise.all(promiseArr);
-    console.log({ result });
+
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
     }
@@ -67,7 +66,7 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
 
 const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/capNhatHinhAnhPhongChoThueAsync',
-  async ({ idRoom, formData }, { rejectWithValue, dispatch, getState }) => {
+  async ({ idRoom, formData }, { rejectWithValue, dispatch }) => {
     const result = await quanLyPhongChoThueService.capNhatHinhAnhPhongChoThue(
       idRoom,
       formData,
@@ -89,7 +88,7 @@ const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
 
 const xoaNhieuPhongAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
-  async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
+  async (idNguoiDungArr, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
@@ -113,7 +112,7 @@ const xoaNhieuPhongAsync = createAsyncThunk(
 
 const xoaPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/xoaPhongChoThueAsync',
-  async (idRoom, { rejectWithValue, dispatch, getState }) => {
+  async (idRoom, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const result = await quanLyPhongChoThueService.xoaPhongChoThue(idRoom);
@@ -204,6 +203,8 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/datPhongPhongChoThueAsync',
   async (dateBooking, { rejectWithValue, dispatch }) => {
     const result = await quanLyPhongChoThueService.datPhongChoThue(dateBooking);
+    const urlRoom = process.env.REACT_APP_LINK_ROOM;
+    const cityName = localService.getCityName();
 
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
@@ -221,7 +222,7 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
     const updateUserInfo = { ...userInfo, ...result.userDetail };
     localService.setUserInfo(updateUserInfo);
     showSuccess(capitalize(capitalize(result.message)));
-    history.goBack()
+    history.push(`${urlRoom}/${cityName}`);
   }
 );
 

@@ -39,7 +39,7 @@ export const geoCodeService = {
           handleChooseEndLoading(header);
           const results = data.results;
           const lengthThanhPho = 'thanhpho';
-          console.log({ results });
+          
           const provinces = results[0].address_components
             .map((item, index) => {
               const province = item.long_name;

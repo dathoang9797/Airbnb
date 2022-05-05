@@ -24,6 +24,9 @@ const Inject = styled.div`
   @media (min-width: 744px) {
     ${tw`rounded-lg h-[480px] mb-8 overflow-visible`}
   }
+  iframe{
+    ${tw`w-full h-full`}
+  }
 `;
 
 export const BookingDetailMapCSS = { Container, Header, Inject };
