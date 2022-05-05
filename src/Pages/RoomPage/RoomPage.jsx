@@ -69,6 +69,11 @@ function RoomPage() {
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
 
+  console.log({danhSachViTriByProvince})
+  console.log({danhSachProvince})
+  console.log({danhSachPhongChoThueTheoViTri})
+
+
   const handleToggle = () => setCollapsed(!collapsed);
 
   const handleChange = (value) => {

@@ -38,10 +38,10 @@ function ListCard({ src, title, description, price }) {
 
   const renderRoomBestSale = () => {
     if (!roomsBestSale.length) return [];
-    return roomsBestSale.map((room) => {
+    return roomsBestSale.map((room, index) => {
       const { image, name, price, description, _id } = room;
       return (
-        <CardItem to={`${urlDetail}/${_id}`}>
+        <CardItem to={`${urlDetail}/${_id}`} key={`${_id}-${index}`}>
           <img src={image} alt={image} />
           <CardHeading>
             {name.length > maxLengthName ? name.slice(0, maxLengthName) : name}
