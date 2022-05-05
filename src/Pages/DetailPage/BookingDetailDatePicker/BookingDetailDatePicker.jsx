@@ -33,7 +33,6 @@ function BookingDetailDatePicker(props) {
 
   useEffect(() => {
     if (checkIn && checkOut) {
-      console.log({ checkIn, checkOut });
       const startDate = new Date(checkIn);
       const endDate = new Date(checkOut);
       setDate([{ startDate, endDate, key: 'selection' }]);
@@ -41,7 +40,6 @@ function BookingDetailDatePicker(props) {
   }, [checkIn, checkOut]);
 
   const handleDateChange = async (date) => {
-    console.log({ date });
     const { startDate, endDate } = date.selection;
     const params = { roomId, checkIn: startDate, checkOut: endDate };
     const totalPrice = handlePrice(startDate, endDate);

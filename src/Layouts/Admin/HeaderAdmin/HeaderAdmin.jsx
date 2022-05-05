@@ -107,4 +107,4 @@ function HeaderAdmin() {
   );
 }
 
-export default HeaderAdmin;
+export default React.memo(HeaderAdmin);

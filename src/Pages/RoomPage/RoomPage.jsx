@@ -1,18 +1,19 @@
 import { images } from '@Assets/Images';
 import { ButtonScrollTop, SearchMap, SpinnerMap } from '@Components';
-import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
 import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
+import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
 import { loadingSelector } from '@Redux/Selector/LoadingSelect';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { geoCodeService } from '@Services/GeoCodeService';
+import { localService } from '@Services/LocalStorageService';
 import { Layout } from 'antd';
 import _ from 'lodash';
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { shallowEqual, useDispatch, useSelector, batch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomItem from './RoomItem';
 import RoomMap from './RoomMap';
@@ -26,7 +27,7 @@ function RoomPage() {
   const [places, setPlaces] = useState([]);
   const danhSachPhongChoThueTheoViTriRef = useRef(null);
   const danhSachViTriByProvinceRef = useRef(null);
-  const procinvesRef = useRef(null);
+  const provincesRef = useRef(null);
   const dispatch = useDispatch();
   const { cityName } = useParams();
 
@@ -35,7 +36,6 @@ function RoomPage() {
   const {
     Container,
     ContentSider,
-    Filter,
     List,
     MainContent,
     Map,
@@ -46,7 +46,11 @@ function RoomPage() {
   } = RoomCSS;
 
   const { setProvincesAction } = quanLyViTriAction;
-  const { setResetDanhSachPhongChoThueTheoViTriAction } = quanLyPhongChoThueAction;
+  const {
+    setResetDanhSachPhongChoThueTheoViTriAction,
+    setResetBookingRoomAction,
+    setResetTotalPriceBookingAction,
+  } = quanLyPhongChoThueAction;
 
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
   const { getDanhSachViTriAsync } = quanLyViTriThunk;
@@ -65,11 +69,7 @@ function RoomPage() {
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
 
-  console.log({ danhSachViTriByProvince });
-  console.log({ danhSachPhongChoThueTheoViTri });
-  const handleToggle = () => {
-    setCollapsed(!collapsed);
-  };
+  const handleToggle = () => setCollapsed(!collapsed);
 
   const handleChange = (value) => {
     setLimitValue({
@@ -82,16 +82,24 @@ function RoomPage() {
 
   useLayoutEffect(() => {
     Promise.all([
+      dispatch(getDanhSachViTriAsync()),
       dispatch(setProvincesAction([])),
       dispatch(setResetDanhSachPhongChoThueTheoViTriAction()),
-      dispatch(getDanhSachViTriAsync()),
+      dispatch(setResetBookingRoomAction()),
+      dispatch(setResetTotalPriceBookingAction()),
+      localService.setCityName(cityName),
     ]);
+    danhSachPhongChoThueTheoViTriRef.current = [];
+    danhSachViTriByProvinceRef.current = [];
+    provincesRef.current = [];
   }, [
     cityName,
     dispatch,
     getDanhSachViTriAsync,
     setProvincesAction,
+    setResetBookingRoomAction,
     setResetDanhSachPhongChoThueTheoViTriAction,
+    setResetTotalPriceBookingAction,
   ]);
 
   //Get coordinates of room address by google map api
@@ -100,18 +108,15 @@ function RoomPage() {
     if ((!lng && !lat) || !danhSachPhongChoThueTheoViTri.length) return;
     if (_.isEqual(danhSachPhongChoThueTheoViTri, danhSachPhongChoThueTheoViTriRef.current)) return;
     danhSachPhongChoThueTheoViTriRef.current = danhSachPhongChoThueTheoViTri;
-    console.log({ danhSachPhongChoThueTheoViTri });
-    console.log({ lng, lat });
-    console.log(danhSachPhongChoThueTheoViTriRef.current);
-    Promise.all(
-      danhSachPhongChoThueTheoViTri.map((phong) => {
+    async function getCoordinateOfEachRoom() {
+      const promisesArr = danhSachPhongChoThueTheoViTri.map((phong) => {
         if (!phong.name) return null;
         return geoCodeService.getGeoCodeByAddress(phong.name);
-      })
-    ).then((data) => {
-      console.log({ data });
-      setPlaces(data);
-    });
+      });
+      const result = await Promise.all(promisesArr);
+      setPlaces(result);
+    }
+    getCoordinateOfEachRoom();
   }, [coordinates, danhSachPhongChoThueTheoViTri, danhSachViTriByProvince.length]);
 
   useEffect(() => {
@@ -119,7 +124,6 @@ function RoomPage() {
     if ((!lng && !lat) || !danhSachViTriByProvince.length) return;
     if (_.isEqual(danhSachViTriByProvince, danhSachViTriByProvinceRef.current)) return;
     danhSachViTriByProvinceRef.current = danhSachViTriByProvince;
-    console.log('hello');
     const idViTriArr = danhSachViTriByProvince.map((item) => item._id);
     const params = { idViTriArr, isLoading: false, isLoadingPopup: true };
     dispatch(getDanhSachPhongChoThueTheoViTriAsync(params));
@@ -128,11 +132,10 @@ function RoomPage() {
   useEffect(() => {
     const { lng, lat } = coordinates;
     if ((!lng && !lat) || !danhSachProvince.length) return;
-    console.log({ lng, lat });
     async function getProvinces() {
       const provinces = await geoCodeService.getGeoCodeByCoordinates(lng, lat, danhSachProvince);
-      if (!_.isEqual(procinvesRef.current, provinces)) {
-        procinvesRef.current = provinces;
+      if (!_.isEqual(provincesRef.current, provinces)) {
+        provincesRef.current = provinces;
         dispatch(setProvincesAction(provinces));
       }
     }
@@ -140,9 +143,7 @@ function RoomPage() {
   }, [coordinates, dispatch, danhSachProvince, setProvincesAction]);
 
   useEffect(() => {
-    if (!cityName) return;
     geoCodeService.getGeoCodeByAddress(cityName).then((data) => {
-      console.log({ data });
       const lat = data[0].geometry.location.lat;
       const lng = data[0].geometry.location.lng;
       setCoordinates({ lat, lng });
@@ -179,13 +180,7 @@ function RoomPage() {
       <Layout>
         <ContentSider trigger={null} collapsible collapsed={collapsed}>
           <span>Hơn 300 chỗ ở tại khu vực trên bản đồ</span>
-          {/* <Filter>
-            <button className='mr-2'>Cancellation flexibility</button>
-            <button className='mr-2'>Type of place</button>
-            <button className='mr-2'>Price</button>
-            <button className='mr-2'>Instant book</button>
-            <button className='mr-2'>More filters</button>
-          </Filter> */}
+
           <Scarcity>
             <img src={calendar} alt='Calendar' />
             <span>

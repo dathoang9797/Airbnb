@@ -54,7 +54,6 @@ export const tableColumnsTicketField = [
       return record.userId.tickets.length;
     },
     sorter: (a, b) => {
-      console.log({ a });
       if (a.userId && b.userId) {
         return a.userId.tickets.length - b.userId.tickets.length;
       }
@@ -76,7 +75,6 @@ export const tableColumnsTicketField = [
     dataIndex: ['roomId', 'name'],
     key: 'room',
     sorter: (a, b) => {
-      console.log({ a });
       if (a.roomId && b.roomId) {
         const nameA = a.roomId.name.toLowerCase();
         const nameB = b.roomId.name.toLowerCase();

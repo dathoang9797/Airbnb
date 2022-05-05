@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { FeatureCSS } from './Feature.styles';
 import { images } from '@Assets/Images';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector, batch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
 import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
@@ -13,10 +13,19 @@ import { removeSpace, removeUnicode } from '@Utils/Common';
 function Feature() {
   const { tphcm, haNoi, daNang, vungTau, canTho, phuQuoc, nhaTrang, hoiAn } = images;
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
-  const { Container, FeatureHeader, GridContainer, GirdItem, GirdTitle, GridDesc } = FeatureCSS;
-  const provinceArr = [];
-  const [next, setNext] = useState(false);
+  const {
+    Container,
+    FeatureHeader,
+    GridContainer,
+    GirdItem,
+    GirdTitle,
+    GridItemDesc,
+    GirdItemTitle,
+  } = FeatureCSS;
 
+  const provinceArr = useMemo(() => [], []);
+  const [next, setNext] = useState(false);
+  const danhSachViTriByProvinceRef = useRef(null);
   const [citys, setCitys] = useState([
     { bgImage: tphcm, cityName: 'Thành phố Hồ Chí Minh', rentals: 0 },
     { bgImage: haNoi, cityName: 'Hà Nội', rentals: 0 },
@@ -27,8 +36,7 @@ function Feature() {
     { bgImage: nhaTrang, cityName: 'Nha Trang', rentals: 0 },
     { bgImage: hoiAn, cityName: 'Hội An', rentals: 0 },
   ]);
-  console.log({ next });
-  console.log('render');
+
   const dispatch = useDispatch();
 
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
@@ -41,15 +49,17 @@ function Feature() {
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
 
+
   useEffect(() => {
-    console.log('hello2');
     dispatch(setProvincesAction(provinceArr));
+    danhSachViTriByProvinceRef.current = [];
     setNext(true);
   }, [dispatch, provinceArr, setProvincesAction]);
 
   useEffect(() => {
     if (!next) return;
-    console.log('hello');
+    if (_.isEqual(danhSachViTriByProvinceRef.current, danhSachViTriByProvince)) return;
+    danhSachViTriByProvinceRef.current = danhSachViTriByProvince;
     const idViTriArr = danhSachViTriByProvince.map((item) => item._id);
     const params = { idViTriArr, isLoading: true, isLoadingPopup: false };
     dispatch(getDanhSachPhongChoThueTheoViTriAsync(params));
@@ -149,12 +159,13 @@ function Feature() {
 
   const renderCity = () => {
     return citys.map((city, index) => {
-      provinceArr.push(city.cityName);
+      if (provinceArr.length < citys.length) provinceArr.push(city.cityName);
+
       return (
         <NavLink to={`${urlRoom}/${city.cityName}`} key={`${city}-${index}`}>
           <GirdItem image={city.bgImage}>
-            <GirdTitle>{city.cityName}</GirdTitle>
-            <GridDesc>{city.rentals} rental</GridDesc>
+            <GirdItemTitle>{city.cityName}</GirdItemTitle>
+            <GridItemDesc>{city.rentals} rental</GridItemDesc>
           </GirdItem>
         </NavLink>
       );

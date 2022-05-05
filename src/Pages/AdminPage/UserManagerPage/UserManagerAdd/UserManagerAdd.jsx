@@ -51,7 +51,6 @@ function UserManagerFormAdd({ handleOk }) {
   const handleChangeSelect = async (value) => {
     await setFieldValue('type', value);
   };
-  console.log({ values });
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>

@@ -20,7 +20,6 @@ function Siderbar() {
 
   useEffect(() => {
     const handleResizeScreenX = () => {
-      console.log(window.innerWidth);
       if (window.innerWidth <= 992) {
         setWidthSideBar(200);
         setWidthCollapsed(40);
@@ -99,4 +98,4 @@ function Siderbar() {
   );
 }
 
-export default Siderbar;
+export default React.memo(Siderbar);

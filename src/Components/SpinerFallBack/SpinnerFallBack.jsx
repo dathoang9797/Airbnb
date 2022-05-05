@@ -2,13 +2,14 @@ import React from 'react';
 import { SpinnerFallBackCSS } from './SpinnerFallBack.styles';
 
 function SpinnerFallBack() {
+  const { Container, Ripple } = SpinnerFallBackCSS;
   return (
-    <SpinnerFallBackCSS.Container>
-      <SpinnerFallBackCSS.Ripple>
+    <Container>
+      <Ripple>
         <div></div>
         <div></div>
-      </SpinnerFallBackCSS.Ripple>
-    </SpinnerFallBackCSS.Container>
+      </Ripple>
+    </Container>
   );
 }
 

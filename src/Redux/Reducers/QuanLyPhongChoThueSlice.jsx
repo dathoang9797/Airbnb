@@ -35,6 +35,12 @@ const quanLyPhongChoThueSlice = createSlice({
     setResetDanhSachPhongChoThueTheoViTriAction: (state, action) => {
       state.danhSachPhongChoThueTheoViTri = [];
     },
+    setResetBookingRoomAction: (state, action) => {
+      state.bookingRoom = {};
+    },
+    setResetTotalPriceBookingAction: (state, action) => {
+      state.totalPriceBooking = 0;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getDanhSachPhongChoThueAsync.fulfilled, (state, action) => {
@@ -116,12 +122,16 @@ const {
   setBookingRoomAction,
   setTotalPriceBookingAction,
   setResetDanhSachPhongChoThueTheoViTriAction,
+  setResetBookingRoomAction,
+  setResetTotalPriceBookingAction,
 } = quanLyPhongChoThueSlice.actions;
 
 export const quanLyPhongChoThueAction = {
   setBookingRoomAction,
   setTotalPriceBookingAction,
   setResetDanhSachPhongChoThueTheoViTriAction,
+  setResetBookingRoomAction,
+  setResetTotalPriceBookingAction,
 };
 
 export default quanLyPhongChoThueSlice.reducer;

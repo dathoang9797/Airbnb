@@ -39,7 +39,6 @@ function EvaluateManagerEdit(props) {
       return;
     }
     const result = await dispatch(capNhatDanhGiaAsync(params));
-    console.log({ result });
     if (result.error) return;
     handleOk();
   };

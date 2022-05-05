@@ -83,7 +83,7 @@ const taoviTriAsync = createAsyncThunk(
 
 const xoaNhieuViTrigAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
-  async (idNguoiDungArr, { rejectWithValue, dispatch, getState }) => {
+  async (idNguoiDungArr, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const promiseArr = idNguoiDungArr.map((idNguoiDung) =>
@@ -107,7 +107,7 @@ const xoaNhieuViTrigAsync = createAsyncThunk(
 
 const xoaViTriAsync = createAsyncThunk(
   'quanLyViTriReducer/xoaViTriAsync',
-  async (idLocation, { rejectWithValue, dispatch, getState }) => {
+  async (idLocation, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const result = await quanLyViTriService.xoaViTri(idLocation);

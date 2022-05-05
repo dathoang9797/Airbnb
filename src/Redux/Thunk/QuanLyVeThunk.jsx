@@ -9,7 +9,7 @@ const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachVeAsync = createAsyncThunk(
   'quanLyVeReducer/getDanhSachVeAsync',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     const result = await quanLyVeService.layDanhSachVe();
 
     if (!result) {
@@ -89,7 +89,7 @@ const getDanhSachVeTheoPhongAsync = createAsyncThunk(
 
 const xoaNhieuVeAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuVeAsync',
-  async (idTicketArr, { rejectWithValue, dispatch, getState }) => {
+  async (idTicketArr, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const promisesArr = idTicketArr.map((idVe) => quanLyVeService.xoaVe(idVe));
@@ -115,7 +115,7 @@ const xoaNhieuVeAsync = createAsyncThunk(
 
 const xoaVeAsync = createAsyncThunk(
   'quanLyVeReducer/xoaVeAsync',
-  async (idTicket, { rejectWithValue, dispatch, getState }) => {
+  async (idTicket, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const result = await quanLyVeService.xoaVe(idTicket);

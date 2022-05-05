@@ -15,7 +15,7 @@ const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
 
 const getDanhSachDanhGiaAsync = createAsyncThunk(
   'quanLyDanhGiaReducer/getDanhSachDanhGiaAsync',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     const result = await quanLyDanhGiaService.layTatCaDanhGia();
 
     if (!result) {
@@ -36,7 +36,7 @@ const getDanhSachDanhGiaAsync = createAsyncThunk(
 
 const xoadanhGiaAsync = createAsyncThunk(
   'quanLydanhGIaReducer/xoadanhGIaAsync',
-  async (idRoom, { rejectWithValue, dispatch, getState }) => {
+  async (idRoom, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const result = await quanLyDanhGiaService.xoaDanhGia(idRoom);
@@ -57,7 +57,7 @@ const xoadanhGiaAsync = createAsyncThunk(
 
 const xoaNhieuDanhGiaAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuDanhGiaAsync',
-  async (idDanhGiaArr, { rejectWithValue, dispatch, getState }) => {
+  async (idDanhGiaArr, { rejectWithValue, dispatch }) => {
     const confirmResult = await sweetAlertDelete();
     if (confirmResult.isConfirmed) {
       const promiseArr = idDanhGiaArr.map((idDanhGia) =>

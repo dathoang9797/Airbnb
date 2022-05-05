@@ -4,7 +4,7 @@ import { CheckOutlined } from '@ant-design/icons';
 
 function SearchMap() {
   const { Move, Container, MoveContentSearch, MoveLabel, MoveSpan } = SearchMapCSS;
-
+  console.log('render')
   return (
     <Container>
       <Move>

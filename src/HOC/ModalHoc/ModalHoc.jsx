@@ -39,7 +39,7 @@ function ModalHoc(WrappedComponent) {
       const propsModal = this.state.propsModal;
       const propsContentModal = this.state.propsContentModal;
       const ContentModal = this.state.contentModal;
-
+      
       return (
         <>
           <WrappedComponent
