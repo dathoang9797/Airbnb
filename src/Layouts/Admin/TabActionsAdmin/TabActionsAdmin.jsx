@@ -24,7 +24,7 @@ function TabActionsAdmin(props) {
   }, [dispatch, handleDeleteAllThunk, selectedRowKeys, setSelectedRowKeys]);
 
   const handleRefreshData = useCallback(() => {
-    dispatch(handleRefreshDataThunk());
+    Promise.all(handleRefreshDataThunk.map((thunk) => dispatch(thunk())));
   }, [dispatch, handleRefreshDataThunk]);
 
   return (

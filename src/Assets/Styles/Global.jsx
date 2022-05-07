@@ -8,6 +8,7 @@ import { ModalReviewCSS } from './Components/ModalReviewCSS';
 import { DatePickerCSS } from './Components/DatePickerCSS';
 import { SweetAlertCSS } from './Components/SweetAlertCSS';
 import { PopoverCSS } from './Components/PopoverCSS';
+import { DropDownCSS } from './Components/DropdownCSS';
 import 'antd/dist/antd.css';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -22,7 +23,7 @@ const CustomStyles = styled.createGlobalStyle`
   ${DatePickerCSS};
   ${SweetAlertCSS};
   ${PopoverCSS};
-
+  ${DropDownCSS};
   .ant-dropdown-arrow {
     --tw-bg-opacity: 1;
     ${tw`dark:background-image[linear-gradient(135deg, transparent 40%, rgba(55, 65, 81, var(--tw-bg-opacity)) 40%)]`};

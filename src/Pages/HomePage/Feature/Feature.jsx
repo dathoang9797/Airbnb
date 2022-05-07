@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { FeatureCSS } from './Feature.styles';
-import { images } from '@Assets/Images';
+import { Images } from '@Assets/Images';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
@@ -11,7 +11,7 @@ import _ from 'lodash';
 import { removeSpace, removeUnicode } from '@Utils/Common';
 
 function Feature() {
-  const { tphcm, haNoi, daNang, vungTau, canTho, phuQuoc, nhaTrang, hoiAn } = images;
+  const { tphcm, haNoi, daNang, vungTau, canTho, phuQuoc, nhaTrang, hoiAn } = Images;
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
   const {
     Container,
@@ -61,7 +61,7 @@ function Feature() {
     if (_.isEqual(danhSachViTriByProvinceRef.current, danhSachViTriByProvince)) return;
     danhSachViTriByProvinceRef.current = danhSachViTriByProvince;
     const idViTriArr = danhSachViTriByProvince.map((item) => item._id);
-    const params = { idViTriArr, isLoading: true, isLoadingPopup: false };
+    const params = { idViTriArr, isLoading: false, isLoadingPopup: false };
     dispatch(getDanhSachPhongChoThueTheoViTriAsync(params));
   }, [danhSachViTriByProvince, dispatch, getDanhSachPhongChoThueTheoViTriAsync, next]);
 

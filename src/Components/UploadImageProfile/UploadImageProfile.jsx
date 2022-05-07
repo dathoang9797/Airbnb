@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { showError, showSuccess } from '@Utils/Common';
 import { Upload } from 'antd';
 import SpinnerDot from '@Components/SpinnerDot';
-import { localService } from '@/Services/LocalStorageService';
+import { localService } from '@Services/LocalStorageService';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
+import { useDispatch } from 'react-redux';
 
 function UploadImageProfile({ children, setImgRoom, token, userInfo }) {
+  const dispatch = useDispatch();
+  const { updateUserInfo } = quanLyNguoiDungAction;
   const [loading, setLoading] = useState(false);
   const urlAirBnb = process.env.REACT_APP_BASE_URL_AIRBNB;
   const tokenCyberSoft = process.env.REACT_APP_TOKEN_CYBERSOFT;
@@ -49,6 +53,7 @@ function UploadImageProfile({ children, setImgRoom, token, userInfo }) {
       setLoading(false);
       userInfo.avatar = baseImg64;
       localService.setUserInfo(userInfo);
+      dispatch(updateUserInfo(userInfo));
       showSuccess(`${name} File Update Thành Công`);
       return;
     }

@@ -1,7 +1,6 @@
 import { ButtonCSS } from './Button';
 import ButtonScrollTop from './ButtonScrollTop';
 import Form from './Form';
-import SearchInput from './SearchInput';
 import SpinnerFallBack from './SpinerFallBack';
 import Spinner from './Spinner';
 import { TableCSS } from './Table';
@@ -15,7 +14,6 @@ export {
   ButtonCSS,
   ButtonScrollTop,
   Form,
-  SearchInput,
   SpinnerFallBack,
   Spinner,
   TableCSS,

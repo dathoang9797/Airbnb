@@ -1,9 +1,8 @@
 import HeaderAdmin from '@Layouts/Admin/HeaderAdmin';
 import SidebarAdmin from '@Layouts/Admin/SidebarAdmin';
 import { localService } from '@Services/LocalStorageService';
-import { showWarning } from '@Utils/Common';
+import { messageApp, showWarning } from '@Utils/Common';
 import { Layout } from 'antd';
-import _ from 'lodash';
 import React, { useEffect, useLayoutEffect } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import { AdminTemplateCSS } from './AdminTemplate.style';
@@ -20,6 +19,7 @@ function AdminTemplate({ Component, ...restRoute }) {
   const urlAdminEvaluate = process.env.REACT_APP_LINK_ADMIN_EVALUATE_MANAGER;
   const typeAdmin = process.env.REACT_APP_NGUOI_DUNG_ADMIN;
   const { Container } = AdminTemplateCSS;
+  const { messageAuthorization } = messageApp;
 
   useLayoutEffect(() => window.scrollTo(0, 0));
 
@@ -56,14 +56,16 @@ function AdminTemplate({ Component, ...restRoute }) {
   }, [pathname, urlAdminEvaluate, urlAdminLocation, urlAdminRoom, urlAdminTicket, urlAdminUser]);
 
   useEffect(() => {
-    if (!_.isEmpty(userInfo) && userInfo.type !== typeAdmin) {
-      showWarning('Bạn không có quyền truy cập vào trang này');
+    if (userInfo && userInfo.type !== typeAdmin) {
+      setTimeout(() => {
+        showWarning(messageAuthorization);
+      }, 500);
     }
-  }, [typeAdmin, userInfo]);
+  }, [messageAuthorization, typeAdmin, userInfo]);
 
   const handleRender = () => {
     switch (true) {
-      case _.isEmpty(userInfo): {
+      case !userInfo: {
         return <Redirect to={urlSignIn} />;
       }
 

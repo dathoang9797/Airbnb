@@ -19,6 +19,10 @@ function LocationManagerAdd({ handleOk }) {
     handleOk();
   };
 
+  const handleChangeSelect = async (value) => {
+    await setFieldValue('province', value);
+  };
+
   const formik = useFormik({
     initialValues: addLocationField,
     validationSchema: addLocationSchema,
@@ -31,9 +35,18 @@ function LocationManagerAdd({ handleOk }) {
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
+console.log({values});
+
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
-      {renderFormLocationField(addLocationField, errors, values, handleChange, handleInputNumber)}
+      {renderFormLocationField(
+        addLocationField,
+        errors,
+        values,
+        handleChange,
+        handleInputNumber,
+        handleChangeSelect
+      )}
       <FormControl>
         <FormButton type='submit'>ADD LOCATION</FormButton>
       </FormControl>

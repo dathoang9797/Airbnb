@@ -1,14 +1,13 @@
 import ButtonScrollTop from '@Components/ButtonScrollTop';
-import React, { useEffect } from 'react';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
+import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
+import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
+import React, { useLayoutEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Banner from './Banner';
 import Feature from './Feature';
 import { HomePageCSS } from './HomePage.styles';
 import ListCard from './ListCard';
-import NavBar from './NavBar';
-import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
-import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
-import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function HomePage() {
   const { Container } = HomePageCSS;
@@ -19,15 +18,14 @@ export default function HomePage() {
 
   const dispatch = useDispatch();
   const danhSachProvince = useSelector(selectDanhSachProvince);
-  console.log({danhSachProvince})
-  
-  useEffect(() => {
+  console.log({ danhSachProvince });
+
+  useLayoutEffect(() => {
     Promise.all([dispatch(getDanhSachViTriAsync()), dispatch(getDanhSachPhongChoThueAsync())]);
   }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachViTriAsync]);
 
   return (
     <Container>
-      <NavBar />
       <Banner />
       <Feature />
       <ListCard />

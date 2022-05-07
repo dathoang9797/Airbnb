@@ -1,4 +1,4 @@
-import { images } from '@Assets/Images';
+import { VectorSVG } from '@Assets/Svgs';
 import UploadImageProfile from '@Components/UploadImageProfile';
 import ModalHoc from '@HOC/ModalHoc';
 import { localService } from '@Services/LocalStorageService';
@@ -6,14 +6,16 @@ import React, { useState } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import { ProfilePageCSS } from './ProfilePage.styles';
 import ProfileUpdate from './ProfileUpdate';
+import { Redirect } from 'react-router-dom';
 
 function ProfilePage(props) {
   const { showModal, handlePropsContentModal, handleContentModal } = props;
   const userInfo = localService.getUserInfo();
   const { avatar, token, name, email, address, birthday, gender, phone, _id } = userInfo;
   const fieldProfileUpdate = { name, email, address, birthday, gender, phone, _id };
-  const { account } = images;
+  const { AccountSVG } = VectorSVG;
   const [imgRoom, setImgRoom] = useState('' || avatar);
+  const urlHome = process.env.REACT_APP_LINK_HOME;
 
   const handleShowModal = () => {
     handleContentModal(ProfileUpdate);
@@ -38,12 +40,12 @@ function ProfilePage(props) {
     CardTextUnderline,
   } = ProfilePageCSS;
 
-  return (
+  return !userInfo ? (
+    <Redirect to={urlHome} />
+  ) : (
     <Container>
       <ContentLeft>
-        <CardImage>
-          <img src={imgRoom || account} alt={imgRoom || account} />
-        </CardImage>
+        <CardImage>{imgRoom ? <img src={imgRoom} alt={imgRoom} /> : <AccountSVG />}</CardImage>
         <UploadImageProfile setImgRoom={setImgRoom} token={token} userInfo={userInfo}>
           <CardTitleUploadImage>Cập nhật ảnh</CardTitleUploadImage>
         </UploadImageProfile>

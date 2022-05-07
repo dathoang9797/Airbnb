@@ -65,7 +65,7 @@ function TicketManagerPage(props) {
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuVeAsync}
-        handleRefreshDataThunk={getDanhSachVeAsync}
+        handleRefreshDataThunk={[getDanhSachVeAsync]}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vé'
         showModal={handleShowModal}

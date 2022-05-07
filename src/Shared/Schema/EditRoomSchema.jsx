@@ -21,4 +21,5 @@ export const editRoomSchema = yup.object().shape({
   wifi: yup.boolean().required(messageFieldIsRequire),
   heating: yup.boolean().required(messageFieldIsRequire),
   cableTV: yup.boolean().required(messageFieldIsRequire),
+  locationId: yup.string().required(messageFieldIsRequire),
 });

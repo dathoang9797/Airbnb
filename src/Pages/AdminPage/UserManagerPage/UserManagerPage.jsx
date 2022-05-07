@@ -14,7 +14,6 @@ import ModalHoc from '@HOC/ModalHoc';
 
 function UserManagerPage(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
   const dispatch = useDispatch();
   const idTable = useMemo(() => nanoid(), []);
   const urlUserEdit = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER_EDIT;
@@ -77,7 +76,7 @@ function UserManagerPage(props) {
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuNguoiDungAsync}
-        handleRefreshDataThunk={getDanhSachNguoiDungAsync}
+        handleRefreshDataThunk={[getDanhSachNguoiDungAsync]}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm quản trị viên'
         showModal={handleShowModal}

@@ -1,6 +1,6 @@
 export const addLocationField = {
   name: '',
-  province: '',
   country: '',
+  province: '',
   valueate: 0,
 };

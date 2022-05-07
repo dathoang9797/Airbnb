@@ -1,4 +1,4 @@
-import { images } from '@Assets/Images';
+import { Images } from '@Assets/Images';
 import { ButtonScrollTop, SearchMap, SpinnerMap } from '@Components';
 import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
 import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
@@ -31,7 +31,7 @@ function RoomPage() {
   const dispatch = useDispatch();
   const { cityName } = useParams();
 
-  const { calendar } = images;
+  const { calendar } = Images;
   const numberEachPage = 10;
   const {
     Container,
@@ -64,15 +64,13 @@ function RoomPage() {
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
   const danhSachProvince = useSelector(selectDanhSachProvince, shallowEqual);
 
+  console.log({danhSachProvince})
+  console.log({danhSachViTriByProvince})
+
   const danhSachPhongChoThueTheoViTriSlice = useMemo(() => {
     const { maxValue, minValue } = limitValue;
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
-
-  console.log({danhSachViTriByProvince})
-  console.log({danhSachProvince})
-  console.log({danhSachPhongChoThueTheoViTri})
-
 
   const handleToggle = () => setCollapsed(!collapsed);
 
@@ -139,6 +137,8 @@ function RoomPage() {
     if ((!lng && !lat) || !danhSachProvince.length) return;
     async function getProvinces() {
       const provinces = await geoCodeService.getGeoCodeByCoordinates(lng, lat, danhSachProvince);
+      console.log({provinces})
+      console.log({lng,lat})
       if (!_.isEqual(provincesRef.current, provinces)) {
         provincesRef.current = provinces;
         dispatch(setProvincesAction(provinces));
@@ -149,6 +149,7 @@ function RoomPage() {
 
   useEffect(() => {
     geoCodeService.getGeoCodeByAddress(cityName).then((data) => {
+      console.log({data})
       const lat = data[0].geometry.location.lat;
       const lng = data[0].geometry.location.lng;
       setCoordinates({ lat, lng });
@@ -160,7 +161,10 @@ function RoomPage() {
     const waitingCloseLoadingPopup = setTimeout(() => {
       setShowSpinnerMap(false);
     }, 500);
-    return () => clearTimeout(waitingCloseLoadingPopup);
+    return () => {
+      console.log('clear');
+      clearTimeout(waitingCloseLoadingPopup);
+    };
   }, [isLoadingPopup]);
 
   const renderPhongChoThue = useMemo(() => {
