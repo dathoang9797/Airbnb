@@ -37,29 +37,25 @@ export const geoCodeService = {
         .json()
         .then((data) => {
           handleChooseEndLoading(header);
-          console.log({ data });
-          const results = data.results;
-          const thanhPho = 'thanhpho';
-          const provinces = results[0].address_components
-            .map((item, index) => {
-              const province = item.long_name;
-              const formatProvince = removeUnicode(removeSpace(province));
-              if (formatProvince.includes(thanhPho)) {
-                return formatProvince.slice(thanhPho.length);
-              }
-              return formatProvince;
-            })
-            .map((formatProvince) => {
-              if (danhSachProvince.every((province) => province !== formatProvince)) {
-                return null;
-              }
-              return formatProvince;
-            })
-            .filter((item) => item !== null)
-            .filter((item, provinceIndex, thisProvinceArr) => {
-              return thisProvinceArr.indexOf(item) === provinceIndex;
-            });
-          return provinces;
+          const results = data.results.map((result) => {
+            console.log({ result });
+            const { address_components } = result;
+            const provinces = address_components
+              .reverse()
+              .map((item) => {
+                const province = item.long_name;
+                const formatProvince = removeUnicode(removeSpace(province));
+                if (danhSachProvince.every((province) => !province.includes(formatProvince))) {
+                  return null;
+                }
+                return formatProvince;
+              })
+              .filter((item) => item !== null);
+            //Remove element duplicate
+            return [...new Set(provinces)];
+          });
+
+          return [...new Set(results.flat())];
         })
         .catch(() => {
           handleChooseEndLoading(header);

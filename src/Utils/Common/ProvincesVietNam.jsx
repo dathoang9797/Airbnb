@@ -76,7 +76,7 @@ export const provincesVietNam = [
   'BaRiaVungTau',
   'Hue',
   'Tp.Hue',
-  'Tp.Ho Chi Minh',
+  'Ho Chi Minh',
   'Ba Ria',
   'Da Lat',
   'Mui Ne',

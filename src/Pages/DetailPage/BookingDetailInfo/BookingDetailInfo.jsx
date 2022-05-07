@@ -122,4 +122,4 @@ function BookingDetailInfo(props) {
     </Container>
   );
 }
-export default BookingDetailInfo;
+export default React.memo(BookingDetailInfo);

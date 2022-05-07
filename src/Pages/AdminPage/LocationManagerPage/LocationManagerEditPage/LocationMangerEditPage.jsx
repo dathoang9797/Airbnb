@@ -22,7 +22,7 @@ function LocationMangerEditPage() {
 
   const { capNhatViTriAsync } = quanLyViTriThunk;
 
-  const { selectChiTietViTri } = quanLyViTriSelector;
+  const { selectChiTietViTri, selectorDanhSachProvinces } = quanLyViTriSelector;
 
   const chiTietViTri = useSelector(selectChiTietViTri, _.isEqual);
 
@@ -34,6 +34,8 @@ function LocationMangerEditPage() {
     };
   }, [chiTietViTri, editLocationField]);
   const refChiTietNguoiDung = useRef(initialValues);
+
+  const danhSachProvinces = useSelector(selectorDanhSachProvinces, _.isEqual);
 
   const handleSubmitEditLocation = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
@@ -70,6 +72,7 @@ function LocationMangerEditPage() {
       <FormContainer onFinish={handleSubmit} size='small'>
         {renderFormLocationField(
           editLocationField,
+          danhSachProvinces,
           errors,
           values,
           handleChange,

@@ -1,9 +1,9 @@
 import React from 'react';
-import { BannerCSS } from './Banner.styles';
-
 import Typed from 'react-typed';
+import { BannerCSS } from './Banner.styles';
 import BannerSearch from './BannerSearch';
 import BannerSelect from './BannerSelect';
+
 
 function Banner() {
   const { Container, BannerContent, BannerGrid, BannerButtonSearch } = BannerCSS;
@@ -38,4 +38,4 @@ function Banner() {
   );
 }
 
-export default Banner;
+export default React.memo(Banner);

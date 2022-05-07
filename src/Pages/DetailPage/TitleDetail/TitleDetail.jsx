@@ -84,4 +84,4 @@ function TitleDetail({ name }) {
   );
 }
 
-export default TitleDetail;
+export default React.memo(TitleDetail);

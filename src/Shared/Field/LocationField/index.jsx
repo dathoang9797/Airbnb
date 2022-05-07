@@ -1,6 +1,6 @@
 import { addLocationField } from './AddLocationFied';
 import { editLocationField } from './EditLocationField';
-import { renderFormLocationField } from './FormFieldLocation';
+import { renderFormLocationField } from './FormLocationField';
 import { tableColumnsLocationField } from './TableColumnLocationField';
 
 export const locationField = {

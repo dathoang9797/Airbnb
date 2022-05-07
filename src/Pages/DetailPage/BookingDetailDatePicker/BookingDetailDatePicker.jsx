@@ -86,4 +86,4 @@ function BookingDetailDatePicker(props) {
   );
 }
 
-export default BookingDetailDatePicker;
+export default React.memo(BookingDetailDatePicker);

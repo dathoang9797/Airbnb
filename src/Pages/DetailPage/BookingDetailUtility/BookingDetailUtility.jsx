@@ -35,4 +35,4 @@ function BookingDetailUtility(propsUtility) {
   );
 }
 
-export default BookingDetailUtility;
+export default React.memo(BookingDetailUtility);

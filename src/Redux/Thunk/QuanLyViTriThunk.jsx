@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { quanLyViTriService } from '@Services/QuanLyViTriService';
+import { provinceService } from '@Services/ProvinceService';
 import { messageApp, showSuccess } from '@Utils/Common';
 import { history, sweetAlert } from '@Utils/Libs';
 import _ from 'lodash';
@@ -32,6 +33,19 @@ const getDanhSachViTriAsync = createAsyncThunk(
 
     if ('message' in result) {
       return rejectWithValue(capitalize(result.message));
+    }
+
+    return result;
+  }
+);
+
+const getDanhSachProvinceAsync = createAsyncThunk(
+  'quanLyViTriReducer/getDanhSachProvinceAsync',
+  async (_, { rejectWithValue }) => {
+    const result = await provinceService.layTatCaProvince();
+    
+    if (!result) {
+      return rejectWithValue(messageNetWorkErr);
     }
 
     return result;
@@ -155,4 +169,5 @@ export const quanLyViTriThunk = {
   xoaNhieuViTrigAsync,
   taoviTriAsync,
   capNhatViTriAsync,
+  getDanhSachProvinceAsync,
 };

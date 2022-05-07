@@ -1,5 +1,4 @@
 import Form from '@Components/Form';
-import { provincesVietNam } from '@/Utils/Common';
 
 const {
   FormControl,
@@ -14,6 +13,7 @@ const {
 
 export const renderFormLocationField = (
   field = null,
+  danhSachProvines,
   errors = null,
   values = null,
   handleChange = null,
@@ -67,7 +67,6 @@ export const renderFormLocationField = (
       }
 
       case 'province': {
-        const provincesVietNamSort = provincesVietNam.sort();
         return (
           <FormControl key={`${key}-${index}`}>
             <FormGroup>
@@ -75,14 +74,14 @@ export const renderFormLocationField = (
                 <FormSelect
                   bordered={false}
                   onChange={handleChangeSelect}
-                  defaultValue={provincesVietNam[0]}
+                  defaultValue={values.province}
                   menuItemSelectedIcon={<FormCheckOutlined />}
                   dropdownClassName='select-province'
                 >
-                  {provincesVietNamSort.sort().map((province, index) => {
+                  {danhSachProvines.map((province, index) => {
                     return (
-                      <FormOption key={`ProvinceSelect-${index}`} value={province}>
-                        {province}
+                      <FormOption key={`ProvinceSelect-${index}`} value={province.province_name}>
+                        {province.province_name}
                       </FormOption>
                     );
                   })}

@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { removeSpace, removeUnicode } from '@Utils/Common';
-import { provincesVietNam, filterSearchValue } from '@Utils/Common';
+import { filterSearchValue } from '@Utils/Common';
+import { sortValue } from '@Utils/Common';
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
@@ -12,43 +13,62 @@ const selectorProvinces = (state) => state.QuanLyViTriReducer.provinces;
 
 const selectorCityName = (state) => state.QuanLyViTriReducer.cityName;
 
+const selectorDanhSachProvinces = (state) => state.QuanLyViTriReducer.danhSachProvince;
+
 const selectDanhSachViTriByProvince = createSelector(
   selectDanhSachViTri,
   selectorProvinces,
   (danhSachViTri, provinces) => {
     if (!provinces.length) return [];
-    const result = provinces.map((province) => {
-      return danhSachViTri.filter((viTri) => {
-        return removeSpace(removeUnicode(viTri.province)) === removeSpace(removeUnicode(province));
-      });
-    });
-    return result.flat();
+    const thanhPhoShortName = 'tp.';
+    const thanhPhoFullName = 'thanhpho';
+    const tinhFullName = 'tinh';
+    const result = [
+      ...new Set(
+        provinces
+          .map((province) => {
+            return danhSachViTri.filter((viTri) => {
+              const formatProvince = removeSpace(removeUnicode(viTri.province));
+
+              if (
+                (formatProvince.includes(thanhPhoFullName) &&
+                  formatProvince.slice(thanhPhoFullName.length) === province) ||
+                (formatProvince.includes(tinhFullName) &&
+                  formatProvince.slice(tinhFullName.length) === province) ||
+                (formatProvince.includes(thanhPhoShortName) &&
+                  formatProvince.slice(thanhPhoShortName.length) === province)
+              ) {
+                return true;
+              }
+
+              return formatProvince === province;
+            });
+          })
+          .flat()
+      ),
+    ];
+    console.log({ result });
+    return result;
   }
 );
 
-const selectDanhSachProvince = createSelector(selectDanhSachViTri, (danhSachViTri) => {
-  if (!danhSachViTri.length) return [];
-  const provinceArr = danhSachViTri
-    .map((viTri) => {
-      return removeSpace(removeUnicode(viTri.province));
-    })
-    //Remove element duplicate
-    .filter((item, provinceIndex, thisProvinceArr) => {
-      return thisProvinceArr.indexOf(item) === provinceIndex;
-    });
-  const thanhPho = 'tp.';
+const selectDanhSachProvinceFilter = createSelector(
+  selectDanhSachViTri,
+  selectorDanhSachProvinces,
+  (danhSachViTri, danhSachProvince) => {
+    if (!danhSachViTri.length || !danhSachProvince.length) return [];
 
-  return provincesVietNam
-    .map((provinceVietNam) => {
-      return provinceArr.filter((province) => {
-        if (removeSpace(removeUnicode(provinceVietNam)).includes(thanhPho)) {
-          return removeSpace(removeUnicode(provinceVietNam)).slice(thanhPho.length) === province;
-        }
-        return removeSpace(removeUnicode(provinceVietNam)) === province;
-      });
-    })
-    .flat();
-});
+    const provinceDanhSachViTriArr = danhSachViTri.map((viTri) => {
+      return removeSpace(removeUnicode(viTri.province));
+    });
+
+    const provinceDanhSachProvinceArr = danhSachProvince.map((province) => {
+      return removeSpace(removeUnicode(province.province_name));
+    });
+    const result = [...provinceDanhSachViTriArr, ...provinceDanhSachProvinceArr];
+    return result.sort(sortValue);
+  }
+);
 
 const selectDanhViTriFilter = createSelector(
   selectDanhSachViTri,
@@ -64,8 +84,9 @@ const selectDanhViTriFilter = createSelector(
 export const quanLyViTriSelector = {
   selectDanhSachViTri,
   selectDanhSachViTriByProvince,
-  selectDanhSachProvince,
+  selectDanhSachProvinceFilter,
   selectChiTietViTri,
   selectorCityName,
   selectDanhViTriFilter,
+  selectorDanhSachProvinces,
 };

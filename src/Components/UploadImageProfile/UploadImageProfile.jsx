@@ -21,7 +21,7 @@ function UploadImageProfile({ children, setImgRoom, token, userInfo }) {
   const keyNameUpload = process.env.REACT_APP_KEY_NAME_FORM_DATA_USER;
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
       showError('You can only upload JPG/PNG file!');
     }
@@ -69,7 +69,7 @@ function UploadImageProfile({ children, setImgRoom, token, userInfo }) {
       showUploadList={false}
       onChange={handleChange}
       beforeUpload={beforeUpload}
-      accept='image/x-png, image/gif, image/jpg'
+      accept='image/x-png, image/gif, image/jpeg'
       action={`${urlAirBnb}${urlUploadAvatar}`}
       headers={headerReq}
       name={keyNameUpload}

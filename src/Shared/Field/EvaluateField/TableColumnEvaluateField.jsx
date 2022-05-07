@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { sortValue } from '@Utils/Common';
 
 export const tableColumnsEvaluateField = [
   {
@@ -21,17 +22,7 @@ export const tableColumnsEvaluateField = [
     title: 'Nội Dung',
     dataIndex: 'content',
     key: 'content',
-    sorter: (a, b) => {
-      if (a.content && b.content) {
-        const tenA = a.content.toLowerCase();
-        const tenB = b.content.toLowerCase();
-        if (tenA > tenB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Content',
@@ -49,17 +40,7 @@ export const tableColumnsEvaluateField = [
     dataIndex: 'created_at',
     key: 'created_at',
     render: (text, record, index) => moment(record.created_at).format('DD/MM/YYYY'),
-    sorter: (a, b) => {
-      if (a.created_at && b.created_at) {
-        const created_atA = a.created_at.toLowerCase();
-        const created_atB = b.created_at.toLowerCase();
-        if (created_atA > created_atB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Ngày tạo đánh giá',
@@ -86,17 +67,7 @@ export const tableColumnsEvaluateField = [
         'data-label': 'Ngày cập nhật đánh giá',
       };
     },
-    sorter: (a, b) => {
-      if (a.updatedAt && b.updatedAt) {
-        const updatedAtA = a.updatedAt.toLowerCase();
-        const updatedAtB = b.updatedAt.toLowerCase();
-        if (updatedAtA > updatedAtB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
   },
   {
     title: 'Thao tác',

@@ -1,4 +1,5 @@
 import UpLoadImageTable from '@Components/UpLoadImageTable';
+import { sortValue } from '@Utils/Common';
 
 export const tableColumnsRoomField = [
   {
@@ -21,17 +22,7 @@ export const tableColumnsRoomField = [
     title: 'Tên Phòng',
     dataIndex: 'name',
     key: 'name',
-    sorter: (a, b) => {
-      if (a.name && b.name) {
-        const tenA = a.name.toLowerCase();
-        const tenB = b.name.toLowerCase();
-        if (tenA > tenB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Tên phòng',
@@ -82,17 +73,7 @@ export const tableColumnsRoomField = [
     title: 'Location',
     dataIndex: 'locationId',
     key: 'locationId',
-    sorter: (a, b) => {
-      if (a.locationId && b.locationId) {
-        const emailA = a.locationId.name.toLowerCase();
-        const emailB = b.locationId.name.toLowerCase();
-        if (emailA > emailB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     render: (text, record, index) => {
       if (record.locationId) {
         return record.locationId.name;

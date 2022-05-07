@@ -86,4 +86,4 @@ function GridImagesDetail(props) {
   );
 }
 
-export default GridImagesDetail;
+export default React.memo(GridImagesDetail);

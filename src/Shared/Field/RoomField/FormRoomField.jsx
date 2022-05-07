@@ -15,7 +15,7 @@ const {
 
 export const renderFormRoomField = (
   field = null,
-  danhSachViTri = [],
+  sortDanhSachViTri = [],
   errors = null,
   values = null,
   handleChange = null,
@@ -247,19 +247,6 @@ export const renderFormRoomField = (
       }
 
       case 'locationId': {
-        const cloneDanhSachViTri = [...danhSachViTri];
-        const sortDanhSachViTri = cloneDanhSachViTri.sort((a, b) => {
-          const provinceA = a.province.toLowerCase();
-          const provinceB = b.province.toLowerCase();
-          if (provinceA < provinceB) {
-            return -1;
-          }
-          if (provinceA > provinceB) {
-            return 1;
-          }
-          return 0;
-        });
-        console.log({ sortDanhSachViTri });
         return (
           <FormControl key={`${key}-${index}`}>
             <FormGroup>
@@ -267,11 +254,11 @@ export const renderFormRoomField = (
                 <FormSelect
                   bordered={false}
                   onChange={handleChangeSelect}
-                  defaultValue={sortDanhSachViTri[0]._id}
+                  defaultValue={values.locationId}
                   menuItemSelectedIcon={<FormCheckOutlined />}
                   dropdownClassName='select-location'
                 >
-                  {sortDanhSachViTri.sort().map((viTri, index) => {
+                  {sortDanhSachViTri.map((viTri, index) => {
                     return (
                       <FormOption key={`ViTriSelect-${viTri._id}-${index}`} value={viTri._id}>
                         {viTri.province}

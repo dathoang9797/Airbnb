@@ -77,4 +77,4 @@ function BookingDetailPricePopup() {
   );
 }
 
-export default BookingDetailPricePopup;
+export default React.memo(BookingDetailPricePopup);

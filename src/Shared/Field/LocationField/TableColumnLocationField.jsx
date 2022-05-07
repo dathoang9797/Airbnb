@@ -1,4 +1,5 @@
 import UpLoadImageTable from '@Components/UpLoadImageTable';
+import { sortValue } from '@Utils/Common';
 
 export const tableColumnsLocationField = [
   {
@@ -21,17 +22,7 @@ export const tableColumnsLocationField = [
     title: 'Tên Vị Trí',
     dataIndex: 'name',
     key: 'name',
-    sorter: (a, b) => {
-      if (a.name && b.name) {
-        const tenA = a.name.toLowerCase();
-        const tenB = b.name.toLowerCase();
-        if (tenA > tenB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Tên phòng',
@@ -82,17 +73,7 @@ export const tableColumnsLocationField = [
     title: 'Country',
     dataIndex: 'country',
     key: 'country',
-    sorter: (a, b) => {
-      if (a.country && b.country) {
-        const countryA = a.country.toLowerCase();
-        const countryB = b.country.toLowerCase();
-        if (countryA > countryB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Country',
@@ -118,17 +99,7 @@ export const tableColumnsLocationField = [
         'data-label': 'Province',
       };
     },
-    sorter: (a, b) => {
-      if (a.province && b.province) {
-        const provinceA = a.province.toLowerCase();
-        const provinceB = b.province.toLowerCase();
-        if (provinceA > provinceB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
   },
   {
     title: 'Valueate',

@@ -33,9 +33,6 @@ function ListCard({ src, title, description, price }) {
       .flat();
   }, [danhSachPhongChoThue, idRoomsBestSale]);
 
-  console.log({ idRoomsBestSale });
-  console.log({ roomsBestSale });
-
   const renderRoomBestSale = () => {
     if (!roomsBestSale.length) return [];
     return roomsBestSale.map((room, index) => {
@@ -67,4 +64,4 @@ function ListCard({ src, title, description, price }) {
   );
 }
 
-export default ListCard;
+export default React.memo(ListCard);
