@@ -1,27 +1,34 @@
 import React, { useMemo } from 'react';
 import { IoLocationSharp } from 'react-icons/io5';
 import { BannerSelectCSS } from './BannerSelect.styles';
-import { provincesVietNam } from '@Utils/Common/ProvincesVietNam';
 import { Menu, Space } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
+import { useSelector } from 'react-redux';
+import _ from 'lodash';
 
 function BannerSelect() {
-  const { BannerSelect, Container, GeocodeIcon } = BannerSelectCSS;
+  const { BannerSelect, Container } = BannerSelectCSS;
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
+  const { selectorDanhSachProvinces } = quanLyViTriSelector;
+  const danhSachProvince = useSelector(selectorDanhSachProvinces, _.isEqual);
 
   const handleItem = useMemo(() => {
-    return provincesVietNam.map((cityName, index) => {
-      return {
-        label: (
-          <>
-            <NavLink to={`${urlRoom}/${cityName}`}>{cityName}</NavLink>
-          </>
-        ),
-        key: `${index}`,
-      };
-    }).sort();
-  }, [urlRoom]);
-
+    return danhSachProvince
+      .map((province, index) => {
+        return {
+          label: (
+            <>
+              <NavLink to={`${urlRoom}/${province.province_name}`}>
+                {province.province_name}
+              </NavLink>
+            </>
+          ),
+          key: `${index}`,
+        };
+      })
+      .sort();
+  }, [danhSachProvince, urlRoom]);
 
   const menu = <Menu items={handleItem} />;
 
@@ -32,10 +39,8 @@ function BannerSelect() {
           All Locations <IoLocationSharp />
         </Space>
       </BannerSelect>
-
-      <span className='type-and-hit-enter'>type and hit enter</span>
     </Container>
   );
 }
 
-export default BannerSelect;
+export default React.memo(BannerSelect);

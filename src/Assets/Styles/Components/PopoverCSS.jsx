@@ -54,7 +54,7 @@ export const PopoverCSS = css`
   }
 
   .wrapper-search-popup {
-    ${tw`absolute shadow-md p-0 overflow-hidden z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[#222] text-base min-width[10rem] bg-clip-padding w-full  mt-12 max-w-[700px]`};
+    ${tw`absolute shadow-md p-0 overflow-hidden z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[#222] text-base min-width[10rem] bg-clip-padding w-full  mt-12 max-w-[700px] box-shadow[rgba(0, 0, 0, 0.35) 0px 5px 15px]`};
 
     ${tw`lg:max-w-[480px]`}
 

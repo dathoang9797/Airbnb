@@ -34,4 +34,4 @@ function BookingDetailPriceHeader(props) {
   );
 }
 
-export default BookingDetailPriceHeader;
+export default React.memo(BookingDetailPriceHeader);

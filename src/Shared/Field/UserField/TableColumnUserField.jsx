@@ -1,5 +1,6 @@
 import { Tag, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { sortValue } from '@Utils/Common';
 
 export const tableColumnsUserField = [
   {
@@ -23,17 +24,7 @@ export const tableColumnsUserField = [
     dataIndex: 'name',
     key: 'name',
     sortDirections: ['ascend', 'descend'],
-    sorter: (a, b) => {
-      if (a.name && b.name) {
-        const tenA = a.name.toLowerCase();
-        const tenB = b.name.toLowerCase();
-        if (tenA > tenB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Họ Tên',
@@ -50,17 +41,7 @@ export const tableColumnsUserField = [
     dataIndex: 'email',
     key: 'email',
     sortDirections: ['ascend', 'descend'],
-    sorter: (a, b) => {
-      if (a.email && b.email) {
-        const emailA = a.email.toLowerCase();
-        const emailB = b.email.toLowerCase();
-        if (emailA > emailB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Email',
@@ -128,17 +109,7 @@ export const tableColumnsUserField = [
       );
     },
     sortDirections: ['ascend', 'descend'],
-    sorter: (a, b) => {
-      if (a.type && b.type) {
-        const typeA = a.type.toLowerCase();
-        const typeB = b.type.toLowerCase();
-        if (typeA > typeB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Loại Tài Khoản',

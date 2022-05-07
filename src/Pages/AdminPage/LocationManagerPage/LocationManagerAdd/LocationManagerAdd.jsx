@@ -1,16 +1,20 @@
 import React from 'react';
 import Form from '@Components/Form';
 import { locationField } from '@Shared/Field/LocationField';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { useFormik } from 'formik';
 import { addLocationSchema } from '@Shared/Schema/AddLocationSchema';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
+import _ from 'lodash';
 
 function LocationManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
   const { taoviTriAsync } = quanLyViTriThunk;
   const { addLocationField, renderFormLocationField } = locationField;
   const { FormContainer, FormControl, FormButton } = Form;
+  const { selectorDanhSachProvinces } = quanLyViTriSelector;
+  const danhSachProvinces = useSelector(selectorDanhSachProvinces, _.isEqual);
 
   const handleSubmitAddLocation = async (values, { resetForm }) => {
     const result = await dispatch(taoviTriAsync(values));
@@ -24,7 +28,7 @@ function LocationManagerAdd({ handleOk }) {
   };
 
   const formik = useFormik({
-    initialValues: addLocationField,
+    initialValues: {...addLocationField, province: danhSachProvinces[0].province_name},
     validationSchema: addLocationSchema,
     onSubmit: handleSubmitAddLocation,
   });
@@ -35,12 +39,11 @@ function LocationManagerAdd({ handleOk }) {
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
-console.log({values});
-
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
       {renderFormLocationField(
         addLocationField,
+        danhSachProvinces,
         errors,
         values,
         handleChange,

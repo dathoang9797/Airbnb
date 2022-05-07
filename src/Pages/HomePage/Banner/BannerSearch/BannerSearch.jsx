@@ -127,4 +127,4 @@ function BannerSearch() {
   );
 }
 
-export default BannerSearch;
+export default React.memo(BannerSearch);

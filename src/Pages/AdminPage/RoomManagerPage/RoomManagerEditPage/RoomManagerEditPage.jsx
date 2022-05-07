@@ -38,7 +38,7 @@ function RoomManagerEditPage() {
   const initialValues = useMemo(() => {
     return {
       ...editRoomField,
-      ..._.omit(chiTietPhongChoThue, ['__v', 'deleteAt', 'image', 'locationId']),
+      ..._.omit(chiTietPhongChoThue, ['__v', 'deleteAt', 'image']),
     };
   }, [chiTietPhongChoThue, editRoomField]);
   const refChiTietNguoiDung = useRef(initialValues);

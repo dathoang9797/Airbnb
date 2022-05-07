@@ -23,4 +23,4 @@ const BookingDetailPrice = (props) => {
   );
 };
 
-export default BookingDetailPrice;
+export default React.memo(BookingDetailPrice);

@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'lodash';
+import { sortValue } from '@Utils/Common';
 
 function RoomManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
@@ -18,6 +19,9 @@ function RoomManagerAdd({ handleOk }) {
   const { selectDanhSachViTri } = quanLyViTriSelector;
 
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
+
+  const cloneDanhSachViTri = [...danhSachViTri];
+  const sortDanhSachViTri = cloneDanhSachViTri.sort(sortValue);
 
   const handleSubmitAddRoom = async (values, { resetForm }) => {
     const result = await dispatch(taoPhongChoThueAsync(values));
@@ -35,24 +39,25 @@ function RoomManagerAdd({ handleOk }) {
   };
 
   const handleChangeSelect = async (value) => {
+    console.log({ value });
     await setFieldValue('locationId', value);
   };
 
   const formik = useFormik({
-    initialValues: addRoomField,
+    initialValues: { ...addRoomField, locationId: sortDanhSachViTri[0]._id },
     validationSchema: addRoomSchema,
     onSubmit: handleSubmitAddRoom,
   });
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
-  console.log({values})
+  console.log({ values });
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
       {renderFormRoomField(
         addRoomField,
-        danhSachViTri,
+        sortDanhSachViTri,
         errors,
         values,
         handleChange,

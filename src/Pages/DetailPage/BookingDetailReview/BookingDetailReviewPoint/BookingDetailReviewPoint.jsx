@@ -86,4 +86,4 @@ function BookingDetailReviewPoint() {
   );
 }
 
-export default BookingDetailReviewPoint;
+export default React.memo(BookingDetailReviewPoint);

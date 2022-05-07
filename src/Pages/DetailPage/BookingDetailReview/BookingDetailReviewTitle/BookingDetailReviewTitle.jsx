@@ -18,4 +18,4 @@ function BookingDetailReviewTitle() {
   );
 }
 
-export default BookingDetailReviewTitle;
+export default React.memo(BookingDetailReviewTitle);

@@ -13,7 +13,7 @@ import { Layout } from 'antd';
 import _ from 'lodash';
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomItem from './RoomItem';
 import RoomMap from './RoomMap';
@@ -53,24 +53,23 @@ function RoomPage() {
   } = quanLyPhongChoThueAction;
 
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
-  const { getDanhSachViTriAsync } = quanLyViTriThunk;
+  const { getDanhSachViTriAsync, getDanhSachProvinceAsync } = quanLyViTriThunk;
 
-  const { selectDanhSachViTriByProvince, selectDanhSachProvince } = quanLyViTriSelector;
+  const { selectDanhSachViTriByProvince,selectDanhSachProvinceFilter } = quanLyViTriSelector;
   const { selectDanhSachPhongChoThueTheoViTri } = quanLyPhongChoThueSelector;
   const { selectIsLoadingPopupState } = loadingSelector;
 
   const isLoadingPopup = useSelector(selectIsLoadingPopupState);
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
-  const danhSachProvince = useSelector(selectDanhSachProvince, shallowEqual);
-
-  console.log({danhSachProvince})
-  console.log({danhSachViTriByProvince})
+  const danhSachProvinceFilter = useSelector(selectDanhSachProvinceFilter, _.isEqual);
 
   const danhSachPhongChoThueTheoViTriSlice = useMemo(() => {
     const { maxValue, minValue } = limitValue;
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
+
+  console.log({ danhSachViTriByProvince, danhSachProvinceFilter });
 
   const handleToggle = () => setCollapsed(!collapsed);
 
@@ -86,6 +85,7 @@ function RoomPage() {
   useLayoutEffect(() => {
     Promise.all([
       dispatch(getDanhSachViTriAsync()),
+      dispatch(getDanhSachProvinceAsync()),
       dispatch(setProvincesAction([])),
       dispatch(setResetDanhSachPhongChoThueTheoViTriAction()),
       dispatch(setResetBookingRoomAction()),
@@ -98,6 +98,7 @@ function RoomPage() {
   }, [
     cityName,
     dispatch,
+    getDanhSachProvinceAsync,
     getDanhSachViTriAsync,
     setProvincesAction,
     setResetBookingRoomAction,
@@ -117,6 +118,7 @@ function RoomPage() {
         return geoCodeService.getGeoCodeByAddress(phong.name);
       });
       const result = await Promise.all(promisesArr);
+      console.log({ result });
       setPlaces(result);
     }
     getCoordinateOfEachRoom();
@@ -134,22 +136,19 @@ function RoomPage() {
 
   useEffect(() => {
     const { lng, lat } = coordinates;
-    if ((!lng && !lat) || !danhSachProvince.length) return;
+    if ((!lng && !lat) || !danhSachProvinceFilter.length) return;
     async function getProvinces() {
-      const provinces = await geoCodeService.getGeoCodeByCoordinates(lng, lat, danhSachProvince);
-      console.log({provinces})
-      console.log({lng,lat})
+      const provinces = await geoCodeService.getGeoCodeByCoordinates(lng, lat, danhSachProvinceFilter);
       if (!_.isEqual(provincesRef.current, provinces)) {
         provincesRef.current = provinces;
         dispatch(setProvincesAction(provinces));
       }
     }
     getProvinces();
-  }, [coordinates, dispatch, danhSachProvince, setProvincesAction]);
+  }, [coordinates, dispatch, danhSachProvinceFilter, setProvincesAction]);
 
   useEffect(() => {
     geoCodeService.getGeoCodeByAddress(cityName).then((data) => {
-      console.log({data})
       const lat = data[0].geometry.location.lat;
       const lng = data[0].geometry.location.lng;
       setCoordinates({ lat, lng });
@@ -162,7 +161,6 @@ function RoomPage() {
       setShowSpinnerMap(false);
     }, 500);
     return () => {
-      console.log('clear');
       clearTimeout(waitingCloseLoadingPopup);
     };
   }, [isLoadingPopup]);

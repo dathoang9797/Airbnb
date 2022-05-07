@@ -30,7 +30,7 @@ function Feature() {
     { bgImage: tphcm, cityName: 'Thành phố Hồ Chí Minh', rentals: 0 },
     { bgImage: haNoi, cityName: 'Hà Nội', rentals: 0 },
     { bgImage: daNang, cityName: 'Đà Nẵng', rentals: 0 },
-    { bgImage: vungTau, cityName: 'Vũng Tàu', rentals: 0 },
+    { bgImage: vungTau, cityName: 'Tỉnh Bà Rịa - Vũng Tàu', rentals: 0 },
     { bgImage: canTho, cityName: 'Cần Thơ', rentals: 0 },
     { bgImage: phuQuoc, cityName: 'Phú Quốc', rentals: 0 },
     { bgImage: nhaTrang, cityName: 'Nha Trang', rentals: 0 },
@@ -50,6 +50,7 @@ function Feature() {
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
 
 
+  console.log({danhSachViTriByProvince})
   useEffect(() => {
     dispatch(setProvincesAction(provinceArr));
     danhSachViTriByProvinceRef.current = [];
@@ -69,7 +70,11 @@ function Feature() {
     return danhSachPhongChoThueTheoViTri.filter((room) => {
       return (
         removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Thành phố Hồ Chí Minh'))
+          removeSpace(removeUnicode('Thành phố Hồ Chí Minh')) ||
+        removeSpace(removeUnicode(room.locationId.province)) ===
+          removeSpace(removeUnicode('Hồ Chí Minh')) ||
+        removeSpace(removeUnicode(room.locationId.province)) ===
+          removeSpace(removeUnicode('Tp.Ho Chi Minh'))
       );
     });
   }, [danhSachPhongChoThueTheoViTri]);
@@ -96,7 +101,7 @@ function Feature() {
     return danhSachPhongChoThueTheoViTri.filter((room) => {
       return (
         removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Vũng Tàu'))
+        removeSpace(removeUnicode('Tỉnh Bà Rịa - Vũng Tàu'))
       );
     });
   }, [danhSachPhongChoThueTheoViTri]);
@@ -133,7 +138,7 @@ function Feature() {
       { bgImage: tphcm, cityName: 'Thành phố Hồ Chí Minh', rentals: totalRoomTphcm.length },
       { bgImage: haNoi, cityName: 'Hà Nội', rentals: totalRoomHanoi.length },
       { bgImage: daNang, cityName: 'Đà Nẵng', rentals: totalRoomDaNang.length },
-      { bgImage: vungTau, cityName: 'Vũng Tàu', rentals: totalRoomVungTau.length },
+      { bgImage: vungTau, cityName: 'Tỉnh Bà Rịa - Vũng Tàu', rentals: totalRoomVungTau.length },
       { bgImage: canTho, cityName: 'Cần Thơ', rentals: totalRoomDaNang.length },
       { bgImage: phuQuoc, cityName: 'Phú Quốc', rentals: totalRoomPhuQuoc.length },
       { bgImage: nhaTrang, cityName: 'Nha Trang', rentals: totalRoomNhaTrang.length },
@@ -182,4 +187,4 @@ function Feature() {
   );
 }
 
-export default Feature;
+export default React.memo(Feature);

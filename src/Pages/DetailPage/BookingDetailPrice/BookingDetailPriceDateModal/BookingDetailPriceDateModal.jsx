@@ -126,4 +126,4 @@ function BookingDetailPriceDate(props) {
   );
 }
 
-export default BookingDetailPriceDate;
+export default React.memo(BookingDetailPriceDate);

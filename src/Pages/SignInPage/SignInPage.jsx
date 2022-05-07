@@ -6,6 +6,7 @@ import { VectorSVG } from '@Assets/Svgs';
 function SignInPage() {
   const { Container, Content, ContentLeft, ContentRight, Form } = SignInCSS;
   const { BackgroundSignInUpSVG } = VectorSVG;
+  
   return (
     <Container>
       <Form>

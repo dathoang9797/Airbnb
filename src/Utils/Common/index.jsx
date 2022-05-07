@@ -11,6 +11,7 @@ import { handleDataTable } from './HandleDataTable';
 import { handleChooseEndLoading, handleChooseStartLoading } from './HandleChooseLoading';
 import { renderUtilityIcon } from './RenderUtilityIcon';
 import { provincesVietNam } from './ProvincesVietNam';
+import { sortValue } from './SortValue';
 
 export {
   capitalize,
@@ -29,4 +30,5 @@ export {
   handleChooseStartLoading,
   renderUtilityIcon,
   provincesVietNam,
+  sortValue,
 };

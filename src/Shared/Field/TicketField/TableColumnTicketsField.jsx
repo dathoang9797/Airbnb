@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { sortValue } from '@Utils/Common';
 
 export const tableColumnsTicketField = [
   {
@@ -21,17 +22,7 @@ export const tableColumnsTicketField = [
     title: 'Người đặt',
     dataIndex: ['userId', 'name'],
     key: 'name',
-    sorter: (a, b) => {
-      if (a.userId && b.userId) {
-        const tenA = a.userId.name.toLowerCase();
-        const tenB = b.userId.name.toLowerCase();
-        if (tenA > tenB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Người đặt',
@@ -53,11 +44,7 @@ export const tableColumnsTicketField = [
       }
       return record.userId.tickets.length;
     },
-    sorter: (a, b) => {
-      if (a.userId && b.userId) {
-        return a.userId.tickets.length - b.userId.tickets.length;
-      }
-    },
+    sorter: sortValue,
 
     onCell: (record) => {
       return {
@@ -74,17 +61,7 @@ export const tableColumnsTicketField = [
     title: 'Tên phòng',
     dataIndex: ['roomId', 'name'],
     key: 'room',
-    sorter: (a, b) => {
-      if (a.roomId && b.roomId) {
-        const nameA = a.roomId.name.toLowerCase();
-        const nameB = b.roomId.name.toLowerCase();
-        if (nameA > nameB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
     onCell: (record) => {
       return {
         'data-label': 'Ngày tạo vé',
@@ -106,17 +83,7 @@ export const tableColumnsTicketField = [
         'data-label': 'CheckIn',
       };
     },
-    sorter: (a, b) => {
-      if (a.checkIn && b.checkIn) {
-        const checkInA = a.checkIn.toLowerCase();
-        const checkInB = b.checkIn.toLowerCase();
-        if (checkInA > checkInB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
   },
   {
     title: 'CheckOut',
@@ -133,17 +100,7 @@ export const tableColumnsTicketField = [
         'data-label': 'CheckOut',
       };
     },
-    sorter: (a, b) => {
-      if (a.checkOut && b.checkOut) {
-        const checkOutA = a.checkOut.toLowerCase();
-        const checkOutB = b.checkOut.toLowerCase();
-        if (checkOutA > checkOutB) {
-          return 1;
-        } else {
-          return -1;
-        }
-      }
-    },
+    sorter: sortValue,
   },
   {
     title: 'Thao tác',

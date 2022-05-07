@@ -55,7 +55,7 @@ function UpLoadImage({ idRoom, imageProp }) {
   }, [pathname, urlLocation, urlRoom]);
 
   const beforeUpload = useCallback((file) => {
-    const isJpgOrPng = file.type === 'image/jpg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
       showError('You can only upload JPG/PNG file!');
     }
@@ -106,7 +106,8 @@ function UpLoadImage({ idRoom, imageProp }) {
         onChange={handleChange}
         className='avatar-uploader'
         beforeUpload={beforeUpload}
-        accept='image/x-png, image/gif, image/jpg'
+        accept='image/x-png, image/gif, image/jpeg'
+        
         action={`${urlAirBnb}${handleUrlUploadImage()}/${idRoom}`}
         headers={headerReq}
         name={handleKeyName()}

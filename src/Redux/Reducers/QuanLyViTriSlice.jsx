@@ -4,6 +4,7 @@ import { showError } from '@Utils/Common';
 
 const initialState = {
   danhSachViTri: [],
+  danhSachProvince: [],
   chiTietViTri: {},
   provinces: [],
 };
@@ -15,6 +16,7 @@ const {
   xoaViTriAsync,
   taoviTriAsync,
   capNhatViTriAsync,
+  getDanhSachProvinceAsync,
 } = quanLyViTriThunk;
 
 const quanLyViTriSlice = createSlice({
@@ -26,6 +28,16 @@ const quanLyViTriSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(getDanhSachProvinceAsync.fulfilled, (state, action) => {
+      state.danhSachProvince = action.payload;
+    });
+    builder.addCase(getDanhSachProvinceAsync.rejected, (state, action) => {
+      if (action.payload) {
+        showError(action.payload);
+      } else {
+        showError(action.error.message);
+      }
+    });
     builder.addCase(getDanhSachViTriAsync.fulfilled, (state, action) => {
       state.danhSachViTri = action.payload;
     });

@@ -76,4 +76,4 @@ function BookingDetailPriceBill(props) {
   );
 }
 
-export default BookingDetailPriceBill;
+export default React.memo(BookingDetailPriceBill);
