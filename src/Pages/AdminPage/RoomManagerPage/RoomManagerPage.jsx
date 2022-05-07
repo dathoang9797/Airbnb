@@ -2,6 +2,7 @@ import { TableCSS } from '@Components';
 import TabActionsAdmin from '@Layouts/Admin/TabActionsAdmin';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
+import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { roomField } from '@Shared/Field/RoomField';
 import { handleDataTable } from '@Utils/Common';
@@ -29,13 +30,15 @@ function RoomManagerPage(props) {
     getChiTietPhongChoThueAsync,
   } = quanLyPhongChoThueThunk;
 
+  const { getDanhSachViTriAsync } = quanLyViTriThunk;
+
   const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
 
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
 
   useEffect(() => {
-    dispatch(getDanhSachPhongChoThueAsync());
-  }, [dispatch, getDanhSachPhongChoThueAsync]);
+    Promise.all([dispatch(getDanhSachPhongChoThueAsync()), dispatch(getDanhSachViTriAsync())]);
+  }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachViTriAsync]);
 
   const handleGetDetailRoom = async (idNguoiDung) => {
     await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));
@@ -80,7 +83,7 @@ function RoomManagerPage(props) {
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuPhongAsync}
-        handleRefreshDataThunk={getDanhSachPhongChoThueAsync}
+        handleRefreshDataThunk={[getDanhSachViTriAsync, getDanhSachPhongChoThueAsync]}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Phòng'
         showModal={handleShowModal}

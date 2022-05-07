@@ -14,8 +14,8 @@ const Container = styled(NavLink)`
 `;
 
 const Rating = styled.div`
-  ${tw`flex mt-auto`}
-  img {
+  ${tw`flex mt-auto items-center justify-center`}
+  svg {
     ${tw`w-3.5 mr-1`}
   }
 `;
@@ -72,14 +72,14 @@ const Image = styled.div`
     ${tw`absolute content['SUPERHOST'] bg-white box-shadow[0px 2px 4px rgba(0, 0, 0, 0.18)] rounded py-1 px-2 top-2.5 left-2.5 letter-spacing[0.48px] text-xs  uppercase`};
   }
   button {
-    ${tw`absolute top-1/2 w-8 h-8 bg-white border-radius[50%] overflow-hidden p-0 flex justify-center items-center border-none transition-all duration-300 cursor-pointer opacity-0`};
+    ${tw`absolute top-1/2 w-8 h-8 bg-white border-radius[50%] overflow-hidden p-0 flex justify-center items-center border-none transition-all duration-300 cursor-pointer opacity-0 -translate-y-1/2`};
   }
 
   button:hover {
     ${tw`opacity-100`};
   }
 
-  button img {
+  button svg {
     ${tw`w-2.5 h-2.5`}
   }
 

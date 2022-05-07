@@ -77,7 +77,7 @@ function LocationManagerPage(props) {
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuViTrigAsync}
-        handleRefreshDataThunk={getDanhSachViTriAsync}
+        handleRefreshDataThunk={[getDanhSachViTriAsync]}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vị Trí'
         showModal={handleShowModal}

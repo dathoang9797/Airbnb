@@ -6,6 +6,7 @@ import { xacThucNguoiDungService } from '@Services/XacThucNguoiDungService';
 import _ from 'lodash';
 import { history, sweetAlert } from '@Utils/Libs';
 import { capitalize } from '@Utils/Common';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
 
 const {
   messageLoginFailed,
@@ -34,12 +35,12 @@ const setUserInfoAsync = createAsyncThunk(
       return rejectWithValue(messageLoginFailed);
     }
 
-    if ('message' in result && !('user' in result)) {
-      return rejectWithValue(messageLoginFailed);
-    }
-
     if (!('user' in result)) {
       return rejectWithValue(capitalize(result.message));
+    }
+
+    if ('message' in result && !('user' in result)) {
+      return rejectWithValue(messageLoginFailed);
     }
 
     showSuccess(capitalize(result.message));
@@ -65,12 +66,12 @@ const setRegisterUserInfoAsync = createAsyncThunk(
         return rejectWithValue(messageNetWorkErr);
       }
 
-      if (typeof result === 'string') {
-        return rejectWithValue(result);
-      }
-
       if (_.isEmpty(result)) {
         return rejectWithValue(messageRegisterFailed);
+      }
+
+      if (typeof result === 'string') {
+        return rejectWithValue(result);
       }
 
       if ('message' in result) {
@@ -197,7 +198,7 @@ const capNhatProfileAsync = createAsyncThunk(
       isLoading,
       isLoadingPopup
     );
-
+    const { updateUserInfo } = quanLyNguoiDungAction;
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
     }
@@ -216,6 +217,7 @@ const capNhatProfileAsync = createAsyncThunk(
     const userInfo = localService.getUserInfo();
     const userUpdate = { ...userInfo, ...result };
     localService.setUserInfo(userUpdate);
+    dispatch(updateUserInfo(userUpdate));
     showSuccess(messageUpdateSuccess);
   }
 );

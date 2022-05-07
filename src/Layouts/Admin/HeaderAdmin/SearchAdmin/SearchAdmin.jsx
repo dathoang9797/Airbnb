@@ -1,14 +1,14 @@
-import { searchSelector } from '@/Redux/Selector/SearchSelect';
-import { SearchInputCSS } from '@Components/SearchInput/SeachInput.styles';
+import { searchSelector } from '@Redux/Selector/SearchSelect';
+import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchAdminCSS } from './SearchAdmin.styles';
 
-function SearchInput({ content, dispatchAction }) {
+function SearchAdmin({ content, dispatchAction }) {
   const dispatch = useDispatch();
   const { selectSearchState } = searchSelector;
   const searchValue = useSelector(selectSearchState);
-  const { Container, Content, Input, Item } = SearchInputCSS;
+  const { Container, Content, Input, Item } = SearchAdminCSS;
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -34,4 +34,4 @@ function SearchInput({ content, dispatchAction }) {
   );
 }
 
-export default SearchInput;
+export default SearchAdmin;

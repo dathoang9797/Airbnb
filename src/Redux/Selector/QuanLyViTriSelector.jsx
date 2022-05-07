@@ -36,12 +36,16 @@ const selectDanhSachProvince = createSelector(selectDanhSachViTri, (danhSachViTr
     .filter((item, provinceIndex, thisProvinceArr) => {
       return thisProvinceArr.indexOf(item) === provinceIndex;
     });
+  const thanhPho = 'tp.';
 
   return provincesVietNam
     .map((provinceVietNam) => {
-      return provinceArr.filter(
-        (province) => removeSpace(removeUnicode(provinceVietNam)) === province
-      );
+      return provinceArr.filter((province) => {
+        if (removeSpace(removeUnicode(provinceVietNam)).includes(thanhPho)) {
+          return removeSpace(removeUnicode(provinceVietNam)).slice(thanhPho.length) === province;
+        }
+        return removeSpace(removeUnicode(provinceVietNam)) === province;
+      });
     })
     .flat();
 });

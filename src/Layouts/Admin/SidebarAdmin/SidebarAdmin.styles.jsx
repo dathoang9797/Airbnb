@@ -94,7 +94,7 @@ const SiderBar = styled(Sider)`
       ${tw` md:px-1.5 sm:px-2`}
     }
 
-    div img {
+    div svg {
       ${tw`m-auto `}
     }
   }

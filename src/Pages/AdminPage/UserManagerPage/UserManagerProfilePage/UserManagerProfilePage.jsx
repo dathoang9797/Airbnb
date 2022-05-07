@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { Redirect } from 'react-router';
 import moment from 'moment';
-import { images } from '@Assets/Images';
+import { VectorSVG } from '@Assets/Svgs';
 
 function UserManagerProfile() {
   const urlUserManager = process.env.REACT_APP_LINK_ADMIN_USER_MANAGER;
   const { Container, Content, About, Desc, Grid, GridContent, GridItem, GridKey, Img } =
     UserManagerProfileCSS;
-  const { account } = images;
+  const { AccountSVG } = VectorSVG;
 
   const { selectChiTietNguoiDung } = quanLyNguoiDungSelector;
 
@@ -25,9 +25,7 @@ function UserManagerProfile() {
     <Container>
       <Content>
         <Desc>
-          <Img>
-            <img src={avatar ? avatar : account} alt={avatar} />
-          </Img>
+          <Img>{avatar ? <img src={avatar} alt={avatar} /> : <AccountSVG />}</Img>
         </Desc>
 
         <About>

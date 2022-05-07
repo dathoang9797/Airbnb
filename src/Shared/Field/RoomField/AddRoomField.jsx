@@ -15,5 +15,6 @@ export const addRoomField = {
     wifi: false,
     heating: false,
     cableTV: false,
+    locationId:'',
   };
   

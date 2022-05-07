@@ -5,7 +5,7 @@ const { Header } = Layout;
 
 const Container = styled(Header)`
   ${tw` flex items-center justify-end z-10 py-4 px-8 bg-white shadow-md dark:bg-gray-800 `}
-  &.ant-layout-header{
+  &.ant-layout-header {
     ${tw`height[auto] line-height[0px]`}
     ${tw`md:height[64px] md:line-height[64px]`}
   }
@@ -18,11 +18,11 @@ const Content = styled.div`
 
 const Dropdowns = styled(Dropdown)`
   button {
-    ${tw`align-middle rounded-full  focus:outline-none`}
+    ${tw`align-middle rounded-full  focus:outline-none`};
   }
-
-  img {
-    ${tw`object-cover  rounded-full`}
+  img,
+  svg {
+    ${tw`rounded-full`};
   }
 `;
 

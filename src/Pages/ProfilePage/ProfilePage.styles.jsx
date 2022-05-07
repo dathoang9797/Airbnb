@@ -19,7 +19,7 @@ const ContentLeft = styled.div`
 
 const CardImage = styled.div`
   ${tw`rounded-full`};
-  img {
+  img,svg {
     ${tw`rounded-full h-20 w-20 m-auto `};
   }
 `;

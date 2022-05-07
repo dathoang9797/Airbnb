@@ -8,15 +8,20 @@ const {
   FormHiOutlineClipboard,
   InputNumber,
   FormSwitch,
+  FormSelect,
+  FormOption,
+  FormCheckOutlined,
 } = Form;
 
 export const renderFormRoomField = (
   field = null,
+  danhSachViTri = [],
   errors = null,
   values = null,
   handleChange = null,
   handleInputNumber = null,
-  handleChangeSwitch = null
+  handleChangeSwitch = null,
+  handleChangeSelect = null
 ) => {
   return Object.keys(field).map((key, index) => {
     switch (key) {
@@ -235,6 +240,45 @@ export const renderFormRoomField = (
             <FormGroup>
               <FormItem label='Heating'>
                 <FormSwitch onChange={handleChangeSwitch('heating')} checked={values.heating} />
+              </FormItem>
+            </FormGroup>
+          </FormControl>
+        );
+      }
+
+      case 'locationId': {
+        const cloneDanhSachViTri = [...danhSachViTri];
+        const sortDanhSachViTri = cloneDanhSachViTri.sort((a, b) => {
+          const provinceA = a.province.toLowerCase();
+          const provinceB = b.province.toLowerCase();
+          if (provinceA < provinceB) {
+            return -1;
+          }
+          if (provinceA > provinceB) {
+            return 1;
+          }
+          return 0;
+        });
+        console.log({ sortDanhSachViTri });
+        return (
+          <FormControl key={`${key}-${index}`}>
+            <FormGroup>
+              <FormItem label='Location'>
+                <FormSelect
+                  bordered={false}
+                  onChange={handleChangeSelect}
+                  defaultValue={sortDanhSachViTri[0]._id}
+                  menuItemSelectedIcon={<FormCheckOutlined />}
+                  dropdownClassName='select-location'
+                >
+                  {sortDanhSachViTri.sort().map((viTri, index) => {
+                    return (
+                      <FormOption key={`ViTriSelect-${viTri._id}-${index}`} value={viTri._id}>
+                        {viTri.province}
+                      </FormOption>
+                    );
+                  })}
+                </FormSelect>
               </FormItem>
             </FormGroup>
           </FormControl>

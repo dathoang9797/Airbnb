@@ -46,6 +46,10 @@ function LocationMangerEditPage() {
     dispatch(capNhatViTriAsync(params));
   };
 
+  const handleChangeSelect = async (value) => {
+    await setFieldValue('province', value);
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
@@ -64,7 +68,14 @@ function LocationMangerEditPage() {
   ) : (
     <Container>
       <FormContainer onFinish={handleSubmit} size='small'>
-        {renderFormLocationField(editLocationField, errors, values, handleChange, handleInputNumber)}
+        {renderFormLocationField(
+          editLocationField,
+          errors,
+          values,
+          handleChange,
+          handleInputNumber,
+          handleChangeSelect
+        )}
         <FormControl>
           <FormButton type='submit'>EDIT LOCATION</FormButton>
         </FormControl>

@@ -2,6 +2,7 @@ import { editRoomSchema } from '@Shared/Schema/EditRoomSchema';
 import { showWarning } from '@Utils/Common';
 import Form from '@Components/Form';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { roomField } from '@Shared/Field/RoomField';
 import { messageApp } from '@Utils/Common';
@@ -25,6 +26,10 @@ function RoomManagerEditPage() {
   const { selectChiTietPhongChoThue } = quanLyPhongChoThueSelector;
 
   const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
+
+  const { selectDanhSachViTri } = quanLyViTriSelector;
+
+  const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
 
   const isHasChiTietPhongChoThue = useMemo(
     () => _.isEmpty(chiTietPhongChoThue),
@@ -57,6 +62,10 @@ function RoomManagerEditPage() {
     return async (value: number) => await setFieldValue(field, value);
   };
 
+  const handleChangeSelect = async (value) => {
+    await setFieldValue('locationId', value);
+  };
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
@@ -73,11 +82,13 @@ function RoomManagerEditPage() {
       <FormContainer onFinish={handleSubmit} size='small'>
         {renderFormRoomField(
           editRoomField,
+          danhSachViTri,
           errors,
           values,
           handleChange,
           handleInputNumber,
-          handleChangeSwitch
+          handleChangeSwitch,
+          handleChangeSelect
         )}
         <FormControl>
           <FormButton type='submit'>EDIT ROOM</FormButton>

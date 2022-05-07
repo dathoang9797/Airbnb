@@ -1,10 +1,12 @@
 import Form from '@Components/Form';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { roomField } from '@Shared/Field/RoomField';
 import { addRoomSchema } from '@Shared/Schema/AddRoomSchema';
 import { useFormik } from 'formik';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 
 function RoomManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
@@ -12,6 +14,10 @@ function RoomManagerAdd({ handleOk }) {
   const { FormContainer, FormControl, FormButton } = Form;
 
   const { taoPhongChoThueAsync } = quanLyPhongChoThueThunk;
+
+  const { selectDanhSachViTri } = quanLyViTriSelector;
+
+  const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
 
   const handleSubmitAddRoom = async (values, { resetForm }) => {
     const result = await dispatch(taoPhongChoThueAsync(values));
@@ -28,6 +34,10 @@ function RoomManagerAdd({ handleOk }) {
     return async (value: number) => await setFieldValue(field, value);
   };
 
+  const handleChangeSelect = async (value) => {
+    await setFieldValue('locationId', value);
+  };
+
   const formik = useFormik({
     initialValues: addRoomField,
     validationSchema: addRoomSchema,
@@ -36,15 +46,19 @@ function RoomManagerAdd({ handleOk }) {
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
 
+  console.log({values})
+
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
       {renderFormRoomField(
         addRoomField,
+        danhSachViTri,
         errors,
         values,
         handleChange,
         handleInputNumber,
-        handleChangeSwitch
+        handleChangeSwitch,
+        handleChangeSelect
       )}
       <FormControl>
         <FormButton type='submit'>ADD ROOM</FormButton>

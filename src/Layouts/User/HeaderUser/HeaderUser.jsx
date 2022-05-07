@@ -1,61 +1,25 @@
-import React, { useState, useLayoutEffect } from 'react';
 import { HeaderCSS } from '@Layouts/User/HeaderUser/HeaderUser.styles';
-import { images } from '@Assets/Images';
+import React from 'react';
+import HeaderDefault from './HeaderDefault';
+import HeaderSticky from './HeaderSticky';
+import HeaderPrimary from './HeaderPrimary';
+import { useLocation } from 'react-router-dom';
 
 function HeaderUser() {
-  const [state, setState] = useState(false);
-  const { hamburger, logo, searchIcon, globe, chevronDown, account } = images;
-  const { Container, Logo, Nav, Search, SearchIcon, NavA, NavButton } = HeaderCSS;
+  const { Container } = HeaderCSS;
+  const urlHome = process.env.REACT_APP_LINK_HOME;
+  const { pathname } = useLocation();
 
-  useLayoutEffect(() => {
-    const changeClassOnScroll = () => {
-      const scrollValue = document.documentElement.scrollTop;
-      setState(scrollValue > 80);
-    };
-    window.addEventListener('scroll', changeClassOnScroll);
-    return () => window.removeEventListener('scroll', changeClassOnScroll);
-  }, []);
-
-  const changeClassOnSroll = () => {
-    const scrollValue = document.documentElement.scrollTop;
-    if (scrollValue > 80) {
-      setState(true);
-    } else {
-      setState(false);
-    }
-  };
-  
-  window.addEventListener('scroll', changeClassOnSroll);
-  return (
-    <Container className={state ? 'active' : ''}>
-      <Logo>
-        <img src={logo} alt='Logo' />
-      </Logo>
-      <Search>
-        <button>Selected map area</button>
-        <span />
-        <button>1 Sep - 3 Sep</button>
-        <span />
-        <button>
-          1 guest
-          <SearchIcon>
-            <img src={searchIcon} alt='Search Icon' />
-          </SearchIcon>
-        </button>
-      </Search>
-      <Nav>
-        <NavA>Become a host</NavA>
-        <NavButton className='__nav__button-language'>
-          <img src={globe} alt='Globe' />
-          <img src={chevronDown} alt='Chevron down' />
-        </NavButton>
-        <NavButton className='__nav__button-account'>
-          <img src={hamburger} alt='Hamburger' />
-          <img src={account} alt='Account' />
-        </NavButton>
-      </Nav>
+  return urlHome === pathname ? (
+    <Container>
+      <HeaderDefault />
+      <HeaderSticky />
+    </Container>
+  ) : (
+    <Container>
+      <HeaderPrimary />
     </Container>
   );
 }
 
-export default HeaderUser;
+export default React.memo(HeaderUser);

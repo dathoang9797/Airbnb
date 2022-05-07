@@ -23,7 +23,11 @@ const initialState = {
 const quanLyNguoiDungSlice = createSlice({
   name: 'quanLyNguoiDungReducer',
   initialState,
-  reducers: {},
+  reducers: {
+    updateUserInfo: (state, action) => {
+      state.userInfo = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(setUserInfoAsync.fulfilled, (state, action) => {
       state.userInfo = action.payload;
@@ -100,8 +104,8 @@ const quanLyNguoiDungSlice = createSlice({
     });
   },
 });
-const { setSearchValue } = quanLyNguoiDungSlice.actions;
+const { setSearchValue,updateUserInfo } = quanLyNguoiDungSlice.actions;
 
-export const quanLyNguoiDungAction = { setSearchValue };
+export const quanLyNguoiDungAction = { setSearchValue,updateUserInfo };
 
 export default quanLyNguoiDungSlice.reducer;

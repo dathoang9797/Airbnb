@@ -1,5 +1,4 @@
 import { CarryOutOutlined, DashboardOutlined, UsergroupAddOutlined } from '@ant-design/icons';
-import { images } from '@Assets/Images';
 import ButtonScrollTop from '@Components/ButtonScrollTop';
 import React, { useState, useEffect } from 'react';
 import { AiFillLike } from 'react-icons/ai';
@@ -7,13 +6,14 @@ import { GiTicket } from 'react-icons/gi';
 import { IoLocationOutline } from 'react-icons/io5';
 import { NavLink, useLocation } from 'react-router-dom';
 import { SiderBarCSS } from './SidebarAdmin.styles';
+import { VectorSVG } from '@Assets/Svgs';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
   const [widthSidebar, setWidthSideBar] = useState(230);
   const [widthCollapsed, setWidthCollapsed] = useState(60);
   const { pathname } = useLocation();
-  const { logo } = images;
+  const { LogoSVG } = VectorSVG;
   const { Menus, SiderBar } = SiderBarCSS;
 
   const onCollapse = (collapsed) => setCollapsed(collapsed);
@@ -88,12 +88,12 @@ function Siderbar() {
       >
         <div>
           <a href='#a'>
-            <img src={logo} alt={logo} />
+            <LogoSVG />
           </a>
         </div>
         <Menus defaultSelectedKeys={[pathname]} mode='inline' items={items} />
       </SiderBar>
-      <ButtonScrollTop className='fade-in'/>
+      <ButtonScrollTop className='fade-in' />
     </>
   );
 }

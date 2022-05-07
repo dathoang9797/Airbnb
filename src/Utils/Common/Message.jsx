@@ -61,6 +61,9 @@ const messageDeleteTicketSuccess = 'Xóa vé thành công';
 
 const messageUpdateImageProfileSuccess = 'Xóa vé thành công';
 
+const messageAuthorization = 'Bạn không có quyền truy cập vào trang này';
+
+
 export const messageApp = {
   messagePasswordIsValid,
   messageNetWorkErr,
@@ -93,4 +96,5 @@ export const messageApp = {
   messagePlaceHolderSearchTicket,
   messageUpdateEvaluateSuccess,
   messageUpdateImageProfileSuccess,
+  messageAuthorization,
 };

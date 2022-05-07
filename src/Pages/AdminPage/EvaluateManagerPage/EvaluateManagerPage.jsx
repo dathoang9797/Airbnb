@@ -69,7 +69,7 @@ function EvaluateManagerPage(props) {
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuDanhGiaAsync}
-        handleRefreshDataThunk={getDanhSachDanhGiaAsync}
+        handleRefreshDataThunk={[getDanhSachDanhGiaAsync]}
         showModal={handleShowModal}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Đánh Giá'

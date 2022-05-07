@@ -23,7 +23,7 @@ const Item = styled.div`
 
 const Input = styled(FormInput)``;
 
-export const SearchInputCSS = {
+export const SearchAdminCSS = {
   Container,
   Content,
   Item,

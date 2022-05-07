@@ -1,13 +1,24 @@
 import Form from '@Components/Form';
+import { provincesVietNam } from '@/Utils/Common';
 
-const { FormControl, FormGroup, FormItem, FormInput, InputNumber } = Form;
+const {
+  FormControl,
+  FormGroup,
+  FormItem,
+  FormInput,
+  InputNumber,
+  FormSelect,
+  FormCheckOutlined,
+  FormOption,
+} = Form;
 
 export const renderFormLocationField = (
   field = null,
   errors = null,
   values = null,
   handleChange = null,
-  handleInputNumber = null
+  handleInputNumber = null,
+  handleChangeSelect = null
 ) => {
   return Object.keys(field).map((key, index) => {
     switch (key) {
@@ -32,27 +43,6 @@ export const renderFormLocationField = (
           </FormControl>
         );
       }
-      case 'province': {
-        return (
-          <FormControl key={`${key}-${index}`}>
-            <FormGroup>
-              <FormItem
-                validateStatus={errors ? 'error' : 'success'}
-                help={errors ? errors.province : ''}
-              >
-                <FormInput
-                  type='text'
-                  placeholder=' '
-                  name='province'
-                  onChange={handleChange}
-                  childrenProps='Your Province '
-                  value={values.province}
-                />
-              </FormItem>
-            </FormGroup>
-          </FormControl>
-        );
-      }
 
       case 'country': {
         return (
@@ -70,6 +60,33 @@ export const renderFormLocationField = (
                   childrenProps='Your Country '
                   value={values.country}
                 />
+              </FormItem>
+            </FormGroup>
+          </FormControl>
+        );
+      }
+
+      case 'province': {
+        const provincesVietNamSort = provincesVietNam.sort();
+        return (
+          <FormControl key={`${key}-${index}`}>
+            <FormGroup>
+              <FormItem label='Province'>
+                <FormSelect
+                  bordered={false}
+                  onChange={handleChangeSelect}
+                  defaultValue={provincesVietNam[0]}
+                  menuItemSelectedIcon={<FormCheckOutlined />}
+                  dropdownClassName='select-province'
+                >
+                  {provincesVietNamSort.sort().map((province, index) => {
+                    return (
+                      <FormOption key={`ProvinceSelect-${index}`} value={province}>
+                        {province}
+                      </FormOption>
+                    );
+                  })}
+                </FormSelect>
               </FormItem>
             </FormGroup>
           </FormControl>

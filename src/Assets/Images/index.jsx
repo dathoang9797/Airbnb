@@ -1,15 +1,4 @@
-import logo from './logo.svg';
-import account from './account.svg';
 import calendar from './calendar.gif';
-import chevronDown from './chevronDown.svg';
-import chevronLeft from './chevronLeft.svg';
-import chevronRight from './chevronRight.svg';
-import globe from './globe.svg';
-import hamburger from './hamburger.svg';
-import heart from './heart.svg';
-import searchIcon from './searchIcon.svg';
-import star from './star.svg';
-import svg30 from './svg30.svg';
 import tphcm from './tphcm.jpg';
 import haNoi from './hanoi.jpg';
 import daNang from './daNang.jpg';
@@ -20,19 +9,9 @@ import canTho from './CanTho.jpg';
 import heroImgOne from './hero-img-one.jpg';
 import hoiAn from './HoiAn.jpg';
 
-export const images = {
-  logo,
-  account,
+
+export const Images = {
   calendar,
-  chevronDown,
-  chevronLeft,
-  chevronRight,
-  globe,
-  hamburger,
-  heart,
-  searchIcon,
-  star,
-  svg30,
   tphcm,
   haNoi,
   daNang,

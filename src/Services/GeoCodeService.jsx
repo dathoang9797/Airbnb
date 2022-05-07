@@ -37,10 +37,9 @@ export const geoCodeService = {
         .json()
         .then((data) => {
           handleChooseEndLoading(header);
+          console.log({ data });
           const results = data.results;
-          console.log({ results });
           const thanhPho = 'thanhpho';
-
           const provinces = results[0].address_components
             .map((item, index) => {
               const province = item.long_name;
@@ -56,7 +55,10 @@ export const geoCodeService = {
               }
               return formatProvince;
             })
-            .filter((item) => item !== null);
+            .filter((item) => item !== null)
+            .filter((item, provinceIndex, thisProvinceArr) => {
+              return thisProvinceArr.indexOf(item) === provinceIndex;
+            });
           return provinces;
         })
         .catch(() => {

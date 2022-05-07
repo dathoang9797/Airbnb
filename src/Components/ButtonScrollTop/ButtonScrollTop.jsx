@@ -8,7 +8,6 @@ function ButtonScrollTop(props) {
 
   useEffect(() => {
     const handleShowButton = () => {
-     
       setShowButton(window.scrollY > 1);
     };
     window.addEventListener('scroll', handleShowButton);

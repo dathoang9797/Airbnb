@@ -1,10 +1,11 @@
 import React from 'react';
 import { RoomItemCSS } from './RoomItem.styles';
-import { images } from '@Assets/Images';
+import { VectorSVG } from '@Assets/Svgs';
 import RoomSpinner from './RoomSpinner';
 
 function RoomItem({ phong, showSpinnerMap }) {
   const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;
+  const { ChevronLeftSVG, ChevronRightSVG, HeartSVG, StarSVG } = VectorSVG;
   const {
     _id,
     name,
@@ -29,18 +30,16 @@ function RoomItem({ phong, showSpinnerMap }) {
 
   const { Container, Content, Image, Title, Desc, Detail, Price, PriceNight, Rating } = RoomItemCSS;
 
-  const { chevronLeft, chevronRight, heart, star } = images;
-
   return showSpinnerMap ? (
     <RoomSpinner />
   ) : (
     <Container to={`${urlDetailPage}/${_id}`}>
       <Image>
         <button>
-          <img src={chevronLeft} alt='Chevron Left' />
+          <ChevronLeftSVG />
         </button>
         <button>
-          <img src={chevronRight} alt='Chevron Right' />
+          <ChevronRightSVG />
         </button>
         <img
           src={image ?? `https://picsum.photos/id/300/200`}
@@ -59,7 +58,7 @@ function RoomItem({ phong, showSpinnerMap }) {
           </div>
           <div>
             <button>
-              <img src={heart} alt={heart} />
+              <HeartSVG />
             </button>
           </div>
         </Title>
@@ -76,7 +75,7 @@ function RoomItem({ phong, showSpinnerMap }) {
         </Desc>
         <Detail>
           <Rating>
-            <img src={star} alt='Star' />
+            <StarSVG />
             <span>{locationId ? locationId.valueate : 0}</span>
           </Rating>
           <Price>
