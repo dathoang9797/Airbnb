@@ -1,13 +1,13 @@
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import SpinnerDot from '@Components/SpinnerDot';
 import { localService } from '@Services/LocalStorageService';
 import { showError, showSuccess } from '@Utils/Common';
-import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Upload } from 'antd';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { useLocation } from 'react-router-dom';
 import { UpLoadImageTableCSS } from './UpLoadImageTable.styles';
-import SpinnerDot from '@Components/SpinnerDot';
-import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 function UpLoadImage({ idRoom, imageProp }) {
   const userInfo = localService.getUserInfo();

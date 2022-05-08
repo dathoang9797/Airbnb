@@ -2,6 +2,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import { removeSpace, removeUnicode } from '@Utils/Common';
 import { filterSearchValue } from '@Utils/Common';
 import { sortValue } from '@Utils/Common';
+import _ from 'lodash';
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
@@ -20,35 +21,20 @@ const selectDanhSachViTriByProvince = createSelector(
   selectorProvinces,
   (danhSachViTri, provinces) => {
     if (!provinces.length) return [];
-    const thanhPhoShortName = 'tp.';
-    const thanhPhoFullName = 'thanhpho';
-    const tinhFullName = 'tinh';
-    const result = [
-      ...new Set(
-        provinces
-          .map((province) => {
-            return danhSachViTri.filter((viTri) => {
-              const formatProvince = removeSpace(removeUnicode(viTri.province));
-
-              if (
-                (formatProvince.includes(thanhPhoFullName) &&
-                  formatProvince.slice(thanhPhoFullName.length) === province) ||
-                (formatProvince.includes(tinhFullName) &&
-                  formatProvince.slice(tinhFullName.length) === province) ||
-                (formatProvince.includes(thanhPhoShortName) &&
-                  formatProvince.slice(thanhPhoShortName.length) === province)
-              ) {
-                return true;
-              }
-
-              return formatProvince === province;
-            });
-          })
-          .flat()
-      ),
-    ];
-    console.log({ result });
-    return result;
+    const result = provinces
+      .map((province) => {
+        return danhSachViTri.filter((viTri) => {
+          const formatProvinceViTri = removeUnicode(removeSpace(viTri.province));
+          const formatProvince = removeUnicode(removeSpace(province));
+          if (formatProvince.length > formatProvinceViTri.length) {
+            return formatProvince.includes(formatProvinceViTri);
+          }
+          return formatProvinceViTri.includes(formatProvince);
+        });
+      })
+      .flat();
+    const resultRemoveDuplicate = [...new Set(result)];
+    return resultRemoveDuplicate;
   }
 );
 

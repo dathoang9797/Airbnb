@@ -7,7 +7,7 @@ import { locationField } from '@Shared/Field/LocationField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationManagerAdd from './LocationManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -29,6 +29,8 @@ function LocationManagerPage(props) {
 
   const danhSachViTri = useSelector(selectDanhViTriFilter, _.isEqual);
 
+  const handleRefreshDataThunk = useMemo(() => [getDanhSachViTriAsync], [getDanhSachViTriAsync]);
+  
   useEffect(() => {
     dispatch(getDanhSachViTriAsync());
   }, [dispatch, getDanhSachViTriAsync]);
@@ -46,7 +48,6 @@ function LocationManagerPage(props) {
   const handleDeleteLocation = async (idRoom) => {
     dispatch(xoaViTriAsync(idRoom));
     setSelectedRowKeys([]);
-
   };
 
   const renderDataTable = () => {
@@ -67,17 +68,17 @@ function LocationManagerPage(props) {
     onChange: onSelectChange,
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = useCallback(() => {
     handleContentModal(LocationManagerAdd);
     showModal();
-  };
+  }, [handleContentModal, showModal]);
 
   return (
     <>
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuViTrigAsync}
-        handleRefreshDataThunk={[getDanhSachViTriAsync]}
+        handleRefreshDataThunk={handleRefreshDataThunk}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vị Trí'
         showModal={handleShowModal}

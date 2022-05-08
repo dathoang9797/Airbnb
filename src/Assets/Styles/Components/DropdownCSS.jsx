@@ -2,12 +2,7 @@ import tw, { css } from 'twin.macro';
 
 export const DropDownCSS = css`
   .dropdown-province {
-    height: 300px;
-    max-width: 700px;
-    width: 100%;
-    overflow-y: auto;
-    border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    ${tw`h-[300px] max-w-[700px] w-full overflow-y-auto rounded-xl box-shadow[rgba(0, 0, 0, 0.35) 0px 5px 15px]`}
     ${tw`lg:w-[300px]`};
 
     .ant-dropdown-menu li.ant-dropdown-menu-item {
@@ -15,15 +10,14 @@ export const DropDownCSS = css`
     }
 
     .ant-dropdown-menu-item:hover {
-      background-color: var(--color-primary);
-      color: #fff !important;
+      ${tw`background-color[ var(--color-primary)] color[#fff!important]`};
     }
   }
 
   .select-location,
   .select-province {
     &::-webkit-scrollbar {
-      display: none;
+      ${tw`hidden`};
     }
   }
 `;

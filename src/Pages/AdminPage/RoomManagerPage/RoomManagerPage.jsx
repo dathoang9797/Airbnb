@@ -8,7 +8,7 @@ import { roomField } from '@Shared/Field/RoomField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -35,6 +35,11 @@ function RoomManagerPage(props) {
   const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
 
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
+
+  const handleRefreshDataThunk = useMemo(
+    () => [getDanhSachViTriAsync, getDanhSachPhongChoThueAsync],
+    [getDanhSachViTriAsync, getDanhSachPhongChoThueAsync]
+  );
 
   useEffect(() => {
     Promise.all([dispatch(getDanhSachPhongChoThueAsync()), dispatch(getDanhSachViTriAsync())]);
@@ -73,17 +78,17 @@ function RoomManagerPage(props) {
     onChange: onSelectChange,
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = useCallback(() => {
     handleContentModal(RoomManagerAdd);
     showModal();
-  };
+  }, [handleContentModal, showModal]);
 
   return (
     <>
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuPhongAsync}
-        handleRefreshDataThunk={[getDanhSachViTriAsync, getDanhSachPhongChoThueAsync]}
+        handleRefreshDataThunk={handleRefreshDataThunk}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Phòng'
         showModal={handleShowModal}

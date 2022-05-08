@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { ButtonCSS } from '@Components/Button';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { TabActionAdminCSS } from './TabActionAdmin.styles';
 
@@ -13,19 +13,21 @@ function TabActionsAdmin(props) {
     handleRefreshDataThunk,
     showModal,
   } = props;
+
+  console.log('Tab render')
   const { Add, Primary } = ButtonCSS;
   const hasSelected = !selectedRowKeys.length;
   const { Container } = TabActionAdminCSS;
   const dispatch = useDispatch();
 
-  const handleDeleteAll = useCallback(async () => {
+  const handleDeleteAll = async () => {
     dispatch(handleDeleteAllThunk(selectedRowKeys));
     setSelectedRowKeys([]);
-  }, [dispatch, handleDeleteAllThunk, selectedRowKeys, setSelectedRowKeys]);
+  };
 
-  const handleRefreshData = useCallback(() => {
+  const handleRefreshData = () => {
     Promise.all(handleRefreshDataThunk.map((thunk) => dispatch(thunk())));
-  }, [dispatch, handleRefreshDataThunk]);
+  };
 
   return (
     <Container>
@@ -44,4 +46,4 @@ function TabActionsAdmin(props) {
   );
 }
 
-export default TabActionsAdmin;
+export default React.memo(TabActionsAdmin);
