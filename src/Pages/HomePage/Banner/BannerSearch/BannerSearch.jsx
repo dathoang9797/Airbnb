@@ -13,7 +13,6 @@ function BannerSearch() {
   const [danhSachViTriFilter, setDanhSachViTriFilter] = useState([]);
   const spacePressedRef = useRef(false);
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
-
   const {
     PopupSearchGoAnyWhere,
     PopupItemProvince,

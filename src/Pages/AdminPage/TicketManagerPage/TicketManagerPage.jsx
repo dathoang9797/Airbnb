@@ -7,7 +7,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { ticketField } from '@Shared/Field/TicketField';
 import { handleDataTable } from '@Utils/Common';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TicketManagerAdd from './TicketManagerAdd';
 import TicketManagerEdit from './TicketManagerEdit';
@@ -22,6 +22,11 @@ function TicketManagerPage(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const { Table } = TableCSS;
   const { showModal, handlePropsContentModal, handleContentModal } = props;
+  const handleRefreshDataThunk = useMemo(
+    () => [getDanhSachVeAsync],
+    [getDanhSachVeAsync]
+  );
+    
 
   useEffect(() => {
     dispatch(getDanhSachVeAsync());
@@ -55,17 +60,17 @@ function TicketManagerPage(props) {
     onChange: onSelectChange,
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = useCallback(() => {
     handleContentModal(TicketManagerAdd);
     showModal();
-  };
+  }, [handleContentModal, showModal]);
 
   return (
     <>
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuVeAsync}
-        handleRefreshDataThunk={[getDanhSachVeAsync]}
+        handleRefreshDataThunk={handleRefreshDataThunk}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Vé'
         showModal={handleShowModal}

@@ -7,7 +7,7 @@ import { userField } from '@Shared/Field/UserField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -29,6 +29,10 @@ function UserManagerPage(props) {
 
   const danhSachNguoiDung = useSelector(selectDanhSachNguoiDungFilter, _.isEqual);
 
+  const handleRefreshDataThunk = useMemo(
+    () => [getDanhSachNguoiDungAsync],
+    [getDanhSachNguoiDungAsync]
+  );
   useEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
@@ -66,17 +70,17 @@ function UserManagerPage(props) {
     return handleDataTable(danhSachNguoiDung, propsFieldAction);
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = useCallback(() => {
     handleContentModal(UserManagerAdd);
     showModal();
-  };
+  }, [handleContentModal, showModal]);
 
   return (
     <>
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuNguoiDungAsync}
-        handleRefreshDataThunk={[getDanhSachNguoiDungAsync]}
+        handleRefreshDataThunk={handleRefreshDataThunk}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm quản trị viên'
         showModal={handleShowModal}

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import SpinnerDot from '@Components/SpinnerDot';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
+import { localService } from '@Services/LocalStorageService';
 import { showError, showSuccess } from '@Utils/Common';
 import { Upload } from 'antd';
-import SpinnerDot from '@Components/SpinnerDot';
-import { localService } from '@Services/LocalStorageService';
-import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 function UploadImageProfile({ children, setImgRoom, token, userInfo }) {

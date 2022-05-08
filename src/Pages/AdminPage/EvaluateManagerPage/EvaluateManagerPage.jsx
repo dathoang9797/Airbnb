@@ -6,16 +6,16 @@ import { quanLyDanhGiaThunk } from '@Redux/Thunk/QuanLyDanhGiaThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { evaluateField } from '@Shared/Field/EvaluateField';
 import { handleDataTable } from '@Utils/Common';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import EvaluateManagerAdd from './EvaluateManagerAdd';
 import EvaluateManagerEdit from './EvaluateManagerEdit';
 
 function EvaluateManagerPage(props) {
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const idTable = useMemo(() => nanoid(), []);
-  
+
   const { showModal, handlePropsContentModal, handleContentModal } = props;
   const { tableColumnsEvaluateField } = evaluateField;
   const { Table } = TableCSS;
@@ -25,7 +25,11 @@ function EvaluateManagerPage(props) {
   const { getDanhSachDanhGiaAsync, xoadanhGiaAsync, xoaNhieuDanhGiaAsync } = quanLyDanhGiaThunk;
 
   const danhSachDanhGia = useSelector(selectDanhSachDanhGiaFilter, shallowEqual);
-  
+
+  const handleRefreshDataThunk = useMemo(
+    () => [getDanhSachDanhGiaAsync],
+    [getDanhSachDanhGiaAsync]
+  );
 
   useEffect(() => {
     dispatch(getDanhSachDanhGiaAsync());
@@ -59,17 +63,17 @@ function EvaluateManagerPage(props) {
     onChange: onSelectChange,
   };
 
-  const handleShowModal = () => {
+  const handleShowModal = useCallback(() => {
     handleContentModal(EvaluateManagerAdd);
     showModal();
-  };
+  }, [handleContentModal, showModal]);
 
   return (
     <>
       <TabActionsAdmin
         setSelectedRowKeys={setSelectedRowKeys}
         handleDeleteAllThunk={xoaNhieuDanhGiaAsync}
-        handleRefreshDataThunk={[getDanhSachDanhGiaAsync]}
+        handleRefreshDataThunk={handleRefreshDataThunk}
         showModal={handleShowModal}
         selectedRowKeys={selectedRowKeys}
         contentButtonAction='Thêm Đánh Giá'

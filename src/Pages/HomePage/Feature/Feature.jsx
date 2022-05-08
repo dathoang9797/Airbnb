@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react';
-import { FeatureCSS } from './Feature.styles';
 import { Images } from '@Assets/Images';
-import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { quanLyViTriAction } from '@Redux/Reducers/QuanLyViTriSlice';
-import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
+import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
-import _ from 'lodash';
 import { removeSpace, removeUnicode } from '@Utils/Common';
+import _ from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { FeatureCSS } from './Feature.styles';
 
 function Feature() {
   const { tphcm, haNoi, daNang, vungTau, canTho, phuQuoc, nhaTrang, hoiAn } = Images;
@@ -23,11 +23,10 @@ function Feature() {
     GirdItemTitle,
   } = FeatureCSS;
 
-  const provinceArr = useMemo(() => [], []);
   const [next, setNext] = useState(false);
   const danhSachViTriByProvinceRef = useRef(null);
   const [citys, setCitys] = useState([
-    { bgImage: tphcm, cityName: 'Thành phố Hồ Chí Minh', rentals: 0 },
+    { bgImage: tphcm, cityName: 'Hồ Chí Minh', rentals: 0 },
     { bgImage: haNoi, cityName: 'Hà Nội', rentals: 0 },
     { bgImage: daNang, cityName: 'Đà Nẵng', rentals: 0 },
     { bgImage: vungTau, cityName: 'Tỉnh Bà Rịa - Vũng Tàu', rentals: 0 },
@@ -49,13 +48,24 @@ function Feature() {
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
 
+  const handleRentalCity = useCallback(() => {
+    const cityUpdate = citys.map((city) => {
+      const cityNameFormat = removeSpace(removeUnicode(city.cityName));
+      const roomLength = danhSachPhongChoThueTheoViTri.filter((room) => {
+        return removeSpace(removeUnicode(room.locationId.province)).includes(cityNameFormat);
+      }).length;
+      const valueUpdate = { ...city, rentals: roomLength };
+      return valueUpdate;
+    });
+    setCitys(cityUpdate);
+  }, [danhSachPhongChoThueTheoViTri]);
 
-  console.log({danhSachViTriByProvince})
   useEffect(() => {
+    const provinceArr = citys.map((city) => city.cityName);
     dispatch(setProvincesAction(provinceArr));
     danhSachViTriByProvinceRef.current = [];
     setNext(true);
-  }, [dispatch, provinceArr, setProvincesAction]);
+  }, [dispatch, setProvincesAction]);
 
   useEffect(() => {
     if (!next) return;
@@ -66,106 +76,12 @@ function Feature() {
     dispatch(getDanhSachPhongChoThueTheoViTriAsync(params));
   }, [danhSachViTriByProvince, dispatch, getDanhSachPhongChoThueTheoViTriAsync, next]);
 
-  const totalRoomTphcm = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-          removeSpace(removeUnicode('Thành phố Hồ Chí Minh')) ||
-        removeSpace(removeUnicode(room.locationId.province)) ===
-          removeSpace(removeUnicode('Hồ Chí Minh')) ||
-        removeSpace(removeUnicode(room.locationId.province)) ===
-          removeSpace(removeUnicode('Tp.Ho Chi Minh'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomHanoi = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Hà Nội'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomDaNang = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Đà Nẵng'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomVungTau = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Tỉnh Bà Rịa - Vũng Tàu'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomPhuQuoc = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Phú Quốc'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomNhaTrang = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Nha Trang'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
-  const totalRoomHoiAn = useMemo(() => {
-    return danhSachPhongChoThueTheoViTri.filter((room) => {
-      return (
-        removeSpace(removeUnicode(room.locationId.province)) ===
-        removeSpace(removeUnicode('Hội An'))
-      );
-    });
-  }, [danhSachPhongChoThueTheoViTri]);
-
   useEffect(() => {
-    setCitys([
-      { bgImage: tphcm, cityName: 'Thành phố Hồ Chí Minh', rentals: totalRoomTphcm.length },
-      { bgImage: haNoi, cityName: 'Hà Nội', rentals: totalRoomHanoi.length },
-      { bgImage: daNang, cityName: 'Đà Nẵng', rentals: totalRoomDaNang.length },
-      { bgImage: vungTau, cityName: 'Tỉnh Bà Rịa - Vũng Tàu', rentals: totalRoomVungTau.length },
-      { bgImage: canTho, cityName: 'Cần Thơ', rentals: totalRoomDaNang.length },
-      { bgImage: phuQuoc, cityName: 'Phú Quốc', rentals: totalRoomPhuQuoc.length },
-      { bgImage: nhaTrang, cityName: 'Nha Trang', rentals: totalRoomNhaTrang.length },
-      { bgImage: hoiAn, cityName: 'Hội An', rentals: totalRoomHoiAn.length },
-    ]);
-  }, [
-    canTho,
-    daNang,
-    haNoi,
-    hoiAn,
-    nhaTrang,
-    phuQuoc,
-    totalRoomDaNang,
-    totalRoomHanoi,
-    totalRoomHoiAn,
-    totalRoomNhaTrang,
-    totalRoomPhuQuoc,
-    totalRoomTphcm,
-    totalRoomVungTau,
-    tphcm,
-    vungTau,
-  ]);
+    handleRentalCity();
+  }, [handleRentalCity]);
 
   const renderCity = () => {
     return citys.map((city, index) => {
-      if (provinceArr.length < citys.length) provinceArr.push(city.cityName);
-
       return (
         <NavLink to={`${urlRoom}/${city.cityName}`} key={`${city}-${index}`}>
           <GirdItem image={city.bgImage}>
