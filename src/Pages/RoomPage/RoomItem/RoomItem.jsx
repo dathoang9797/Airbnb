@@ -1,7 +1,7 @@
 import React from 'react';
 import { RoomItemCSS } from './RoomItem.styles';
 import { VectorSVG } from '@Assets/Svgs';
-import RoomSpinner from './RoomSpinner';
+import RoomSpinner from '@Pages/RoomPage/RoomSpinner';
 
 function RoomItem({ phong, showSpinnerMap }) {
   const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;

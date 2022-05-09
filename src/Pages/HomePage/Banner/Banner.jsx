@@ -29,7 +29,7 @@ function Banner() {
             <form>
               <BannerSearch />
               <BannerSelect />
-              <BannerButtonSearch>Search</BannerButtonSearch>
+              <BannerButtonSearch type='button'>Search</BannerButtonSearch>
             </form>
           </div>
         </BannerGrid>

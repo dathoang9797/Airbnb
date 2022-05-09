@@ -14,15 +14,15 @@ const SpinnerMapButton = styled.button`
     ${tw`-webkit-box-pack[center] -webkit-box-align[center] flex items-center justify-center h-full  w-10`};
     span {
       & > span:first-child {
-        ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.3s] align-middle`};
+        ${tw`background-color[var(--color-text-dark)] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.3s] align-middle`};
       }
 
       & ~ span:nth-child(2) {
-        ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.15s] align-middle`};
+        ${tw`background-color[var(--color-text-dark)] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both] animation-delay[-0.15s] align-middle`};
       }
 
       & ~ span:last-child {
-        ${tw`background-color[#222] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both]  align-middle`};
+        ${tw`background-color[var(--color-text-dark)] w-2 h-2 mx-0.5 rounded-[100%] inline-block animation-name[spinner-search] animation-duration[ 0.8s] animation-iteration-count[infinite] animation-timing-function[linear] animation-fill-mode[both]  align-middle`};
       }
     }
   }

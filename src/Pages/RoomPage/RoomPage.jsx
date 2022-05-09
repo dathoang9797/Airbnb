@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom';
 import RoomItem from './RoomItem';
 import RoomMap from './RoomMap';
 import { RoomCSS } from './RoomPage.styles';
+import RoomNotFound from './RoomNotFound';
 
 function RoomPage() {
   const [collapsed, setCollapsed] = useState(false);
@@ -55,7 +56,7 @@ function RoomPage() {
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
   const { getDanhSachViTriAsync, getDanhSachProvinceAsync } = quanLyViTriThunk;
 
-  const { selectDanhSachViTriByProvince,selectDanhSachProvinceFilter } = quanLyViTriSelector;
+  const { selectDanhSachViTriByProvince, selectDanhSachProvinceFilter } = quanLyViTriSelector;
   const { selectDanhSachPhongChoThueTheoViTri } = quanLyPhongChoThueSelector;
   const { selectIsLoadingPopupState } = loadingSelector;
 
@@ -138,7 +139,11 @@ function RoomPage() {
     const { lng, lat } = coordinates;
     if ((!lng && !lat) || !danhSachProvinceFilter.length) return;
     async function getProvinces() {
-      const provinces = await geoCodeService.getGeoCodeByCoordinates(lng, lat, danhSachProvinceFilter);
+      const provinces = await geoCodeService.getGeoCodeByCoordinates(
+        lng,
+        lat,
+        danhSachProvinceFilter
+      );
       if (!_.isEqual(provincesRef.current, provinces)) {
         provincesRef.current = provinces;
         dispatch(setProvincesAction(provinces));
@@ -166,7 +171,8 @@ function RoomPage() {
   }, [isLoadingPopup]);
 
   const renderPhongChoThue = useMemo(() => {
-    if (!danhSachPhongChoThueTheoViTri.length) return null;
+    if (!danhSachPhongChoThueTheoViTri.length)
+      return <RoomNotFound showSpinnerMap={showSpinnerMap} />;
     return (
       <>
         {danhSachPhongChoThueTheoViTriSlice.map((phong) => {

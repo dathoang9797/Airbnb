@@ -1,6 +1,6 @@
 import tw, { styled } from 'twin.macro';
 
-const Container = tw.section`m-4 md:m-8 `;
+const Container = tw.section`m-4 md:m-8 w-full`;
 
 const FeatureHeader = styled.div`
   ${tw`container mx-auto p-4 mb-2 space-y-2 text-center `};
@@ -10,7 +10,8 @@ const FeatureHeader = styled.div`
 `;
 
 const GridContainer = styled.div`
-  ${tw` container mx-auto grid justify-center gap-3 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-4`}
+  ${tw` container  mx-auto grid justify-center gap-3 sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-4`}
+ 
   @media (min-width: 384px) {
     ${tw`max-w-[100%!important]`};
   }
@@ -27,7 +28,7 @@ const GirdItem = styled.div`
   }
 `;
 
-const GirdTitle = tw.h1`my-2  text-2xl font-semibold color[#222]`;
+const GirdTitle = tw.h1`my-2  text-2xl font-semibold color[var(--color-text-dark)]`;
 
 const GirdItemTitle = tw(GirdTitle)`text-white`;
 

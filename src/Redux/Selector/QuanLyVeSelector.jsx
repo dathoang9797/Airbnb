@@ -5,6 +5,8 @@ const selectDanhSachVe = (state) => state.QuanLyVeReducer.danhSachVe;
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
+const selectDanhSachVeTheoNguoiDung = (state) => state.QuanLyVeReducer.danhSachVeTheoNguoiDung;
+
 const selectDanhSachVeFilter = createSelector(
   selectDanhSachVe,
   selectSearchValue,
@@ -19,4 +21,5 @@ const selectDanhSachVeFilter = createSelector(
 export const quanLyVeSelector = {
   selectDanhSachVe,
   selectDanhSachVeFilter,
+  selectDanhSachVeTheoNguoiDung,
 };

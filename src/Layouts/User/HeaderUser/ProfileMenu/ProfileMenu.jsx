@@ -5,6 +5,7 @@ import { localService } from '@Services/LocalStorageService';
 import { useSelector } from 'react-redux';
 import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
 import _ from 'lodash';
+import { useHistory } from 'react-router-dom';
 
 function ProfileMenu() {
   const { AccountSVG, HamburgerSVG, GlobeSVG } = VectorSVG;
@@ -18,6 +19,7 @@ function ProfileMenu() {
   const { selectUserInfo } = quanLyNguoiDungSelector;
   const userInfoStore = useSelector(selectUserInfo);
   const userInfo = localService.getUserInfo();
+  const history = useHistory();
   const {
     Container,
     AccountMenu,
@@ -26,6 +28,7 @@ function ProfileMenu() {
     ChooseLanguage,
     PopupItemUserProfile,
     UserProfile,
+    ButtonLogout,
   } = ProfileMenuCSS;
 
   useLayoutEffect(() => {
@@ -58,6 +61,8 @@ function ProfileMenu() {
 
   const handleLogOut = () => {
     localService.removeUserInfo();
+    history.push(urlHome);
+    window.location.reload();
   };
 
   const contentPopupProfile = userInfo ? (
@@ -67,9 +72,9 @@ function ProfileMenu() {
       ) : null}
       <PopupItemUserProfile to={urlHome}> Home</PopupItemUserProfile>
       <PopupItemUserProfile to={urlProfile}>Profile</PopupItemUserProfile>
-      <PopupItemUserProfile to={urlSignIn} onClick={handleLogOut}>
+      <ButtonLogout to={urlHome} onClick={handleLogOut}>
         Logout
-      </PopupItemUserProfile>
+      </ButtonLogout>
       <hr />
       <PopupItemUserProfile to={'/'}>Host Your Home</PopupItemUserProfile>
       <PopupItemUserProfile to={'/'}>Host Your Experience</PopupItemUserProfile>

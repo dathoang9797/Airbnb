@@ -19,7 +19,8 @@ const ContentLeft = styled.div`
 
 const CardImage = styled.div`
   ${tw`rounded-full`};
-  img,svg {
+  img,
+  svg {
     ${tw`rounded-full h-20 w-20 m-auto `};
   }
 `;
@@ -84,6 +85,19 @@ const ContentRight = styled.div`
   }
 `;
 
+const ButtonClose = styled.span`
+  ${tw`appearance[none] flex justify-center items-center border-radius[50%] border-none outline-none m-0 p-0 color[rgb(34, 34, 34)] cursor-pointer touch-action[manipulation] relative bg-transparent transition-all duration-300`}
+  &:before {
+    ${tw`content block absolute top-1/2 left-1/2 transform[translate(-50%, -50%)] w-8 h-8 border-radius[50%] z-index[-1] transition-all duration-300`};
+  }
+  &:hover {
+    ${tw`transition-all duration-300 color[rgb(0, 0, 0)]`}
+  }
+  &:hover:before {
+    ${tw`transition-all duration-300 background-color[rgb(247, 247, 247)]`}
+  }
+`;
+
 export const ProfilePageCSS = {
   Container,
   ContentLeft,
@@ -99,4 +113,5 @@ export const ProfilePageCSS = {
   ContentRight,
   CardTitleUploadImage,
   CardTextUnderline,
+  ButtonClose,
 };

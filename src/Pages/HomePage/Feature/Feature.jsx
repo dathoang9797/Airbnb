@@ -29,13 +29,13 @@ function Feature() {
     { bgImage: tphcm, cityName: 'Hồ Chí Minh', rentals: 0 },
     { bgImage: haNoi, cityName: 'Hà Nội', rentals: 0 },
     { bgImage: daNang, cityName: 'Đà Nẵng', rentals: 0 },
-    { bgImage: vungTau, cityName: 'Tỉnh Bà Rịa - Vũng Tàu', rentals: 0 },
+    { bgImage: vungTau, cityName: 'Bà Rịa - Vũng Tàu', rentals: 0 },
     { bgImage: canTho, cityName: 'Cần Thơ', rentals: 0 },
     { bgImage: phuQuoc, cityName: 'Phú Quốc', rentals: 0 },
     { bgImage: nhaTrang, cityName: 'Nha Trang', rentals: 0 },
     { bgImage: hoiAn, cityName: 'Hội An', rentals: 0 },
   ]);
-
+  const cityRef = useRef(citys);
   const dispatch = useDispatch();
 
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
@@ -49,7 +49,7 @@ function Feature() {
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
 
   const handleRentalCity = useCallback(() => {
-    const cityUpdate = citys.map((city) => {
+    const cityUpdate = cityRef.current.map((city) => {
       const cityNameFormat = removeSpace(removeUnicode(city.cityName));
       const roomLength = danhSachPhongChoThueTheoViTri.filter((room) => {
         return removeSpace(removeUnicode(room.locationId.province)).includes(cityNameFormat);
@@ -61,7 +61,7 @@ function Feature() {
   }, [danhSachPhongChoThueTheoViTri]);
 
   useEffect(() => {
-    const provinceArr = citys.map((city) => city.cityName);
+    const provinceArr = cityRef.current.map((city) => city.cityName);
     dispatch(setProvincesAction(provinceArr));
     danhSachViTriByProvinceRef.current = [];
     setNext(true);
@@ -83,7 +83,7 @@ function Feature() {
   const renderCity = () => {
     return citys.map((city, index) => {
       return (
-        <NavLink to={`${urlRoom}/${city.cityName}`} key={`${city}-${index}`}>
+        <NavLink to={`${urlRoom}/Thành phố ${city.cityName}`} key={`${city}-${index}`}>
           <GirdItem image={city.bgImage}>
             <GirdItemTitle>{city.cityName}</GirdItemTitle>
             <GridItemDesc>{city.rentals} rental</GridItemDesc>

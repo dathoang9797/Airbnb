@@ -8,23 +8,23 @@ const CSSIcon = css`
   ${tw`text-2xl`}
 `;
 
-const MessageIconCSS = styled(AiOutlineMessage)`
+const MessageIcon = styled(AiOutlineMessage)`
   ${CSSIcon}
 `;
 
-const FacebookIconCSS = styled(MdFacebook)`
+const FacebookIcon = styled(MdFacebook)`
   ${CSSIcon}
 `;
 
-const TwitterIconCSS = styled(FaTwitter)`
+const TwitterIcon = styled(FaTwitter)`
   ${CSSIcon}
 `;
 
-const ContainerCSS = styled.section`
+const Container = styled.section`
   ${tw`text-gray-600 bg-gray-100  overflow-hidden container  py-24 mx-auto h-full lg:pl-1.5`};
 `;
 
-const ContentCSS = styled.div`
+const Content = styled.div`
   ${tw` mx-auto flex flex-wrap justify-center items-center`};
 
   .ant-image-mask {
@@ -42,19 +42,19 @@ const ContentCSS = styled.div`
   }
 `;
 
-const ImageCSS = styled(ImageAnt)`
+const Image = styled(ImageAnt)`
   ${tw` w-full  h-full object-cover object-center rounded-lg`};
 `;
 
-const ProfileCSS = styled.div`
+const Profile = styled.div`
   ${tw`lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0`};
 `;
 
-const TitleCSS = styled.h1`
+const Title = styled.h1`
   ${tw`text-white text-3xl  font-medium mb-1 color[var(--color-primary)]`};
 `;
 
-const RateCSS = styled(RateAnt)`
+const Rate = styled(RateAnt)`
   &.ant-rate,
   & > span {
     ${tw`ml-3`};
@@ -69,11 +69,11 @@ const RateCSS = styled(RateAnt)`
     ${tw`text-gray-400`};
   }
 `;
-const DescCSS = styled.p`
+const Desc = styled.p`
   ${tw`leading-relaxed text-justify`};
 `;
 
-const SocialCSS = styled.div`
+const Social = styled.div`
   ${tw`flex mb-4 lg:mb-2`};
 
   & > span:first-child {
@@ -89,7 +89,7 @@ const SocialCSS = styled.div`
   }
 `;
 
-const ServiceCSS = styled.div`
+const Service = styled.div`
   & > div:not(:last-child) {
     ${tw`flex  justify-start items-center flex-wrap my-2 lg:inline-block `};
     div {
@@ -112,16 +112,16 @@ const ServiceCSS = styled.div`
 `;
 
 export const RoomManagerProfileCSS = {
-  ContainerCSS,
-  ContentCSS,
-  ImageCSS,
-  ProfileCSS,
-  TitleCSS,
-  RateCSS,
-  DescCSS,
-  SocialCSS,
-  ServiceCSS,
-  MessageIconCSS,
-  FacebookIconCSS,
-  TwitterIconCSS,
+  Container,
+  Content,
+  Image,
+  Profile,
+  Title,
+  Rate,
+  Desc,
+  Social,
+  Service,
+  MessageIcon,
+  FacebookIcon,
+  TwitterIcon,
 };
