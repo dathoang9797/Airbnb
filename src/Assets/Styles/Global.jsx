@@ -4,7 +4,7 @@ import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 import { Abstracts } from './Abstracts';
 import { Base } from './Base';
 import { Vendors } from './Vendors';
-import { ModalReviewCSS } from './Components/ModalReviewCSS';
+import { ModalCSS } from './Components/ModalCSS';
 import { DatePickerCSS } from './Components/DatePickerCSS';
 import { SweetAlertCSS } from './Components/SweetAlertCSS';
 import { PopoverCSS } from './Components/PopoverCSS';
@@ -19,7 +19,7 @@ const CustomStyles = styled.createGlobalStyle`
   ${Base};
   ${Abstracts};
   ${Vendors};
-  ${ModalReviewCSS};
+  ${ModalCSS};
   ${DatePickerCSS};
   ${SweetAlertCSS};
   ${PopoverCSS};

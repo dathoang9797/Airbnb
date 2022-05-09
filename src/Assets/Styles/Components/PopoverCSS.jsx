@@ -11,7 +11,7 @@ export const PopoverCSS = css`
   }
 
   .wrap-card-popup {
-    ${tw`p-0 bg-white rounded-lg box-shadow[ 0 0 0 1px rgb(0 0 0 / 32%)] color[#222] pointer-events-auto font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    ${tw`p-0 bg-white rounded-lg box-shadow[ 0 0 0 1px rgb(0 0 0 / 32%)] color[var(--color-text-dark)] pointer-events-auto font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
     ] overflow-hidden`};
 
     .ant-popover-content {
@@ -40,7 +40,7 @@ export const PopoverCSS = css`
   }
 
   .wrapper-userprofile-popup {
-    ${tw`absolute shadow-md p-0 overflow-hidden mt-8 z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[#222] text-base min-width[10rem] bg-clip-padding w-full max-w-[240px]
+    ${tw`absolute shadow-md p-0 overflow-hidden mt-8 z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[var(--color-text-dark)] text-base min-width[10rem] bg-clip-padding w-full max-w-[240px]
    box-shadow[rgba(100, 100, 111, 0.2) 0px 7px 29px 0px] transition-shadow duration-200
     `};
 
@@ -54,7 +54,7 @@ export const PopoverCSS = css`
   }
 
   .wrapper-search-popup {
-    ${tw`absolute shadow-md p-0 overflow-hidden z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[#222] text-base min-width[10rem] bg-clip-padding w-full  mt-12 max-w-[700px] box-shadow[rgba(0, 0, 0, 0.35) 0px 5px 15px]`};
+    ${tw`absolute shadow-md p-0 overflow-hidden z-50 bg-white border[1px solid rgba(0,0,0,.15)] rounded-2xl text-left color[var(--color-text-dark)] text-base min-width[10rem] bg-clip-padding w-full  mt-12 max-w-[700px] box-shadow[rgba(0, 0, 0, 0.35) 0px 5px 15px]`};
 
     ${tw`lg:max-w-[480px]`}
 

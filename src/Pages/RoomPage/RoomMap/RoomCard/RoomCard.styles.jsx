@@ -19,9 +19,7 @@ const Content = styled.div`
 
   &:hover div,
   ${Container}.ant-popover-open & div {
-    ${tw`transition-all  duration-300`};
-    background-color: #222;
-    color: white;
+    ${tw`transition-all  duration-300 text-white background-color[var(--color-text-dark)]`};
   }
 
   div div {
@@ -40,8 +38,6 @@ const Popover = styled(PopoverAnt)`
 const ContentPopover = styled.div``;
 
 const PopoverLink = styled(NavLink)`
- 
-
   img {
     ${tw`h-full w-full object-cover`};
   }
@@ -56,11 +52,11 @@ const PopoverTitle = styled.span`
 `;
 
 const PopoverParagraph = styled.p`
-  ${tw`mb-0.5 overflow-clip text-base text-overflow[ellipsis] -webkit-box-orient[vertical] -webkit-line-clamp[1] color[#222] font-normal `};
+  ${tw`mb-0.5 overflow-clip text-base text-overflow[ellipsis] -webkit-box-orient[vertical] -webkit-line-clamp[1] color[var(--color-text-dark)] font-normal `};
 `;
 
 const PopoverPrice = styled.div`
-  ${tw`mt-1.5 flex items-start justify-start text-base color[#222] font-normal`}
+  ${tw`mt-1.5 flex items-start justify-start text-base color[var(--color-text-dark)] font-normal`}
   & > span:first-child {
     ${tw`font-extrabold`};
   }

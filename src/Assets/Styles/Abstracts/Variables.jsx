@@ -8,7 +8,7 @@ export const Variables = css`
     --color-primary-blur: #ffe9ed;
     --color-medium: #f7f7f7;
     --color-light: #ddd;
-    --color-text-light: rgb(113, 113, 113);
+    --color-text-light: #484848;
     --color-text-dark: #222;
     --color-white: #fff;
     --color-primary-rgb: 255, 56, 92;

@@ -1,5 +1,6 @@
 import { handleChooseStartLoading, handleChooseEndLoading } from '@Utils/Common';
 import { removeSpace, removeUnicode } from '@Utils/Common';
+import _ from 'lodash';
 
 export const geoCodeService = {
   getGeoCodeByAddress(address, isLoading = false, isLoadingPopup = true) {
@@ -43,19 +44,18 @@ export const geoCodeService = {
             const provinces = address_components
               .reverse()
               .map((item) => {
-                const province = item.long_name;
-                const formatProvince = removeUnicode(removeSpace(province));
-                if (danhSachProvince.every((province) => !province.includes(formatProvince))) {
-                  return null;
-                }
-                return formatProvince;
+                const provinceFormat = removeUnicode(removeSpace(item.long_name));
+                return danhSachProvince.filter((province) => {
+                  if (provinceFormat.length > province.length) {
+                    return provinceFormat.includes(province);
+                  }
+                  return province.includes(provinceFormat);
+                });
               })
-              .filter((item) => item !== null);
-            //Remove element duplicate
-            return [...new Set(provinces)];
+              .flat();
+            return _.uniq(provinces);
           });
-
-          return [...new Set(results.flat())];
+          return _.uniq(results.flat());
         })
         .catch(() => {
           handleChooseEndLoading(header);

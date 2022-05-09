@@ -8,17 +8,7 @@ export const ResetCSS = css`
   }
 
   body {
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    font-size: 14px;
-    line-height: 1.43;
-    color: #484848;
-    background-color: #fff;
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    font-weight: 600;
-    overflow: visible !important;
-    width: 100% !important;
-    position: relative;
+    ${tw`font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif !important] text-sm color[var(--color-text-light)] bg-white m-0 overflow-visible w-full relative  font-semibold`}
   }
 
   input:-webkit-autofill,
@@ -27,11 +17,9 @@ export const ResetCSS = css`
   input:-webkit-autofill:active {
     -webkit-text-fill-color: rgb(0, 0, 0) !important;
     transition: background-color 600000s 0s, white 600000s 0s;
-    /* ${tw`dark:-webkit-text-fill-color[#fff !important]`} */
   }
 
   button:focus {
-    outline: 0px dotted;
-    outline: 0px auto transparent;
+    ${tw`outline[0px auto transparent] `}
   }
 `;

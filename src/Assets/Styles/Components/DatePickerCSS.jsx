@@ -5,7 +5,7 @@ export const DatePickerCSS = css`
     ${tw`top[5%] left[15%] bg-transparent backdrop-filter[unset]`};
 
     button[data-id='button-icon-element'] {
-      ${tw`color[#222] transition-all duration-300`};
+      ${tw`color[var(--color-text-dark)] transition-all duration-300`};
       &:hover {
         ${tw`background[rgb(247, 247, 247)]`};
       }
@@ -13,7 +13,7 @@ export const DatePickerCSS = css`
 
     td[role='gridcell'] {
       button:hover {
-        ${tw`border[1px solid #222]`};
+        ${tw`border[1px solid var(--color-text-dark)]`};
       }
     }
 

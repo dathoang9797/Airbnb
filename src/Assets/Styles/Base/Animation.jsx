@@ -66,4 +66,16 @@ export const AnimationCSS = css`
       opacity: 1;
     }
   }
+
+  @keyframes face-move {
+    33% {
+      top: 0px;
+    }
+    66% {
+      top: 20px;
+    }
+    100% {
+      top: 0px;
+    }
+  }
 `;

@@ -16,7 +16,7 @@ const FirstDot = styled.div`
   animation-timing-function: linear;
   animation-fill-mode: both;
   vertical-align: middle;
-  background-color: #222222;
+  background-color: var(--color-text-dark);
   animation-delay: -0.3s;
 `;
 
@@ -32,7 +32,7 @@ const SecondDot = styled.div`
   animation-timing-function: linear;
   animation-fill-mode: both;
   vertical-align: middle;
-  background-color: #222222;
+  background-color: var(--color-text-dark);
   animation-delay: -0.15s;
 `;
 
@@ -48,7 +48,7 @@ const ThirdDot = styled.div`
   animation-timing-function: linear;
   animation-fill-mode: both;
   vertical-align: middle;
-  background-color: #222222;
+  background-color: var(--color-text-dark);
 `;
 
 export const SpinnerDotCSS = {

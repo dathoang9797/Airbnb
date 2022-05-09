@@ -13,18 +13,18 @@ function RoomManagerProfilePage() {
   const urlRoomManager = process.env.REACT_APP_LINK_ADMIN_ROOM_MANAGER;
   const { description, image, locationId, name, price } = chiTietPhong;
   const {
-    ContainerCSS,
-    ContentCSS,
-    ImageCSS,
-    DescCSS,
-    ProfileCSS,
-    RateCSS,
-    ServiceCSS,
-    SocialCSS,
-    TitleCSS,
-    FacebookIconCSS,
-    TwitterIconCSS,
-    MessageIconCSS,
+    Container,
+    Content,
+    Image,
+    Desc,
+    Profile,
+    Rate,
+    Service,
+    Social,
+    Title,
+    FacebookIcon,
+    TwitterIcon,
+    MessageIcon,
   } = RoomManagerProfileCSS;
 
   const renderService = () => {
@@ -56,40 +56,40 @@ function RoomManagerProfilePage() {
   return isHasChiTietPhong ? (
     <Redirect to={urlRoomManager} />
   ) : (
-    <ContainerCSS>
-      <ContentCSS>
-        <ImageCSS alt={image} src={image} />
-        <ProfileCSS>
-          <TitleCSS>{name}</TitleCSS>
-          <SocialCSS>
+    <Container>
+      <Content>
+        <Image alt={image} src={image} />
+        <Profile>
+          <Title>{name}</Title>
+          <Social>
             <span>
-              <RateCSS defaultValue={4}>
+              <Rate defaultValue={4}>
                 <span>4 Reviews</span>
-              </RateCSS>
+              </Rate>
             </span>
             <span>
               <a href='@a'>
-                <FacebookIconCSS />
+                <FacebookIcon />
               </a>
               <a href='@a'>
-                <TwitterIconCSS />
+                <TwitterIcon />
               </a>
               <a href='@a'>
-                <MessageIconCSS />
+                <MessageIcon />
               </a>
             </span>
-          </SocialCSS>
-          <DescCSS>{description}</DescCSS>
-          <ServiceCSS>
+          </Social>
+          <Desc>{description}</Desc>
+          <Service>
             <div>{renderService()}</div>
             <div>{locationId ? <></> : null}</div>
             <div>
               <span>${price.toLocaleString()}</span>
             </div>
-          </ServiceCSS>
-        </ProfileCSS>
-      </ContentCSS>
-    </ContainerCSS>
+          </Service>
+        </Profile>
+      </Content>
+    </Container>
   );
 }
 

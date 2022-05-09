@@ -33,8 +33,7 @@ const selectDanhSachViTriByProvince = createSelector(
         });
       })
       .flat();
-    const resultRemoveDuplicate = [...new Set(result)];
-    return resultRemoveDuplicate;
+    return _.uniq(result);
   }
 );
 

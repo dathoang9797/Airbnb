@@ -7,7 +7,7 @@ const Container = styled.div`
 `;
 
 const BecomeHost = styled.a`
-  ${tw` border-none flex justify-center items-center py-2.5 px-4 cursor-pointer text-decoration[none] h-[42px] border-radius[22px] transition-all duration-300 color[#222 !important] `}
+  ${tw` border-none flex justify-center items-center py-2.5 px-4 cursor-pointer text-decoration[none] h-[42px] border-radius[22px] transition-all duration-300 color[var(--color-text-dark) !important] `}
   &:hover {
     ${tw`background-color[var(--color-medium)] color[var(--color-primary)]`};
   }
@@ -24,7 +24,7 @@ const ChooseLanguage = styled.button`
 `;
 
 const UserProfile = styled(Popover)`
-  ${tw`border-1 border-color[#ddd] color[#222] cursor-pointer inline-flex  m-0 text-align[inherit]   duration-[250] appearance-none overflow-visible text-decoration[none] padding[5px 5px 5px 12px !important] h-[42px]  user-select[auto !important] items-center outline-none bg-white   border-radius[21px] align-middle	transition-shadow  relative  z-10 `};
+  ${tw`border-1 border-color[#ddd] color[var(--color-text-dark)] cursor-pointer inline-flex  m-0 text-align[inherit]   duration-[250] appearance-none overflow-visible text-decoration[none] padding[5px 5px 5px 12px !important] h-[42px]  user-select[auto !important] items-center outline-none bg-white   border-radius[21px] align-middle	transition-shadow  relative  z-10 `};
 `;
 const BurgerMenu = styled.div`
   img {
@@ -42,7 +42,17 @@ const AccountMenu = styled.div`
 const PopupItemUserProfile = styled(NavLink)`
   ${tw`pl-1 block text-sm w-full font-normal cursor-pointer padding[0.5rem 1.5rem]  whitespace-nowrap bg-transparent border-0 text-align[inherit] color[#212529] hover:color[#212529]`};
   &:first-child {
-    ${tw`color[#222] font-semibold`};
+    ${tw`color[var(--color-text-dark)] font-semibold`};
+  }
+  &:hover {
+    ${tw`color[#16181b] text-decoration[none] background-color[#f8f9fa] outline-none border-none transition-colors duration-300 rounded-2xl`}
+  }
+`;
+
+const ButtonLogout = styled.button`
+  ${tw`pl-1 block text-sm w-full font-normal cursor-pointer padding[0.5rem 1.5rem]  whitespace-nowrap bg-transparent border-0 text-align[inherit] color[#212529] hover:color[#212529]`};
+  &:first-child {
+    ${tw`color[var(--color-text-dark)] font-semibold`};
   }
   &:hover {
     ${tw`color[#16181b] text-decoration[none] background-color[#f8f9fa] outline-none border-none transition-colors duration-300 rounded-2xl`}
@@ -57,4 +67,5 @@ export const ProfileMenuCSS = {
   UserProfile,
   BurgerMenu,
   AccountMenu,
+  ButtonLogout,
 };
