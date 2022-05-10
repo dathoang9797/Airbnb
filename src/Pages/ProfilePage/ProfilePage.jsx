@@ -1,22 +1,23 @@
-import { CloseOutlined } from '@ant-design/icons';
 import { VectorSVG } from '@Assets/Svgs';
 import UploadImageProfile from '@Components/UploadImageProfile';
 import ModalHoc from '@HOC/ModalHoc';
+import { quanLyVeSelector } from '@Redux/Selector/QuanLyVeSelector';
+import { quanLyVeThunk } from '@Redux/Thunk/QuanLyVeThunk';
 import { localService } from '@Services/LocalStorageService';
+import { messageApp, showWarning } from '@Utils/Common';
+import _ from 'lodash';
 import React, { useState, useEffect } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { ProfilePageCSS } from './ProfilePage.styles';
-import ProfileUpdate from './ProfileUpdate';
 import ProfileTicket from './ProfileTicket';
-import { quanLyVeThunk } from '@Redux/Thunk/QuanLyVeThunk';
-import { quanLyVeSelector } from '@Redux/Selector/QuanLyVeSelector';
-import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
+import ProfileUpdate from './ProfileUpdate';
+import ButtonScrollTop from '@Components/ButtonScrollTop';
 
 function ProfilePage(props) {
   const dispatch = useDispatch();
-  const { showModal, handlePropsContentModal, handleContentModal, handlePropsModal } = props;
+  const { showModal, handlePropsContentModal, handleContentModal } = props;
   const userInfo = localService.getUserInfo();
   const { avatar, token, name, email, address, birthday, gender, phone, _id } = userInfo;
   const fieldProfileUpdate = { name, email, address, birthday, gender, phone, _id };
@@ -26,7 +27,8 @@ function ProfilePage(props) {
   const { getDanhSachVeTheoNguoiDungAsync } = quanLyVeThunk;
   const { selectDanhSachVeTheoNguoiDung } = quanLyVeSelector;
   const danhSachVeTheoNguoiDung = useSelector(selectDanhSachVeTheoNguoiDung, _.isEqual);
-  console.log('render')
+  const { messageUserNotLogin } = messageApp;
+
   useEffect(() => {
     dispatch(getDanhSachVeTheoNguoiDungAsync(_id));
   }, [_id, dispatch, getDanhSachVeTheoNguoiDungAsync]);
@@ -46,14 +48,7 @@ function ProfilePage(props) {
     ContentRight,
     CardTitleUploadImage,
     CardTextUnderline,
-    ButtonClose,
   } = ProfilePageCSS;
-
-  const closeIcon = (
-    <ButtonClose>
-      <CloseOutlined />
-    </ButtonClose>
-  );
 
   const handleShowModalProfile = () => {
     handleContentModal(ProfileUpdate);
@@ -61,12 +56,13 @@ function ProfilePage(props) {
     showModal();
   };
 
-  const handleShowModalTicket = () => {
-    handleContentModal(ProfileTicket);
-    handlePropsModal({ wrapClassName: 'wrap-modal-profile-ticket', closeIcon });
-    handlePropsContentModal({ danhSachVeTheoNguoiDung });
-    showModal();
-  };
+  useEffect(() => {
+    if (!userInfo) {
+      setTimeout(() => {
+        showWarning(messageUserNotLogin);
+      }, 500);
+    }
+  }, [messageUserNotLogin, userInfo]);
 
   return !userInfo ? (
     <Redirect to={urlHome} />
@@ -96,14 +92,16 @@ function ProfilePage(props) {
         <CardText>Bắt đầu tham gia vào 2021</CardText>
         <CardTextUnderline onClick={handleShowModalProfile}>Chỉnh sửa hồ sơ</CardTextUnderline>
         <br />
-        <CardTextUnderline onClick={handleShowModalTicket} className='mb-2'>
+        {/* <CardTextUnderline onClick={handleShowModalTicket} className='mb-2'>
           Xem danh sách vé
-        </CardTextUnderline>
+        </CardTextUnderline> */}
         <CardTitle>
           <i className='fa fa-star'></i>0 đánh giá
         </CardTitle>
         <CardTextUnderline>Đánh giá của bạn</CardTextUnderline>
+        <ProfileTicket danhSachVeTheoNguoiDung={danhSachVeTheoNguoiDung} />
       </ContentRight>
+      <ButtonScrollTop />
     </Container>
   );
 }

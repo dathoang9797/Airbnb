@@ -60,9 +60,10 @@ const selectDanhViTriFilter = createSelector(
   selectSearchValue,
   (danhSachViTri, searchValue) => {
     if (!searchValue.length) return danhSachViTri;
+    const keyTypeFilterLocation = process.env.REACT_APP_KEY_FILTER_ROOM_LIST;
     const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachViTri = [...danhSachViTri];
-    return filterSearchValue(searchValueFormat, cloneDanhSachViTri);
+    return filterSearchValue(searchValueFormat, cloneDanhSachViTri, keyTypeFilterLocation);
   }
 );
 

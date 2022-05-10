@@ -57,13 +57,13 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "GENERATE_SOURCEMAP=false craco build --prod",
+    "start": "craco  start",
+    "build": "GENERATE_SOURCEMAP=false craco build -- --profile",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "build:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && GENERATE_SOURCEMAP=false craco build --prod",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && craco start"
+    "build:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && GENERATE_SOURCEMAP=false craco build -- --profile",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && craco start",
+    "analyze": "craco build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -84,9 +84,5 @@
     "twin": {
       "preset": "styled-components"
     }
-  },
-  "resolutions": {
-    "@mui/utils": "~5.1.0"
-  },
-  "devDependencies": {}
+  }
 }

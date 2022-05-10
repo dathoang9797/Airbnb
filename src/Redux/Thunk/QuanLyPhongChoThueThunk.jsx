@@ -2,8 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { localService } from '@Services/LocalStorageService';
 import { quanLyPhongChoThueService } from '@Services/QuanLyPhongChoThueService';
 import { messageApp, showSuccess, capitalize } from '@Utils/Common';
-import { sweetAlert } from '@Utils/Libs';
-import { history } from '@Utils/Libs';
+import { history, sweetAlert } from '@Utils/Libs';
 import _ from 'lodash';
 
 const {
@@ -205,7 +204,7 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
     const result = await quanLyPhongChoThueService.datPhongChoThue(dateBooking);
     const urlRoom = process.env.REACT_APP_LINK_ROOM;
     const cityName = localService.getCityName();
-
+    const { sweetAlertConfirmContinueOrNot } = sweetAlert;
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
     }
@@ -222,6 +221,8 @@ const datPhongPhongChoThueAsync = createAsyncThunk(
     const updateUserInfo = { ...userInfo, ...result.userDetail };
     localService.setUserInfo(updateUserInfo);
     showSuccess(capitalize(capitalize(result.message)));
+    const confirmResult = await sweetAlertConfirmContinueOrNot();
+    if (confirmResult.isConfirmed) return;
     history.push(`${urlRoom}/${cityName}`);
   }
 );

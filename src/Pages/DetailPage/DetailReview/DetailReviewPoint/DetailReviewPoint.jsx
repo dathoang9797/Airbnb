@@ -11,7 +11,6 @@ function DetailReviewPoint() {
     ItemProcessContent,
     ItemProcessScore,
   } = DetailReviewPointCSS;
-  
   return (
     <Container>
       <Content>

@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 const Container = styled.main`
-  ${tw`relative m-auto  pt-24 color[var(--color-text-dark)] font-weight[400 ] font-size[16px ] line-height[20px ] font-family[ Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif]`};
+  ${tw`relative m-auto px-10  pt-24 color[var(--color-text-dark)] font-weight[400 ] font-size[16px ] line-height[20px ] font-family[ Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif]`};
 
   @media (min-width: 375px) {
     ${tw`px-6`};

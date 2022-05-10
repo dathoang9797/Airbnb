@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { DateRange } from 'react-date-range';
 import * as locales from 'react-date-range/dist/locale';
 import moment from 'moment';
@@ -8,6 +8,7 @@ import { useDispatch, batch, shallowEqual, useSelector } from 'react-redux';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 
 function DetailBookingDatePicker(props) {
+  const { Container, Heading, Title } = DetailBookingDatePickerCSS;
   const dispatch = useDispatch();
   const [date, setDate] = useState([
     {
@@ -16,19 +17,14 @@ function DetailBookingDatePicker(props) {
       key: 'selection',
     },
   ]);
-
-  const minDate = new Date();
-  const maxDate = new Date(moment().add(6, 'M'));
-  const { Container, Heading, Title } = DetailBookingDatePickerCSS;
+  const [direction, setDirection] = useState('horizontal');
+  const minDate = useMemo(() => new Date(), []);
+  const maxDate = useMemo(() => new Date(moment().add(6, 'M')), []);
   const dateFormatDateRange = 'dd/MM/yyyy';
   const { roomId, price } = props;
-
   const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueAction;
-
   const { selectBookingRoom } = quanLyPhongChoThueSelector;
-
   const bookingRoom = useSelector(selectBookingRoom, shallowEqual);
-
   const { checkIn, checkOut } = bookingRoom;
 
   useEffect(() => {
@@ -38,6 +34,25 @@ function DetailBookingDatePicker(props) {
       setDate([{ startDate, endDate, key: 'selection' }]);
     }
   }, [checkIn, checkOut]);
+
+  useEffect(() => {
+    const handlerResize = () => {
+      const domMonth = document.querySelectorAll('.rdrMonth');
+      if (window.innerWidth < 600) {
+        setDirection('vertical');
+        domMonth.forEach((item) => {
+          item.style.width = '100%';
+        });
+        return;
+      }
+      setDirection('horizontal');
+      domMonth.forEach((item) => {
+        item.style.width = '27.667em';
+      });
+    };
+    window.addEventListener('resize', handlerResize);
+    return () => window.removeEventListener('resize', handlerResize);
+  }, []);
 
   const handleDateChange = async (date) => {
     const { startDate, endDate } = date.selection;
@@ -74,7 +89,7 @@ function DetailBookingDatePicker(props) {
         showSelectionPreview={false}
         ranges={date}
         onChange={handleDateChange}
-        direction='horizontal'
+        direction={direction}
         preventSnapRefocus={true}
         locale={locales['vi']}
         rangeColors={['#ff3d67']}
@@ -86,4 +101,4 @@ function DetailBookingDatePicker(props) {
   );
 }
 
-export default React.memo(DetailBookingDatePicker);
+export default DetailBookingDatePicker;

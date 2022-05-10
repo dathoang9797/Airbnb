@@ -8,7 +8,13 @@ const Container = styled.main`
     ]`}
 
   .ant-pagination-item-active {
-    ${tw`font-medium bg-white border-color[var(--color-primary)]`};
+    ${tw`font-medium bg-white border-color[var(--color-primary)] `};
+  }
+
+  .ant-pagination-item-active:hover a,
+  .ant-pagination-item:hover a,
+  .ant-pagination-item-active a {
+    ${tw`transition-colors duration-300 color[var(--color-primary)]`};
   }
 
   .ant-pagination-item:hover {
@@ -20,7 +26,7 @@ const Container = styled.main`
     ${tw`color[var(--color-primary)] border-color[var(--color-primary)]`};
   }
 
-  .ant-layout{
+  .ant-layout {
     ${tw`min-height[100vh]`};
   }
 
@@ -42,7 +48,7 @@ const Container = styled.main`
 `;
 
 const Map = styled.div`
-  ${tw`background-color[pink] w-[calc(100% - 60%)] absolute right-0 top-0 bottom-0 transition-all duration-300`}
+  ${tw` w-[calc(100% - 60%)] absolute right-0 top-0 bottom-0 transition-all duration-300`}
   @media (max-width: 1100px) {
     ${tw`static w-full`};
   }

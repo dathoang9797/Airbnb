@@ -4,9 +4,8 @@ import { AiFillStar } from 'react-icons/ai';
 
 function DetailBookingPriceHeader(props) {
   const { Container, PricingContainer, PricingContent, PricingEvaluate } =
-  DetailBookingPriceHeaderCSS;
+    DetailBookingPriceHeaderCSS;
   const { price } = props;
-
   return (
     <Container>
       <PricingContainer>
@@ -22,7 +21,7 @@ function DetailBookingPriceHeader(props) {
       <PricingEvaluate>
         <div>
           <span>
-            <AiFillStar className='h-4 w-4'/>
+            <AiFillStar className='h-4 w-4' />
           </span>
           <span aria-hidden='true'>4,73 ·</span>
           <a aria-label='Xếp hạng 4,73/5 theo 260 đánh giá.' href='@a'>
@@ -34,4 +33,4 @@ function DetailBookingPriceHeader(props) {
   );
 }
 
-export default React.memo(DetailBookingPriceHeader);
+export default DetailBookingPriceHeader;

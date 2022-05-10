@@ -5,7 +5,8 @@ const Text = styled.span`
 `;
 
 const Button = styled.button`
-  ${tw`cursor-pointer inline-block margin[0px -8px] relative text-center w-auto touch-action[manipulation] text-sm font-semibold rounded-lg outline-none p-2 border-none bg-transparent color[rgb(34, 34, 34)] underline transition-all duration-300 -webkit-tap-highlight-color[transparent]`};
+  ${tw`cursor-pointer inline-block  relative text-center w-auto touch-action[manipulation] text-sm font-semibold rounded-lg outline-none px-0 py-2 border-none bg-transparent color[rgb(34, 34, 34)] underline transition-all duration-300 -webkit-tap-highlight-color[transparent] md:px-2`};
+  
   &:hover {
     ${tw`border-none background[rgb(247, 247, 247)] color[rgb(0, 0, 0)]`};
   }
@@ -33,7 +34,9 @@ const Heading = styled.span`
 `;
 
 const Desc = styled.div`
-  ${tw`-webkit-box-pack[justify ] -webkit-box-align[end ] align-items[flex-end ] display[flex ]justify-content[space-between ]`};
+  ${tw`-webkit-box-pack[justify] -webkit-box-align[end] items-start flex flex-col justify-start 
+   md:flex-row md:justify-between md:items-center
+  `};
 `;
 
 const DescLeft = styled.div`
@@ -66,14 +69,14 @@ const DescRight = styled.div`
 const DescRightContent = styled.div`
   ${tw`flex justify-end -webkit-box-pack[end]`}
   div:first-child {
-    ${tw`mr-5`}
+    ${tw`mr-2 md:mr-5`}
   }
 `;
 
 const DescRightContentItem = styled.div`
   ${tw`color[rgb(34, 34, 34)] -webkit-box-align[center] flex items-center`}
   span {
-    ${tw`mr-2`}
+    ${tw`mr-2 `}
     svg {
       ${tw` h-4 w-4 `};
     }

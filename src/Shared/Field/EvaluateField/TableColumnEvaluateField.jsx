@@ -22,7 +22,7 @@ export const tableColumnsEvaluateField = [
     title: 'Nội Dung',
     dataIndex: 'content',
     key: 'content',
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.content, valueB?.content, 'content'),
     onCell: (record) => {
       return {
         'data-label': 'Content',
@@ -40,7 +40,7 @@ export const tableColumnsEvaluateField = [
     dataIndex: 'created_at',
     key: 'created_at',
     render: (text, record, index) => moment(record.created_at).format('DD/MM/YYYY'),
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.created_at, valueB?.created_at, 'created_at'),
     onCell: (record) => {
       return {
         'data-label': 'Ngày tạo đánh giá',
@@ -67,7 +67,7 @@ export const tableColumnsEvaluateField = [
         'data-label': 'Ngày cập nhật đánh giá',
       };
     },
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.updatedAt, valueB?.updatedAt, 'updatedAt'),
   },
   {
     title: 'Thao tác',

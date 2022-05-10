@@ -41,7 +41,7 @@ const MenuItem = styled.section`
   }
 `;
 const CopyRight = styled.div`
-  ${tw`flex justify-center items-center mt-0 xl:flex-row    md:flex-col sm:flex-col`};
+  ${tw`flex justify-center items-center mt-0 flex-col xl:flex-row`};
   span,
   a {
     ${tw`mr-4 transition-all  duration-300  md:pb-0.5`};
@@ -72,25 +72,23 @@ const Social = styled.div`
 `;
 
 const Bottom = styled.div`
-  ${tw`px-20 m-auto py-6  flex justify-between items-center flex-col-reverse relative`};
-  ${tw`xl:flex-grow  xl:flex-row`};
+  ${tw`px-0 m-auto py-6  flex justify-between items-center flex-col-reverse relative`};
+  ${tw`xl:flex-grow  xl:flex-row md:px-20`};
   &:after {
     ${tw`w-[calc(100% - 160px)] border-t-1 border-gray-300 content absolute py-10`}
   }
 `;
 
 const Top = styled.div`
-  ${tw`container -webkit-box-direction[normal !important] -webkit-box-orient[horizontal !important] `};
+  ${tw`container -webkit-box-direction[normal !important] -webkit-box-orient[horizontal !important] px-0`};
   ${tw`sm:mr-0 sm:max-w-full`};
   ${tw`md:flex md:flex-direction[column] md:py-10`};
   ${tw`xl:flex  xl:flex-row xl:py-12  xl:m-auto`};
 `;
 
 const Container = styled.footer`
-  ${tw`bg-gray-100 text-center`};
-  ${tw`sm:text-left sm:py-8`};
-  ${tw`md:text-left md:py-0`};
-  ${tw`xl:py-0`};
+  ${tw`bg-gray-100 text-left py-8`};
+  ${tw`xl:py-0 xl:text-center`};
 `;
 
 export const FooterCSS = {

@@ -24,6 +24,23 @@ function AdminTemplate({ Component, ...restRoute }) {
   useLayoutEffect(() => window.scrollTo(0, 0));
 
   useLayoutEffect(() => {
+    const domAdminTemPlate = document.getElementById('admin-template');
+    if (domAdminTemPlate) {
+      if (
+        pathname === urlAdminUser ||
+        pathname === urlAdminRoom ||
+        pathname === urlAdminLocation ||
+        pathname === urlAdminTicket ||
+        pathname === urlAdminEvaluate
+      ) {
+        domAdminTemPlate.style.minWidth = '345px';
+        return;
+      }
+      domAdminTemPlate.style.minWidth = 'unset';
+    }
+  }, [pathname, urlAdminEvaluate, urlAdminLocation, urlAdminRoom, urlAdminTicket, urlAdminUser]);
+
+  useLayoutEffect(() => {
     const handleScroll = () => {
       const antLayoutSiderTrigger = document.querySelector('.ant-layout-sider-trigger');
       const sideBar = document.querySelector('#side-bar');

@@ -3,7 +3,7 @@ import { Popover } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
-  ${tw`inline-flex justify-center items-center font-family[ Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif]`}
+  ${tw`inline-flex justify-center items-center font-family[ Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif] md:mt-0 mt-4 `}
 `;
 
 const BecomeHost = styled.a`

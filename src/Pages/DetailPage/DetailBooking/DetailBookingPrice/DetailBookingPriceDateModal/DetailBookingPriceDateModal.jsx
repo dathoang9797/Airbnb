@@ -1,31 +1,26 @@
 import { quanLyPhongChoThueAction } from '@Redux/Reducers/QuanLyPhongChoThueSlice';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { DatePickerModal } from 'react-rainbow-components';
 import { batch, shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { DetailBookingPriceDateModalCSS } from './DetailBookingPriceDateModal.styles';
 
 function DetailBookingPriceDateModal(props) {
+  const { Container, Content, Heading, Title, Item, Button, CheckIn, CheckOut } =
+    DetailBookingPriceDateModalCSS;
   const [isOpen, setIsOpen] = useState(false);
   const [date, setDate] = useState({ startDate: null, endDate: null });
   const [valueDatePicker, setValueDatePicker] = useState(null);
   const dispatch = useDispatch();
-
-  const { Container, Content, Heading, Title, Item, Button, CheckIn, CheckOut } =
-  DetailBookingPriceDateModalCSS;
   const { roomId, price } = props;
   const addDayStr = 'Thêm Ngày';
   const dateFormat = 'DD-MM-YYYY';
-  const minDate = new Date();
-  const maxDate = new Date(moment().add(6, 'M'));
-
+  const minDate = useMemo(() => new Date(), []);
+  const maxDate = useMemo(() => new Date(moment().add(6, 'M')), []);
   const { setBookingRoomAction, setTotalPriceBookingAction } = quanLyPhongChoThueAction;
-
   const { selectBookingRoom } = quanLyPhongChoThueSelector;
-
   const bookingRoom = useSelector(selectBookingRoom, shallowEqual);
-
   const { checkIn, checkOut } = bookingRoom;
 
   useEffect(() => {
@@ -126,4 +121,4 @@ function DetailBookingPriceDateModal(props) {
   );
 }
 
-export default React.memo(DetailBookingPriceDateModal);
+export default DetailBookingPriceDateModal;

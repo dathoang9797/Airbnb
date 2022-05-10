@@ -9,9 +9,7 @@ const Container = styled.div`
     ${tw`lg:left-2.5`};
   }
 
-  #admin-template{
-    ${tw`min-w-[345px]`};
-  }
+  
 `;
 
 export const AdminTemplateCSS = {

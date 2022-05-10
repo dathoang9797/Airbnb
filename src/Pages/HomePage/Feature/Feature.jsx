@@ -49,6 +49,7 @@ function Feature() {
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
 
   const handleRentalCity = useCallback(() => {
+    if (!danhSachPhongChoThueTheoViTri.length) return;
     const cityUpdate = cityRef.current.map((city) => {
       const cityNameFormat = removeSpace(removeUnicode(city.cityName));
       const roomLength = danhSachPhongChoThueTheoViTri.filter((room) => {

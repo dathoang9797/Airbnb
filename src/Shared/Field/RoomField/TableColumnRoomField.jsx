@@ -22,7 +22,7 @@ export const tableColumnsRoomField = [
     title: 'Tên Phòng',
     dataIndex: 'name',
     key: 'name',
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.name, valueB?.name, 'roomName'),
     onCell: (record) => {
       return {
         'data-label': 'Tên phòng',
@@ -73,7 +73,8 @@ export const tableColumnsRoomField = [
     title: 'Location',
     dataIndex: 'locationId',
     key: 'locationId',
-    sorter: sortValue,
+    sorter: (valueA, valueB) =>
+      sortValue(valueA?.locationId?.name, valueB?.locationId?.name, 'locationRoomName'),
     render: (text, record, index) => {
       if (record.locationId) {
         return record.locationId.name;

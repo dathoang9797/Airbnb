@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DetailReviewRatingCSS } from './DetailReviewRating.styles';
 import moment from 'moment';
 
@@ -7,8 +7,9 @@ function DetailReviewRating(props) {
   const { danhSachDanhGia } = props;
   const formatDay = 'DD/MM/YYYY';
 
-  const renderUserReview = () => {
-    return danhSachDanhGia?.slice(0, 8).map((item, index) => {
+  const renderUserReview = useMemo(() => {
+    if (!danhSachDanhGia.length) return null;
+    return danhSachDanhGia.slice(0, 8).map((item, index) => {
       return (
         <Item key={item._id}>
           <ImageUser>
@@ -22,11 +23,11 @@ function DetailReviewRating(props) {
         </Item>
       );
     });
-  };
+  }, [danhSachDanhGia]);
 
   return (
     <Container>
-      <Content>{renderUserReview()}</Content>
+      <Content>{renderUserReview}</Content>
     </Container>
   );
 }

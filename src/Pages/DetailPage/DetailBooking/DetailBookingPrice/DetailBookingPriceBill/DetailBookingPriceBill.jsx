@@ -1,6 +1,6 @@
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
-import { messageApp, showWarning } from '@Utils/Common';
+import { messageApp, showWarning, parseFloatNumber } from '@Utils/Common';
 import _ from 'lodash';
 import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -8,14 +8,14 @@ import { DetailBookingPriceBillCSS } from './DetailBookingPriceBill.styles';
 
 function DetailBookingPriceBill(props) {
   const { Container, Bill, BillItemFirst, BillItemSecond, BillTax, Button } =
-  DetailBookingPriceBillCSS;
+    DetailBookingPriceBillCSS;
   const dispatch = useDispatch();
   const { price } = props;
   const { selectBookingRoom, selectTotalPriceBooking } = quanLyPhongChoThueSelector;
   const { datPhongPhongChoThueAsync } = quanLyPhongChoThueThunk;
   const bookingRoom = useSelector(selectBookingRoom, shallowEqual);
-  const totalPriceBooking = useSelector(selectTotalPriceBooking) || price;
   const { messageWaringBooking } = messageApp;
+  const totalPriceBooking = useSelector(selectTotalPriceBooking);
   const pricerService = Math.floor(Math.random() * 10) + 1;
 
   const handleBookingRoom = () => {
@@ -27,13 +27,10 @@ function DetailBookingPriceBill(props) {
   };
 
   const handleRenderPrice = () => {
-    if (totalPriceBooking) {
-      if (typeof totalPriceBooking === 'string') {
-        return (Number(totalPriceBooking.replace(/,/g, '')) + pricerService).toLocaleString();
-      }
-      return totalPriceBooking.toLocaleString();
-    }
-    return 0;
+    if (!price) return 0;
+    if (!totalPriceBooking) return (price + pricerService).toLocaleString();
+    const totalPrice = parseFloatNumber(totalPriceBooking) + pricerService;
+    return totalPrice.toLocaleString();
   };
 
   return (
@@ -52,7 +49,9 @@ function DetailBookingPriceBill(props) {
                 </button>
               </div>
             </span>
-            <span>${totalPriceBooking}</span>
+            <span>
+              ${totalPriceBooking ? totalPriceBooking?.toLocaleString() : price?.toLocaleString()}
+            </span>
           </div>
           <div>
             <span>
@@ -76,4 +75,4 @@ function DetailBookingPriceBill(props) {
   );
 }
 
-export default React.memo(DetailBookingPriceBill);
+export default DetailBookingPriceBill;

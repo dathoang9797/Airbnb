@@ -24,6 +24,10 @@ const CustomStyles = styled.createGlobalStyle`
   ${SweetAlertCSS};
   ${PopoverCSS};
   ${DropDownCSS};
+  #root {
+    ${tw`w-[100%!important]`}
+  }
+
   .ant-dropdown-arrow {
     --tw-bg-opacity: 1;
     ${tw`dark:background-image[linear-gradient(135deg, transparent 40%, rgba(55, 65, 81, var(--tw-bg-opacity)) 40%)]`};

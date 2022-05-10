@@ -17,6 +17,9 @@ const HeaderDesc = styled.div`
     li:nth-of-type(1n) {
       ${tw`inline-block`};
     }
+    li:last-child{
+      ${tw`mb-4`};
+    }
   }
 `;
 

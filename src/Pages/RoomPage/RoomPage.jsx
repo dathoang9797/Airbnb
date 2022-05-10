@@ -9,16 +9,17 @@ import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { geoCodeService } from '@Services/GeoCodeService';
 import { localService } from '@Services/LocalStorageService';
+import { removeSpace, removeUnicode } from '@Utils/Common';
 import { Layout } from 'antd';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomItem from './RoomItem';
 import RoomMap from './RoomMap';
-import { RoomCSS } from './RoomPage.styles';
 import RoomNotFound from './RoomNotFound';
+import { RoomCSS } from './RoomPage.styles';
 
 function RoomPage() {
   const [collapsed, setCollapsed] = useState(false);
@@ -56,21 +57,21 @@ function RoomPage() {
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
   const { getDanhSachViTriAsync, getDanhSachProvinceAsync } = quanLyViTriThunk;
 
-  const { selectDanhSachViTriByProvince, selectDanhSachProvinceFilter } = quanLyViTriSelector;
+  const { selectDanhSachViTriByProvince, selectDanhSachProvinceFilter, selectDanhSachViTri } =
+    quanLyViTriSelector;
   const { selectDanhSachPhongChoThueTheoViTri } = quanLyPhongChoThueSelector;
   const { selectIsLoadingPopupState } = loadingSelector;
 
   const isLoadingPopup = useSelector(selectIsLoadingPopupState);
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
-  const danhSachProvinceFilter = useSelector(selectDanhSachProvinceFilter, _.isEqual);
+  const danhSachProvinceFilter = useSelector(selectDanhSachProvinceFilter, shallowEqual);
+  const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
 
   const danhSachPhongChoThueTheoViTriSlice = useMemo(() => {
     const { maxValue, minValue } = limitValue;
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
-
-  console.log({ danhSachViTriByProvince, danhSachProvinceFilter });
 
   const handleToggle = () => setCollapsed(!collapsed);
 
@@ -81,7 +82,28 @@ function RoomPage() {
     });
   };
 
-  useLayoutEffect(() => window.scrollTo(0, 0));
+  const handleSetCityName = useCallback(
+    (provinces) => {
+      if (!provinces.length) return;
+      const result = provinces
+        .map((province) => {
+          return danhSachViTri.filter((viTri) => {
+            const formatProvince = removeSpace(removeUnicode(viTri.province));
+            if (formatProvince > province) {
+              return formatProvince.includes(province);
+            }
+            return province.includes(formatProvince);
+          });
+        })
+        .flat();
+      if (!result) return;
+      const resultRemoveDuplicate = _.uniq(result);
+      const cityName = resultRemoveDuplicate[0].province;
+      if (cityName) return;
+      localService.setCityName(cityName);
+    },
+    [danhSachViTri]
+  );
 
   useLayoutEffect(() => {
     Promise.all([
@@ -119,7 +141,6 @@ function RoomPage() {
         return geoCodeService.getGeoCodeByAddress(phong.name);
       });
       const result = await Promise.all(promisesArr);
-      console.log({ result });
       setPlaces(result);
     }
     getCoordinateOfEachRoom();
@@ -146,11 +167,12 @@ function RoomPage() {
       );
       if (!_.isEqual(provincesRef.current, provinces)) {
         provincesRef.current = provinces;
+        handleSetCityName(provinces);
         dispatch(setProvincesAction(provinces));
       }
     }
     getProvinces();
-  }, [coordinates, dispatch, danhSachProvinceFilter, setProvincesAction]);
+  }, [coordinates, dispatch, danhSachProvinceFilter, setProvincesAction, handleSetCityName]);
 
   useEffect(() => {
     geoCodeService.getGeoCodeByAddress(cityName).then((data) => {

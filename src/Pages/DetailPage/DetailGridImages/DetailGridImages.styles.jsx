@@ -22,7 +22,6 @@ const ImagesContentLeft = styled.div`
 const ImagesContentRight = styled.div`
   ${tw`hidden`};
   ${tw`md:flex md:justify-center md: items-center`};
-
 `;
 
 const ImagesItemCommonCSS = css`
@@ -105,18 +104,14 @@ const ImagesItemLinkContent = styled.div`
 
 const ButtonShowImage = styled.button`
   ${tw`absolute z-10 bottom-6 right-6 `}
-  a {
-    ${tw`cursor-pointer inline-block m-0 relative text-center text-decoration[none] w-auto touch-action[manipulation] text-sm font-semibold border-1 rounded-lg border-solid outline-none padding[7px 15px] transition-all duration-300
-     -webkit-tap-highlight-color[transparent] border-color[rgb(34, 34, 34) ] background[rgb(255, 255, 255)] color[rgb(34, 34, 34)]
-    `};
-    & > div {
-      ${tw`-webkit-box-align[center] flex items-center`};
-      svg {
-        ${tw`block h-6 w-6 fill[currentcolor]`}
-      }
-      div {
-        ${tw`ml-2`}
-      }
+  & > div {
+    ${tw`-webkit-box-align[center] flex items-center cursor-pointer m-0 relative text-center text-decoration[none] w-auto touch-action[manipulation] text-sm font-semibold border-1 rounded-lg border-solid outline-none padding[7px 15px] transition-all duration-300
+     -webkit-tap-highlight-color[transparent] border-color[rgb(34, 34, 34) ] background[rgb(255, 255, 255)] color[rgb(34, 34, 34)]`};
+    svg {
+      ${tw`block h-6 w-6 fill[currentcolor] `}
+    }
+    div {
+      ${tw`ml-2`}
     }
   }
 `;

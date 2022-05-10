@@ -2,10 +2,11 @@ import tw, { css } from 'twin.macro';
 
 export const ModalCSS = css`
   .wrap-modal-review,
-  .wrap-modal-profile-ticket {
+  .wrap-modal-profile-ticket,
+  .wrap-modal-grid-image {
     .ant-modal {
       width: 100% !important;
-      max-width: 400px !important;
+      max-width: 340px !important;
       @media (min-width: 500x) {
         max-width: 450px !important;
       }
@@ -39,7 +40,7 @@ export const ModalCSS = css`
     }
 
     .ant-modal-body {
-      ${tw`px-[8px] pt-[48px]`}
+      ${tw`px-[8px] pt-[48px] `}
       @media (min-width: 940px) {
         padding-left: 16px !important;
       }
@@ -61,7 +62,8 @@ export const ModalCSS = css`
       ${tw`top-[15px] left-[20px] absolute`};
     }
   }
-  .wrap-modal-profile-ticket {
+  .wrap-modal-profile-ticket,
+  .wrap-modal-grid-image {
     .ant-modal-body {
        {
         ${tw`pr-0`}

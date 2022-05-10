@@ -14,7 +14,6 @@ function TabActionsAdmin(props) {
     showModal,
   } = props;
 
-  console.log('Tab render')
   const { Add, Primary } = ButtonCSS;
   const hasSelected = !selectedRowKeys.length;
   const { Container } = TabActionAdminCSS;

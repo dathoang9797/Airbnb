@@ -23,8 +23,8 @@ const Spinner = () => {
         timeOut2.current = setTimeout(() => {
           spinRef.current.style.zIndex = 0;
           spinRef.current.style.display = 'none';
-        }, 500);
-      }, 1000);
+        }, 300);
+      }, 200);
     }
   },[isLoading]);
 

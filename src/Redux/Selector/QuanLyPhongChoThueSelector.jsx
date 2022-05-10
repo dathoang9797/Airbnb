@@ -19,9 +19,10 @@ const selectDanhSachPhongFilter = createSelector(
   selectSearchValue,
   (danhSachPhongChoThue, searchValue) => {
     if (!searchValue.length) return danhSachPhongChoThue;
+    const keyTypeFilterRoom = process.env.REACT_APP_KEY_FILTER_ROOM_LIST;
     const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachPhongChoThue = [...danhSachPhongChoThue];
-    return filterSearchValue(searchValueFormat, cloneDanhSachPhongChoThue);
+    return filterSearchValue(searchValueFormat, cloneDanhSachPhongChoThue,keyTypeFilterRoom);
   }
 );
 

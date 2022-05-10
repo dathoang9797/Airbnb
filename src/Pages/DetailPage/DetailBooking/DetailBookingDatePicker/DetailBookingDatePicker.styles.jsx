@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 const Container = styled.div`
-  ${tw`relative mb-4 rounded-lg bg-white font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif] pt-12 border-top[1px solid rgb(221,221,221)]`};
+  ${tw`relative mb-4  bg-white font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif] pt-12 border-top[1px solid rgb(221,221,221)]`};
   .rdrDayToday .rdrDayNumber span:after {
     background: var(--color-primary);
   }

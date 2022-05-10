@@ -1,10 +1,14 @@
-import React from 'react';
-import moment from 'moment';
-import { ProfileTicketCSS } from './ProfileTicket.styles';
+import { CloseOutlined } from '@ant-design/icons';
+import { ButtonCSS } from '@Components/Button';
+import ModalHoc from '@HOC/ModalHoc';
 import { capitalize, renderUtilityIcon } from '@Utils/Common';
 import _ from 'lodash';
+import moment from 'moment';
+import React, { useMemo } from 'react';
+import { ProfileTicketCSS } from './ProfileTicket.styles';
+import ProfileModal from './ProfileModal';
 
-function ProfileTicket({ danhSachVeTheoNguoiDung, handleOk }) {
+function ProfileTicket(props) {
   const {
     Container,
     TicketContent,
@@ -15,9 +19,30 @@ function ProfileTicket({ danhSachVeTheoNguoiDung, handleOk }) {
     TicketDateBook,
     TicketNameRoom,
     TicketService,
+    TicketShowMore,
   } = ProfileTicketCSS;
-
   const formatDay = 'DD/MM/YYYY';
+  const { Close } = ButtonCSS;
+  const {
+    showModal,
+    handlePropsContentModal,
+    handleContentModal,
+    danhSachVeTheoNguoiDung,
+    handlePropsModal,
+  } = props;
+
+  const closeIcon = (
+    <Close>
+      <CloseOutlined />
+    </Close>
+  );
+
+  const handleShowModalTicket = () => {
+    handleContentModal(ProfileModal);
+    handlePropsModal({ wrapClassName: 'wrap-modal-profile-ticket', closeIcon });
+    handlePropsContentModal({ danhSachVeTheoNguoiDung });
+    showModal();
+  };
 
   const renderService = (chiTietPhong) => {
     const utility = _.omit(chiTietPhong, [
@@ -43,9 +68,9 @@ function ProfileTicket({ danhSachVeTheoNguoiDung, handleOk }) {
     });
   };
 
-  const renderTicketInfo = () => {
-    return danhSachVeTheoNguoiDung.map((item, index) => {
-      const { checkIn, checkOut, roomId,_id } = item;
+  const renderTicketInfo = useMemo(() => {
+    return danhSachVeTheoNguoiDung.slice(0, 3).map((item, index) => {
+      const { checkIn, checkOut, roomId, _id } = item;
       const { image, description, name } = roomId;
       return (
         <TicketItem key={`${_id}-${index}`}>
@@ -64,13 +89,13 @@ function ProfileTicket({ danhSachVeTheoNguoiDung, handleOk }) {
         </TicketItem>
       );
     });
-  };
-
+  }, [danhSachVeTheoNguoiDung]);
   return (
     <Container>
-      <TicketContent>{renderTicketInfo()}</TicketContent>
+      <TicketContent>{renderTicketInfo}</TicketContent>
+      <TicketShowMore onClick={handleShowModalTicket}>Hiển thị thêm</TicketShowMore>
     </Container>
   );
 }
 
-export default ProfileTicket;
+export default ModalHoc(React.memo(ProfileTicket));

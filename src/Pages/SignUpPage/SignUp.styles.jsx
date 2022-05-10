@@ -22,8 +22,8 @@ const Form = styled.div`
 `;
 
 const Container = styled.div`
-  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-5 py-5`};
-  ${tw`md:pt-20 md:pb-12 md:px-10`};
+  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-5 pb-10 pt-36`};
+  ${tw`md:pt-20  md:px-10`};
 
 `;
 

@@ -24,7 +24,7 @@ export const tableColumnsUserField = [
     dataIndex: 'name',
     key: 'name',
     sortDirections: ['ascend', 'descend'],
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.name, valueB?.name, 'name'),
     onCell: (record) => {
       return {
         'data-label': 'Họ Tên',
@@ -41,7 +41,7 @@ export const tableColumnsUserField = [
     dataIndex: 'email',
     key: 'email',
     sortDirections: ['ascend', 'descend'],
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.email, valueB?.email, 'email'),
     onCell: (record) => {
       return {
         'data-label': 'Email',
@@ -109,7 +109,7 @@ export const tableColumnsUserField = [
       );
     },
     sortDirections: ['ascend', 'descend'],
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.type, valueB?.type, 'type'),
     onCell: (record) => {
       return {
         'data-label': 'Loại Tài Khoản',

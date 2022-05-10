@@ -1,10 +1,11 @@
 import React from 'react';
 import { DetailBookingInfoCSS } from './DetailBookingInfo.styles';
-import { BsDoorClosed,BsCalendar2 } from 'react-icons/bs';
-import { IoIosArrowForward} from 'react-icons/io';
+import { BsDoorClosed, BsCalendar2 } from 'react-icons/bs';
+import { IoIosArrowForward } from 'react-icons/io';
 import { GrKey } from 'react-icons/gr';
 
 function DetailBookingInfo(props) {
+  const { guests, bedRoom, bath, description } = props;
   const {
     Container,
     Header,
@@ -21,9 +22,6 @@ function DetailBookingInfo(props) {
     DetailParagraphItem,
     DetailParagraphItemShowMore,
   } = DetailBookingInfoCSS;
-
-  const { guests, bedRoom, bath, description } = props;
-
   return (
     <Container>
       <Header>
@@ -79,7 +77,7 @@ function DetailBookingInfo(props) {
       <DetailContent>
         <DetailItem>
           <DetailIcon>
-            <BsDoorClosed className='h-6 w-6'/>
+            <BsDoorClosed className='h-6 w-6' />
           </DetailIcon>
           <DetailDesc>
             <h1>Tự nhận phòng</h1>
@@ -88,7 +86,7 @@ function DetailBookingInfo(props) {
         </DetailItem>
         <DetailItem>
           <DetailIcon>
-            <GrKey className='h-6 w-6'/>
+            <GrKey className='h-6 w-6' />
           </DetailIcon>
           <DetailDesc>
             <h1>Trải nghiệm nhận phòng tuyệt vời</h1>
@@ -97,7 +95,7 @@ function DetailBookingInfo(props) {
         </DetailItem>
         <DetailCancelDay>
           <DetailIcon>
-          <BsCalendar2 className='h-6 w-6'/>
+            <BsCalendar2 className='h-6 w-6' />
           </DetailIcon>
           <DetailDesc>
             <h1>Hủy miễn phí trước 3 thg 5.</h1>
@@ -114,7 +112,7 @@ function DetailBookingInfo(props) {
           <button type='button'>
             <span>
               <span>Hiển thị thêm</span>
-             <IoIosArrowForward/>
+              <IoIosArrowForward />
             </span>
           </button>
         </DetailParagraphItemShowMore>
@@ -122,4 +120,4 @@ function DetailBookingInfo(props) {
     </Container>
   );
 }
-export default React.memo(DetailBookingInfo);
+export default DetailBookingInfo;

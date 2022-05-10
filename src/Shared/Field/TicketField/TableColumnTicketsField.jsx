@@ -22,7 +22,7 @@ export const tableColumnsTicketField = [
     title: 'Người đặt',
     dataIndex: ['userId', 'name'],
     key: 'name',
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.userId?.name, valueB?.userId?.name, 'userIdName'),
     onCell: (record) => {
       return {
         'data-label': 'Người đặt',
@@ -44,7 +44,8 @@ export const tableColumnsTicketField = [
       }
       return record.userId.tickets.length;
     },
-    sorter: sortValue,
+    sorter: (valueA, valueB) =>
+      sortValue(valueA?.userId?.tickets, valueB?.userId?.tickets, 'userIdTickets'),
 
     onCell: (record) => {
       return {
@@ -61,7 +62,7 @@ export const tableColumnsTicketField = [
     title: 'Tên phòng',
     dataIndex: ['roomId', 'name'],
     key: 'room',
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.roomId?.name, valueB?.roomId?.name, 'roomIdName'),
     onCell: (record) => {
       return {
         'data-label': 'Ngày tạo vé',
@@ -83,7 +84,7 @@ export const tableColumnsTicketField = [
         'data-label': 'CheckIn',
       };
     },
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.checkIn, valueB?.checkIn, 'checkIn'),
   },
   {
     title: 'CheckOut',
@@ -100,7 +101,7 @@ export const tableColumnsTicketField = [
         'data-label': 'CheckOut',
       };
     },
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.checkOut, valueB?.checkOut, 'checkOut'),
   },
   {
     title: 'Thao tác',

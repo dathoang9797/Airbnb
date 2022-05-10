@@ -22,7 +22,7 @@ export const tableColumnsLocationField = [
     title: 'Tên Vị Trí',
     dataIndex: 'name',
     key: 'name',
-    sorter: sortValue,
+    sorter:  (valueA, valueB) => sortValue(valueA?.name, valueB?.name, 'nameLocation'),
     onCell: (record) => {
       return {
         'data-label': 'Tên phòng',
@@ -73,7 +73,7 @@ export const tableColumnsLocationField = [
     title: 'Country',
     dataIndex: 'country',
     key: 'country',
-    sorter: sortValue,
+    sorter:  (valueA, valueB) => sortValue(valueA?.country, valueB?.country, 'country'),
     onCell: (record) => {
       return {
         'data-label': 'Country',
@@ -99,7 +99,7 @@ export const tableColumnsLocationField = [
         'data-label': 'Province',
       };
     },
-    sorter: sortValue,
+    sorter: (valueA, valueB) => sortValue(valueA?.province, valueB?.province, 'province'),
   },
   {
     title: 'Valueate',

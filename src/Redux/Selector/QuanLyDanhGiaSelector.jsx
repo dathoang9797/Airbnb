@@ -10,9 +10,10 @@ const selectDanhSachDanhGiaFilter = createSelector(
   selectSearchValue,
   (danhSachDanhGia, searchValue) => {
     if (!searchValue.length) return danhSachDanhGia;
+    const keyTypeFilterEvaluate = process.env.REACT_APP_KEY_FILTER_EVALUATE_LIST;
     const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachDanhGia = [...danhSachDanhGia];
-    return filterSearchValue(searchValueFormat, cloneDanhSachDanhGia);
+    return filterSearchValue(searchValueFormat, cloneDanhSachDanhGia, keyTypeFilterEvaluate);
   }
 );
 

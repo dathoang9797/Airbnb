@@ -15,6 +15,17 @@ const sweetAlertDelete = (title = '', icon = '') => {
   });
 };
 
+const sweetAlertConfirmContinueOrNot = (title = '', icon = '') => {
+  return Swal.fire({
+    text: 'Bạn có muốn đặt phòng tiếp không ?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: primaryColor,
+    cancelButtonColor: deleteColor,
+    confirmButtonText: 'Vâng tui muốn đặt tiếp',
+  });
+};
+
 const sweetAlertSuccess = (message) => {
   return Swal.fire('Deleted!', message, 'success');
 };
@@ -22,4 +33,5 @@ const sweetAlertSuccess = (message) => {
 export const sweetAlert = {
   sweetAlertDelete,
   sweetAlertSuccess,
+  sweetAlertConfirmContinueOrNot,
 };

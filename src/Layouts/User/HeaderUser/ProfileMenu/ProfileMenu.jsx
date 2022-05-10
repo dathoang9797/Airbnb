@@ -1,11 +1,11 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { ProfileMenuCSS } from './ProfileMenu.styles';
 import { VectorSVG } from '@Assets/Svgs';
-import { localService } from '@Services/LocalStorageService';
-import { useSelector } from 'react-redux';
 import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
+import { localService } from '@Services/LocalStorageService';
 import _ from 'lodash';
+import React, { useLayoutEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { ProfileMenuCSS } from './ProfileMenu.styles';
 
 function ProfileMenu() {
   const { AccountSVG, HamburgerSVG, GlobeSVG } = VectorSVG;
@@ -31,10 +31,10 @@ function ProfileMenu() {
     ButtonLogout,
   } = ProfileMenuCSS;
 
+  const handleVisible = () => setVisible(!visible);
+
   useLayoutEffect(() => {
-    const handleOnScroll = () => {
-      setVisible(false);
-    };
+    const handleOnScroll = () => setVisible(false);
     window.addEventListener('scroll', handleOnScroll);
     return () => window.removeEventListener('scroll', handleOnScroll);
   }, []);
@@ -71,7 +71,9 @@ function ProfileMenu() {
         <PopupItemUserProfile to={urlDashBoard}>DashBoard</PopupItemUserProfile>
       ) : null}
       <PopupItemUserProfile to={urlHome}> Home</PopupItemUserProfile>
-      <PopupItemUserProfile to={urlProfile}>Profile</PopupItemUserProfile>
+      <PopupItemUserProfile to={urlProfile} onClick={handleVisible}>
+        Profile
+      </PopupItemUserProfile>
       <ButtonLogout to={urlHome} onClick={handleLogOut}>
         Logout
       </ButtonLogout>

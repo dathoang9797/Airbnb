@@ -12,9 +12,10 @@ const selectDanhSachVeFilter = createSelector(
   selectSearchValue,
   (danhSachVe, searchValue) => {
     if (!searchValue.length) return danhSachVe;
+    const keyTypeFilterTicket = process.env.REACT_APP_KEY_FILTER_TICKET_LIST;
     const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachVe = [...danhSachVe];
-    return filterSearchValue(searchValueFormat, cloneDanhSachVe);
+    return filterSearchValue(searchValueFormat, cloneDanhSachVe, keyTypeFilterTicket);
   }
 );
 

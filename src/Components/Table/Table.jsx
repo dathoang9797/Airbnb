@@ -75,7 +75,7 @@ const Table = styled(TableAnt)`
   }
 
   ul.ant-table-pagination.ant-pagination {
-    ${tw`dark:bg-gray-800`};
+    ${tw`mr-2`};
   }
 
   .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,

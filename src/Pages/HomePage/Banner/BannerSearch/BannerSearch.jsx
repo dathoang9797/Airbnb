@@ -13,6 +13,7 @@ function BannerSearch() {
   const [danhSachViTriFilter, setDanhSachViTriFilter] = useState([]);
   const spacePressedRef = useRef(false);
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
+  const keyTypeFilterLocation = process.env.REACT_APP_KEY_FILTER_LOCATION_LIST;
   const {
     PopupSearchGoAnyWhere,
     PopupItemProvince,
@@ -77,7 +78,7 @@ function BannerSearch() {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    const danhSachViTriFilter = filterSearchValue(value, danhSachViTri);
+    const danhSachViTriFilter = filterSearchValue(value, danhSachViTri, keyTypeFilterLocation);
     if (!value.trim().length) {
       setDanhSachViTriFilter([]);
       setSearchValue(value);

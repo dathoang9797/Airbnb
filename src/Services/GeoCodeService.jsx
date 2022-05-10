@@ -1,10 +1,13 @@
 import { handleChooseStartLoading, handleChooseEndLoading } from '@Utils/Common';
-import { removeSpace, removeUnicode } from '@Utils/Common';
+import { removeSpace, removeUnicode, showError, messageApp } from '@Utils/Common';
 import _ from 'lodash';
+
+const { messageNetWorkErr } = messageApp;
 
 export const geoCodeService = {
   getGeoCodeByAddress(address, isLoading = false, isLoadingPopup = true) {
     const header = { isLoading, isLoadingPopup };
+
     handleChooseStartLoading(header);
     const url = `${process.env.REACT_APP_URL_GEOCODE_GOOGLE}?address=${encodeURIComponent(
       address
@@ -17,7 +20,8 @@ export const geoCodeService = {
           handleChooseEndLoading(header);
           return data.results;
         })
-        .catch(() => {
+        .catch((error) => {
+          showError(messageNetWorkErr);
           handleChooseEndLoading(header);
         })
     );
@@ -39,7 +43,6 @@ export const geoCodeService = {
         .then((data) => {
           handleChooseEndLoading(header);
           const results = data.results.map((result) => {
-            console.log({ result });
             const { address_components } = result;
             const provinces = address_components
               .reverse()
@@ -57,7 +60,8 @@ export const geoCodeService = {
           });
           return _.uniq(results.flat());
         })
-        .catch(() => {
+        .catch((error) => {
+          showError(messageNetWorkErr);
           handleChooseEndLoading(header);
         })
     );

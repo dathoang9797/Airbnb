@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DetailBookingUtilityCSS } from './DetailBookingUtility.styles';
 import { capitalize, renderUtilityIcon } from '@Utils/Common';
 
 function DetailBookingUtility(propsUtility) {
-  const {
-    Container,
-    Heading,
-    IconContent,
-    IconContentItem,
-    IconContentItemDesc,
-  } = DetailBookingUtilityCSS;
+  const { Container, Heading, IconContent, IconContentItem, IconContentItemDesc } =
+    DetailBookingUtilityCSS;
 
-  const renderUtility = () => {
+  const renderUtility = useMemo(() => {
     return Object.keys(propsUtility).map((key, index) => {
       if (!propsUtility[key]) return null;
       return (
@@ -23,16 +18,16 @@ function DetailBookingUtility(propsUtility) {
         </IconContentItem>
       );
     });
-  };
+  }, [propsUtility]);
 
   return (
     <Container>
       <Heading>
         <h2>Nơi này có những gì cho bạn</h2>
       </Heading>
-      <IconContent>{renderUtility()}</IconContent>
+      <IconContent>{renderUtility}</IconContent>
     </Container>
   );
 }
 
-export default React.memo(DetailBookingUtility);
+export default DetailBookingUtility;

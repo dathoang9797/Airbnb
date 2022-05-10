@@ -63,6 +63,7 @@ const messageUpdateImageProfileSuccess = 'Xóa vé thành công';
 
 const messageAuthorization = 'Bạn không có quyền truy cập vào trang này';
 
+const messageUserNotLogin = 'Bạn cần phải đăng nhập để truy cập vào trang này';
 
 export const messageApp = {
   messagePasswordIsValid,
@@ -97,4 +98,5 @@ export const messageApp = {
   messageUpdateEvaluateSuccess,
   messageUpdateImageProfileSuccess,
   messageAuthorization,
+  messageUserNotLogin,
 };

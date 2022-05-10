@@ -39,7 +39,6 @@ function RoomManagerAdd({ handleOk }) {
   };
 
   const handleChangeSelect = async (value) => {
-    console.log({ value });
     await setFieldValue('locationId', value);
   };
 
@@ -50,8 +49,6 @@ function RoomManagerAdd({ handleOk }) {
   });
 
   const { setFieldValue, handleSubmit, handleChange, errors, values } = formik;
-
-  console.log({ values });
 
   return (
     <FormContainer onFinish={handleSubmit} size='small'>
