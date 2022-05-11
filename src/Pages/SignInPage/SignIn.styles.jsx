@@ -25,7 +25,7 @@ const Form = styled.div`
 `;
 
 const Container = styled.div`
-  ${tw`min-w-full min-h-screen bg-gray-400  flex items-center justify-center px-5 pt-36 pb-10`};
+  ${tw`w-full h-full bg-gray-400  flex items-center justify-center px-5 pt-36 pb-10`};
   ${tw` md:pt-24 md:px-10`};
 `;
 

@@ -6,7 +6,7 @@ import { quanLyDanhGiaThunk } from '@Redux/Thunk/QuanLyDanhGiaThunk';
 import { nanoid } from '@reduxjs/toolkit';
 import { evaluateField } from '@Shared/Field/EvaluateField';
 import { handleDataTable } from '@Utils/Common';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import EvaluateManagerAdd from './EvaluateManagerAdd';
 import EvaluateManagerEdit from './EvaluateManagerEdit';
@@ -31,7 +31,7 @@ function EvaluateManagerPage(props) {
     [getDanhSachDanhGiaAsync]
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getDanhSachDanhGiaAsync());
   }, [dispatch, getDanhSachDanhGiaAsync]);
 

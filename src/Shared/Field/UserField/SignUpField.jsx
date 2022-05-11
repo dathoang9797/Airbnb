@@ -3,7 +3,7 @@ export const signUpField = {
   email: '',
   password: '',
   phone: '',
-  birthday: '',
   address: '',
+  birthday: '',
   gender: false,
 };

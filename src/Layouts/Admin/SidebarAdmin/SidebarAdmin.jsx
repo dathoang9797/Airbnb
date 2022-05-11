@@ -15,7 +15,7 @@ function Siderbar() {
   const { pathname } = useLocation();
   const { LogoSVG } = VectorSVG;
   const { Menus, SiderBar } = SiderBarCSS;
-
+  const urlHome = process.env.REACT_APP_LINK_HOME
   const onCollapse = (collapsed) => setCollapsed(collapsed);
 
   useEffect(() => {
@@ -87,9 +87,9 @@ function Siderbar() {
         collapsedWidth={widthCollapsed}
       >
         <div>
-          <a href='#a'>
+          <NavLink to={urlHome}>
             <LogoSVG />
-          </a>
+          </NavLink>
         </div>
         <Menus defaultSelectedKeys={[pathname]} mode='inline' items={items} />
       </SiderBar>

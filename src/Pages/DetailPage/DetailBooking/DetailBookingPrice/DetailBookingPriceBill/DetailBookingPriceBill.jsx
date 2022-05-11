@@ -1,6 +1,8 @@
+import SpinnerMap from '@Components/SpinnerMap';
+import { loadingSelector } from '@Redux/Selector/LoadingSelect';
 import { quanLyPhongChoThueSelector } from '@Redux/Selector/QuanLyPhongChoThueSelector';
 import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
-import { messageApp, showWarning, parseFloatNumber } from '@Utils/Common';
+import { messageApp, parseFloatNumber, showWarning } from '@Utils/Common';
 import _ from 'lodash';
 import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -9,21 +11,24 @@ import { DetailBookingPriceBillCSS } from './DetailBookingPriceBill.styles';
 function DetailBookingPriceBill(props) {
   const { Container, Bill, BillItemFirst, BillItemSecond, BillTax, Button } =
     DetailBookingPriceBillCSS;
-  const dispatch = useDispatch();
   const { price } = props;
+  const { messageWaringBooking } = messageApp;
+  const pricerService = 100;
+  const dispatch = useDispatch();
   const { selectBookingRoom, selectTotalPriceBooking } = quanLyPhongChoThueSelector;
   const { datPhongPhongChoThueAsync } = quanLyPhongChoThueThunk;
   const bookingRoom = useSelector(selectBookingRoom, shallowEqual);
-  const { messageWaringBooking } = messageApp;
   const totalPriceBooking = useSelector(selectTotalPriceBooking);
-  const pricerService = Math.floor(Math.random() * 10) + 1;
+  const { selectIsLoadingPopupState } = loadingSelector;
+  const isLoadingPopup = useSelector(selectIsLoadingPopupState);
 
   const handleBookingRoom = () => {
     if (_.isEmpty(bookingRoom)) {
       showWarning(messageWaringBooking);
       return;
     }
-    dispatch(datPhongPhongChoThueAsync(bookingRoom));
+    const params = { dateBooking: bookingRoom, isLoading: false, isLoadingPopup: true };
+    dispatch(datPhongPhongChoThueAsync(params));
   };
 
   const handleRenderPrice = () => {
@@ -35,7 +40,7 @@ function DetailBookingPriceBill(props) {
 
   return (
     <Container>
-      <Button onClick={handleBookingRoom}>Đặt phòng</Button>
+      {isLoadingPopup ? <SpinnerMap /> : <Button onClick={handleBookingRoom}>Đặt phòng</Button>}
       <ul>
         <li>Bạn vẫn chưa bị trừ tiền</li>
       </ul>

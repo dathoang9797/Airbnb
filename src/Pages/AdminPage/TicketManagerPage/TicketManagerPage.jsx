@@ -7,7 +7,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { ticketField } from '@Shared/Field/TicketField';
 import { handleDataTable } from '@Utils/Common';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import TicketManagerAdd from './TicketManagerAdd';
 import TicketManagerEdit from './TicketManagerEdit';
@@ -28,7 +28,7 @@ function TicketManagerPage(props) {
   );
     
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getDanhSachVeAsync());
   }, [dispatch, getDanhSachVeAsync]);
 

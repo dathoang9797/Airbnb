@@ -69,7 +69,7 @@ function ProfileTicket(props) {
   };
 
   const renderTicketInfo = useMemo(() => {
-    return danhSachVeTheoNguoiDung.slice(0, 3).map((item, index) => {
+    return danhSachVeTheoNguoiDung.slice(0, 2).map((item, index) => {
       const { checkIn, checkOut, roomId, _id } = item;
       const { image, description, name } = roomId;
       return (
@@ -93,7 +93,9 @@ function ProfileTicket(props) {
   return (
     <Container>
       <TicketContent>{renderTicketInfo}</TicketContent>
-      <TicketShowMore onClick={handleShowModalTicket}>Hiển thị thêm</TicketShowMore>
+      {danhSachVeTheoNguoiDung.length > 2 ? (
+        <TicketShowMore onClick={handleShowModalTicket}> Hiển thị thêm</TicketShowMore>
+      ) : null}
     </Container>
   );
 }

@@ -18,6 +18,7 @@ function DetailReview(props) {
     handleContentModal,
     danhSachDanhGia,
   } = props;
+  
   const closeIcon = (
     <Close>
       <CloseOutlined />

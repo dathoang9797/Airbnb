@@ -200,8 +200,12 @@ const capNhatPhongChoThueAsync = createAsyncThunk(
 
 const datPhongPhongChoThueAsync = createAsyncThunk(
   'quanLyPhongChoThueReducer/datPhongPhongChoThueAsync',
-  async (dateBooking, { rejectWithValue, dispatch }) => {
-    const result = await quanLyPhongChoThueService.datPhongChoThue(dateBooking);
+  async ({ dateBooking, isLoading, isLoadingPopup }, { rejectWithValue, dispatch }) => {
+    const result = await quanLyPhongChoThueService.datPhongChoThue(
+      dateBooking,
+      isLoading,
+      isLoadingPopup
+    );
     const urlRoom = process.env.REACT_APP_LINK_ROOM;
     const cityName = localService.getCityName();
     const { sweetAlertConfirmContinueOrNot } = sweetAlert;

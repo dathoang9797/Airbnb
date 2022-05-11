@@ -1,9 +1,15 @@
 import tw, { styled } from 'twin.macro';
 import { ButtonCSS } from '@Components/Button';
+import { SpinnerMapCSS } from '@Components/SpinnerMap/SpinnerMap.styles';
+
 const { Primary } = ButtonCSS;
+const { Container: ContainerSpinnerMap } = SpinnerMapCSS;
 
 const Container = styled.div`
   ${tw` flex-shrink-0 font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif]`};
+  ${ContainerSpinnerMap} {
+    ${tw`relative`}
+  }
   ul {
     ${tw`-webkit-box-direction[normal] -webkit-box-orient[vertical] -webkit-box-align[center] 
     color[rgb(34, 34, 34)] font-normal text-sm items-center flex flex-col list-none

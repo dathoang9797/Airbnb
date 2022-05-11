@@ -96,7 +96,7 @@ function RoomPage() {
           });
         })
         .flat();
-      if (!result) return;
+      if (!result.length) return;
       const resultRemoveDuplicate = _.uniq(result);
       const cityName = resultRemoveDuplicate[0].province;
       if (cityName) return;

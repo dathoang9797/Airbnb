@@ -7,7 +7,7 @@ import { locationField } from '@Shared/Field/LocationField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LocationManagerAdd from './LocationManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -31,7 +31,7 @@ function LocationManagerPage(props) {
 
   const handleRefreshDataThunk = useMemo(() => [getDanhSachViTriAsync], [getDanhSachViTriAsync]);
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getDanhSachViTriAsync());
   }, [dispatch, getDanhSachViTriAsync]);
 

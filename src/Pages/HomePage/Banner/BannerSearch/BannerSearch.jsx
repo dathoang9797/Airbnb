@@ -6,6 +6,7 @@ import { BsChevronRight } from 'react-icons/bs';
 import { GrLocation } from 'react-icons/gr';
 import { useSelector } from 'react-redux';
 import { BannerSearchCSS } from './BannerSearch.styles';
+import { useHistory } from 'react-router-dom';
 
 function BannerSearch() {
   const [visibleSearch, setVisibleSearch] = useState(false);
@@ -14,6 +15,8 @@ function BannerSearch() {
   const spacePressedRef = useRef(false);
   const urlRoom = process.env.REACT_APP_LINK_ROOM;
   const keyTypeFilterLocation = process.env.REACT_APP_KEY_FILTER_LOCATION_LIST;
+  const history = useHistory();
+  const tpHcm = 'Thành phố hồ chí minh';
   const {
     PopupSearchGoAnyWhere,
     PopupItemProvince,
@@ -65,7 +68,7 @@ function BannerSearch() {
       {!danhSachViTriFilter.length ? (
         <>
           <p>Đi bất cứ đâu, bất cứ lúc nào</p>
-          <button>
+          <button onClick={() => history.push(`${urlRoom}/${tpHcm}`)}>
             <span>Tôi Linh Hoạt</span>
             <BsChevronRight />
           </button>

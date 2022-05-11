@@ -35,24 +35,26 @@ function DetailBookingDatePicker(props) {
     }
   }, [checkIn, checkOut]);
 
-  useEffect(() => {
-    const handlerResize = () => {
-      const domMonth = document.querySelectorAll('.rdrMonth');
-      if (window.innerWidth < 600) {
-        setDirection('vertical');
-        domMonth.forEach((item) => {
-          item.style.width = '100%';
-        });
-        return;
-      }
-      setDirection('horizontal');
+  const handlerResize = () => {
+    const domMonth = document.querySelectorAll('.rdrMonth');
+    if (window.innerWidth < 600) {
+      setDirection('vertical');
       domMonth.forEach((item) => {
-        item.style.width = '27.667em';
+        item.style.width = '100%';
       });
-    };
+      return;
+    }
+    setDirection('horizontal');
+    domMonth.forEach((item) => {
+      item.style.width = '27.667em';
+    });
+  };
+
+  useEffect(() => {
+    handlerResize();
     window.addEventListener('resize', handlerResize);
     return () => window.removeEventListener('resize', handlerResize);
-  }, []);
+  });
 
   const handleDateChange = async (date) => {
     const { startDate, endDate } = date.selection;

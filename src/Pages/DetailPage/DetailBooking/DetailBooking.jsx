@@ -4,7 +4,6 @@ import DetailBookingDatePicker from './DetailBookingDatePicker';
 import DetailBookingInfo from './DetailBookingInfo';
 import DetailBookingUtility from './DetailBookingUtility';
 import DetailBookingPrice from './DetailBookingPrice';
-import _ from 'lodash';
 
 function DetailBooking(props) {
   const { Container, ContentLeft, ContentRight } = DetailBookingCSS;
@@ -57,4 +56,4 @@ function DetailBooking(props) {
   );
 }
 
-export default React.memo(DetailBooking, (prevProps, nextProps) => _.isEqual(prevProps, nextProps));
+export default React.memo(DetailBooking);

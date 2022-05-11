@@ -8,7 +8,7 @@ import { roomField } from '@Shared/Field/RoomField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import RoomManagerAdd from './RoomManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -41,7 +41,7 @@ function RoomManagerPage(props) {
     [getDanhSachViTriAsync, getDanhSachPhongChoThueAsync]
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     Promise.all([dispatch(getDanhSachPhongChoThueAsync()), dispatch(getDanhSachViTriAsync())]);
   }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachViTriAsync]);
 

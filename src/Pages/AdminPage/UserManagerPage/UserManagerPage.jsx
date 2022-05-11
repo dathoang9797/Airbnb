@@ -7,7 +7,7 @@ import { userField } from '@Shared/Field/UserField';
 import { handleDataTable } from '@Utils/Common';
 import { history } from '@Utils/Libs';
 import _ from 'lodash';
-import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useLayoutEffect, useMemo, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import UserManagerAdd from './UserManagerAdd';
 import ModalHoc from '@HOC/ModalHoc';
@@ -33,7 +33,7 @@ function UserManagerPage(props) {
     () => [getDanhSachNguoiDungAsync],
     [getDanhSachNguoiDungAsync]
   );
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getDanhSachNguoiDungAsync());
   }, [dispatch, getDanhSachNguoiDungAsync]);
 

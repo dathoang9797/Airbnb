@@ -23,6 +23,7 @@ function DetailGridImages(props) {
     handlePropsContentModal({ image });
     showModal();
   };
+
   const {
     Container,
     Content,

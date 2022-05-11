@@ -6,7 +6,7 @@ import { quanLyVeThunk } from '@Redux/Thunk/QuanLyVeThunk';
 import { localService } from '@Services/LocalStorageService';
 import { messageApp, showWarning } from '@Utils/Common';
 import _ from 'lodash';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLayoutEffect } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -29,7 +29,7 @@ function ProfilePage(props) {
   const danhSachVeTheoNguoiDung = useSelector(selectDanhSachVeTheoNguoiDung, _.isEqual);
   const { messageUserNotLogin } = messageApp;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getDanhSachVeTheoNguoiDungAsync(_id));
   }, [_id, dispatch, getDanhSachVeTheoNguoiDungAsync]);
 

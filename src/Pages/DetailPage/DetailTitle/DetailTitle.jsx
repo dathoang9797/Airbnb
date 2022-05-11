@@ -5,7 +5,6 @@ import { AiFillStar } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 
 function DetailTitle({ name }) {
-  console.log('DetailTitle render')
   const {
     Button,
     Container,

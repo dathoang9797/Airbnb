@@ -1,7 +1,7 @@
 import React from 'react';
 import { RoomItemCSS } from './RoomItem.styles';
 import { VectorSVG } from '@Assets/Svgs';
-import RoomSpinner from '@Pages/RoomPage/RoomSpinner';
+import SpinnerDot from '@Components/SpinnerDot';
 
 function RoomItem({ phong, showSpinnerMap }) {
   const urlDetailPage = process.env.REACT_APP_LINK_DETAIL;
@@ -31,7 +31,7 @@ function RoomItem({ phong, showSpinnerMap }) {
   const { Container, Content, Image, Title, Desc, Detail, Price, PriceNight, Rating } = RoomItemCSS;
 
   return showSpinnerMap ? (
-    <RoomSpinner />
+    <SpinnerDot className='my-10 relative' />
   ) : (
     <Container to={`${urlDetailPage}/${_id}`}>
       <Image>
