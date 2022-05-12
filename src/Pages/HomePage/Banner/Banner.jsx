@@ -4,9 +4,12 @@ import { BannerCSS } from './Banner.styles';
 import BannerSearch from './BannerSearch';
 import BannerSelect from './BannerSelect';
 
-
 function Banner() {
   const { Container, BannerContent, BannerGrid, BannerButtonSearch } = BannerCSS;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <Container>
@@ -26,7 +29,7 @@ function Banner() {
             </h1>
 
             <h4>Explore top-rated attractions, activities and more!</h4>
-            <form>
+            <form onSubmit={handleSubmit}>
               <BannerSearch />
               <BannerSelect />
               <BannerButtonSearch type='button'>Search</BannerButtonSearch>

@@ -247,6 +247,7 @@ export const renderFormRoomField = (
       }
 
       case 'locationId': {
+        console.log({ values });
         return (
           <FormControl key={`${key}-${index}`}>
             <FormGroup>
@@ -254,7 +255,7 @@ export const renderFormRoomField = (
                 <FormSelect
                   bordered={false}
                   onChange={handleChangeSelect}
-                  defaultValue={values.locationId}
+                  defaultValue={values.locationId?.province}
                   menuItemSelectedIcon={<FormCheckOutlined />}
                   dropdownClassName='select-location'
                 >

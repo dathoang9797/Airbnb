@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import React, { useEffect, useLayoutEffect } from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import { AdminTemplateCSS } from './AdminTemplate.style';
+import ButtonScrollTop from '@Components/ButtonScrollTop';
 
 function AdminTemplate({ Component, ...restRoute }) {
   const userInfo = localService.getUserInfo();
@@ -21,7 +22,7 @@ function AdminTemplate({ Component, ...restRoute }) {
   const { Container } = AdminTemplateCSS;
   const { messageAuthorization } = messageApp;
 
-  useLayoutEffect(() => window.scrollTo(0, 0));
+  useEffect(() => window.scrollTo(0, 0));
 
   useLayoutEffect(() => {
     const domAdminTemPlate = document.getElementById('admin-template');
@@ -80,6 +81,7 @@ function AdminTemplate({ Component, ...restRoute }) {
     }
   }, [messageAuthorization, typeAdmin, userInfo]);
 
+ 
   const handleRender = () => {
     switch (true) {
       case !userInfo: {
@@ -107,6 +109,7 @@ function AdminTemplate({ Component, ...restRoute }) {
                 <Layout id='admin-template'>
                   <HeaderAdmin />
                   <Component {...propsRoute} />
+                  <ButtonScrollTop className='fade-in' />
                 </Layout>
               </Layout>
             </Container>

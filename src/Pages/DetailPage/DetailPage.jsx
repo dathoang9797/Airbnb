@@ -4,7 +4,7 @@ import { quanLyDanhGiaSelector, quanLyPhongChoThueSelector } from '@Redux/Select
 import { quanLyDanhGiaThunk, quanLyPhongChoThueThunk } from '@Redux/Thunk';
 import { messageApp, showWarning } from '@Utils/Common';
 import _ from 'lodash';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import DetailBooking from './DetailBooking';

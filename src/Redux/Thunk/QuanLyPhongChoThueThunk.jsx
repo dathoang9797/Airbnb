@@ -63,28 +63,6 @@ const getDanhSachPhongChoThueTheoViTriAsync = createAsyncThunk(
   }
 );
 
-const capNhatHinhAnhPhongChoThueAsync = createAsyncThunk(
-  'quanLyPhongChoThueReducer/capNhatHinhAnhPhongChoThueAsync',
-  async ({ idRoom, formData }, { rejectWithValue, dispatch }) => {
-    const result = await quanLyPhongChoThueService.capNhatHinhAnhPhongChoThue(
-      idRoom,
-      formData,
-      false
-    );
-    if (!result) {
-      return rejectWithValue(messageNetWorkErr);
-    }
-
-    if (typeof result === 'string') {
-      return rejectWithValue(result);
-    }
-
-    if ('message' in result) {
-      return rejectWithValue(capitalize(result.message));
-    }
-  }
-);
-
 const xoaNhieuPhongAsync = createAsyncThunk(
   'quanLyNguoiDungReducer/xoaNhieuPhongAsync',
   async (idNguoiDungArr, { rejectWithValue, dispatch }) => {
@@ -236,7 +214,6 @@ export const quanLyPhongChoThueThunk = {
   getDanhSachPhongChoThueTheoViTriAsync,
   xoaPhongChoThueAsync,
   taoPhongChoThueAsync,
-  capNhatHinhAnhPhongChoThueAsync,
   xoaNhieuPhongAsync,
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,

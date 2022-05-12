@@ -19,13 +19,9 @@ function LocationMangerEditPage() {
   const { messageNoDifferent } = messageApp;
   const { Container } = LocationManagerEditCSS;
   const { FormContainer, FormControl, FormButton } = Form;
-
   const { capNhatViTriAsync } = quanLyViTriThunk;
-
   const { selectChiTietViTri, selectorDanhSachProvinces } = quanLyViTriSelector;
-
   const chiTietViTri = useSelector(selectChiTietViTri, _.isEqual);
-
   const isHasChiTietViTri = useMemo(() => _.isEmpty(chiTietViTri), [chiTietViTri]);
   const initialValues = useMemo(() => {
     return {
@@ -34,7 +30,6 @@ function LocationMangerEditPage() {
     };
   }, [chiTietViTri, editLocationField]);
   const refChiTietNguoiDung = useRef(initialValues);
-
   const danhSachProvinces = useSelector(selectorDanhSachProvinces, _.isEqual);
 
   const handleSubmitEditLocation = (valuesUpDate) => {

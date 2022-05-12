@@ -4,9 +4,9 @@ const Container = tw.div`text-gray-600  overflow-y-auto h-full   py-5 mx-auto sm
 
 const TicketContent = tw.div`-my-8 divide-y-2 divide-gray-100`;
 
-const TicketItem = tw.div`py-8 flex flex-wrap md:flex-nowrap`;
+const TicketItem = tw.div`py-8 flex flex-wrap lg:flex-nowrap`;
 
-const TicketContentLeft = tw.div`md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col w-full h-full`;
+const TicketContentLeft = tw.div`lg:w-64 lg:mb-0 mb-6 flex-shrink-0 flex flex-col w-full h-full`;
 
 const TicketContentRight = tw.div`md:flex-grow ml-4 `;
 

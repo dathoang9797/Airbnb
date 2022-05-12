@@ -4,7 +4,7 @@ import tw, { styled } from 'twin.macro';
 const { Header } = Layout;
 
 const Container = styled(Header)`
-  ${tw` flex items-center justify-end z-10 py-4 px-8 bg-white shadow-md dark:bg-gray-800 `}
+  ${tw` flex items-center justify-end z-10 py-4 px-4 md:px-8 bg-white shadow-md dark:bg-gray-800 `}
   &.ant-layout-header {
     ${tw`height[auto] line-height[0px]`}
     ${tw`md:height[64px] md:line-height[64px]`}

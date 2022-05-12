@@ -1,37 +1,40 @@
 import { CarryOutOutlined, DashboardOutlined, UsergroupAddOutlined } from '@ant-design/icons';
-import ButtonScrollTop from '@Components/ButtonScrollTop';
-import React, { useState, useEffect } from 'react';
+import { VectorSVG } from '@Assets/Svgs';
+import React, { useState } from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { GiTicket } from 'react-icons/gi';
 import { IoLocationOutline } from 'react-icons/io5';
 import { NavLink, useLocation } from 'react-router-dom';
 import { SiderBarCSS } from './SidebarAdmin.styles';
-import { VectorSVG } from '@Assets/Svgs';
 
 function Siderbar() {
   const [collapsed, setCollapsed] = useState(false);
-  const [widthSidebar, setWidthSideBar] = useState(230);
-  const [widthCollapsed, setWidthCollapsed] = useState(60);
+  const [widthCollapsed, setWidthCollapsed] = useState(50);
+  const [trigger, setTrigger] = useState('');
   const { pathname } = useLocation();
-  const { LogoSVG } = VectorSVG;
-  const { Menus, SiderBar } = SiderBarCSS;
-  const urlHome = process.env.REACT_APP_LINK_HOME
-  const onCollapse = (collapsed) => setCollapsed(collapsed);
+  const { LogoSVG, CloseIconSVG } = VectorSVG;
+  const { Menus, SiderBar, BuggerSiderBar } = SiderBarCSS;
+  const urlHome = process.env.REACT_APP_LINK_HOME;
 
-  useEffect(() => {
-    const handleResizeScreenX = () => {
-      if (window.innerWidth <= 992) {
-        setWidthSideBar(200);
-        setWidthCollapsed(40);
-        return;
-      } else {
-        setWidthSideBar(230);
-        setWidthCollapsed(60);
+  const onCollapse = (collapsed) => {
+    const domAntLayout = document.querySelector('.ant-layout');
+    const domButtonSideCloseIcon = document.querySelector('#bugger-sider-close-icon');
+    if (!collapsed) {
+      domAntLayout.classList.add('opacity');
+      if (domButtonSideCloseIcon) {
+        domButtonSideCloseIcon.classList.add('opened');
+        domButtonSideCloseIcon.style.background = 'white';
       }
-    };
-    window.addEventListener('resize', handleResizeScreenX);
-    return () => window.removeEventListener('resize', handleResizeScreenX);
-  });
+      setCollapsed(collapsed);
+      return;
+    }
+    if (domButtonSideCloseIcon) {
+      domButtonSideCloseIcon.classList.remove('opened');
+      domButtonSideCloseIcon.style.background = 'transparent';
+    }
+    domAntLayout.classList.remove('opacity');
+    setCollapsed(collapsed);
+  };
 
   const items = [
     {
@@ -81,10 +84,25 @@ function Siderbar() {
       <SiderBar
         collapsible
         collapsed={collapsed}
-        onCollapse={onCollapse}
         id='side-bar'
-        width={widthSidebar}
+        width={230}
         collapsedWidth={widthCollapsed}
+        onBreakpoint={(broken) => {
+          if (broken) {
+            setWidthCollapsed(0);
+            setTrigger(
+              <BuggerSiderBar id='bugger-sider-close-icon'>
+                <CloseIconSVG />
+              </BuggerSiderBar>
+            );
+          } else {
+            setWidthCollapsed(50);
+            setTrigger('');
+          }
+        }}
+        onCollapse={onCollapse}
+        breakpoint='lg'
+        trigger={trigger}
       >
         <div>
           <NavLink to={urlHome}>
@@ -93,7 +111,6 @@ function Siderbar() {
         </div>
         <Menus defaultSelectedKeys={[pathname]} mode='inline' items={items} />
       </SiderBar>
-      <ButtonScrollTop className='fade-in' />
     </>
   );
 }

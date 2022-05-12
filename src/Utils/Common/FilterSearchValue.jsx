@@ -25,16 +25,16 @@ export const filterSearchValue = (searchValue, data, type) => {
       }
 
       case type === keyTypeFilterTicket: {
-        const formatuserIdName = removeSpace(removeUnicode(item.userId?.name)) ?? '';
-        const formatuserIdEmail = removeSpace(removeUnicode(item.userId?.email)) ?? '';
-        const formatroomIdName = removeSpace(removeUnicode(item.roomId?.name)) ?? '';
-        const formatroomIdDesc = removeSpace(removeUnicode(item.roomId?.description)) ?? '';
+        const formatUserIdName = removeSpace(removeUnicode(item.userId?.name)) ?? '';
+        const formatUserIdEmail = removeSpace(removeUnicode(item.userId?.email)) ?? '';
+        const formatRoomIdName = removeSpace(removeUnicode(item.roomId?.name)) ?? '';
+        const formatRoomIdDesc = removeSpace(removeUnicode(item.roomId?.description)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return (
-          formatuserIdName.includes(formatSearchValue) ||
-          formatuserIdEmail.includes(formatSearchValue) ||
-          formatroomIdName.includes(formatSearchValue) ||
-          formatroomIdDesc.includes(formatSearchValue)
+          formatUserIdName.includes(formatSearchValue) ||
+          formatUserIdEmail.includes(formatSearchValue) ||
+          formatRoomIdName.includes(formatSearchValue) ||
+          formatRoomIdDesc.includes(formatSearchValue)
         );
       }
 

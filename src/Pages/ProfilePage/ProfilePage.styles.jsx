@@ -66,6 +66,10 @@ const CardTextUnderline = styled.button`
 const ContentRight = styled.div`
   ${tw`ml-20 w-full mt-10  md:text-left md:mt-0`};
 
+  @media (max-width: 580px) {
+    ${tw`width[24rem] ml-0`};
+  }
+
   ${CardTitle} {
     ${tw`text-2xl text-left`};
   }

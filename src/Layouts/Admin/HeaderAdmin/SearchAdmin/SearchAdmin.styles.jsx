@@ -7,11 +7,11 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  ${tw`relative w-full max-w-xl mr-6 `};
+  ${tw`relative w-full max-w-xl mr-0 md:mr-6 `};
 `;
 
 const Item = styled.div`
-  ${tw`absolute inset-y-0 flex items-center pl-2 w-full `};
+  ${tw`absolute inset-y-0 flex items-center pl-2 w-full  h-8 md:h-auto`};
 
   &:focus-within svg {
     ${tw`transition-all duration-300 color[var(--color-primary) !important]`};

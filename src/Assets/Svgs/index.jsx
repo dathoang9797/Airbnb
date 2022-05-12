@@ -12,6 +12,7 @@ import { ReactComponent as Svg30SVG } from './svg30.svg';
 import { ReactComponent as HeartSVG } from './heart.svg';
 import { ReactComponent as BackgroundSignInUpSVG } from './backgroundSignInUp.svg';
 import { ReactComponent as SmileFaceSVG } from './smileFace.svg';
+import { ReactComponent as CloseIconSVG } from './closeIcon.svg';
 
 export const VectorSVG = {
   LogoSVG,
@@ -28,4 +29,5 @@ export const VectorSVG = {
   HeartSVG,
   BackgroundSignInUpSVG,
   SmileFaceSVG,
+  CloseIconSVG,
 };

@@ -13,10 +13,16 @@ export const sortValue = (valueA, valueB, type) => {
       type === 'locationRoomName' ||
       type === 'userIdName' ||
       type === 'roomIdName') &&
-      !_.isEmpty(valueA) &&
-      !_.isEmpty(valueB): {
+      !_.isNull(valueA) &&
+      !_.isNull(valueB): {
       const valueFormatA = removeSpace(removeUnicode(valueA));
       const valueFormatB = removeSpace(removeUnicode(valueB));
+      if (valueFormatA === '' || !valueFormatA) {
+        return 1;
+      }
+      if (valueFormatB === '' || !valueFormatB) {
+        return -1;
+      }
       if (valueFormatA < valueFormatB) {
         return -1;
       }
@@ -30,8 +36,14 @@ export const sortValue = (valueA, valueB, type) => {
       type === 'checkIn' ||
       type === 'created_at' ||
       type === 'updatedAt') &&
-      !_.isEmpty(valueA) &&
-      !_.isEmpty(valueB): {
+      !_.isNull(valueA) &&
+      !_.isNull(valueB): {
+      if (valueA === '' || !valueA) {
+        return 1;
+      }
+      if (valueB === '' || !valueB) {
+        return -1;
+      }
       const convertIsoTimeA = new Date(valueA);
       const convertIsoTimeB = new Date(valueB);
       const formatTimeA = convertIsoTimeA.getFullYear();
@@ -39,7 +51,13 @@ export const sortValue = (valueA, valueB, type) => {
       return formatTimeA - formatTimeB;
     }
 
-    case type === 'userIdTickets' && !_.isEmpty(valueA) && !_.isEmpty(valueB): {
+    case type === 'userIdTickets' && !_.isNull(valueA) && !_.isNull(valueB): {
+      if (valueA === '' || !valueA) {
+        return 1;
+      }
+      if (valueB === '' || !valueB) {
+        return -1;
+      }
       const ticketsA = valueA.length;
       const ticketsB = valueB.length;
       return ticketsA - ticketsB;

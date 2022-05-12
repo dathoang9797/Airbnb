@@ -8,11 +8,16 @@ const Container = styled.div`
   ${tw`xl:text-xl xl:py-3 xl:px-16`};
 
   & button {
-    ${tw`my-1 flex items-center justify-center  md:w-auto md:m-0`}
+    ${tw`my-1 flex items-center justify-center  md:w-auto md:m-0 `}
   }
 
   & button.ant-btn[disabled] {
-    ${tw`  background-color[rgba(209, 213, 219) !important] w-full margin-right[auto !important] md:margin-right[ 16px !important] md:w-auto`};
+    ${tw`  background-color[rgba(209, 213, 219) !important] `};
+  }
+  
+  & button:nth-child(2),
+  & button.ant-btn[disabled] {
+    ${tw`w-full margin-right[auto !important] md:margin-right[ 16px !important] md:w-auto`};
   }
 `;
 

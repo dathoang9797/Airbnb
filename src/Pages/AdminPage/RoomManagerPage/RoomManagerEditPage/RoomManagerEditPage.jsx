@@ -42,7 +42,7 @@ function RoomManagerEditPage() {
     };
   }, [chiTietPhongChoThue, editRoomField]);
   const refChiTietNguoiDung = useRef(initialValues);
-
+  console.log({ initialValues });
   const handleSubmitEditRoom = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
     const idRoom = valuesUpDate._id;

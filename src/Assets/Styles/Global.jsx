@@ -9,7 +9,7 @@ import { DatePickerCSS } from './Components/DatePickerCSS';
 import { SweetAlertCSS } from './Components/SweetAlertCSS';
 import { PopoverCSS } from './Components/PopoverCSS';
 import { DropDownCSS } from './Components/DropdownCSS';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import 'animate.css';

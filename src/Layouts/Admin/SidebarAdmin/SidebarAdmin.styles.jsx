@@ -30,30 +30,21 @@ const Menus = styled(Menu)`
 
     span,
     svg {
-      color: var(--color-text-dark);
-      ${tw`vertical-align[baseline]`}
-      ${tw`sm:text-xs`};
-      ${tw`md:text-xs`};
-      ${tw`lg:text-sm `};
-      ${tw`xl:text-sm `};
+      ${tw`vertical-align[baseline] color[var(--color-text-dark)] `}
+      ${tw`lg:text-base `};
     }
     span a {
-      color: var(--color-text-dark);
-      ${tw`vertical-align[baseline]`}
-      ${tw`sm:text-xs`};
-      ${tw`md:text-xs`};
-      ${tw`lg:text-sm `};
-      ${tw`xl:text-sm `};
+      ${tw`vertical-align[baseline] text-sm `}
     }
 
     &:hover {
       span svg,
       svg {
-        ${tw`transition-all duration-300`};
+        ${tw`transition-all duration-300 color[var(--color-text-dark)]`};
         color: var(--color-primary);
       }
       span a {
-        ${tw`transition-all duration-300`};
+        ${tw`transition-all duration-300 color[var(--color-text-dark)]`};
         color: var(--color-primary);
       }
     }
@@ -78,32 +69,71 @@ const Menus = styled(Menu)`
 `;
 
 const SiderBar = styled(Sider)`
-  ${tw`z-20  overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0 flex-none border-t-1 border-r-1  w-full`};
+  ${tw`z-[999]   bg-white  block flex-shrink-0 flex-none border-t-1 border-r-1   position[fixed !important] w-full h-full lg:h-auto lg:position[static !important]`};
 
   &.ant-layout-sider-collapsed {
     color: var(--color-primary);
 
     div.ant-layout-sider-trigger {
-      ${tw`bg-white border-t-1 border-r-1 `}
+      ${tw`bg-white border-t-1 border-r-1 `};
     }
+    width: calc(100%-230px);
   }
 
   div.ant-layout-sider-children {
     ${tw`py-4   `}
     div {
-      ${tw` md:px-1.5 sm:px-2`}
+      ${tw`  pl-[12px] mr-[2px] overflow-hidden`};
     }
 
     div svg {
-      ${tw`m-auto `}
+      ${tw`m-auto`};
     }
   }
   div.ant-layout-sider-trigger {
     ${tw`bg-white border-t-1 border-r-1  color[var(--color-primary)]`}
+  }
+
+  span.ant-layout-sider-zero-width-trigger {
+    ${tw`top-[10px] right[-50px] bg-transparent`};
+    &:after {
+      ${tw`bg-transparent w-screen h-screen m-[15px] `}
+    }
+  }
+`;
+
+const BuggerSiderBar = styled.button`
+  ${tw`bg-transparent border-none  cursor-pointer flex p-0 w-full h-full rounded-lg `};
+  &:hover {
+  }
+  svg {
+    ${tw` w-full h-full`};
+  }
+  .line {
+    ${tw`fill[none] stroke[var(--color-primary)] stroke-width[6] transition[stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1)]`}
+  }
+  .line1 {
+    ${tw`stroke-dasharray[60 207] stroke-width[6]`};
+  }
+  .line2 {
+    ${tw`stroke-dasharray[60 60] stroke-width[6]`};
+  }
+  .line3 {
+    ${tw`stroke-dasharray[60 207] stroke-width[6]`};
+  }
+  &.opened .line1 {
+    ${tw`stroke-dasharray[ 90 207] stroke-dashoffset[-134] stroke-width[6]`};
+  }
+  &.opened .line2 {
+    ${tw`stroke-dasharray[ 1 60] stroke-dashoffset[-30] stroke-width[6]`};
+  }
+  &.opened .line3 {
+    ${tw`stroke-dasharray[ 90 207] stroke-dashoffset[-134] stroke-width[6]`};
   }
 `;
 
 export const SiderBarCSS = {
   SiderBar,
   Menus,
+  BuggerSiderBar,
 };

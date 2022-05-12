@@ -9,7 +9,6 @@ import canTho from './CanTho.jpg';
 import heroImgOne from './hero-img-one.jpg';
 import hoiAn from './HoiAn.jpg';
 
-
 export const Images = {
   calendar,
   tphcm,

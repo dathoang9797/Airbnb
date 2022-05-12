@@ -56,10 +56,10 @@ const Table = styled(TableAnt)`
 
   thead.ant-table-thead > tr > th,
   td.ant-table-cell {
-    ${tw`px-1 py-2 text-xs`};
-    ${tw`md:py-2 md:text-xs`};
-    ${tw`lg:py-3 lg:text-xs`};
-    ${tw`xl:py-4 xl:text-sm`};
+    ${tw`px-1 py-2 text-sm`};
+    ${tw`md:py-2`};
+    ${tw`lg:py-3`};
+    ${tw`xl:py-4`};
   }
 
   td.ant-table-cell:last-child div:not(.ant-empty.ant-empty-normal) {
@@ -119,7 +119,7 @@ const Table = styled(TableAnt)`
     ${tw`border-[var(--color-primary)]`}
   }
 
-  @media screen and (max-width: 910px) {
+  @media screen and (max-width: 768px) {
     table {
       ${tw`border-0`};
     }
@@ -133,19 +133,15 @@ const Table = styled(TableAnt)`
     }
 
     th {
-      ${tw`hidden`};
+      ${tw`hidden `};
     }
 
     th.ant-table-column-has-sorters,
     th.ant-table-selection-column,
     th.ant-table-cell[data-label='Hình Ảnh'] {
-      ${tw`table-cell border-b-0 border-t-0 font-size[0.8em]`}
+      ${tw`table-cell border-b-0 border-t-0 `}
       &:not(:last-child) {
-        ${tw`p-2`};
-
-        @media (max-width: 600px) {
-          ${tw`p-0`};
-        }
+        ${tw`py-4 px-4`};
       }
     }
 
@@ -172,11 +168,32 @@ const Table = styled(TableAnt)`
     td.ant-table-cell:last-child div:not(.ant-empty.ant-empty-normal) {
       ${tw`block`}
     }
+
+    .ant-table-column-sorter-up,
+    .ant-table-column-sorter-down,
+    .anticon-filter {
+      font-size: 18px;
+    }
   }
 
-  @media only screen and (max-width: 576px) {
+  @media (max-width: 576px) {
     .ant-pagination-options {
       display: inline-block;
+    }
+  }
+
+  @media (max-width: 560px) {
+    tr {
+      ${tw` flex flex-col`};
+    }
+    th.ant-table-cell {
+      ${tw`text-left mx-2 border-r-0`}
+    }
+    .ant-table-filter-trigger {
+      ${tw`p-0`}
+      &::after {
+        ${tw`absolute  h-full content z-50 w-[400px] margin-left[-400px]`}
+      }
     }
   }
 `;

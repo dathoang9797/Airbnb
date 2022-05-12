@@ -6,7 +6,6 @@ const {
   getDanhSachPhongChoThueAsync,
   taoPhongChoThueAsync,
   xoaPhongChoThueAsync,
-  capNhatHinhAnhPhongChoThueAsync,
   xoaNhieuPhongAsync,
   getChiTietPhongChoThueAsync,
   capNhatPhongChoThueAsync,
@@ -77,13 +76,7 @@ const quanLyPhongChoThueSlice = createSlice({
         showError(action.error.message);
       }
     });
-    builder.addCase(capNhatHinhAnhPhongChoThueAsync.rejected, (state, action) => {
-      if (action.payload) {
-        showError(action.payload);
-      } else {
-        showError(action.error.message);
-      }
-    });
+
     builder.addCase(xoaNhieuPhongAsync.rejected, (state, action) => {
       if (action.payload) {
         showError(action.payload);

@@ -192,6 +192,8 @@ function RoomPage() {
     };
   }, [isLoadingPopup]);
 
+  useEffect(() => window.scrollTo(0, 0));
+
   const renderPhongChoThue = useMemo(() => {
     if (!danhSachPhongChoThueTheoViTri.length)
       return <RoomNotFound showSpinnerMap={showSpinnerMap} />;

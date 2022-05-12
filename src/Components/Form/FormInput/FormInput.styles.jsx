@@ -6,7 +6,7 @@ const FormSpan = styled.span`
 `;
 
 const FormLegend = styled.legend`
-  ${tw` block  h-0 p-0 max-w-0 invisible transition-all duration-300 width[auto !important]`};
+  ${tw` block   p-0 max-w-0 invisible transition-all duration-300 width[auto !important] h-1`};
 `;
 
 const FormFieldSet = styled.fieldset`
@@ -18,7 +18,7 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled(Input)`
-  ${tw`w-full h-full pr-3 rounded-lg   relative z-10 transition duration-300 bg-transparent border-0 outline-none outline-offset[0]  pl-10 py-2
+  ${tw`w-full h-full pr-3 rounded-lg   relative z-10 transition duration-300 bg-transparent border-0 outline-none outline-offset[0] pl-3 md:pl-10 py-2
   `}
 
   &.ant-input:focus,
