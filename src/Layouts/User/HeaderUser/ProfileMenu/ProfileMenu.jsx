@@ -1,15 +1,19 @@
 import { VectorSVG } from '@Assets/Svgs';
 import { quanLyNguoiDungSelector } from '@Redux/Selector/QuanLyNguoiDungSelector';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
 import { localService } from '@Services/LocalStorageService';
 import _ from 'lodash';
 import React, { useLayoutEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { ProfileMenuCSS } from './ProfileMenu.styles';
+import { useHistory } from 'react-router-dom';
 
 function ProfileMenu() {
   const { AccountSVG, HamburgerSVG, GlobeSVG } = VectorSVG;
   const [visible, setVisible] = useState(false);
+  const { updateUserInfo } = quanLyNguoiDungAction;
+  const dispatch = useDispatch();
+  const history = useHistory();
   const typeAdmin = process.env.REACT_APP_NGUOI_DUNG_ADMIN;
   const urlSignIn = process.env.REACT_APP_LINK_SIGN_IN;
   const urlSignUp = process.env.REACT_APP_LINK_SIGN_UP;
@@ -19,7 +23,6 @@ function ProfileMenu() {
   const { selectUserInfo } = quanLyNguoiDungSelector;
   const userInfoStore = useSelector(selectUserInfo);
   const userInfo = localService.getUserInfo();
-  const history = useHistory();
   const {
     Container,
     AccountMenu,
@@ -61,8 +64,8 @@ function ProfileMenu() {
 
   const handleLogOut = () => {
     localService.removeUserInfo();
+    dispatch(updateUserInfo({}));
     history.push(urlHome);
-    window.location.reload();
   };
 
   const contentPopupProfile = userInfo ? (
