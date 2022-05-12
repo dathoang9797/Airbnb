@@ -5,9 +5,7 @@ const NotHaveAccountLink = styled.div`
   a {
     ${tw`hover:text-[var(--color-primary)] `}
   }
-  input {
-    ${tw`ml-10`}
-  }
+ 
 `;
 
 export const FormSignInPageCSS = { NotHaveAccountLink };

@@ -19,6 +19,9 @@ const Content = styled.div`
 const Form = styled.div`
   max-width: 1000px;
   ${tw`bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden`};
+  input {
+    ${tw`pl-10 md:pl-10`}
+  }
 `;
 
 const Container = styled.div`

@@ -4,14 +4,14 @@ import tw, { styled } from 'twin.macro';
 const { Sider } = Layout;
 
 const Menus = styled(Menu)`
-  ${tw`mt-6 bg-white dark:bg-gray-800`}
+  ${tw`mt-6 bg-white overflow-hidden`}
 
   &.ant-menu-inline,&.ant-menu-vertical {
     ${tw`border-r-0`}
   }
 
   &.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    ${tw`bg-white dark:bg-gray-800`};
+    ${tw`bg-white `};
 
     svg {
       color: var(--color-primary);
