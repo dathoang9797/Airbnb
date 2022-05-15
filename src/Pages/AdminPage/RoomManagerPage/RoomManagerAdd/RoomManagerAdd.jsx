@@ -1,27 +1,28 @@
 import Form from '@Components/Form';
-import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { quanLyViTriSelector } from '@Redux/Selector/QuanLyViTriSelector';
+import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { roomField } from '@Shared/Field/RoomField';
 import { addRoomSchema } from '@Shared/Schema/AddRoomSchema';
-import { useFormik } from 'formik';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import _ from 'lodash';
 import { sortValue } from '@Utils/Common';
+import { useFormik } from 'formik';
+import _ from 'lodash';
+import React, { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function RoomManagerAdd({ handleOk }) {
   const dispatch = useDispatch();
   const { addRoomField, renderFormRoomField } = roomField;
   const { FormContainer, FormControl, FormButton } = Form;
-
   const { taoPhongChoThueAsync } = quanLyPhongChoThueThunk;
-
   const { selectDanhSachViTri } = quanLyViTriSelector;
-
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
 
-  const cloneDanhSachViTri = [...danhSachViTri];
-  const sortDanhSachViTri = cloneDanhSachViTri.sort(sortValue);
+  const sortDanhSachViTri = useMemo(() => {
+    const danhSachViTriFilter = danhSachViTri
+      .filter((item) => item.province)
+      .sort((valueA, valueB) => sortValue(valueA?.province, valueB?.province, 'province'));
+    return danhSachViTriFilter;
+  }, [danhSachViTri]);
 
   const handleSubmitAddRoom = async (values, { resetForm }) => {
     const result = await dispatch(taoPhongChoThueAsync(values));

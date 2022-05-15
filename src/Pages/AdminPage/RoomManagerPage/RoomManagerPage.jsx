@@ -22,18 +22,14 @@ function RoomManagerPage(props) {
   const { showModal, handleContentModal } = props;
   const { tableColumnsRoomField } = roomField;
   const idTable = useMemo(() => nanoid(), []);
-
   const {
     getDanhSachPhongChoThueAsync,
     xoaPhongChoThueAsync,
     xoaNhieuPhongAsync,
     getChiTietPhongChoThueAsync,
   } = quanLyPhongChoThueThunk;
-
-  const { getDanhSachViTriAsync } = quanLyViTriThunk;
-
+  const { getDanhSachViTriAsync, getDanhSachProvinceAsync } = quanLyViTriThunk;
   const { selectDanhSachPhongFilter } = quanLyPhongChoThueSelector;
-
   const danhSachPhongChoThue = useSelector(selectDanhSachPhongFilter, _.isEqual);
 
   const handleRefreshDataThunk = useMemo(
@@ -42,8 +38,12 @@ function RoomManagerPage(props) {
   );
 
   useLayoutEffect(() => {
-    Promise.all([dispatch(getDanhSachPhongChoThueAsync()), dispatch(getDanhSachViTriAsync())]);
-  }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachViTriAsync]);
+    Promise.all([
+      dispatch(getDanhSachPhongChoThueAsync()),
+      dispatch(getDanhSachViTriAsync()),
+      dispatch(getDanhSachProvinceAsync()),
+    ]);
+  }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachProvinceAsync, getDanhSachViTriAsync]);
 
   const handleGetDetailRoom = async (idNguoiDung) => {
     await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));

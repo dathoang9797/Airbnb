@@ -67,12 +67,10 @@ function RoomPage() {
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
   const danhSachProvinceFilter = useSelector(selectDanhSachProvinceFilter, shallowEqual);
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
-
   const danhSachPhongChoThueTheoViTriSlice = useMemo(() => {
     const { maxValue, minValue } = limitValue;
     return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
-
   const handleToggle = () => setCollapsed(!collapsed);
 
   const handleChange = (value) => {
@@ -84,7 +82,7 @@ function RoomPage() {
 
   const handleSetCityName = useCallback(
     (provinces) => {
-      if (!provinces.length) return;
+      if (!provinces || !provinces.length) return;
       const result = provinces
         .map((province) => {
           return danhSachViTri.filter((viTri) => {
@@ -137,7 +135,7 @@ function RoomPage() {
     danhSachPhongChoThueTheoViTriRef.current = danhSachPhongChoThueTheoViTri;
     async function getCoordinateOfEachRoom() {
       const promisesArr = danhSachPhongChoThueTheoViTri.map((phong) => {
-        if (!phong.name) return null;
+        if (!phong || !phong.name) return null;
         return geoCodeService.getGeoCodeByAddress(phong.name);
       });
       const result = await Promise.all(promisesArr);

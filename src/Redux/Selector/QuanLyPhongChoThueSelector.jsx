@@ -11,8 +11,15 @@ const selectTotalPriceBooking = (state) => state.QuanLyPhongChoThueReducer.total
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
-const selectDanhSachPhongChoThueTheoViTri = (state) =>
-  state.QuanLyPhongChoThueReducer.danhSachPhongChoThueTheoViTri;
+const selectDanhSachPhongChoThueTheoViTri = createSelector(
+  (state) => state.QuanLyPhongChoThueReducer.danhSachPhongChoThueTheoViTri,
+  (danhSachPhongChoThueTheoViTri) => {
+    const result = danhSachPhongChoThueTheoViTri.filter(
+      (item, index, thisArr) => index === thisArr.findIndex((t) => t.name === item.name)
+    );
+    return result;
+  }
+);
 
 const selectDanhSachPhongFilter = createSelector(
   selectDanhSachPhongChoThue,
@@ -22,7 +29,7 @@ const selectDanhSachPhongFilter = createSelector(
     const keyTypeFilterRoom = process.env.REACT_APP_KEY_FILTER_ROOM_LIST;
     const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachPhongChoThue = [...danhSachPhongChoThue];
-    return filterSearchValue(searchValueFormat, cloneDanhSachPhongChoThue,keyTypeFilterRoom);
+    return filterSearchValue(searchValueFormat, cloneDanhSachPhongChoThue, keyTypeFilterRoom);
   }
 );
 

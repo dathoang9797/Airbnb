@@ -49,16 +49,17 @@ export const geoCodeService = {
               .map((item) => {
                 const provinceFormat = removeUnicode(removeSpace(item.long_name));
                 return danhSachProvince.filter((province) => {
-                  if (provinceFormat.length > province.length) {
-                    return provinceFormat.includes(province);
+                  if (province.length > provinceFormat.length) {
+                    return province.includes(provinceFormat);
                   }
-                  return province.includes(provinceFormat);
+                  return provinceFormat.includes(province);
                 });
               })
               .flat();
             return _.uniq(provinces);
           });
-          return _.uniq(results.flat());
+          const resultRemoveDuplicate = _.uniq(results.flat());
+          return resultRemoveDuplicate;
         })
         .catch((error) => {
           showError(messageNetWorkErr);

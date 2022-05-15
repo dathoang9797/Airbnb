@@ -20,15 +20,10 @@ function RoomManagerEditPage() {
   const { messageNoDifferent } = messageApp;
   const { Container } = RoomManagerEditCSS;
   const { FormContainer, FormControl, FormButton } = Form;
-
   const { capNhatPhongChoThueAsync } = quanLyPhongChoThueThunk;
-
   const { selectChiTietPhongChoThue } = quanLyPhongChoThueSelector;
-
   const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
-
   const { selectDanhSachViTri } = quanLyViTriSelector;
-
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
 
   const isHasChiTietPhongChoThue = useMemo(
@@ -42,7 +37,7 @@ function RoomManagerEditPage() {
     };
   }, [chiTietPhongChoThue, editRoomField]);
   const refChiTietNguoiDung = useRef(initialValues);
-  console.log({ initialValues });
+
   const handleSubmitEditRoom = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
     const idRoom = valuesUpDate._id;

@@ -21,19 +21,21 @@ const selectDanhSachViTriByProvince = createSelector(
   selectorProvinces,
   (danhSachViTri, provinces) => {
     if (!provinces.length) return [];
-    const result = provinces
-      .map((province) => {
-        return danhSachViTri.filter((viTri) => {
-          const formatProvinceViTri = removeUnicode(removeSpace(viTri.province));
-          const formatProvince = removeUnicode(removeSpace(province));
-          if (formatProvince.length > formatProvinceViTri.length) {
-            return formatProvince.includes(formatProvinceViTri);
-          }
-          return formatProvinceViTri.includes(formatProvince);
-        });
-      })
-      .flat();
-    return _.uniq(result);
+    const result = _.uniq(
+      provinces
+        .map((province) => {
+          return danhSachViTri.filter((viTri) => {
+            const formatProvinceViTri = removeUnicode(removeSpace(viTri.province)) ?? '';
+            const formatProvince = removeUnicode(removeSpace(province));
+            if (formatProvince.length > formatProvinceViTri.length) {
+              return formatProvince.includes(formatProvinceViTri);
+            }
+            return formatProvinceViTri.includes(formatProvince);
+          });
+        })
+        .flat()
+    ).filter((item) => item.province);
+    return result;
   }
 );
 
@@ -42,16 +44,15 @@ const selectDanhSachProvinceFilter = createSelector(
   selectorDanhSachProvinces,
   (danhSachViTri, danhSachProvince) => {
     if (!danhSachViTri.length || !danhSachProvince.length) return [];
-
-    const provinceDanhSachViTriArr = danhSachViTri.map((viTri) => {
-      return removeSpace(removeUnicode(viTri.province));
-    });
-
-    const provinceDanhSachProvinceArr = danhSachProvince.map((province) => {
-      return removeSpace(removeUnicode(province.province_name));
-    });
-    const result = [...provinceDanhSachViTriArr, ...provinceDanhSachProvinceArr];
-    return result.sort(sortValue);
+    const provinceDanhSachProvince = danhSachProvince.map((province) => province.province_name);
+    const provinceDanhSachViTri = danhSachViTri.map((viTri) => viTri.province);
+    const result = [...provinceDanhSachProvince, ...provinceDanhSachViTri]
+      .filter((province) => province)
+      .filter((province) => province.length >= 5)
+      .map((province) => removeUnicode(removeSpace(province)))
+      .filter((province, index, array) => array.indexOf(province) === index)
+      .sort((valueA, valueB) => sortValue(valueA, valueB, 'string'));
+    return result;
   }
 );
 

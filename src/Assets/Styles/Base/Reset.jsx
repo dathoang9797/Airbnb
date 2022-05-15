@@ -8,7 +8,7 @@ export const ResetCSS = css`
   }
 
   body {
-    ${tw`font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif !important] text-sm color[var(--color-text-light)] bg-white m-0 overflow-visible w-[100% !important] relative  font-semibold overflow-y[auto !important]`}
+    ${tw`font-family[Circular, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif !important] text-sm color[var(--color-text-light)] bg-white m-0 overflow-visible w-[100% !important] relative  font-semibold overflow-y[auto !important] padding[0px !important]`}
   }
 
   input:-webkit-autofill,

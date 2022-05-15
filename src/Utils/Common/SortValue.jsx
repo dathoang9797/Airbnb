@@ -3,7 +3,8 @@ import { removeSpace, removeUnicode } from '@Utils/Common';
 
 export const sortValue = (valueA, valueB, type) => {
   switch (true) {
-    case (type === 'content' ||
+    case (type === 'string' ||
+      type === 'content' ||
       type === 'province' ||
       type === 'name' ||
       type === 'nameLocation' ||

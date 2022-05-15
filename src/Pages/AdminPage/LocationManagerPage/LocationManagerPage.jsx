@@ -14,7 +14,6 @@ import ModalHoc from '@HOC/ModalHoc';
 
 function LocationManagerPage(props) {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
   const dispatch = useDispatch();
   const { tableColumnsLocationField } = locationField;
   const idTable = useMemo(() => nanoid(), []);
@@ -22,18 +21,20 @@ function LocationManagerPage(props) {
   const urlLocationProfile = process.env.REACT_APP_LINK_ADMIN_LOCATIONS_MANAGER_PROFILE;
   const { Table } = TableCSS;
   const { showModal, handleContentModal } = props;
-
   const { selectDanhViTriFilter } = quanLyViTriSelector;
-  const { getDanhSachViTriAsync, getChiTietViTriAsync, xoaNhieuViTrigAsync, xoaViTriAsync } =
-    quanLyViTriThunk;
-
+  const {
+    getDanhSachViTriAsync,
+    getChiTietViTriAsync,
+    xoaNhieuViTrigAsync,
+    xoaViTriAsync,
+    getDanhSachProvinceAsync,
+  } = quanLyViTriThunk;
   const danhSachViTri = useSelector(selectDanhViTriFilter, _.isEqual);
-
   const handleRefreshDataThunk = useMemo(() => [getDanhSachViTriAsync], [getDanhSachViTriAsync]);
   
   useLayoutEffect(() => {
-    dispatch(getDanhSachViTriAsync());
-  }, [dispatch, getDanhSachViTriAsync]);
+    Promise.all([dispatch(getDanhSachViTriAsync()), dispatch(getDanhSachProvinceAsync())]);
+  }, [dispatch, getDanhSachProvinceAsync, getDanhSachViTriAsync]);
 
   const handleGetDetailLocation = async (idLocation) => {
     await dispatch(getChiTietViTriAsync(idLocation));
