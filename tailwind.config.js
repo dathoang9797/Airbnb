@@ -22,19 +22,18 @@ module.exports = {
     },
     extend: {
       colors: {
-        dark: "rgba(0,0,0,.87);",
+        dark: "rgba(0,0,0,.87)",
         dark_mode_light: "#f9fafb",
         gray_theme: "rgb(249, 250, 252)",
         // [`blue-theme`]: "#185ADB",
-        [`blue-theme`]: "#222260",
-        [`dark-theme`]: "#212321",
-        [`purple-theme`]: "rgb( 117, 95, 211)",
-        [`pink-theme`]: "rgb(234, 83, 172)",
-        [`gray-theme`]: "#f7f9fa",
-        [`green-theme`]: "rgb(106, 201, 119)",
-        [`yellow-theme`]: "#FDCE00",
-        [`green-theme`]: "#70D700",
-        [`green-mint-theme`]: "rgb( 70, 220, 216)",
+        "blue-theme": "#222260",
+        "dark-theme": "#212321",
+        "purple-theme": "rgb( 117, 95, 211)",
+        "pink-theme": "rgb(234, 83, 172)",
+        "gray-theme": "#f7f9fa",
+        "green-theme": "rgb(106, 201, 119)",
+        "yellow-theme": "#FDCE00",
+        "green-mint-theme": "rgb( 70, 220, 216)",
       },
       borderWidth: {
         5: "5px",
@@ -98,6 +97,16 @@ module.exports = {
       backgroundColor: {
         dark_mode_bg: "rgba(16 18 27 / 40%)",
         dark_mode_card_theme_bg: "rgb(146 151 179 / 13%)",
+        'orange-50': 'rgb(255 247 237)',
+        'orange-100': 'rgb(255 237 213)',
+        'orange-200': 'rgb(254 215 170)',
+        'orange-300': 'rgb(253 186 116)',
+        'orange-400': 'rgb(251 146 60)',
+        'orange-500': 'rgb(249 115 22)',
+        'orange-600': 'rgb(234 88 12)',
+        'orange-700': 'rgb(194 65 12)',
+        'orange-800': 'rgb(154 52 18)',
+        'orange-900': 'rgb(124 45 18)',
       },
       boxShadow: {
         design_code:
@@ -108,4 +117,5 @@ module.exports = {
   variants: {
     extend: {},
   },
+  
 };
