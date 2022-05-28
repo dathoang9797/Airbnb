@@ -4,12 +4,12 @@ import moment from 'moment';
 
 function DetailReviewRating(props) {
   const { Container, Content, ImageUser, Item, Paragraph } = DetailReviewRatingCSS;
-  const { danhSachDanhGia } = props;
+  const { danhSachDanhGia, size } = props;
   const formatDay = 'DD/MM/YYYY';
 
   const renderUserReview = useMemo(() => {
     if (!danhSachDanhGia.length) return null;
-    return danhSachDanhGia.slice(0, 8).map((item, index) => {
+    return danhSachDanhGia.slice(0, size).map((item, index) => {
       return (
         <Item key={item._id}>
           <ImageUser>
@@ -23,7 +23,7 @@ function DetailReviewRating(props) {
         </Item>
       );
     });
-  }, [danhSachDanhGia]);
+  }, [danhSachDanhGia, size]);
 
   return (
     <Container>

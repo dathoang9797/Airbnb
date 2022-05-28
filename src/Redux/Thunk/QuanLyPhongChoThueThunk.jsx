@@ -7,7 +7,7 @@ import _ from 'lodash';
 
 const {
   messageNetWorkErr,
-  messageRegisterSucceed,
+  messageAddRoomSucceed,
   messageIdIsUnValid,
   messageNameRoomIsExits,
   messageUpdateFailed,
@@ -127,7 +127,7 @@ const taoPhongChoThueAsync = createAsyncThunk(
       }
 
       await dispatch(getDanhSachPhongChoThueAsync());
-      showSuccess(messageRegisterSucceed);
+      showSuccess(messageAddRoomSucceed);
       return;
     }
     return rejectWithValue(messageNameRoomIsExits);

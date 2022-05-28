@@ -9,7 +9,7 @@ import { quanLyPhongChoThueThunk } from '@Redux/Thunk/QuanLyPhongChoThueThunk';
 import { quanLyViTriThunk } from '@Redux/Thunk/QuanLyViTriThunk';
 import { geoCodeService } from '@Services/GeoCodeService';
 import { localService } from '@Services/LocalStorageService';
-import { removeSpace, removeUnicode } from '@Utils/Common';
+import { removeSpace, removeUnicode, sortValue } from '@Utils/Common';
 import { Layout } from 'antd';
 import _ from 'lodash';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -32,7 +32,6 @@ function RoomPage() {
   const provincesRef = useRef(null);
   const dispatch = useDispatch();
   const { cityName } = useParams();
-
   const { calendar } = Images;
   const numberEachPage = 10;
   const {
@@ -46,31 +45,27 @@ function RoomPage() {
     ButtonCollapse,
     ButtonShowRoom,
   } = RoomCSS;
-
   const { setProvincesAction } = quanLyViTriAction;
   const {
     setResetDanhSachPhongChoThueTheoViTriAction,
     setResetBookingRoomAction,
     setResetTotalPriceBookingAction,
   } = quanLyPhongChoThueAction;
-
   const { getDanhSachPhongChoThueTheoViTriAsync } = quanLyPhongChoThueThunk;
   const { getDanhSachViTriAsync, getDanhSachProvinceAsync } = quanLyViTriThunk;
-
-  const { selectDanhSachViTriByProvince, selectDanhSachProvinceFilter, selectDanhSachViTri } =
-    quanLyViTriSelector;
+  const { selectDanhSachViTriByProvince, selectDanhSachProvinceFilter } = quanLyViTriSelector;
   const { selectDanhSachPhongChoThueTheoViTri } = quanLyPhongChoThueSelector;
   const { selectIsLoadingPopupState } = loadingSelector;
-
   const isLoadingPopup = useSelector(selectIsLoadingPopupState);
   const danhSachPhongChoThueTheoViTri = useSelector(selectDanhSachPhongChoThueTheoViTri, _.isEqual);
   const danhSachViTriByProvince = useSelector(selectDanhSachViTriByProvince, _.isEqual);
   const danhSachProvinceFilter = useSelector(selectDanhSachProvinceFilter, shallowEqual);
-  const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
+
   const danhSachPhongChoThueTheoViTriSlice = useMemo(() => {
     const { maxValue, minValue } = limitValue;
-    return danhSachPhongChoThueTheoViTri.slice(minValue, maxValue);
+    return danhSachPhongChoThueTheoViTri?.slice(minValue, maxValue);
   }, [danhSachPhongChoThueTheoViTri, limitValue]);
+  
   const handleToggle = () => setCollapsed(!collapsed);
 
   const handleChange = (value) => {
@@ -82,25 +77,28 @@ function RoomPage() {
 
   const handleSetCityName = useCallback(
     (provinces) => {
-      if (!provinces || !provinces.length) return;
+      if (!provinces?.length) return;
       const result = provinces
         .map((province) => {
-          return danhSachViTri.filter((viTri) => {
-            const formatProvince = removeSpace(removeUnicode(viTri.province));
-            if (formatProvince > province) {
-              return formatProvince.includes(province);
+          return danhSachProvinceFilter?.filter((dsProvince) => {
+            const formatDsProvince = removeSpace(removeUnicode(dsProvince)) ?? '';
+            const formatProvince = removeSpace(removeUnicode(province)) ?? '';
+            if (formatDsProvince.length > formatProvince.length) {
+              return formatDsProvince.includes(formatProvince);
             }
-            return province.includes(formatProvince);
+            return formatProvince.includes(formatDsProvince);
           });
         })
         .flat();
-      if (!result.length) return;
+      if (!result?.length) return;
       const resultRemoveDuplicate = _.uniq(result);
-      const cityName = resultRemoveDuplicate[0].province;
-      if (cityName) return;
+      const sortResult = resultRemoveDuplicate
+        .sort((a, b) => sortValue(a, b, 'stringLength'))
+        .reverse()[0];
+      const cityName = sortResult;
       localService.setCityName(cityName);
     },
-    [danhSachViTri]
+    [danhSachProvinceFilter]
   );
 
   useLayoutEffect(() => {
@@ -130,23 +128,23 @@ function RoomPage() {
   //Get coordinates of room address by google map api
   useEffect(() => {
     const { lng, lat } = coordinates;
-    if ((!lng && !lat) || !danhSachPhongChoThueTheoViTri.length) return;
+    if ((!lng && !lat) || !danhSachPhongChoThueTheoViTri?.length) return;
     if (_.isEqual(danhSachPhongChoThueTheoViTri, danhSachPhongChoThueTheoViTriRef.current)) return;
     danhSachPhongChoThueTheoViTriRef.current = danhSachPhongChoThueTheoViTri;
     async function getCoordinateOfEachRoom() {
       const promisesArr = danhSachPhongChoThueTheoViTri.map((phong) => {
-        if (!phong || !phong.name) return null;
+        if (!phong?.name) return null;
         return geoCodeService.getGeoCodeByAddress(phong.name);
       });
       const result = await Promise.all(promisesArr);
       setPlaces(result);
     }
     getCoordinateOfEachRoom();
-  }, [coordinates, danhSachPhongChoThueTheoViTri, danhSachViTriByProvince.length]);
+  }, [coordinates, danhSachPhongChoThueTheoViTri, danhSachViTriByProvince?.length]);
 
   useEffect(() => {
     const { lng, lat } = coordinates;
-    if ((!lng && !lat) || !danhSachViTriByProvince.length) return;
+    if ((!lng && !lat) || !danhSachViTriByProvince?.length) return;
     if (_.isEqual(danhSachViTriByProvince, danhSachViTriByProvinceRef.current)) return;
     danhSachViTriByProvinceRef.current = danhSachViTriByProvince;
     const idViTriArr = danhSachViTriByProvince.map((item) => item._id);
@@ -156,7 +154,7 @@ function RoomPage() {
 
   useEffect(() => {
     const { lng, lat } = coordinates;
-    if ((!lng && !lat) || !danhSachProvinceFilter.length) return;
+    if ((!lng && !lat) || !danhSachProvinceFilter?.length) return;
     async function getProvinces() {
       const provinces = await geoCodeService.getGeoCodeByCoordinates(
         lng,
@@ -185,19 +183,28 @@ function RoomPage() {
     const waitingCloseLoadingPopup = setTimeout(() => {
       setShowSpinnerMap(false);
     }, 500);
-    return () => {
-      clearTimeout(waitingCloseLoadingPopup);
-    };
+    return () => clearTimeout(waitingCloseLoadingPopup);
   }, [isLoadingPopup]);
 
   useEffect(() => window.scrollTo(0, 0));
 
+  useEffect(() => {
+    const handleResize = () => {
+      const antLayoutDom = document.querySelector('.ant-layout-sider');
+      if (antLayoutDom && antLayoutDom.classList.contains('ant-layout-sider-collapsed')) {
+        if (window.innerWidth <= 1100) setCollapsed(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const renderPhongChoThue = useMemo(() => {
-    if (!danhSachPhongChoThueTheoViTri.length)
+    if (!danhSachPhongChoThueTheoViTri?.length)
       return <RoomNotFound showSpinnerMap={showSpinnerMap} />;
     return (
       <>
-        {danhSachPhongChoThueTheoViTriSlice.map((phong) => {
+        {danhSachPhongChoThueTheoViTriSlice?.map((phong) => {
           return <RoomItem key={phong._id} phong={phong} showSpinnerMap={showSpinnerMap} />;
         })}
         <Pagination
@@ -208,14 +215,13 @@ function RoomPage() {
         />
       </>
     );
-  }, [danhSachPhongChoThueTheoViTri.length, danhSachPhongChoThueTheoViTriSlice, showSpinnerMap]);
+  }, [danhSachPhongChoThueTheoViTri?.length, danhSachPhongChoThueTheoViTriSlice, showSpinnerMap]);
 
   return (
     <Container>
       <Layout>
         <ContentSider trigger={null} collapsible collapsed={collapsed}>
           <span>Hơn 300 chỗ ở tại khu vực trên bản đồ</span>
-
           <Scarcity>
             <img src={calendar} alt='Calendar' />
             <span>

@@ -22,6 +22,7 @@ export const handleDataTable = (
           {handleUpdateItem ? (
             <Edit
               onClick={() => {
+                console.log({item})
                 handleUpdateItem(item._id);
               }}
             >

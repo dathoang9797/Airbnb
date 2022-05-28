@@ -46,7 +46,7 @@ const ContentLeft = styled.div`
 `;
 
 const ContentRight = styled.div`
-  ${tw`relative w-full h-full mx-0 px-1.5 overflow-y-auto`};
+  ${tw`relative w-full h-full mx-0 px-1.5 overflow-y-hidden  overflow-x-hidden`};
 
   @media (min-width: 375px) {
     ${tw`px-1.5`};
@@ -61,7 +61,7 @@ const ContentRight = styled.div`
   }
 
   @media (min-width: 1128px) {
-    ${tw`px-2 width[58.3333%]`};
+    ${tw`px-2 width[58.3333%] overflow-y-auto`};
   }
 
   ${ItemRatingCSS} {

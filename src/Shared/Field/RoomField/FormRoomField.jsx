@@ -247,6 +247,7 @@ export const renderFormRoomField = (
       }
 
       case 'locationId': {
+        const defaultValue = sortDanhSachViTri.find((item) => item._id === values?.locationId);
         return (
           <FormControl key={`${key}-${index}`}>
             <FormGroup>
@@ -254,14 +255,14 @@ export const renderFormRoomField = (
                 <FormSelect
                   bordered={false}
                   onChange={handleChangeSelect}
-                  defaultValue={values.locationId}
+                  defaultValue={defaultValue ? defaultValue._id : null}
                   menuItemSelectedIcon={<FormCheckOutlined />}
                   dropdownClassName='select-location'
                 >
                   {sortDanhSachViTri.map((viTri, index) => {
                     if (!viTri?.province) return null;
                     return (
-                      <FormOption key={`ViTriSelect-${viTri._id}-${index}`} value={viTri._id}>
+                      <FormOption key={`ViTriSelect-${viTri?._id}-${index}`} value={viTri?._id}>
                         {viTri.province}
                       </FormOption>
                     );

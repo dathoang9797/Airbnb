@@ -10,11 +10,11 @@ export const filterSearchValue = (searchValue, data, type) => {
   return data.filter((item, index) => {
     switch (true) {
       case type === keyTypeFilterRoom: {
-        const formatItemName = removeSpace(removeUnicode(item.name)) ?? '';
-        const formatDescription = removeSpace(removeUnicode(item.description)) ?? '';
-        const formatLocationIdName = removeSpace(removeUnicode(item.locationId?.name)) ?? '';
+        const formatItemName = removeSpace(removeUnicode(item?.name)) ?? '';
+        const formatDescription = removeSpace(removeUnicode(item?.description)) ?? '';
+        const formatLocationIdName = removeSpace(removeUnicode(item?.locationId?.name)) ?? '';
         const formatLocationIdprovince =
-          removeSpace(removeUnicode(item.locationId?.province)) ?? '';
+          removeSpace(removeUnicode(item?.locationId?.province)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return (
           formatItemName.includes(formatSearchValue) ||
@@ -25,10 +25,10 @@ export const filterSearchValue = (searchValue, data, type) => {
       }
 
       case type === keyTypeFilterTicket: {
-        const formatUserIdName = removeSpace(removeUnicode(item.userId?.name)) ?? '';
-        const formatUserIdEmail = removeSpace(removeUnicode(item.userId?.email)) ?? '';
-        const formatRoomIdName = removeSpace(removeUnicode(item.roomId?.name)) ?? '';
-        const formatRoomIdDesc = removeSpace(removeUnicode(item.roomId?.description)) ?? '';
+        const formatUserIdName = removeSpace(removeUnicode(item?.userId?.name)) ?? '';
+        const formatUserIdEmail = removeSpace(removeUnicode(item?.userId?.email)) ?? '';
+        const formatRoomIdName = removeSpace(removeUnicode(item?.roomId?.name)) ?? '';
+        const formatRoomIdDesc = removeSpace(removeUnicode(item?.roomId?.description)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return (
           formatUserIdName.includes(formatSearchValue) ||
@@ -39,8 +39,8 @@ export const filterSearchValue = (searchValue, data, type) => {
       }
 
       case type === keyTypeFilterLocation: {
-        const formatItemName = removeSpace(removeUnicode(item.name)) ?? '';
-        const formatProvince = removeSpace(removeUnicode(item.province)) ?? '';
+        const formatItemName = removeSpace(removeUnicode(item?.name)) ?? '';
+        const formatProvince = removeSpace(removeUnicode(item?.province)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return (
           formatItemName.includes(formatSearchValue) || formatProvince.includes(formatSearchValue)
@@ -48,8 +48,8 @@ export const filterSearchValue = (searchValue, data, type) => {
       }
 
       case type === keyTypeFilterUser: {
-        const formatItemName = removeSpace(removeUnicode(item.name)) ?? '';
-        const formatItemEmail = removeSpace(removeUnicode(item.email)) ?? '';
+        const formatItemName = removeSpace(removeUnicode(item?.name)) ?? '';
+        const formatItemEmail = removeSpace(removeUnicode(item?.email)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return (
           formatItemName.includes(formatSearchValue) || formatItemEmail.includes(formatSearchValue)
@@ -57,7 +57,7 @@ export const filterSearchValue = (searchValue, data, type) => {
       }
 
       case type === keyTypeFilterEvaluate: {
-        const formatItemContent = removeSpace(removeUnicode(item.content)) ?? '';
+        const formatItemContent = removeSpace(removeUnicode(item?.content)) ?? '';
         const formatSearchValue = removeSpace(removeUnicode(searchValue));
         return formatItemContent.includes(formatSearchValue);
       }

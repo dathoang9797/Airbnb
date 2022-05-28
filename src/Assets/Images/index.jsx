@@ -1,13 +1,13 @@
 import calendar from './calendar.gif';
 import tphcm from './tphcm.jpg';
-import haNoi from './hanoi.jpg';
+import haNoi from './haNoi.jpg';
 import daNang from './daNang.jpg';
-import phuQuoc from './PhuQuoc.jpg';
-import nhaTrang from './NhaTrang.jpg';
-import vungTau from './VungTau.jpg';
-import canTho from './CanTho.jpg';
-import heroImgOne from './hero-img-one.jpg';
-import hoiAn from './HoiAn.jpg';
+import phuQuoc from './phuQuoc.jpg';
+import nhaTrang from './nhaTrang.jpg';
+import vungTau from './vungTau.jpg';
+import canTho from './canTho.jpg';
+import heroImgOne from './heroImgOne.jpg';
+import hoiAn from './hoiAn.jpg';
 
 export const Images = {
   calendar,

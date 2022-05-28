@@ -5,6 +5,7 @@ export const ModalCSS = css`
   .wrap-modal-profile-ticket,
   .wrap-modal-grid-image {
     .ant-modal {
+      top:40px;
       width: 100% !important;
       max-width: 340px !important;
       @media (min-width: 500x) {

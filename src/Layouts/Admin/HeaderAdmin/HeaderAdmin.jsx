@@ -9,6 +9,8 @@ import { history } from '@Utils/Libs';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { AiOutlineHome } from 'react-icons/ai';
+import { quanLyNguoiDungAction } from '@Redux/Reducers/QuanLyNguoiDungSlice';
+import { useDispatch } from 'react-redux';
 
 function HeaderAdmin() {
   const userInfo = localService.getUserInfo();
@@ -31,9 +33,12 @@ function HeaderAdmin() {
     messagePlaceHolderSearchTicket,
   } = messageApp;
   const { Container, Content, Dropdowns, Menu } = HeaderCSS;
+  const { updateUserInfo } = quanLyNguoiDungAction;
+  const dispatch = useDispatch();
 
   const handleLogOut = () => {
     localService.removeUserInfo();
+    dispatch(updateUserInfo({}));
     history.push(urlSignIn);
   };
 
@@ -97,7 +102,7 @@ function HeaderAdmin() {
           arrow={{ pointAtCenter: true }}
         >
           <button aria-label='Account' aria-haspopup='true'>
-            {userInfo.avatar ? (
+            {userInfo?.avatar ? (
               <img
                 className='w-10 h-10'
                 src={userInfo.avatar}

@@ -8,12 +8,12 @@ import { capitalize } from '@Utils/Common';
 
 const {
   messageNetWorkErr,
-  messageRegisterSucceed,
   messageIdIsUnValid,
   messageNameRoomIsExits,
   messageUpdateFailed,
   messageUpdateSuccess,
   messageLocationRoomSuccess,
+  messageAddLocationSucceed,
 } = messageApp;
 
 const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
@@ -43,7 +43,7 @@ const getDanhSachProvinceAsync = createAsyncThunk(
   'quanLyViTriReducer/getDanhSachProvinceAsync',
   async (_, { rejectWithValue }) => {
     const result = await provinceService.layTatCaProvince();
-    
+
     if (!result) {
       return rejectWithValue(messageNetWorkErr);
     }
@@ -88,7 +88,7 @@ const taoviTriAsync = createAsyncThunk(
       }
 
       await dispatch(getDanhSachViTriAsync());
-      showSuccess(messageRegisterSucceed);
+      showSuccess(messageAddLocationSucceed);
       return;
     }
     return rejectWithValue(messageNameRoomIsExits);

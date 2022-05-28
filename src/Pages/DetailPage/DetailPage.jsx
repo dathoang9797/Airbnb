@@ -55,7 +55,7 @@ function DetailPage() {
       <DetailTitle name={name} />
       <DetailGridImages image={image} />
       <DetailBooking chiTietPhong={chiTietPhong} />
-      <DetailReview danhSachDanhGia={danhSachDanhGia} />
+      <DetailReview danhSachDanhGia={danhSachDanhGia} size={8} />
       <DetailMap name={name} />
       <ButtonScrollTop />
     </Container>

@@ -49,10 +49,11 @@ export const geoCodeService = {
               .map((item) => {
                 const provinceFormat = removeUnicode(removeSpace(item.long_name));
                 return danhSachProvince.filter((province) => {
-                  if (province.length > provinceFormat.length) {
-                    return province.includes(provinceFormat);
+                  const provinceProvinceFormat = removeUnicode(removeSpace(province));
+                  if (provinceProvinceFormat.length > provinceFormat.length) {
+                    return provinceProvinceFormat.includes(provinceFormat);
                   }
-                  return provinceFormat.includes(province);
+                  return provinceFormat.includes(provinceProvinceFormat);
                 });
               })
               .flat();

@@ -45,13 +45,13 @@ function RoomManagerPage(props) {
     ]);
   }, [dispatch, getDanhSachPhongChoThueAsync, getDanhSachProvinceAsync, getDanhSachViTriAsync]);
 
-  const handleGetDetailRoom = async (idNguoiDung) => {
-    await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));
+  const handleUpdateRoom = async (idRoom) => {
+    await dispatch(getChiTietPhongChoThueAsync(idRoom));
     history.push(urlRoomEdit);
   };
 
-  const handleGetProfileRoom = async (idNguoiDung) => {
-    await dispatch(getChiTietPhongChoThueAsync(idNguoiDung));
+  const handleGetProfileRoom = async (idRoom) => {
+    await dispatch(getChiTietPhongChoThueAsync(idRoom));
     history.push(urlRoomProfile);
   };
 
@@ -63,7 +63,7 @@ function RoomManagerPage(props) {
   const renderDataTable = () => {
     const propsFieldAction = {
       handleGetProfileItem: handleGetProfileRoom,
-      handleUpdateItem: handleGetDetailRoom,
+      handleUpdateItem: handleUpdateRoom,
       handleDeleteItem: handleDeleteRoom,
     };
     return handleDataTable(danhSachPhongChoThue, propsFieldAction);

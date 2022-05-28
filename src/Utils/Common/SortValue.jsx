@@ -52,7 +52,9 @@ export const sortValue = (valueA, valueB, type) => {
       return formatTimeA - formatTimeB;
     }
 
-    case type === 'userIdTickets' && !_.isNull(valueA) && !_.isNull(valueB): {
+    case (type === 'userIdTickets' || type === 'stringLength') &&
+      !_.isNull(valueA) &&
+      !_.isNull(valueB): {
       if (valueA === '' || !valueA) {
         return 1;
       }

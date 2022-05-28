@@ -5,10 +5,10 @@ import { sweetAlert } from '@Utils/Libs';
 
 const {
   messageNetWorkErr,
-  messageEvaluateSuccess,
   messageIdIsUnValid,
   messageDeleteEvaluateSuccess,
-  messageUpdateEvaluateSuccess,
+  messageUpdateSuccess,
+  messageAddEvaluateSucceed,
 } = messageApp;
 
 const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
@@ -97,7 +97,7 @@ const taoDanhGiaAsync = createAsyncThunk(
     }
 
     await dispatch(getDanhSachDanhGiaAsync());
-    showSuccess(messageEvaluateSuccess);
+    showSuccess(messageAddEvaluateSucceed);
   }
 );
 
@@ -119,7 +119,7 @@ const capNhatDanhGiaAsync = createAsyncThunk(
     }
 
     await dispatch(getDanhSachDanhGiaAsync());
-    showSuccess(messageUpdateEvaluateSuccess);
+    showSuccess(messageUpdateSuccess);
   }
 );
 

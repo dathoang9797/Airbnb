@@ -17,6 +17,7 @@ const {
   messageUpdateSuccess,
   messageUpdateFailed,
   messageDeleteUserSuccess,
+  messageAddUserSucceed,
 } = messageApp;
 
 const { sweetAlertDelete, sweetAlertSuccess } = sweetAlert;
@@ -246,7 +247,7 @@ const taoNguoiDungAsync = createAsyncThunk(
 
       await dispatch(getDanhSachNguoiDungAsync());
 
-      showSuccess(messageRegisterSucceed);
+      showSuccess(messageAddUserSucceed);
       return;
     }
     return rejectWithValue(messageNameOrEmailIsExits);

@@ -1,4 +1,4 @@
-export const capitalize = (str: string) => {
+export const capitalize = (str) => {
   if (str.length === 0) return '';
   const arr = str.split(' ');
   for (var i = 0; i < arr.length; i++) {

@@ -44,6 +44,7 @@ function ProfileModal({ danhSachVeTheoNguoiDung }) {
   const renderTicketInfo = useMemo(() => {
     return danhSachVeTheoNguoiDung.map((item, index) => {
       const { checkIn, checkOut, roomId, _id } = item;
+      if (!roomId) return null;
       const { image, description, name } = roomId;
       return (
         <ModalItem key={`${_id}-${index}`}>

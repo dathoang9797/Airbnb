@@ -5,7 +5,7 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  ${tw`flex flex-wrap -m-2`};
+  ${tw`flex flex-wrap -m-2 py-1`};
 `;
 
 const Item = styled.div`

@@ -25,18 +25,27 @@ function RoomManagerEditPage() {
   const chiTietPhongChoThue = useSelector(selectChiTietPhongChoThue, _.isEqual);
   const { selectDanhSachViTri } = quanLyViTriSelector;
   const danhSachViTri = useSelector(selectDanhSachViTri, _.isEqual);
-
   const isHasChiTietPhongChoThue = useMemo(
     () => _.isEmpty(chiTietPhongChoThue),
     [chiTietPhongChoThue]
   );
+
   const initialValues = useMemo(() => {
     return {
       ...editRoomField,
-      ..._.omit(chiTietPhongChoThue, ['__v', 'deleteAt', 'image']),
+      ..._.omit(chiTietPhongChoThue, ['__v', 'deleteAt', 'image', 'locationId']),
     };
   }, [chiTietPhongChoThue, editRoomField]);
-  const refChiTietNguoiDung = useRef(initialValues);
+
+  const idOfLocation = useMemo(
+    () =>
+      danhSachViTri.filter(
+        (viTri) => viTri?.province === chiTietPhongChoThue?.locationId?.province
+      ),
+    [chiTietPhongChoThue?.locationId?.province, danhSachViTri]
+  )[0]?._id;
+
+  const refChiTietNguoiDung = useRef({ ...initialValues, locationId: idOfLocation });
 
   const handleSubmitEditRoom = (valuesUpDate) => {
     const noiDungCapNhat = _.omit(valuesUpDate, ['_id']);
@@ -63,7 +72,7 @@ function RoomManagerEditPage() {
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues,
+    initialValues: { ...initialValues, locationId: idOfLocation },
     validationSchema: editRoomSchema,
     onSubmit: handleSubmitEditRoom,
   });

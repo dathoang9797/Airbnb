@@ -13,11 +13,10 @@ const selectDanhSachNguoiDungFilter = createSelector(
   selectDanhSachNguoiDung,
   selectSearchValue,
   (danhSachNguoiDung, searchValue) => {
-    if (!searchValue.length) return danhSachNguoiDung;
+    if (!searchValue?.length) return danhSachNguoiDung;
     const keyTypeFilterUser = process.env.REACT_APP_KEY_FILTER_USER_LIST;
-    const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachNguoiDung = [...danhSachNguoiDung];
-    return filterSearchValue(searchValueFormat, cloneDanhSachNguoiDung, keyTypeFilterUser);
+    return filterSearchValue(searchValue, cloneDanhSachNguoiDung, keyTypeFilterUser);
   }
 );
 

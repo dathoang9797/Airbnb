@@ -15,7 +15,7 @@ function DetailReviewModal(props) {
         <DetailReviewPoint />
       </ContentLeft>
       <ContentRight>
-        <DetailReviewRating danhSachDanhGia={danhSachDanhGia} />
+        <DetailReviewRating danhSachDanhGia={danhSachDanhGia} size={danhSachDanhGia.length}/>
       </ContentRight>
     </Container>
   );

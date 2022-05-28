@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 const Container = tw.div`mb-6 block `;
 
 const Content = tw.div`
-flex items-stretch justify-start flex-wrap w-[calc(100% + 16px)]
+flex items-stretch justify-start flex-wrap md:w-[calc(100% + 16px)] w-full
 `;
 
 const Item = styled.div`

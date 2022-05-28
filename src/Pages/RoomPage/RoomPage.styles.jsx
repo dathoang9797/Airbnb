@@ -57,7 +57,7 @@ const Map = styled.div`
 const MainContent = styled.div`
   ${tw`height[100vh] flex items-center justify-center sticky top-0`}
   @media (max-width: 1100px) {
-    ${tw`height[450px]`};
+    /* ${tw`height[450px]`}; */
   }
 `;
 
@@ -95,6 +95,7 @@ const ContentSider = styled(Sider)`
   &.ant-layout-sider-collapsed {
     ${tw`min-h-[0 !important] max-width[0 !important] width[0 !important] padding[0!important] background-color[white !important] min-width[0 !important]
    flex[0 0 0 !important]
+   
     `}
 
     .ant-layout-sider-children,

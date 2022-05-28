@@ -17,8 +17,9 @@ function DetailReview(props) {
     handlePropsContentModal,
     handleContentModal,
     danhSachDanhGia,
+    size,
   } = props;
-  
+
   const closeIcon = (
     <Close>
       <CloseOutlined />
@@ -35,7 +36,7 @@ function DetailReview(props) {
       <Content>
         <DetailReviewTitle />
         <DetailReviewPoint />
-        <DetailReviewRating danhSachDanhGia={danhSachDanhGia} />
+        <DetailReviewRating danhSachDanhGia={danhSachDanhGia} size={size} />
         {danhSachDanhGia.length > 10 && (
           <ButtonOpen onClick={handleShowModal}>
             Hiển thị tất cả {danhSachDanhGia.length} đánh giá

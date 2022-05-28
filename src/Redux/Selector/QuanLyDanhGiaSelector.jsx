@@ -5,19 +5,18 @@ const selectDanhSachDanhGia = (state) => state.QuanLyDanhGiaReducer.danhSachDanh
 
 const selectSearchValue = (state) => state.SearchReducer.searchValue;
 
+const selectIdChiTietDanhGia = (state) => state.QuanLyDanhGiaReducer.idChiTietDanhGia;
+
 const selectDanhSachDanhGiaFilter = createSelector(
   selectDanhSachDanhGia,
   selectSearchValue,
   (danhSachDanhGia, searchValue) => {
-    if (!searchValue.length) return danhSachDanhGia;
+    if (!searchValue?.length) return danhSachDanhGia;
     const keyTypeFilterEvaluate = process.env.REACT_APP_KEY_FILTER_EVALUATE_LIST;
-    const searchValueFormat = searchValue.trim().toLowerCase();
     const cloneDanhSachDanhGia = [...danhSachDanhGia];
-    return filterSearchValue(searchValueFormat, cloneDanhSachDanhGia, keyTypeFilterEvaluate);
+    return filterSearchValue(searchValue, cloneDanhSachDanhGia, keyTypeFilterEvaluate);
   }
 );
-
-const selectIdChiTietDanhGia = (state) => state.QuanLyDanhGiaReducer.idChiTietDanhGia;
 
 const selectChiTietDanhGia = createSelector(
   selectDanhSachDanhGia,
